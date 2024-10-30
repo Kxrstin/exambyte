@@ -11,15 +11,17 @@
     <body>
     <h1>ExamByte</h1>
     <h2>Anmeldung</h2>
-        <form method="post">
+        <form method="post" th:object="${anmeldeFormular}">
             <label for="mailID">E-Mail Adresse:</label>
-            <input type="email" id="mailID" name="mail">
+            <input type="email" id="mailID" th:field="*{mail}">
+            <small class="text-danger" th:if="${#fields.hasErrors('mail')}" th:errors="*{mail}"> Mail Error </small>
 
             <label for="passwordID">Passwort:</label>
-            <input type="password" id="passwordID" name="password">
+            <input type="password" id="passwordID" th:field="*{password}">
+            <small class="text-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"> Password Error </small>
 
             <button type="submit">Anmelden</button>
         </form>
-    <p> Dieser Durchlauf war <span th:text="${erfolgreich}"> </span></p>
+    <span th:text="${erfolgreich}"> </span>
     </body>
 </html>
