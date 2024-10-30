@@ -1,11 +1,19 @@
 package exambyte.studenten;
 
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.time.LocalDate;
+import java.util.List;
+
+
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
@@ -14,6 +22,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class StudentenControllerLandingPageTest {
     @Autowired
     MockMvc mvc;
+
+    @MockBean
+    TestService testService;
 
     @Test
     @DisplayName("Die Route /landingPage führt zum Öffnen der LandingPageStudenten.html Seite und es gibt einen 200 Status.")
@@ -37,5 +48,23 @@ public class StudentenControllerLandingPageTest {
         mvc.perform(get("/studenten/landingPage/zeigeTest"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("studenten/TestPageStudenten"));
+    }
+
+    @Test
+    @DisplayName("Auf der LandingPage soll eine Liste von Tests angezeigt werden")
+    public void test_testsAnzeigen() throws Exception {
+        when(testService.getTests()).thenReturn(List.of(new TestStudenten("Test Dummy",
+                LocalDate.of(2024,10,10),
+                LocalDate.of(2024,11,11),
+                LocalDate.of(2024,11,19),
+                123)));
+
+        String textHtml = mvc.perform(get("/studenten/landingPage"))
+                .andExpect(status().isOk())
+                .andReturn()
+                .getResponse()
+                .getContentAsString();
+
+        assertThat(textHtml).contains("Test Dummy");
     }
 }

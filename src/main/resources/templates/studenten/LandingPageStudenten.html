@@ -13,7 +13,12 @@
         <p> Zulassung: ...</p>
 
         <h3> Tests </h3>
-
+            <ul th:remove="all-but-first">
+                <li th:each="test : ${tests}"
+                    th:text="${test.titel}"> <a href="#">Test 1</a> </li>
+                <li> <a href="#">Test 2</a></li>
+                <li> <a href="#">Test 3</a></li>
+            </ul>
 
         <form action="/studenten/landingPage/zeigeTest" class="form-check">
             <button type="submit"> Test 1</button>
