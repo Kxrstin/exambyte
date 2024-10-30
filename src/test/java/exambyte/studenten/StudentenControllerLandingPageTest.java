@@ -8,10 +8,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.time.LocalDate;
-import java.util.List;
-
-
+import static exambyte.studenten.TestMother.testListe;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -53,11 +50,7 @@ public class StudentenControllerLandingPageTest {
     @Test
     @DisplayName("Auf der LandingPage soll eine Liste von Tests angezeigt werden")
     public void test_testsAnzeigen() throws Exception {
-        when(testService.getTests()).thenReturn(List.of(new TestStudenten("Test Dummy",
-                LocalDate.of(2024,10,10),
-                LocalDate.of(2024,11,11),
-                LocalDate.of(2024,11,19),
-                123)));
+        when(testService.getTests()).thenReturn(testListe());
 
         String textHtml = mvc.perform(get("/studenten/landingPage"))
                 .andExpect(status().isOk())
