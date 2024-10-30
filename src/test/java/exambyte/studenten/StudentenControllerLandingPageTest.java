@@ -40,14 +40,6 @@ public class StudentenControllerLandingPageTest {
     }
 
     @Test
-    @DisplayName("Wenn der Test-Button auf der Startseite gedrückt wird, wird man weitergeleitet auf die testPage")
-    public void test_testPageAnzeigen() throws Exception {
-        mvc.perform(get("/studenten/landingPage/zeigeTest"))
-                .andExpect(status().isOk())
-                .andExpect(view().name("studenten/TestPageStudenten"));
-    }
-
-    @Test
     @DisplayName("Auf der LandingPage soll eine Liste von Tests angezeigt werden")
     public void test_testsAnzeigen() throws Exception {
         when(testService.getTests()).thenReturn(testListe());
@@ -59,5 +51,16 @@ public class StudentenControllerLandingPageTest {
                 .getContentAsString();
 
         assertThat(textHtml).contains("Test Dummy");
+    }
+
+
+
+    @Test
+    @DisplayName("Wenn man auf einen Test klickt, soll man zur richtigen TestPage Seite kommen.")
+    public void test_testBearbeiten() throws Exception {
+        when(testService.hasTestWithId(3)).thenReturn(true);
+        mvc.perform(get("/studenten/landingPage/zeigeTest/3"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("studenten/TestPageStudenten"));
     }
 }

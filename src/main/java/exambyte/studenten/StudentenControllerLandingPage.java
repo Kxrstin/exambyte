@@ -4,7 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -19,7 +22,7 @@ public class StudentenControllerLandingPage {
     @GetMapping("/studenten/landingPage")
     public String landingpage(Model model) {
         if(testService == null) {
-            model.addAttribute("tests", List.of());
+            model.addAttribute("tests", new ArrayList<TestStudenten>());
         } else {
             model.addAttribute("tests", testService.getTests());
         }
@@ -31,8 +34,12 @@ public class StudentenControllerLandingPage {
         return "studenten/ErgebnisPageStudenten";
     }
 
-    @GetMapping("/studenten/landingPage/zeigeTest")
-    public String zeigeTest() {
+    @GetMapping("/studenten/landingPage/zeigeTest/{id}")
+    public String zeigeTest(@PathVariable int id) {
+        // TODO Fehlermeldung
+        if(!testService.hasTestWithId(id)) {
+            return "studenten/LandingPageStudenten";
+        }
         return "studenten/TestPageStudenten";
     }
 }

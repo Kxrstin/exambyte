@@ -11,16 +11,17 @@
     </head>
     <body>
         <h1> ExamByte </h1>
-        <img src="../../Images/ExamByteLogo%20edited.png">
+        <img th:src="@{/Images/Logo/ExamByteLogo.png}"
+             src="../../static/Images/Logo/ExamByteLogo.png">
 
-        <!--TODO: url angeben -->
+        <!--TODO:  -->
         <h2>Übersicht</h2>
-            <form action="Korrekturstand.html">
+            <form action="/organisatoren/korrekturstand">
                 <button type="submit">Korrekturstand</button>
             </form>
 
-        <!--TODO: url angeben -->
-            <form action="Ergebnisübersicht.html">
+        <!--TODO:  -->
+            <form action="/studenten/landingPage/zeigeErgebnis">
                 <button type="submit">Ergebnisübersicht</button>
             </form>
 
@@ -31,13 +32,13 @@
             <li>...</li>
         </ul>
 
-        <!--TODO: url angeben -->
-        <form action="TestErstellenPageOrga.html">
+        <!--TODO:  -->
+        <form action="/organisatoren/testErstellen">
             <button type="submit">+ Test erstellen</button>
         </form>
 
-        <!--TODO: url angeben -->
-        <form action="LandingPageOrga.html">
+        <!--TODO:  -->
+        <form action="/organisatoren/landingPage">
             <button type="submit">- Test löschen</button>
         </form>
 
