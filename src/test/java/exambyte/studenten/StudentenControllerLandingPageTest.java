@@ -1,19 +1,17 @@
 package exambyte.studenten;
 
-import exambyte.studenten.StudentenController;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.context.annotation.Import;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
-@WebMvcTest(StudentenController.class)
-public class StudentenControllerTest {
+@WebMvcTest(StudentenControllerLandingPage.class)
+public class StudentenControllerLandingPageTest {
     @Autowired
     MockMvc mvc;
 
@@ -38,6 +36,6 @@ public class StudentenControllerTest {
     public void test_testPageAnzeigen() throws Exception {
         mvc.perform(get("/studenten/landingPage/zeigeTest"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("studenten/TestBearbeitenPageStudenten"));
+                .andExpect(view().name("studenten/TestPageStudenten"));
     }
 }
