@@ -17,9 +17,25 @@ public class OrganisatorenControllerTest {
     MockMvc mvc;
 
     @Test
-    @DisplayName("Die Organisatoren Seite ist unter /organisatoren/landingPage")
+    @DisplayName("Die Organisatoren LandingPage ist unter /organisatoren/landingPage erreichbar")
     void test_1() throws Exception {
         mvc.perform(get("/organisatoren/landingPage"))
                 .andExpect(status().isOk());
     }
+
+    @Test
+    @DisplayName("Test Erstellen Seite ist unter /organisatoren/testErstellen erreichbar")
+    void test_2() throws Exception {
+        mvc.perform(get("/organisatoren/testErstellen"))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    @DisplayName("Korrekturstand Seite ist unter /organisatoren/korrekturstand erreichbar")
+    void test_3() throws Exception {
+        mvc.perform(get("/organisatoren/korrekturstand"))
+                .andExpect(status().isOk());
+    }
+
+
 }
