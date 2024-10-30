@@ -10,16 +10,16 @@
 
     <body>
     <h1>ExamByte</h1>
-        <img src="../Images/ExamByteLogo%20edited.png">
     <h2>Anmeldung</h2>
-        <form action="AnmeldungPage.html">
-            <label for="idmail">E-Mail Adresse:</label>
-            <input type="email" id="idmail" name="mail">
+        <form method="post">
+            <label for="mailID">E-Mail Adresse:</label>
+            <input type="email" id="mailID" name="mail">
 
-            <label for="idpassword">Passwort:</label>
-            <input type="password" id="idpassword" name="password">
+            <label for="passwordID">Passwort:</label>
+            <input type="password" id="passwordID" name="password">
 
             <button type="submit">Anmelden</button>
         </form>
+    <p> Dieser Durchlauf war <span th:text="${erfolgreich}"> </span></p>
     </body>
 </html>
