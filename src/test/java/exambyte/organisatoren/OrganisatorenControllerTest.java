@@ -9,6 +9,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(OrganisatorenController.class)
@@ -37,5 +39,17 @@ public class OrganisatorenControllerTest {
                 .andExpect(status().isOk());
     }
 
+    @Test
+    @DisplayName("MC-Frage Seite redirected zu /organisatoren/testErstellen")
+    void test_4() throws Exception {
+        mvc.perform(post("/organisatoren/testErstellen/addMcFrage"))
+                .andExpect(redirectedUrl("/organisatoren/testErstellen"));
+    }
 
+    @Test
+    @DisplayName("Freitext-Frage Seite redirected zu /organisatoren/testErstellen")
+    void test_5() throws Exception {
+        mvc.perform(post("/organisatoren/testErstellen/addFreitextFrage"))
+                .andExpect(redirectedUrl("/organisatoren/testErstellen"));
+    }
 }
