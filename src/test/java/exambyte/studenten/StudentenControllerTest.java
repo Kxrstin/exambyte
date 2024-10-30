@@ -25,4 +25,19 @@ public class StudentenControllerTest {
                 .andExpect(status().isOk());
           }
 
+    @Test
+    @DisplayName("Wenn der Ergebnis-Button auf der Startseite gedrückt wird, wird man weitergeleitet auf die ErgebnisPage")
+    public void test_ergebnisPageAnzeigen() throws Exception {
+        mvc.perform(get("/studenten/landingPage/zeigeErgebnis"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("studenten/ErgebnisPageStudenten"));
+    }
+
+    @Test
+    @DisplayName("Wenn der Test-Button auf der Startseite gedrückt wird, wird man weitergeleitet auf die testPage")
+    public void test_testPageAnzeigen() throws Exception {
+        mvc.perform(get("/studenten/landingPage/zeigeTest"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("studenten/TestBearbeitenPageStudenten"));
+    }
 }
