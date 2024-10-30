@@ -10,13 +10,14 @@
         <img src="../../Images/ExamByteLogo%20edited.png" alt="Logo von ExamByte">
         <h2> Test Erstellen </h2>
 
-            <form action="get">
-                <button type="submit" id="mcFrage">+ Multiple-Choice Frage hinzufügen</button>
+            <!--TODO: Method zu POST-Request umändern und Formular erscheinen lassen-->
+            <form method="get">
+                <button type="submit" id="mcFrageButton">+ Multiple-Choice Frage hinzufügen</button>
                 <button type="submit" id="freitextFrage"> + Freitext Frage hinzufügen</button>
             </form>
 
-            <span th:if="${mcFrage}">
-                    <--! Grobe Idee, muss noch getestet werden ob das geht -->
+            <span th:if="${mcFrageButton}">
+                    <!-- Grobe Idee, muss noch getestet werden ob das geht -->
                 <form method="post"></form>
                 <label for="titelMCID"> Titel: </label>
                 <input type="text" id="titelMCID" name="titel">
@@ -24,9 +25,9 @@
                 <label for="multipleChoiceFrageID">Multiple-Choice Fragestellung:</label>
                 <input type="text" id="multipleChoiceFrageID" name="multipleChoiceFrage">
 
-                <button type="submit" id="antwortMC">+ Antwort hinzufügen</button>
+                <button type="submit" id="antwortHinzufügenMC">+ Antwort hinzufügen</button>
 
-                    <span th:if="${antwortMC}">
+                    <span th:if="${antwortHinzufügenMC}">
                         <label for="erklaerungMCFrageID"> Erklärung: </label>
                         <textarea id="erklaerungMCFrageID" name="erklaerungMCFrage"></textarea>
 
@@ -35,6 +36,7 @@
                     </span>
             </span>
 
+        <form>
             <span th:if="${freitextFrage}">
                 <label for="titelFreitextID"> Titel: </label>
                 <input type="text" id="titelFreitextID" name="titel">
@@ -49,5 +51,6 @@
                 <input type="number" name="punktzahlFreitextFrage" id="punktzahlFreitextFrageID">
             </span>
         </form>
+    <!--TODO: "Test fertig" Button hinzufügen, der wieder zur LandingPage führt-->
     </body>
 </html>
