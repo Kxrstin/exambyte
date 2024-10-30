@@ -9,4 +9,14 @@ public class OrganisatorenController {
     public String landingPage() {
         return "/organisatoren/LandingPageOrganisatoren";
     }
+
+    @GetMapping("/organisatoren/testErstellen")
+    public String testErstellen() {
+        return "/organisatoren/TestErstellenPageOrganisatoren";
+    }
+
+    @GetMapping("/organisatoren/korrekturstand")
+    public String korrekturStand() {
+        return "/organisatoren/KorrekturstandOrganisatoren";
+    }
 }
