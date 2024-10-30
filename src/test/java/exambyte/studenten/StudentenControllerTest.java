@@ -38,6 +38,6 @@ public class StudentenControllerTest {
     public void test_testPageAnzeigen() throws Exception {
         mvc.perform(get("/studenten/landingPage/zeigeTest"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("studenten/TestBearbeitenPageStudenten"));
+                .andExpect(view().name("studenten/TestPageStudenten"));
     }
 }

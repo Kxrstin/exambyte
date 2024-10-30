@@ -13,12 +13,14 @@
     <h1> ExamByte </h1>
     <img src="../../Images/Logo/ExamByteLogo.png" alt="Logo von ExamByte">
 
+    <!--
     <h2> Testbearbeitung </h2>
-        <ul>
-            <li> <a href="TestBearbeitenPageStudi.html">Aufgabe 1 (TODO)</a></li>
+        <ul th:remove="all-but-first" th:object="${testListe}">
+            <li th:each="test : *{testListe.tests}"> <a href="TODO">Aufgabe 1</a></li>
             <li> <a href="TestBearbeitenPageStudi.html">Aufgabe 2</a></li>
             <li> <a href="TestBearbeitenPageStudi.html">Aufgabe 3</a></li>
         </ul>
+        -->
 
         <p> Aufgabe 1: </p>
         <from action="post">

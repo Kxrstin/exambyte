@@ -1,10 +1,12 @@
 package exambyte.studenten;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class StudentenController {
+    private TestService testService;
 
     // Methoden für die LandingPage
     @GetMapping("/studenten/landingPage")
@@ -19,7 +21,7 @@ public class StudentenController {
 
     @GetMapping("/studenten/landingPage/zeigeTest")
     public String zeigeTest() {
-        return "studenten/TestBearbeitenPageStudenten";
+        return "studenten/TestPageStudenten";
     }
 
 
