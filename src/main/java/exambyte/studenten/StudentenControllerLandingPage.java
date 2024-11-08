@@ -37,9 +37,6 @@ public class StudentenControllerLandingPage {
     @GetMapping("/studenten/landingPage/zeigeTest/{id}")
     public String zeigeTest(@PathVariable int id) {
         // TODO Fehlermeldung
-        if(!testService.hasTestWithId(id)) {
-            return "studenten/LandingPageStudenten";
-        }
         return "studenten/TestPageStudenten";
     }
 }
