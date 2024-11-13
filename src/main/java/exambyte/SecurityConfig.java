@@ -11,9 +11,9 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain configure(HttpSecurity chainBuilder) throws Exception {
         chainBuilder.authorizeRequests(
-                config -> config.requestMatchers("/anmeldung", "/css/*").permitAll()
+                config -> config.requestMatchers( "/css/*").permitAll()
                         .anyRequest().authenticated())
-                .formLogin(Customizer.withDefaults()); // TODO: Anmeldung über GitHub
+                .oauth2Login(Customizer.withDefaults());
         return chainBuilder.build();
     }
 }
