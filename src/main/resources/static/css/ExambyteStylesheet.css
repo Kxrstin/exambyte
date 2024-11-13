@@ -1,0 +1,40 @@
+body {
+    font-family: "Century Gothic";
+}
+
+h1 {
+    background-color: lightsteelblue;
+    padding: 10px;
+    margin: 0px;
+}
+
+form {
+    margin: 20px;
+}
+
+button {
+    margin-top: 20px;
+}
+
+
+div {
+    margin-top: 10px;
+}
+
+p {
+    margin: 20px;
+}
+
+h2 {
+    margin: 20px;
+}
+
+li {
+    margin-right: 50px;
+}
+
+
+
+
+
+
