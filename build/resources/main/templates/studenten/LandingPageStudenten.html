@@ -1,6 +1,6 @@
 <html lang="de">
     <head>
-        <title> ExamByte </title>
+        <title> ExamByte | Landing Page </title>
         <link rel="icon" type="image/png" th:href="@{/Images/Logo/ExamByteLogoOhneUnterschrift.png}"
               href="../../static/Images/Logo/ExamByteLogoOhneUnterschrift.png">
         <link rel="stylesheet" href="../../static/css/ExambyteStylesheet.css"
@@ -9,10 +9,15 @@
               href="../../static/css/bootstrap.min.css">
     </head>
     <body>
-    <h1> ExamByte - Zulassungsstatus </h1>
-
+    <h1>
+        <img class="imgLogo"
+             th:src="@{/Images/Logo/ExamByteLogo.png}"
+             src="../../static/Images/Logo/ExamByteLogo.png">
+        ExamByte
+    </h1>
+    <h2> Zulassungsstatus</h2>
     <p> Zulassung: 68% bestanden </p>
-    <h2> Zu bearbeitende Tests: </h2>
+    <h3> Zu bearbeitende Tests: </h3>
 
             <ul> <!-- TODO: th:remove="all-but-first" -->
                 <li class="list-group-item" th:each="test : ${tests}"
