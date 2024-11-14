@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="exambyte.anmeldung.AnmeldungControllerTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-11-14T16:55:46" hostname="KERSTIN-SURFACE" time="1.161">
+<testsuite name="exambyte.anmeldung.AnmeldungControllerTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-11-14T17:23:28" hostname="KERSTIN-SURFACE" time="2.403">
   <properties/>
-  <testcase name="Wenn der Pfad / geöffnet wird, soll man zur GitHub Anmeldung redirected werden" classname="exambyte.anmeldung.AnmeldungControllerTest" time="1.161"/>
-  <system-out><![CDATA[17:55:43.618 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [exambyte.anmeldung.AnmeldungControllerTest]: AnmeldungControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-17:55:43.834 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration exambyte.ExambyteProjektApplication for test class exambyte.anmeldung.AnmeldungControllerTest
+  <testcase name="Ein User mit allen Rollen bekommt alle drei Buttons angezeigt." classname="exambyte.anmeldung.AnmeldungControllerTest" time="2.403"/>
+  <system-out><![CDATA[18:23:23.429 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [exambyte.anmeldung.AnmeldungControllerTest]: AnmeldungControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+18:23:23.744 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration exambyte.ExambyteProjektApplication for test class exambyte.anmeldung.AnmeldungControllerTest
 ]]></system-out>
   <system-err><![CDATA[WARNING: A Java agent has been loaded dynamically (C:\Users\kerst\.gradle\caches\modules-2\files-2.1\net.bytebuddy\byte-buddy-agent\1.14.19\154da3a65b4f4a909d3e5bdec55d1b2b4cbb6ce1\byte-buddy-agent-1.14.19.jar)
 WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning

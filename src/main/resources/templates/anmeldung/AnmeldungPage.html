@@ -16,20 +16,24 @@
 
         <span th:if="${isStudent}">
             <form method="get" th:action="@{/studenten/landingPage}">
-                <button class="btn btn-dark" type="submit">Weiter zu Exambyte für Studenten</button>
+                <button class="buttonAnmeldung" type="submit">Weiter zu Exambyte für Studenten</button>
             </form>
         </span>
 
         <span th:if="${isOrganisator}">
             <form method="get" th:action="@{/organisatoren/landingPage}">
-                  <button class="btn btn-dark" type="submit">Weiter zu Exambyte für Organisatoren</button>
+                  <button class="buttonAnmeldung" type="submit">Weiter zu Exambyte für Organisatoren</button>
             </form>
         </span>
 
         <span th:if="${isKorrektor}">
             <form method="get" th:action="@{/korrektoren/landingPage}">
-                <button class="btn btn-dark" type="submit">Weiter zu Exambyte für Korrektoren</button>
+                <button class="buttonAnmeldung" type="submit">Weiter zu Exambyte für Korrektoren</button>
             </form>
+        </span>
+
+        <span th:if="${noRole}">
+            <p class="bg-info"> Nur Korrektoren, Studenten und Organisatoren haben Zugriff auf die Website! </p>
         </span>
     </body>
 </html>

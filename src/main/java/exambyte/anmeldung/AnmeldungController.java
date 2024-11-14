@@ -25,11 +25,17 @@ public class AnmeldungController {
         if(authorities.contains(new SimpleGrantedAuthority("ROLE_STUDENT"))) {
             model.addAttribute("isStudent", true);
         }
+
         if(authorities.contains(new SimpleGrantedAuthority("ROLE_ORGANISATOR"))) {
             model.addAttribute("isOrganisator", true);
         }
+
         if(authorities.contains(new SimpleGrantedAuthority("ROLE_KORREKTOR"))) {
             model.addAttribute("isKorrektor", true);
+        }
+
+        if(model.getAttribute("isStudent") == null && model.getAttribute("isOrganisator") == null && model.getAttribute("isKorrektor") == null) {
+            model.addAttribute("noRole", true);
         }
         return "anmeldung/AnmeldungPage";
     }
