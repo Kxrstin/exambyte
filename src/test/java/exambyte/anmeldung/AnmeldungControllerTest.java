@@ -1,38 +1,47 @@
 package exambyte.anmeldung;
 
+import exambyte.MethodSecurityConfig;
+import exambyte.SecurityConfig;
+import exambyte.helper.WithMockOAuth2User;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.context.annotation.Import;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
+import org.thymeleaf.spring6.expression.Mvc;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(AnmeldungController.class)
+@Import({SecurityConfig.class, MethodSecurityConfig.class})
 public class AnmeldungControllerTest {
     @Autowired
     MockMvc mvc;
 
     @Test
-    @DisplayName("Wenn der Pfad /anmeldung geöffnet wird, soll man zur AnmeldungPage geleitet werden")
+    @DisplayName("Wenn der Pfad / geöffnet wird, soll man zur GitHub Anmeldung redirected werden")
     public void test_anmeldenPage() throws Exception {
-        mvc.perform(get("/anmeldung"))
-                .andExpect(status().isOk())
-                .andExpect(view().name("anmeldung/AnmeldungPage"));
+        MvcResult mvcResult = mvc.perform(get("/"))
+                .andExpect(status().is3xxRedirection())
+                .andReturn();
+        assertThat(mvcResult.getResponse().getRedirectedUrl())
+                .contains("oauth2/authorization/github");
     }
 
     @Test
-    @DisplayName("Wenn das Formular ohne Passwort abgeschickt wird, bekommt man eine Fehlermeldung und einen 302 Status")
+    @DisplayName("Wenn man als Student (mit Role Student) auf den Button drückt, wird man zur URL /studenten/landingPage redirected")
+    @WithMockOAuth2User(roles = "STUDENT")
     public void test_anmeldenDateneingabe() throws Exception {
         mvc.perform(post("/anmeldung")
-                .param("mail", "max.mustermann@hhu.de"))
+                        .with(csrf()))
                 .andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrl("/anmeldung"))
-                .andReturn()
-                .getResponse()
-                .getContentAsString().contains("darf nicht leer sein");
+                .andExpect(redirectedUrl("/studenten/landingPage"));
     }
 
 
