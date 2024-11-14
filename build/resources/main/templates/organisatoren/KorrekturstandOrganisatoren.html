@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="de">
+    <head>
+        <title>ExamByte - Korrekturstand</title>
+        <link rel = "stylesheet" th:href="@{/css/bootstrap.min.css}"
+              href="../../static/css/bootstrap.min.css">
+        <link rel="icon" type="image/png" th:href="@{/Images/Logo/ExamByteLogoOhneUnterschrift.png}"
+              href="../../static/Images/Logo/ExamByteLogoOhneUnterschrift.png">
+        <meta charset="UTF-8">
+    </head>
+    <body>
+        <h1> ExamByte </h1>
+        <img th:src="@{/Images/Logo/ExamByteLogo.png}"
+             src="../../static/Images/Logo/ExamByteLogo.png">
+
+        <h2>Korrekturstand</h2>
+
+        <h3>Test 1</h3>
+
+            <p>
+                Noch nicht korrigiert:
+            </p>
+
+        <!--TODO: Studis speichern und auflisten mithilfe von th:each-->
+            <ul>
+                <li>Rudolf</li>
+                <li>Mickey Mouse</li>
+                <li>Donald Duck</li>
+            </ul>
+
+            <p>
+                Korrigiert:
+            </p>
+
+            <ul>
+                <li>Kerstin Neu</li>
+            </ul>
+    </body>
+</html>

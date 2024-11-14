@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="exambyte.organisatoren.OrganisatorenControllerTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2024-10-30T20:14:35" hostname="MEIRIN" time="1.012">
+  <properties/>
+  <testcase name="Die Organisatoren LandingPage ist unter /organisatoren/landingPage erreichbar" classname="exambyte.organisatoren.OrganisatorenControllerTest" time="0.957"/>
+  <testcase name="Test Erstellen Seite ist unter /organisatoren/testErstellen erreichbar" classname="exambyte.organisatoren.OrganisatorenControllerTest" time="0.025"/>
+  <testcase name="Korrekturstand Seite ist unter /organisatoren/korrekturstand erreichbar" classname="exambyte.organisatoren.OrganisatorenControllerTest" time="0.007"/>
+  <testcase name="MC-Frage Seite redirected zu /organisatoren/testErstellen" classname="exambyte.organisatoren.OrganisatorenControllerTest" time="0.014"/>
+  <testcase name="Freitext-Frage Seite redirected zu /organisatoren/testErstellen" classname="exambyte.organisatoren.OrganisatorenControllerTest" time="0.004"/>
+  <system-out><![CDATA[21:14:34.308 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [exambyte.organisatoren.OrganisatorenControllerTest]: OrganisatorenControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+21:14:34.449 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration exambyte.ExambyteProjektApplication for test class exambyte.organisatoren.OrganisatorenControllerTest
+]]></system-out>
+  <system-err><![CDATA[WARNING: A Java agent has been loaded dynamically (C:\Users\Miran\.gradle\caches\modules-2\files-2.1\net.bytebuddy\byte-buddy-agent\1.14.19\154da3a65b4f4a909d3e5bdec55d1b2b4cbb6ce1\byte-buddy-agent-1.14.19.jar)
+WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
+WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
+WARNING: Dynamic loading of agents will be disallowed by default in a future release
+]]></system-err>
+</testsuite>
