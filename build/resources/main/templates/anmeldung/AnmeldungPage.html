@@ -13,8 +13,23 @@
     <body>
     <h1> Exambyte - Anmeldung </h1>
     <p> Willkommen bei Exambyte, <span th:text="${login}">FooLogin</span>!</p>
-    <form method="post" th:action="@{/anmeldung}">
-        <button class="btn btn-dark" type="submit">Weiter zu Exambyte</button>
-    </form>
+
+        <span th:if="${isStudent}">
+            <form method="get" th:action="@{/studenten/landingPage}">
+                <button class="btn btn-dark" type="submit">Weiter zu Exambyte für Studenten</button>
+            </form>
+        </span>
+
+        <span th:if="${isOrganisator}">
+            <form method="get" th:action="@{/organisatoren/landingPage}">
+                  <button class="btn btn-dark" type="submit">Weiter zu Exambyte für Organisatoren</button>
+            </form>
+        </span>
+
+        <span th:if="${isKorrektor}">
+            <form method="get" th:action="@{/korrektoren/landingPage}">
+                <button class="btn btn-dark" type="submit">Weiter zu Exambyte für Korrektoren</button>
+            </form>
+        </span>
     </body>
 </html>

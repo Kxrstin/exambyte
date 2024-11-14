@@ -34,15 +34,4 @@ public class AnmeldungControllerTest {
                 .contains("oauth2/authorization/github");
     }
 
-    @Test
-    @DisplayName("Wenn man als Student (mit Role Student) auf den Button drückt, wird man zur URL /studenten/landingPage redirected")
-    @WithMockOAuth2User(roles = "STUDENT")
-    public void test_anmeldenDateneingabe() throws Exception {
-        mvc.perform(post("/anmeldung")
-                        .with(csrf()))
-                .andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrl("/studenten/landingPage"));
-    }
-
-
 }
