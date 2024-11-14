@@ -1,5 +1,6 @@
 package exambyte.anmeldung;
 
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Controller;
@@ -18,6 +19,7 @@ public class AnmeldungController {
     }
 
     @PostMapping("/anmeldung")
+    @Secured("ROLE_STUDENT")
     public String weiterleiten() {
         return "redirect:/studenten/landingPage"; // Provisorisch TODO: Rollen beachten
     }

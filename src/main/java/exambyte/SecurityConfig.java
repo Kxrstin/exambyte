@@ -12,7 +12,6 @@ public class SecurityConfig {
     public SecurityFilterChain configure(HttpSecurity chainBuilder) throws Exception {
         chainBuilder.authorizeRequests(
                 config -> config.requestMatchers( "/css/*").permitAll()
-                        .requestMatchers("/studenten/*").hasRole("STUDENT")
                         .anyRequest().authenticated())
                 .oauth2Login(config ->
                         config.userInfoEndpoint(
