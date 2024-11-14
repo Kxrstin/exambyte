@@ -1,13 +1,157 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="exambyte.organisatoren.OrganisatorenControllerTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2024-10-30T20:14:35" hostname="MEIRIN" time="1.012">
+<testsuite name="exambyte.organisatoren.OrganisatorenControllerTest" tests="8" skipped="0" failures="3" errors="0" timestamp="2024-11-14T17:43:18" hostname="MEIRIN" time="1.313">
   <properties/>
-  <testcase name="Die Organisatoren LandingPage ist unter /organisatoren/landingPage erreichbar" classname="exambyte.organisatoren.OrganisatorenControllerTest" time="0.957"/>
-  <testcase name="Test Erstellen Seite ist unter /organisatoren/testErstellen erreichbar" classname="exambyte.organisatoren.OrganisatorenControllerTest" time="0.025"/>
-  <testcase name="Korrekturstand Seite ist unter /organisatoren/korrekturstand erreichbar" classname="exambyte.organisatoren.OrganisatorenControllerTest" time="0.007"/>
-  <testcase name="MC-Frage Seite redirected zu /organisatoren/testErstellen" classname="exambyte.organisatoren.OrganisatorenControllerTest" time="0.014"/>
-  <testcase name="Freitext-Frage Seite redirected zu /organisatoren/testErstellen" classname="exambyte.organisatoren.OrganisatorenControllerTest" time="0.004"/>
-  <system-out><![CDATA[21:14:34.308 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [exambyte.organisatoren.OrganisatorenControllerTest]: OrganisatorenControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-21:14:34.449 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration exambyte.ExambyteProjektApplication for test class exambyte.organisatoren.OrganisatorenControllerTest
+  <testcase name="Die Organisatoren LandingPage ist unter /organisatoren/landingPage erreichbar" classname="exambyte.organisatoren.OrganisatorenControllerTest" time="1.179"/>
+  <testcase name="Test Erstellen Seite ist unter /organisatoren/testErstellen erreichbar" classname="exambyte.organisatoren.OrganisatorenControllerTest" time="0.035"/>
+  <testcase name="Korrekturstand Seite ist unter /organisatoren/korrekturstand erreichbar" classname="exambyte.organisatoren.OrganisatorenControllerTest" time="0.01"/>
+  <testcase name="MC-Frage Seite redirected zu /organisatoren/testErstellen" classname="exambyte.organisatoren.OrganisatorenControllerTest" time="0.021"/>
+  <testcase name="Freitext-Frage Seite redirected zu /organisatoren/testErstellen" classname="exambyte.organisatoren.OrganisatorenControllerTest" time="0.008"/>
+  <testcase name="Hinzufügen eines Titels bei MC-Frage redirected zu /organisatoren/testErstellen" classname="exambyte.organisatoren.OrganisatorenControllerTest" time="0.024">
+    <failure message="java.lang.AssertionError: Redirected URL expected:&lt;/organisatoren/testErstellen&gt; but was:&lt;null&gt;" type="java.lang.AssertionError">java.lang.AssertionError: Redirected URL expected:&lt;/organisatoren/testErstellen&gt; but was:&lt;null&gt;
+	at org.springframework.test.util.AssertionErrors.fail(AssertionErrors.java:59)
+	at org.springframework.test.util.AssertionErrors.assertEquals(AssertionErrors.java:122)
+	at org.springframework.test.web.servlet.result.MockMvcResultMatchers.lambda$redirectedUrl$2(MockMvcResultMatchers.java:130)
+	at org.springframework.test.web.servlet.MockMvc$1.andExpect(MockMvc.java:214)
+	at exambyte.organisatoren.OrganisatorenControllerTest.test_06(OrganisatorenControllerTest.java:66)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+</failure>
+  </testcase>
+  <testcase name="Hinzufügen einer Fragestellung bei MC-Frage redirected zu /organisatoren/testErstellen" classname="exambyte.organisatoren.OrganisatorenControllerTest" time="0.008">
+    <failure message="java.lang.AssertionError: Redirected URL expected:&lt;/organisatoren/testErstellen&gt; but was:&lt;null&gt;" type="java.lang.AssertionError">java.lang.AssertionError: Redirected URL expected:&lt;/organisatoren/testErstellen&gt; but was:&lt;null&gt;
+	at org.springframework.test.util.AssertionErrors.fail(AssertionErrors.java:59)
+	at org.springframework.test.util.AssertionErrors.assertEquals(AssertionErrors.java:122)
+	at org.springframework.test.web.servlet.result.MockMvcResultMatchers.lambda$redirectedUrl$2(MockMvcResultMatchers.java:130)
+	at org.springframework.test.web.servlet.MockMvc$1.andExpect(MockMvc.java:214)
+	at exambyte.organisatoren.OrganisatorenControllerTest.test_07(OrganisatorenControllerTest.java:74)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+</failure>
+  </testcase>
+  <testcase name="Hinzufügen einer Punktzahl bei MC-Frage redirected zu /organisatoren/testErstellen" classname="exambyte.organisatoren.OrganisatorenControllerTest" time="0.016">
+    <failure message="java.lang.AssertionError: Redirected URL expected:&lt;/organisatoren/testErstellen&gt; but was:&lt;null&gt;" type="java.lang.AssertionError">java.lang.AssertionError: Redirected URL expected:&lt;/organisatoren/testErstellen&gt; but was:&lt;null&gt;
+	at org.springframework.test.util.AssertionErrors.fail(AssertionErrors.java:59)
+	at org.springframework.test.util.AssertionErrors.assertEquals(AssertionErrors.java:122)
+	at org.springframework.test.web.servlet.result.MockMvcResultMatchers.lambda$redirectedUrl$2(MockMvcResultMatchers.java:130)
+	at org.springframework.test.web.servlet.MockMvc$1.andExpect(MockMvc.java:214)
+	at exambyte.organisatoren.OrganisatorenControllerTest.test_08(OrganisatorenControllerTest.java:82)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+</failure>
+  </testcase>
+  <system-out><![CDATA[18:43:15.944 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [exambyte.organisatoren.OrganisatorenControllerTest]: OrganisatorenControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+18:43:16.148 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration exambyte.ExambyteProjektApplication for test class exambyte.organisatoren.OrganisatorenControllerTest
+
+MockHttpServletRequest:
+      HTTP Method = POST
+      Request URI = /organisatoren/testErstellen/updateTitel
+       Parameters = {_csrf=[SMQDznR7crM7mGyMRBdgkR1Dl1CFpT0BMs8GP-JPILao0XXzKqIwrRIdQ9EW_Fi4cTpUoS9xummzkAksAPdkDYR4F46R6RHA]}
+          Headers = []
+             Body = null
+    Session Attrs = {SPRING_SECURITY_CONTEXT=SecurityContextImpl [Authentication=OAuth2AuthenticationToken [Principal=Name: [666666], Granted Authorities: [[ROLE_ORGANISATOR]], User Attributes: [{id=666666, login=JoeSchmoe}], Credentials=[PROTECTED], Authenticated=true, Details=null, Granted Authorities=[ROLE_ORGANISATOR]]]}
+
+Handler:
+             Type = org.springframework.web.servlet.resource.ResourceHttpRequestHandler
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = org.springframework.web.servlet.resource.NoResourceFoundException
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 404
+    Error message = No static resource organisatoren/testErstellen/updateTitel.
+          Headers = [Vary:"Origin", "Access-Control-Request-Method", "Access-Control-Request-Headers", X-Content-Type-Options:"nosniff", X-XSS-Protection:"0", Cache-Control:"no-cache, no-store, max-age=0, must-revalidate", Pragma:"no-cache", Expires:"0", X-Frame-Options:"DENY"]
+     Content type = null
+             Body = 
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+
+MockHttpServletRequest:
+      HTTP Method = POST
+      Request URI = /organisatoren/testErstellen/updateFragestellung
+       Parameters = {_csrf=[ltHRfIOLF3dUFfWSKTaMEPOaKdHucX5wSObtSJ1FT814BTVDoLLnTbTuckR5cZP3GRu4Isr8BOjcQBpdftLccKR1LvkbM1R7]}
+          Headers = []
+             Body = null
+    Session Attrs = {SPRING_SECURITY_CONTEXT=SecurityContextImpl [Authentication=OAuth2AuthenticationToken [Principal=Name: [666666], Granted Authorities: [[ROLE_ORGANISATOR]], User Attributes: [{id=666666, login=JoeSchmoe}], Credentials=[PROTECTED], Authenticated=true, Details=null, Granted Authorities=[ROLE_ORGANISATOR]]]}
+
+Handler:
+             Type = org.springframework.web.servlet.resource.ResourceHttpRequestHandler
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = org.springframework.web.servlet.resource.NoResourceFoundException
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 404
+    Error message = No static resource organisatoren/testErstellen/updateFragestellung.
+          Headers = [Vary:"Origin", "Access-Control-Request-Method", "Access-Control-Request-Headers", X-Content-Type-Options:"nosniff", X-XSS-Protection:"0", Cache-Control:"no-cache, no-store, max-age=0, must-revalidate", Pragma:"no-cache", Expires:"0", X-Frame-Options:"DENY"]
+     Content type = null
+             Body = 
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+
+MockHttpServletRequest:
+      HTTP Method = POST
+      Request URI = /organisatoren/testErstellen/updatePunkte
+       Parameters = {_csrf=[fOjwQu0jD-eQ8MjG6XVHivyhgbF39LUXcnqHYRYTyXliywNST4rGJt0baoW9xfqg31hzuc2YrNBOkIU6RkjhWScirUxX_jNj]}
+          Headers = []
+             Body = null
+    Session Attrs = {SPRING_SECURITY_CONTEXT=SecurityContextImpl [Authentication=OAuth2AuthenticationToken [Principal=Name: [666666], Granted Authorities: [[ROLE_ORGANISATOR]], User Attributes: [{id=666666, login=JoeSchmoe}], Credentials=[PROTECTED], Authenticated=true, Details=null, Granted Authorities=[ROLE_ORGANISATOR]]]}
+
+Handler:
+             Type = org.springframework.web.servlet.resource.ResourceHttpRequestHandler
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = org.springframework.web.servlet.resource.NoResourceFoundException
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 404
+    Error message = No static resource organisatoren/testErstellen/updatePunkte.
+          Headers = [Vary:"Origin", "Access-Control-Request-Method", "Access-Control-Request-Headers", X-Content-Type-Options:"nosniff", X-XSS-Protection:"0", Cache-Control:"no-cache, no-store, max-age=0, must-revalidate", Pragma:"no-cache", Expires:"0", X-Frame-Options:"DENY"]
+     Content type = null
+             Body = 
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
 ]]></system-out>
   <system-err><![CDATA[WARNING: A Java agent has been loaded dynamically (C:\Users\Miran\.gradle\caches\modules-2\files-2.1\net.bytebuddy\byte-buddy-agent\1.14.19\154da3a65b4f4a909d3e5bdec55d1b2b4cbb6ce1\byte-buddy-agent-1.14.19.jar)
 WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning

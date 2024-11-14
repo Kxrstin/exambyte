@@ -23,13 +23,13 @@
 <tr>
 <td>
 <div class="infoBox" id="tests">
-<div class="counter">5</div>
+<div class="counter">8</div>
 <p>tests</p>
 </div>
 </td>
 <td>
 <div class="infoBox" id="failures">
-<div class="counter">0</div>
+<div class="counter">3</div>
 <p>failures</p>
 </div>
 </td>
@@ -41,7 +41,7 @@
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">1.007s</div>
+<div class="counter">1.301s</div>
 <p>duration</p>
 </div>
 </td>
@@ -50,8 +50,8 @@
 </div>
 </td>
 <td>
-<div class="infoBox success" id="successRate">
-<div class="percent">100%</div>
+<div class="infoBox failures" id="successRate">
+<div class="percent">62%</div>
 <p>successful</p>
 </div>
 </td>
@@ -61,16 +61,70 @@
 <div id="tabs">
 <ul class="tabLinks">
 <li>
-<a href="#tab0">Tests</a>
+<a href="#tab0">Failed tests</a>
 </li>
 <li>
-<a href="#tab1">Standard output</a>
+<a href="#tab1">Tests</a>
 </li>
 <li>
-<a href="#tab2">Standard error</a>
+<a href="#tab2">Standard output</a>
+</li>
+<li>
+<a href="#tab3">Standard error</a>
 </li>
 </ul>
 <div id="tab0" class="tab">
+<h2>Failed tests</h2>
+<div class="test">
+<a name="test_06()"></a>
+<h3 class="failures">Hinzufügen eines Titels bei MC-Frage redirected zu /organisatoren/testErstellen</h3>
+<span class="code">
+<pre>java.lang.AssertionError: Redirected URL expected:&lt;/organisatoren/testErstellen&gt; but was:&lt;null&gt;
+	at org.springframework.test.util.AssertionErrors.fail(AssertionErrors.java:59)
+	at org.springframework.test.util.AssertionErrors.assertEquals(AssertionErrors.java:122)
+	at org.springframework.test.web.servlet.result.MockMvcResultMatchers.lambda$redirectedUrl$2(MockMvcResultMatchers.java:130)
+	at org.springframework.test.web.servlet.MockMvc$1.andExpect(MockMvc.java:214)
+	at exambyte.organisatoren.OrganisatorenControllerTest.test_06(OrganisatorenControllerTest.java:66)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+</pre>
+</span>
+</div>
+<div class="test">
+<a name="test_07()"></a>
+<h3 class="failures">Hinzufügen einer Fragestellung bei MC-Frage redirected zu /organisatoren/testErstellen</h3>
+<span class="code">
+<pre>java.lang.AssertionError: Redirected URL expected:&lt;/organisatoren/testErstellen&gt; but was:&lt;null&gt;
+	at org.springframework.test.util.AssertionErrors.fail(AssertionErrors.java:59)
+	at org.springframework.test.util.AssertionErrors.assertEquals(AssertionErrors.java:122)
+	at org.springframework.test.web.servlet.result.MockMvcResultMatchers.lambda$redirectedUrl$2(MockMvcResultMatchers.java:130)
+	at org.springframework.test.web.servlet.MockMvc$1.andExpect(MockMvc.java:214)
+	at exambyte.organisatoren.OrganisatorenControllerTest.test_07(OrganisatorenControllerTest.java:74)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+</pre>
+</span>
+</div>
+<div class="test">
+<a name="test_08()"></a>
+<h3 class="failures">Hinzufügen einer Punktzahl bei MC-Frage redirected zu /organisatoren/testErstellen</h3>
+<span class="code">
+<pre>java.lang.AssertionError: Redirected URL expected:&lt;/organisatoren/testErstellen&gt; but was:&lt;null&gt;
+	at org.springframework.test.util.AssertionErrors.fail(AssertionErrors.java:59)
+	at org.springframework.test.util.AssertionErrors.assertEquals(AssertionErrors.java:122)
+	at org.springframework.test.web.servlet.result.MockMvcResultMatchers.lambda$redirectedUrl$2(MockMvcResultMatchers.java:130)
+	at org.springframework.test.web.servlet.MockMvc$1.andExpect(MockMvc.java:214)
+	at exambyte.organisatoren.OrganisatorenControllerTest.test_08(OrganisatorenControllerTest.java:82)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+</pre>
+</span>
+</div>
+</div>
+<div id="tab1" class="tab">
 <h2>Tests</h2>
 <table>
 <thead>
@@ -83,45 +137,171 @@
 </thead>
 <tr>
 <td class="success">Die Organisatoren LandingPage ist unter /organisatoren/landingPage erreichbar</td>
-<td class="success">test_1()</td>
-<td class="success">0.957s</td>
+<td class="success">test_01()</td>
+<td class="success">1.179s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">Test Erstellen Seite ist unter /organisatoren/testErstellen erreichbar</td>
-<td class="success">test_2()</td>
-<td class="success">0.025s</td>
+<td class="success">test_02()</td>
+<td class="success">0.035s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">Korrekturstand Seite ist unter /organisatoren/korrekturstand erreichbar</td>
-<td class="success">test_3()</td>
-<td class="success">0.007s</td>
+<td class="success">test_03()</td>
+<td class="success">0.010s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">MC-Frage Seite redirected zu /organisatoren/testErstellen</td>
-<td class="success">test_4()</td>
-<td class="success">0.014s</td>
+<td class="success">test_04()</td>
+<td class="success">0.021s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">Freitext-Frage Seite redirected zu /organisatoren/testErstellen</td>
-<td class="success">test_5()</td>
-<td class="success">0.004s</td>
+<td class="success">test_05()</td>
+<td class="success">0.008s</td>
 <td class="success">passed</td>
+</tr>
+<tr>
+<td class="failures">Hinzufügen eines Titels bei MC-Frage redirected zu /organisatoren/testErstellen</td>
+<td class="failures">test_06()</td>
+<td class="failures">0.024s</td>
+<td class="failures">failed</td>
+</tr>
+<tr>
+<td class="failures">Hinzufügen einer Fragestellung bei MC-Frage redirected zu /organisatoren/testErstellen</td>
+<td class="failures">test_07()</td>
+<td class="failures">0.008s</td>
+<td class="failures">failed</td>
+</tr>
+<tr>
+<td class="failures">Hinzufügen einer Punktzahl bei MC-Frage redirected zu /organisatoren/testErstellen</td>
+<td class="failures">test_08()</td>
+<td class="failures">0.016s</td>
+<td class="failures">failed</td>
 </tr>
 </table>
 </div>
-<div id="tab1" class="tab">
+<div id="tab2" class="tab">
 <h2>Standard output</h2>
 <span class="code">
-<pre>21:14:34.308 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [exambyte.organisatoren.OrganisatorenControllerTest]: OrganisatorenControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-21:14:34.449 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration exambyte.ExambyteProjektApplication for test class exambyte.organisatoren.OrganisatorenControllerTest
+<pre>18:43:15.944 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [exambyte.organisatoren.OrganisatorenControllerTest]: OrganisatorenControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+18:43:16.148 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration exambyte.ExambyteProjektApplication for test class exambyte.organisatoren.OrganisatorenControllerTest
+
+MockHttpServletRequest:
+      HTTP Method = POST
+      Request URI = /organisatoren/testErstellen/updateTitel
+       Parameters = {_csrf=[SMQDznR7crM7mGyMRBdgkR1Dl1CFpT0BMs8GP-JPILao0XXzKqIwrRIdQ9EW_Fi4cTpUoS9xummzkAksAPdkDYR4F46R6RHA]}
+          Headers = []
+             Body = null
+    Session Attrs = {SPRING_SECURITY_CONTEXT=SecurityContextImpl [Authentication=OAuth2AuthenticationToken [Principal=Name: [666666], Granted Authorities: [[ROLE_ORGANISATOR]], User Attributes: [{id=666666, login=JoeSchmoe}], Credentials=[PROTECTED], Authenticated=true, Details=null, Granted Authorities=[ROLE_ORGANISATOR]]]}
+
+Handler:
+             Type = org.springframework.web.servlet.resource.ResourceHttpRequestHandler
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = org.springframework.web.servlet.resource.NoResourceFoundException
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 404
+    Error message = No static resource organisatoren/testErstellen/updateTitel.
+          Headers = [Vary:&quot;Origin&quot;, &quot;Access-Control-Request-Method&quot;, &quot;Access-Control-Request-Headers&quot;, X-Content-Type-Options:&quot;nosniff&quot;, X-XSS-Protection:&quot;0&quot;, Cache-Control:&quot;no-cache, no-store, max-age=0, must-revalidate&quot;, Pragma:&quot;no-cache&quot;, Expires:&quot;0&quot;, X-Frame-Options:&quot;DENY&quot;]
+     Content type = null
+             Body = 
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+
+MockHttpServletRequest:
+      HTTP Method = POST
+      Request URI = /organisatoren/testErstellen/updateFragestellung
+       Parameters = {_csrf=[ltHRfIOLF3dUFfWSKTaMEPOaKdHucX5wSObtSJ1FT814BTVDoLLnTbTuckR5cZP3GRu4Isr8BOjcQBpdftLccKR1LvkbM1R7]}
+          Headers = []
+             Body = null
+    Session Attrs = {SPRING_SECURITY_CONTEXT=SecurityContextImpl [Authentication=OAuth2AuthenticationToken [Principal=Name: [666666], Granted Authorities: [[ROLE_ORGANISATOR]], User Attributes: [{id=666666, login=JoeSchmoe}], Credentials=[PROTECTED], Authenticated=true, Details=null, Granted Authorities=[ROLE_ORGANISATOR]]]}
+
+Handler:
+             Type = org.springframework.web.servlet.resource.ResourceHttpRequestHandler
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = org.springframework.web.servlet.resource.NoResourceFoundException
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 404
+    Error message = No static resource organisatoren/testErstellen/updateFragestellung.
+          Headers = [Vary:&quot;Origin&quot;, &quot;Access-Control-Request-Method&quot;, &quot;Access-Control-Request-Headers&quot;, X-Content-Type-Options:&quot;nosniff&quot;, X-XSS-Protection:&quot;0&quot;, Cache-Control:&quot;no-cache, no-store, max-age=0, must-revalidate&quot;, Pragma:&quot;no-cache&quot;, Expires:&quot;0&quot;, X-Frame-Options:&quot;DENY&quot;]
+     Content type = null
+             Body = 
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+
+MockHttpServletRequest:
+      HTTP Method = POST
+      Request URI = /organisatoren/testErstellen/updatePunkte
+       Parameters = {_csrf=[fOjwQu0jD-eQ8MjG6XVHivyhgbF39LUXcnqHYRYTyXliywNST4rGJt0baoW9xfqg31hzuc2YrNBOkIU6RkjhWScirUxX_jNj]}
+          Headers = []
+             Body = null
+    Session Attrs = {SPRING_SECURITY_CONTEXT=SecurityContextImpl [Authentication=OAuth2AuthenticationToken [Principal=Name: [666666], Granted Authorities: [[ROLE_ORGANISATOR]], User Attributes: [{id=666666, login=JoeSchmoe}], Credentials=[PROTECTED], Authenticated=true, Details=null, Granted Authorities=[ROLE_ORGANISATOR]]]}
+
+Handler:
+             Type = org.springframework.web.servlet.resource.ResourceHttpRequestHandler
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = org.springframework.web.servlet.resource.NoResourceFoundException
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 404
+    Error message = No static resource organisatoren/testErstellen/updatePunkte.
+          Headers = [Vary:&quot;Origin&quot;, &quot;Access-Control-Request-Method&quot;, &quot;Access-Control-Request-Headers&quot;, X-Content-Type-Options:&quot;nosniff&quot;, X-XSS-Protection:&quot;0&quot;, Cache-Control:&quot;no-cache, no-store, max-age=0, must-revalidate&quot;, Pragma:&quot;no-cache&quot;, Expires:&quot;0&quot;, X-Frame-Options:&quot;DENY&quot;]
+     Content type = null
+             Body = 
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
 </pre>
 </span>
 </div>
-<div id="tab2" class="tab">
+<div id="tab3" class="tab">
 <h2>Standard error</h2>
 <span class="code">
 <pre>WARNING: A Java agent has been loaded dynamically (C:\Users\Miran\.gradle\caches\modules-2\files-2.1\net.bytebuddy\byte-buddy-agent\1.14.19\154da3a65b4f4a909d3e5bdec55d1b2b4cbb6ce1\byte-buddy-agent-1.14.19.jar)
@@ -139,7 +319,7 @@ WARNING: Dynamic loading of agents will be disallowed by default in a future rel
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="http://www.gradle.org">Gradle 8.10.2</a> at 30.10.2024, 21:14:36</p>
+<a href="http://www.gradle.org">Gradle 8.10.2</a> at 14.11.2024, 18:43:19</p>
 </div>
 </div>
 </body>
