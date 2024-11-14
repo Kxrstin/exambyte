@@ -35,14 +35,69 @@ public class AnmeldungControllerTest {
     }
 
     @Test
-    @DisplayName("Wenn man als Student (mit Role Student) auf den Button drückt, wird man zur URL /studenten/landingPage redirected")
-    @WithMockOAuth2User(roles = "STUDENT")
-    public void test_anmeldenDateneingabe() throws Exception {
-        mvc.perform(post("/anmeldung")
-                        .with(csrf()))
-                .andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrl("/studenten/landingPage"));
+    @DisplayName("Ein User ohne Rolle bekommt nur eine Info Nachricht angezeigt und keinen Button")
+    @WithMockOAuth2User
+    public void test_noRole() throws Exception {
+        MvcResult mvcResult = mvc.perform(get("/"))
+                .andExpect(status().isOk())
+                .andReturn();
+        String html = mvcResult.getResponse().getContentAsString();
+        assertThat(html).contains("Nur Korrektoren, Studenten und Organisatoren haben Zugriff auf die Website!");
+        assertThat(html.contains("Weiter zu Exambyte für Korrektoren")).isFalse();
+        assertThat(html.contains("Weiter zu Exambyte für Studenten")).isFalse();
+        assertThat(html.contains("Weiter zu Exambyte für Organisatoren")).isFalse();
     }
 
+    @Test
+    @DisplayName("Ein Korrektor bekommt nur den Korrektor Button angezeigt.")
+    @WithMockOAuth2User(roles = "KORREKTOR")
+    public void test_buttonKorrektor() throws Exception {
+        MvcResult mvcResult = mvc.perform(get("/"))
+                .andExpect(status().isOk())
+                .andReturn();
+        String html = mvcResult.getResponse().getContentAsString();
+        assertThat(html.contains("Weiter zu Exambyte für Korrektoren")).isTrue();
+        assertThat(html.contains("Weiter zu Exambyte für Studenten")).isFalse();
+        assertThat(html.contains("Weiter zu Exambyte für Organisatoren")).isFalse();
+    }
+
+    @Test
+    @DisplayName("Ein Student bekommt nur den Studenten Button angezeigt")
+    @WithMockOAuth2User(roles = "STUDENT")
+    public void test_buttonStudent() throws Exception {
+        MvcResult mvcResult = mvc.perform(get("/"))
+                .andExpect(status().isOk())
+                .andReturn();
+        String html = mvcResult.getResponse().getContentAsString();
+        assertThat(html.contains("Weiter zu Exambyte für Korrektoren")).isFalse();
+        assertThat(html.contains("Weiter zu Exambyte für Studenten")).isTrue();
+        assertThat(html.contains("Weiter zu Exambyte für Organisatoren")).isFalse();
+    }
+
+    @Test
+    @DisplayName("Ein Organisator bekommt nur den Organisator Button angezeigt.")
+    @WithMockOAuth2User(roles = "ORGANISATOR")
+    public void test_buttonOrganisator() throws Exception {
+        MvcResult mvcResult = mvc.perform(get("/"))
+                .andExpect(status().isOk())
+                .andReturn();
+        String html = mvcResult.getResponse().getContentAsString();
+        assertThat(html.contains("Weiter zu Exambyte für Korrektoren")).isFalse();
+        assertThat(html.contains("Weiter zu Exambyte für Studenten")).isFalse();
+        assertThat(html.contains("Weiter zu Exambyte für Organisatoren")).isTrue();
+    }
+
+    @Test
+    @DisplayName("Ein User mit allen Rollen bekommt alle drei Buttons angezeigt.")
+    @WithMockOAuth2User(roles = {"ORGANISATOR","STUDENT","KORREKTOR"})
+    public void test_buttonOrganisatorStudentKorrektor() throws Exception {
+        MvcResult mvcResult = mvc.perform(get("/"))
+                .andExpect(status().isOk())
+                .andReturn();
+        String html = mvcResult.getResponse().getContentAsString();
+        assertThat(html.contains("Weiter zu Exambyte für Korrektoren")).isTrue();
+        assertThat(html.contains("Weiter zu Exambyte für Studenten")).isTrue();
+        assertThat(html.contains("Weiter zu Exambyte für Organisatoren")).isTrue();
+    }
 
 }
