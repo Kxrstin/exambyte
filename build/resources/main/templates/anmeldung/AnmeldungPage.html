@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="de">
     <head>
-        <title>ExamByte - Anmeldeseite</title>
+        <title>ExamByte | Anmeldung</title>
         <link rel="icon" type="image/png" href="../../Images/ExamByteLogo%20ohne%20Unterschrift.png">
         <link rel = "stylesheet" th:href="@{/css/bootstrap.min.css}"
               href="../static/css/bootstrap.min.css">
@@ -11,7 +11,13 @@
     </head>
 
     <body>
-    <h1> Exambyte - Anmeldung </h1>
+    <h1>
+        <img class="imgLogo"
+             th:src="@{/Images/Logo/ExamByteLogo.png}"
+             src="../../static/Images/Logo/ExamByteLogo.png">
+        ExamByte - Anmeldung
+    </h1>
+
     <p> Willkommen bei Exambyte, <span th:text="${login}">FooLogin</span>!</p>
 
         <span th:if="${isStudent}">

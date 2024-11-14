@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="de">
     <head>
-        <title> ExamByte - Test </title>
+        <title> ExamByte | Test </title>
         <link rel="icon" type="image/png" th:href="@{/Images/Logo/ExamByteLogoOhneUnterschrift.png}"
               href="../../static/Images/Logo/ExamByteLogoOhneUnterschrift.png">
         <link rel="stylesheet" href="../../static/css/ExambyteStylesheet.css"
@@ -11,7 +11,12 @@
         <meta charset="UTF-8">
     </head>
     <body>
-    <h1> ExamByte - Test </h1>
+    <h1>
+        <img class="imgLogo"
+             th:src="@{/Images/Logo/ExamByteLogo.png}"
+             src="../../static/Images/Logo/ExamByteLogo.png">
+        ExamByte - Test
+    </h1>
     <form>
         <label for="idtesttitel">Titel: </label>
         <input type="text" id="idtesttitel" name="titel">

@@ -2,10 +2,16 @@ body {
     font-family: "Century Gothic";
 }
 
+.imgLogo {
+    height: 70px;
+    width: 85px;
+}
+
 h1 {
     background-color: lightsteelblue;
     padding: 10px;
     margin: 0px;
+    font-family: "Century Gothic";
 }
 
 form {
@@ -17,12 +23,12 @@ button {
 }
 
 .buttonAnmeldung {
-    padding: 10px 20px;                  /* Innenabstand */
-    font-size: 16px;                     /* Schriftgröße */
-    color: black;                      /* Textfarbe */
-    background-color: lavender;           /* Hintergrundfarbe */
-    border: none;                        /* Rahmen entfernen */
-    border-radius: 5px;                  /* Abgerundete Ecken */
+    padding: 10px 20px;
+    font-size: 16px;
+    color: black;
+    background-color: #e5e5fc;
+    border: none;
+    border-radius: 5px;
     cursor: pointer;
     margin: 0px;
 }
