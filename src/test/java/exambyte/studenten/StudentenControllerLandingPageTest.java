@@ -1,30 +1,55 @@
 package exambyte.studenten;
 
+
+import exambyte.MethodSecurityConfig;
+import exambyte.SecurityConfig;
+import exambyte.helper.WithMockOAuth2User;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Import;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 
+import static exambyte.studenten.TestMother.testListe;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(StudentenControllerLandingPage.class)
+@Import({SecurityConfig.class, MethodSecurityConfig.class})
 public class StudentenControllerLandingPageTest {
     @Autowired
     MockMvc mvc;
 
-    @Test
-    @DisplayName("Die Route /landingPage führt zum Öffnen der LandingPageStudenten.html Seite und es gibt einen 200 Status.")
-    public void test_landingPage() throws Exception {
-        mvc.perform(get("/studenten/landingPage"))
-                .andExpect(view().name("studenten/LandingPageStudenten"))
-                .andExpect(status().isOk());
-          }
+    @MockBean
+    TestService testService;
 
     @Test
-    @DisplayName("Wenn der Ergebnis-Button auf der Startseite gedrückt wird, wird man weitergeleitet auf die ErgebnisPage")
+    @DisplayName("Die Route /landingPage führt zum Öffnen der LandingPageStudenten.html Seite und es gibt einen 200 Status, wenn man kein Student ist.")
+    @WithMockOAuth2User(roles = "STUDENT")
+    public void test_landingPageStudent() throws Exception {
+               mvc.perform(get("/studenten/landingPage"))
+                .andExpect(view().name("studenten/LandingPageStudenten"))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    @DisplayName("Die Route /landingPage führt zur GitHub Anmeldung und es gibt einen 3XX Status, wenn man kein Student ist.")
+    public void test_landingPageKeinStudent() throws Exception {
+        MvcResult result = mvc.perform(get("/studenten/landingPage"))
+                .andExpect(status().is3xxRedirection())
+                .andReturn();
+        assertThat(result.getResponse().getRedirectedUrl())
+                .contains("oauth2/authorization/github");
+    }
+
+    @Test
+    @DisplayName("Wenn der Ergebnis-Button auf der Startseite gedrückt wird, wird man weitergeleitet auf die ErgebnisPage, vorausgesetzt man ist Student.")
+    @WithMockOAuth2User(roles = "STUDENT")
     public void test_ergebnisPageAnzeigen() throws Exception {
         mvc.perform(get("/studenten/landingPage/zeigeErgebnis"))
                 .andExpect(status().isOk())
@@ -32,9 +57,36 @@ public class StudentenControllerLandingPageTest {
     }
 
     @Test
-    @DisplayName("Wenn der Test-Button auf der Startseite gedrückt wird, wird man weitergeleitet auf die testPage")
-    public void test_testPageAnzeigen() throws Exception {
-        mvc.perform(get("/studenten/landingPage/zeigeTest"))
+    @DisplayName("Wenn ein nicht-Student auf die URL /studenten/landingPage/zeigeErgebnis zugreifen will, wird er zu GitHub Anmeldung redirected.")
+    public void test_ergebnisPageAnzeigenNichtStudent() throws Exception {
+        MvcResult result = mvc.perform(get("/studenten/landingPage/zeigeErgebnis"))
+                .andExpect(status().is3xxRedirection())
+                .andReturn();
+        assertThat(result.getResponse().getRedirectedUrl())
+                .contains("oauth2/authorization/github");
+    }
+
+    @Test
+    @DisplayName("Auf der LandingPage soll eine Liste von Tests angezeigt werden")
+    @WithMockOAuth2User(roles = "STUDENT")
+    public void test_testsAnzeigen() throws Exception {
+        when(testService.getTests()).thenReturn(testListe());
+
+        String textHtml = mvc.perform(get("/studenten/landingPage"))
+                .andExpect(status().isOk())
+                .andReturn()
+                .getResponse()
+                .getContentAsString();
+
+        assertThat(textHtml).contains("Test Dummy");
+    }
+
+    @Test
+    @DisplayName("Wenn man auf einen Test klickt, soll man zur richtigen TestPage Seite kommen.")
+    @WithMockOAuth2User(roles = "STUDENT")
+    public void test_testBearbeiten() throws Exception {
+        when(testService.hasTestWithId(3)).thenReturn(true);
+        mvc.perform(get("/studenten/landingPage/zeigeTest/3"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("studenten/TestPageStudenten"));
     }
