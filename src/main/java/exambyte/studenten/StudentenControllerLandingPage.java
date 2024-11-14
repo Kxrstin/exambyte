@@ -1,6 +1,7 @@
 package exambyte.studenten;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +19,7 @@ public class StudentenControllerLandingPage {
     }
 
     @GetMapping("/studenten/landingPage")
+    @Secured("ROLE_STUDENT")
     public String landingpage(Model model) {
         if(testService == null) {
             model.addAttribute("tests", new ArrayList<TestStudenten>());
@@ -28,11 +30,13 @@ public class StudentenControllerLandingPage {
     }
 
     @GetMapping("/studenten/landingPage/zeigeErgebnis")
+    @Secured("ROLE_STUDENT")
     public String zeigeErgebnis() {
         return "studenten/ErgebnisPageStudenten";
     }
 
     @GetMapping("/studenten/landingPage/zeigeTest/{id}")
+    @Secured("ROLE_STUDENT")
     public String zeigeTest(@PathVariable int id) {
         // TODO Fehlermeldung
         return "studenten/TestPageStudenten";
