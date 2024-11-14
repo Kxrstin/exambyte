@@ -11,6 +11,10 @@
     </head>
 
     <body>
-    <h1> Die Anmeldeseite wird noch überarbeitet</h1>
+    <h1> Exambyte - Anmeldung </h1>
+    <p> Willkommen bei Exambyte, <span th:text="${login}">FooLogin</span>!</p>
+    <form method="post" th:action="@{/anmeldung}">
+        <button class="btn btn-dark" type="submit">Weiter zu Exambyte</button>
+    </form>
     </body>
 </html>
