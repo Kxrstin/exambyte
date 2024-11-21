@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="exambyte.controller.studenten.StudentenControllerLandingPageTest" tests="6" skipped="1" failures="0" errors="0" timestamp="2024-11-21T13:54:45" hostname="KERSTIN-SURFACE" time="0.341">
+<testsuite name="exambyte.controller.studenten.StudentenControllerLandingPageTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2024-11-21T15:45:14" hostname="KERSTIN-SURFACE" time="1.125">
   <properties/>
-  <testcase name="Wenn man auf einen Test klickt, soll man zur richtigen TestPage Seite kommen." classname="exambyte.controller.studenten.StudentenControllerLandingPageTest" time="0.22"/>
-  <testcase name="Wenn ein nicht-Student auf die URL /studenten/landingPage/zeigeErgebnis zugreifen will, wird er zu GitHub Anmeldung redirected." classname="exambyte.controller.studenten.StudentenControllerLandingPageTest" time="0.013"/>
-  <testcase name="Auf der LandingPage soll eine Liste von Tests angezeigt werden" classname="exambyte.controller.studenten.StudentenControllerLandingPageTest" time="0.004">
-    <skipped/>
-  </testcase>
-  <testcase name="Die Route /landingPage führt zum Öffnen der LandingPageStudenten.html Seite und es gibt einen 200 Status, wenn man kein Student ist." classname="exambyte.controller.studenten.StudentenControllerLandingPageTest" time="0.041"/>
-  <testcase name="Die Route /landingPage führt zur GitHub Anmeldung und es gibt einen 3XX Status, wenn man kein Student ist." classname="exambyte.controller.studenten.StudentenControllerLandingPageTest" time="0.012"/>
-  <testcase name="Wenn der Ergebnis-Button auf der Startseite gedrückt wird, wird man weitergeleitet auf die ErgebnisPage, vorausgesetzt man ist Student." classname="exambyte.controller.studenten.StudentenControllerLandingPageTest" time="0.022"/>
+  <testcase name="Wenn man auf einen Test klickt, soll man zur richtigen TestPage Seite kommen." classname="exambyte.controller.studenten.StudentenControllerLandingPageTest" time="0.615"/>
+  <testcase name="Wenn ein nicht-Student auf die URL /studenten/landingPage/zeigeErgebnis zugreifen will, wird er zu GitHub Anmeldung redirected." classname="exambyte.controller.studenten.StudentenControllerLandingPageTest" time="0.044"/>
+  <testcase name="Auf der LandingPage soll eine Liste von Tests angezeigt werden" classname="exambyte.controller.studenten.StudentenControllerLandingPageTest" time="0.254"/>
+  <testcase name="Die Route /landingPage führt zum Öffnen der LandingPageStudenten.html Seite und es gibt einen 200 Status, wenn man kein Student ist." classname="exambyte.controller.studenten.StudentenControllerLandingPageTest" time="0.047"/>
+  <testcase name="Die Route /landingPage führt zur GitHub Anmeldung und es gibt einen 3XX Status, wenn man kein Student ist." classname="exambyte.controller.studenten.StudentenControllerLandingPageTest" time="0.036"/>
+  <testcase name="Wenn der Ergebnis-Button auf der Startseite gedrückt wird, wird man weitergeleitet auf die ErgebnisPage, vorausgesetzt man ist Student." classname="exambyte.controller.studenten.StudentenControllerLandingPageTest" time="0.073"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

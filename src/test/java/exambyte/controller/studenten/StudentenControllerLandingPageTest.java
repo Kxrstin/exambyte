@@ -1,6 +1,7 @@
 package exambyte.controller.studenten;
 
 
+import exambyte.aggregates.studenten.StudiTest;
 import exambyte.security.MethodSecurityConfig;
 import exambyte.security.SecurityConfig;
 import exambyte.helper.WithMockOAuth2User;
@@ -14,6 +15,9 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
+
+import java.time.LocalDate;
+import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.Mockito.when;
@@ -67,20 +71,18 @@ public class StudentenControllerLandingPageTest {
                 .contains("oauth2/authorization/github");
     }
 
-    @Disabled
     @Test
     @DisplayName("Auf der LandingPage soll eine Liste von Tests angezeigt werden")
     @WithMockOAuth2User(roles = "STUDENT")
     public void test_testsAnzeigen() throws Exception {
-        // when(testService.getTests()).thenReturn(TestMother.testListe());
-
+        when(testService.getTestList()).thenReturn(List.of(new StudiTest("Mathematik für Informatik 3 Test Woche 5", 3, LocalDate.of(2024, 11, 19), LocalDate.of(2024, 11, 28), LocalDate.of(2024, 12, 5))));
         String textHtml = mvc.perform(get("/studenten/landingPage"))
                 .andExpect(status().isOk())
                 .andReturn()
                 .getResponse()
                 .getContentAsString();
-        // TODO überarbeiten
-        assertThat(textHtml).contains("Test Dummy");
+
+        assertThat(textHtml).contains("Mathematik für Informatik 3");
     }
 
     @Test
@@ -88,6 +90,7 @@ public class StudentenControllerLandingPageTest {
     @WithMockOAuth2User(roles = "STUDENT")
     public void test_testBearbeiten() throws Exception {
         when(testService.hasTestWithId(3)).thenReturn(true);
+        when(testService.getTest(3)).thenReturn(new StudiTest("Mathematik für Informatik 3 Test Woche 5", 3, LocalDate.of(2024, 11, 19), LocalDate.of(2024, 11, 28), LocalDate.of(2024, 12, 5)));
         mvc.perform(get("/studenten/landingPage/zeigeTest/3"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("studenten/TestPageStudenten"));

@@ -2,18 +2,19 @@ package exambyte.service.studenten;
 
 import exambyte.aggregates.studenten.StudiTest;
 import exambyte.infrastructure.studenten.StudiTestRepoImpl;
+import exambyte.persistence.studenten.StudiTestDB;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-@Component
 public class TestService {
-    private StudiTestRepo testRepo;
+    private final StudiTestRepo testRepo;
 
-    public TestService() {
-        testRepo = new StudiTestRepoImpl();
+    public TestService(StudiTestRepo testRepo) {
+        this.testRepo = testRepo;
     }
 
     public StudiTest getTest(int testId) {

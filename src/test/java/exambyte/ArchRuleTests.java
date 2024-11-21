@@ -30,7 +30,7 @@ public class ArchRuleTests {
             .beAnnotatedWith(WebMvcTest.class);
 
     @ArchTest
-    private final ArchRule onionArchiitecture = onionArchitecture()
+    private final ArchRule onionArchitecture = onionArchitecture()
             .domainModels("..aggregates..")
             .applicationServices("..service..")
             .domainServices("..domainService..")

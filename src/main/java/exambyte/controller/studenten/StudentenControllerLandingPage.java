@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 @Controller
@@ -39,8 +40,16 @@ public class StudentenControllerLandingPage {
 
     @GetMapping("/studenten/landingPage/zeigeTest/{id}")
     @Secured("ROLE_STUDENT")
-    public String zeigeTest(@PathVariable int id) {
+    public String zeigeTest(@PathVariable int id, Model model) {
         // TODO Fehlermeldung
+        if(!testService.hasTestWithId(id)) {
+            return "redirect:/studenten/landingPage";
+        }
+        StudiTest test = testService.getTest(id);
+        model.addAttribute("titel", "Titel: " + test.getTitel());
+        model.addAttribute("startzeitpunkt", "Startzeitpunkt: " + test.getStartzeitpunkt().format(DateTimeFormatter.ofPattern("dd.MM.YYYY")));
+        model.addAttribute("endzeitpunkt", "Endzeitpunkt: " + test.getEndzeitpunkt().format(DateTimeFormatter.ofPattern("dd.MM.YYYY")));
+        model.addAttribute("ergebniszeitpunkt", "Ergebniszeitpunkt: " + test.getErgebniszeitpunkt().format(DateTimeFormatter.ofPattern("dd.MM.YYYY")));
         return "studenten/TestPageStudenten";
     }
 }

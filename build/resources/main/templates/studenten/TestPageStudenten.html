@@ -19,10 +19,10 @@
         ExamByte - Test
     </h1>
 
-    <li class="list-group-item"> Titel: Beispieltest</li>
-    <li class="list-group-item"> Startzeitpunkt: 14.11.2024, 12:00 Uhr</li>
-    <li class="list-group-item"> Endzeitpunkt: 21.11.2024, 11:59 Uhr</li>
-    <li class="list-group-item"> Ergebniszeitpunkt: 28.11.2024, 12:00 Uhr</li>
+    <li class="list-group-item" th:text="${titel}"> Titel: Beispieltest</li>
+    <li class="list-group-item" th:text="${startzeitpunkt}"> Startzeitpunkt: 14.11.2024, 12:00 Uhr</li>
+    <li class="list-group-item" th:text="${endzeitpunkt}"> Endzeitpunkt: 21.11.2024, 11:59 Uhr</li>
+    <li class="list-group-item" th:text="${ergebniszeitpunkt}"> Ergebniszeitpunkt: 28.11.2024, 12:00 Uhr</li>
 
     <form action="/studenten/testBearbeitung">
         <button class="btn btn-dark" type="submit"> Test bearbeiten </button>
