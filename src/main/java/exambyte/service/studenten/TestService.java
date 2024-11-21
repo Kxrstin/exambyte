@@ -1,37 +1,30 @@
 package exambyte.service.studenten;
 
 import exambyte.aggregates.studenten.StudiTest;
+import exambyte.infrastructure.studenten.StudiTestRepoImpl;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
 @Component
 public class TestService {
-    // TODO überarbeiten
-    private ArrayList<StudiTest> testListe;
+    private StudiTestRepo testRepo;
 
     public TestService() {
-        testListe = new ArrayList<StudiTest>();
-
+        testRepo = new StudiTestRepoImpl();
     }
 
-    public void addTest(StudiTest test) {
-        testListe.add(test);
+    public StudiTest getTest(int testId) {
+        return testRepo.findTestById(testId);
     }
 
-    // TODO Implementieren
-    public StudiTest getTest(int id) {
-        return null;
+    public boolean hasTestWithId(int testId) {
+       return testRepo.hasTestWithId(testId);
     }
 
-    public List<StudiTest> getTests() {
-        return null;
-    }
-
-    public boolean hasTestWithId(int id) {
-       return false;
+    public List<StudiTest> getTestList() {
+        return testRepo.getTestList();
     }
 }

@@ -20,10 +20,11 @@
     <p> Zulassung: 68% bestanden </p>
     <h3> Zu bearbeitende Tests: </h3>
 
-            <ul> <!-- TODO: th:remove="all-but-first" -->
-                <li class="list-group-item" th:each="test : ${tests}"
-                    th:text="${test.titel()}">
-                    <a th:href="@{/studenten/landingPage/zeigeTest/{id}(id=${test.id()})}">Test 1</a>
+            <ul th:remove="all-but-first">
+                <li class="list-group-item" th:each="test : ${tests}">
+                    <a th:href="@{/studenten/landingPage/zeigeTest/{id}(id=${test.getId()})}">
+                        <span th:text="${test.getTitel()}"> Test 1</span>
+                    </a>
                 </li>
 
                 <li class="list-group-item"> <a href="/studenten/landingPage/zeigeTest/2">Test 2</a></li>

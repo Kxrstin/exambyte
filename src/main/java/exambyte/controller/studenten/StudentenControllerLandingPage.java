@@ -23,10 +23,10 @@ public class StudentenControllerLandingPage {
     @GetMapping("/studenten/landingPage")
     @Secured("ROLE_STUDENT")
     public String landingpage(Model model) {
-        if(testService == null) {
+        if(testService.getTestList() == null) {
             model.addAttribute("tests", new ArrayList<StudiTest>());
         } else {
-            model.addAttribute("tests", testService.getTests());
+            model.addAttribute("tests", testService.getTestList());
         }
         return "studenten/LandingPageStudenten";
     }
