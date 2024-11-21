@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="exambyte.controller.studenten.StudentenControllerLandingPageTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2024-11-21T09:36:45" hostname="KERSTIN-SURFACE" time="0.302">
+<testsuite name="exambyte.controller.studenten.StudentenControllerLandingPageTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2024-11-21T09:40:29" hostname="KERSTIN-SURFACE" time="0.317">
   <properties/>
-  <testcase name="Wenn man auf einen Test klickt, soll man zur richtigen TestPage Seite kommen." classname="exambyte.controller.studenten.StudentenControllerLandingPageTest" time="0.161"/>
+  <testcase name="Wenn man auf einen Test klickt, soll man zur richtigen TestPage Seite kommen." classname="exambyte.controller.studenten.StudentenControllerLandingPageTest" time="0.148"/>
   <testcase name="Wenn ein nicht-Student auf die URL /studenten/landingPage/zeigeErgebnis zugreifen will, wird er zu GitHub Anmeldung redirected." classname="exambyte.controller.studenten.StudentenControllerLandingPageTest" time="0.012"/>
-  <testcase name="Auf der LandingPage soll eine Liste von Tests angezeigt werden" classname="exambyte.controller.studenten.StudentenControllerLandingPageTest" time="0.073"/>
-  <testcase name="Die Route /landingPage führt zum Öffnen der LandingPageStudenten.html Seite und es gibt einen 200 Status, wenn man kein Student ist." classname="exambyte.controller.studenten.StudentenControllerLandingPageTest" time="0.014"/>
-  <testcase name="Die Route /landingPage führt zur GitHub Anmeldung und es gibt einen 3XX Status, wenn man kein Student ist." classname="exambyte.controller.studenten.StudentenControllerLandingPageTest" time="0.009"/>
-  <testcase name="Wenn der Ergebnis-Button auf der Startseite gedrückt wird, wird man weitergeleitet auf die ErgebnisPage, vorausgesetzt man ist Student." classname="exambyte.controller.studenten.StudentenControllerLandingPageTest" time="0.02"/>
+  <testcase name="Auf der LandingPage soll eine Liste von Tests angezeigt werden" classname="exambyte.controller.studenten.StudentenControllerLandingPageTest" time="0.083"/>
+  <testcase name="Die Route /landingPage führt zum Öffnen der LandingPageStudenten.html Seite und es gibt einen 200 Status, wenn man kein Student ist." classname="exambyte.controller.studenten.StudentenControllerLandingPageTest" time="0.015"/>
+  <testcase name="Die Route /landingPage führt zur GitHub Anmeldung und es gibt einen 3XX Status, wenn man kein Student ist." classname="exambyte.controller.studenten.StudentenControllerLandingPageTest" time="0.016"/>
+  <testcase name="Wenn der Ergebnis-Button auf der Startseite gedrückt wird, wird man weitergeleitet auf die ErgebnisPage, vorausgesetzt man ist Student." classname="exambyte.controller.studenten.StudentenControllerLandingPageTest" time="0.021"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
