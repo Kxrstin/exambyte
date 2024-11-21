@@ -6,7 +6,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 public class TestMother {
-    public static List<StudiTest> testListe() {
+    /*public static List<StudiTest> testListe() {
         return List.of(new StudiTest("Test Dummy 1",
                     LocalDate.of(2024,10,10),
                     LocalDate.of(2024,10,20),
@@ -28,4 +28,6 @@ public class TestMother {
                         LocalDate.of(2025,1,30),
                         4));
     }
+
+     */
 }

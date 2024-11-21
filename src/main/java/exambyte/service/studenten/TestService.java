@@ -22,29 +22,16 @@ public class TestService {
         testListe.add(test);
     }
 
+    // TODO Implementieren
     public StudiTest getTest(int id) {
-        return testListe.stream()
-                .filter(t -> t.id() == id)
-                .findFirst()
-                .orElse(null);
+        return null;
     }
 
     public List<StudiTest> getTests() {
-        ArrayList<StudiTest> tests = new ArrayList<>();
-        for(StudiTest test: testListe) {
-            tests.add(new StudiTest(test.titel(),
-                    test.startzeitpunkt(),
-                    test.endzeitpunkt(),
-                    test.ergebniszeitpunkt(),
-                    test.id()));
-        }
-        return tests;
+        return null;
     }
 
     public boolean hasTestWithId(int id) {
-        if(getTest(id) == null) {
-            return false;
-        }
-        return true;
+       return false;
     }
 }
