@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="exambyte.studenten.StudentenControllerTestBearbeitenPageTest" tests="1" skipped="0" failures="1" errors="0" timestamp="2024-11-21T09:36:38" hostname="KERSTIN-SURFACE" time="0.0">
+  <properties/>
+  <testcase name="initializationError" classname="exambyte.studenten.StudentenControllerTestBearbeitenPageTest" time="0.0">
+    <failure message="java.lang.IllegalStateException: Failed to find merged annotation for @org.springframework.test.context.BootstrapWith(org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTestContextBootstrapper.class)" type="java.lang.IllegalStateException">java.lang.IllegalStateException: Failed to find merged annotation for @org.springframework.test.context.BootstrapWith(org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTestContextBootstrapper.class)
+	at org.springframework.util.Assert.state(Assert.java:97)
+	at org.springframework.test.context.TestContextAnnotationUtils$AnnotationDescriptor.&lt;init&gt;(TestContextAnnotationUtils.java:520)
+	at org.springframework.test.context.TestContextAnnotationUtils.findAnnotationDescriptor(TestContextAnnotationUtils.java:259)
+	at org.springframework.test.context.TestContextAnnotationUtils.findAnnotationDescriptor(TestContextAnnotationUtils.java:221)
+	at org.springframework.test.context.BootstrapUtils.resolveExplicitTestContextBootstrapper(BootstrapUtils.java:175)
+	at org.springframework.test.context.BootstrapUtils.resolveTestContextBootstrapper(BootstrapUtils.java:150)
+	at org.springframework.test.context.BootstrapUtils.resolveTestContextBootstrapper(BootstrapUtils.java:126)
+	at org.springframework.test.context.TestContextManager.&lt;init&gt;(TestContextManager.java:126)
+	at org.springframework.test.context.junit.jupiter.SpringExtension.getTestContextManager(SpringExtension.java:366)
+	at org.springframework.test.context.junit.jupiter.SpringExtension.beforeAll(SpringExtension.java:131)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+</failure>
+  </testcase>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
