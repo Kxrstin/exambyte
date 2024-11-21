@@ -1,6 +1,7 @@
 package exambyte.controller.anmeldung;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.security.oauth2.core.user.OAuth2User;
@@ -14,8 +15,7 @@ import java.util.Set;
 @Controller
 public class AnmeldungController {
     @GetMapping("/")
-    public String anmeldung(OAuth2AuthenticationToken auth, Model model) {
-        OAuth2User user = auth.getPrincipal();
+    public String anmeldung(@AuthenticationPrincipal OAuth2User user, Model model) {
         model.addAttribute("login", user.getAttribute("login"));
 
         Set<GrantedAuthority> authorities = new HashSet<>(user.getAuthorities());

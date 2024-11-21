@@ -1,5 +1,6 @@
 package exambyte.security;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
@@ -18,13 +19,25 @@ public class AppUserService implements OAuth2UserService<OAuth2UserRequest, OAut
 
     private final DefaultOAuth2UserService defaultService = new DefaultOAuth2UserService();
 
+    @Value("${exambyte.rollen.organisatoren}")
+    private Set<String> organisatoren;
+
+    @Value("${exambyte.rollen.korrektoren}")
+    private Set<String> korrektoren;
+
     @Override
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
         OAuth2User originalUser = defaultService.loadUser(userRequest);
         Set<GrantedAuthority> authorities = new HashSet<>(originalUser.getAuthorities());
-        if("Kxrstin".equals(originalUser.getAttribute("login")) ||
-                "Narr1M".equals(originalUser.getAttribute("login"))) {
-            authorities.add(new SimpleGrantedAuthority("ROLE_STUDENT"));
+        authorities.add(new SimpleGrantedAuthority("ROLE_STUDENT"));
+        if(korrektoren.contains(originalUser.getAttribute("id").toString())) {
+            authorities.add(new SimpleGrantedAuthority("ROLE_KORREKTOR"));
+        }
+        if(organisatoren.contains(originalUser.getAttribute("id").toString())) {
+            authorities.add(new SimpleGrantedAuthority("ROLE_ORGANISATOR"));
+        }
+        //TODO Narr1M in yaml Datei
+        if("Narr1M".equals(originalUser.getAttribute("login"))) {
             authorities.add(new SimpleGrantedAuthority("ROLE_KORREKTOR"));
             authorities.add(new SimpleGrantedAuthority("ROLE_ORGANISATOR"));
         }
