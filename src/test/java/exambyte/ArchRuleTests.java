@@ -28,4 +28,13 @@ public class ArchRuleTests {
             .beAnnotatedWith(Controller.class)
             .orShould()
             .beAnnotatedWith(WebMvcTest.class);
+
+    @ArchTest
+    private final ArchRule onionArchiitecture = onionArchitecture()
+            .domainModels("..aggregates..")
+            .applicationServices("..service..")
+            .domainServices("..domainService..")
+            .adapter("web", "..controller..")
+            .adapter("infrastructure", "..infrastructure..")
+            .adapter("persistence", "..persistence..");
 }
