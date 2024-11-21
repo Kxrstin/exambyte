@@ -1,7 +1,7 @@
 package exambyte.controller.studenten;
 
 import exambyte.service.studenten.TestService;
-import exambyte.aggregates.studenten.TestStudenten;
+import exambyte.aggregates.studenten.StudiTest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
@@ -24,7 +24,7 @@ public class StudentenControllerLandingPage {
     @Secured("ROLE_STUDENT")
     public String landingpage(Model model) {
         if(testService == null) {
-            model.addAttribute("tests", new ArrayList<TestStudenten>());
+            model.addAttribute("tests", new ArrayList<StudiTest>());
         } else {
             model.addAttribute("tests", testService.getTests());
         }

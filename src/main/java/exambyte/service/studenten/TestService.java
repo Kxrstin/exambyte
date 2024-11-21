@@ -1,6 +1,6 @@
 package exambyte.service.studenten;
 
-import exambyte.aggregates.studenten.TestStudenten;
+import exambyte.aggregates.studenten.StudiTest;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
@@ -10,28 +10,29 @@ import java.util.List;
 @Service
 @Component
 public class TestService {
-    private ArrayList<TestStudenten> testListe;
+    // TODO überarbeiten
+    private ArrayList<StudiTest> testListe;
 
     public TestService() {
-        testListe = new ArrayList<TestStudenten>();
+        testListe = new ArrayList<StudiTest>();
 
     }
 
-    public void addTest(TestStudenten test) {
+    public void addTest(StudiTest test) {
         testListe.add(test);
     }
 
-    public TestStudenten getTest(int id) {
+    public StudiTest getTest(int id) {
         return testListe.stream()
                 .filter(t -> t.id() == id)
                 .findFirst()
                 .orElse(null);
     }
 
-    public List<TestStudenten> getTests() {
-        ArrayList<TestStudenten> tests = new ArrayList<>();
-        for(TestStudenten test: testListe) {
-            tests.add(new TestStudenten(test.titel(),
+    public List<StudiTest> getTests() {
+        ArrayList<StudiTest> tests = new ArrayList<>();
+        for(StudiTest test: testListe) {
+            tests.add(new StudiTest(test.titel(),
                     test.startzeitpunkt(),
                     test.endzeitpunkt(),
                     test.ergebniszeitpunkt(),
