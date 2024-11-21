@@ -7,8 +7,8 @@ spring:
             client-id: ${CLIENT_ID}
             client-secret: ${CLIENT_SECRET}
             scope: read:public_repo
-
 exambyte:
   rollen:
     organisatoren: 147599239
     korrektoren: 147599239
+

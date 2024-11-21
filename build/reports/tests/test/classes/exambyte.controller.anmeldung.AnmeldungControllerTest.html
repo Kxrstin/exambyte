@@ -23,13 +23,13 @@
 <tr>
 <td>
 <div class="infoBox" id="tests">
-<div class="counter">6</div>
+<div class="counter">1</div>
 <p>tests</p>
 </div>
 </td>
 <td>
 <div class="infoBox" id="failures">
-<div class="counter">0</div>
+<div class="counter">1</div>
 <p>failures</p>
 </div>
 </td>
@@ -41,7 +41,7 @@
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">0.628s</div>
+<div class="counter">1.454s</div>
 <p>duration</p>
 </div>
 </td>
@@ -50,8 +50,8 @@
 </div>
 </td>
 <td>
-<div class="infoBox success" id="successRate">
-<div class="percent">100%</div>
+<div class="infoBox failures" id="successRate">
+<div class="percent">0%</div>
 <p>successful</p>
 </div>
 </td>
@@ -61,57 +61,140 @@
 <div id="tabs">
 <ul class="tabLinks">
 <li>
-<a href="#tab0">Tests</a>
+<a href="#tab0">Failed tests</a>
+</li>
+<li>
+<a href="#tab1">Tests</a>
+</li>
+<li>
+<a href="#tab2">Standard output</a>
+</li>
+<li>
+<a href="#tab3">Standard error</a>
 </li>
 </ul>
 <div id="tab0" class="tab">
+<h2>Failed tests</h2>
+<div class="test">
+<a name="test_buttonOrgasnisatorStudentKorrektor()"></a>
+<h3 class="failures">test_buttonOrgasnisatorStudentKorrektor()</h3>
+<span class="code">
+<pre>org.opentest4j.AssertionFailedError: 
+Expecting value to be true but was false
+	at java.base@21.0.2/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:62)
+	at java.base@21.0.2/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:502)
+	at app//exambyte.controller.anmeldung.AnmeldungControllerTest.test_buttonOrgasnisatorStudentKorrektor(AnmeldungControllerTest.java:109)
+	at java.base@21.0.2/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base@21.0.2/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base@21.0.2/java.util.ArrayList.forEach(ArrayList.java:1596)
+</pre>
+</span>
+</div>
+</div>
+<div id="tab1" class="tab">
 <h2>Tests</h2>
 <table>
 <thead>
 <tr>
 <th>Test</th>
-<th>Method name</th>
 <th>Duration</th>
 <th>Result</th>
 </tr>
 </thead>
 <tr>
-<td class="success">Wenn der Pfad / geöffnet wird, soll man zur GitHub Anmeldung redirected werden</td>
-<td class="success">test_anmeldenPage()</td>
-<td class="success">0.017s</td>
-<td class="success">passed</td>
-</tr>
-<tr>
-<td class="success">Ein Korrektor bekommt nur den Korrektor Button angezeigt.</td>
-<td class="success">test_buttonKorrektor()</td>
-<td class="success">0.007s</td>
-<td class="success">passed</td>
-</tr>
-<tr>
-<td class="success">Ein Organisator bekommt nur den Organisator Button angezeigt.</td>
-<td class="success">test_buttonOrganisator()</td>
-<td class="success">0.007s</td>
-<td class="success">passed</td>
-</tr>
-<tr>
-<td class="success">Ein User mit allen Rollen bekommt alle drei Buttons angezeigt.</td>
-<td class="success">test_buttonOrganisatorStudentKorrektor()</td>
-<td class="success">0.010s</td>
-<td class="success">passed</td>
-</tr>
-<tr>
-<td class="success">Ein Student bekommt nur den Studenten Button angezeigt</td>
-<td class="success">test_buttonStudent()</td>
-<td class="success">0.574s</td>
-<td class="success">passed</td>
-</tr>
-<tr>
-<td class="success">Ein User ohne Rolle bekommt nur eine Info Nachricht angezeigt und keinen Button</td>
-<td class="success">test_noRole()</td>
-<td class="success">0.013s</td>
-<td class="success">passed</td>
+<td class="failures">test_buttonOrgasnisatorStudentKorrektor()</td>
+<td class="failures">1.454s</td>
+<td class="failures">failed</td>
 </tr>
 </table>
+</div>
+<div id="tab2" class="tab">
+<h2>Standard output</h2>
+<span class="code">
+<pre>19:50:45.980 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [exambyte.controller.anmeldung.AnmeldungControllerTest]: AnmeldungControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+19:50:46.178 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration exambyte.ExambyteProjektApplication for test class exambyte.controller.anmeldung.AnmeldungControllerTest
+
+MockHttpServletRequest:
+      HTTP Method = GET
+      Request URI = /
+       Parameters = {}
+          Headers = []
+             Body = null
+    Session Attrs = {SPRING_SECURITY_CONTEXT=SecurityContextImpl [Authentication=OAuth2AuthenticationToken [Principal=Name: [147599239], Granted Authorities: [[ROLE_USER]], User Attributes: [{login=username, id=147599239}], Credentials=[PROTECTED], Authenticated=true, Details=null, Granted Authorities=[ROLE_USER]]]}
+
+Handler:
+             Type = exambyte.controller.anmeldung.AnmeldungController
+           Method = exambyte.controller.anmeldung.AnmeldungController#anmeldung(OAuth2User, Model)
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = null
+
+ModelAndView:
+        View name = anmeldung/AnmeldungPage
+             View = null
+        Attribute = login
+            value = username
+        Attribute = noRole
+            value = true
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 200
+    Error message = null
+          Headers = [Content-Language:&quot;en&quot;, Content-Type:&quot;text/html;charset=UTF-8&quot;, X-Content-Type-Options:&quot;nosniff&quot;, X-XSS-Protection:&quot;0&quot;, Cache-Control:&quot;no-cache, no-store, max-age=0, must-revalidate&quot;, Pragma:&quot;no-cache&quot;, Expires:&quot;0&quot;, X-Frame-Options:&quot;DENY&quot;]
+     Content type = text/html;charset=UTF-8
+             Body = &lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;de&quot;&gt;
+    &lt;head&gt;
+        &lt;title&gt;ExamByte | Anmeldung&lt;/title&gt;
+        &lt;link rel=&quot;icon&quot; type=&quot;image/png&quot;
+              href=&quot;/Images/Logo/ExamByteLogoOhneUnterschrift.png&quot;&gt;
+        &lt;link rel = &quot;stylesheet&quot; href=&quot;/css/bootstrap.min.css&quot;&gt;
+        &lt;meta charset=&quot;UTF-8&quot;&gt;
+        &lt;link rel=&quot;stylesheet&quot; href=&quot;/css/ExambyteStylesheet.css&quot;&gt;
+    &lt;/head&gt;
+
+    &lt;body&gt;
+    &lt;h1&gt;
+        &lt;img class=&quot;imgLogo&quot;
+             src=&quot;/Images/Logo/ExamByteLogo.png&quot;&gt;
+        ExamByte - Anmeldung
+    &lt;/h1&gt;
+
+    &lt;p&gt; Willkommen bei Exambyte, &lt;span&gt;username&lt;/span&gt;!&lt;/p&gt;
+
+        
+
+        
+
+        
+
+        &lt;span&gt;
+            &lt;p class=&quot;bg-info&quot;&gt; Nur Korrektoren, Studenten und Organisatoren haben Zugriff auf die Website! &lt;/p&gt;
+        &lt;/span&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+</pre>
+</span>
+</div>
+<div id="tab3" class="tab">
+<h2>Standard error</h2>
+<span class="code">
+<pre>WARNING: A Java agent has been loaded dynamically (C:\Users\kerst\.gradle\caches\modules-2\files-2.1\net.bytebuddy\byte-buddy-agent\1.14.19\154da3a65b4f4a909d3e5bdec55d1b2b4cbb6ce1\byte-buddy-agent-1.14.19.jar)
+WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
+WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
+WARNING: Dynamic loading of agents will be disallowed by default in a future release
+</pre>
+</span>
 </div>
 </div>
 <div id="footer">
@@ -121,7 +204,7 @@
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="http://www.gradle.org">Gradle 8.10.2</a> at 21.11.2024, 16:57:44</p>
+<a href="http://www.gradle.org">Gradle 8.10.2</a> at 21.11.2024, 19:50:50</p>
 </div>
 </div>
 </body>

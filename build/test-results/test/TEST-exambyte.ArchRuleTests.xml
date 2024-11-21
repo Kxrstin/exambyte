@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="exambyte.ArchRuleTests" tests="2" skipped="0" failures="0" errors="0" timestamp="2024-11-21T15:57:31" hostname="KERSTIN-SURFACE" time="2.793">
-  <properties/>
-  <testcase name="nurControllerInControllerKlassen" classname="exambyte.ArchRuleTests" time="2.508"/>
-  <testcase name="onionArchitecture" classname="exambyte.ArchRuleTests" time="0.284"/>
-  <system-out><![CDATA[16:57:31.910 [Test worker] INFO com.tngtech.archunit.core.PluginLoader -- Detected Java version 21.0.2
-]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>
