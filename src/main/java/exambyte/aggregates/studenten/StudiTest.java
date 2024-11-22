@@ -35,4 +35,9 @@ public final class StudiTest {
     public String getTitel() {
         return titel;
     }
+
+    public boolean testBestanden() {
+        // TODO Implementieren
+        return true;
+    }
 }

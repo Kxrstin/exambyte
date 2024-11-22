@@ -26,8 +26,10 @@ public class StudentenControllerLandingPage {
     public String landingpage(Model model) {
         if(testService.getTestList() == null) {
             model.addAttribute("tests", new ArrayList<StudiTest>());
+            model.addAttribute("zulassungsstatus", "Guter Kurs");
         } else {
             model.addAttribute("tests", testService.getTestList());
+            model.addAttribute("zulassungsstatus", testService.zulassungsStatus(testService.getTestList()));
         }
         return "studenten/LandingPageStudenten";
     }
