@@ -44,11 +44,6 @@ public class AppUserService implements OAuth2UserService<OAuth2UserRequest, OAut
         if (organisatoren.contains(id)) {
             authorities.add(new SimpleGrantedAuthority("ROLE_ORGANISATOR"));
         }
-        //TODO Narr1M in yaml Datei
-        if ("Narr1M".equals(originalUser.getAttribute("login"))) {
-            authorities.add(new SimpleGrantedAuthority("ROLE_KORREKTOR"));
-            authorities.add(new SimpleGrantedAuthority("ROLE_ORGANISATOR"));
-        }
 
         return new DefaultOAuth2User(authorities, originalUser.getAttributes(), "id");
     }
