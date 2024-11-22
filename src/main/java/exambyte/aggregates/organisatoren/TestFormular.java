@@ -1,12 +1,13 @@
 package exambyte.aggregates.organisatoren;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class TestFormular {
 
-    private ArrayList<TestFrage> testFragen;
+    private List<TestFrage> testFragen;
 
-    public TestFormular(ArrayList<TestFrage> testFragen){
+    public TestFormular(List<TestFrage> testFragen){
         this.testFragen = testFragen;
     }
 
