@@ -17,4 +17,12 @@ public class TestFormular {
         testFragen.set(firstPos, testFragen.get(secPos - 1));
         testFragen.set(secPos, testFrage);
     }
+
+    public List<TestFrage> getTestFragen(){
+        return  testFragen;
+    }
+
+    public void setTestFragen(List<TestFrage> testFragen) {
+        this.testFragen = testFragen;
+    }
 }
