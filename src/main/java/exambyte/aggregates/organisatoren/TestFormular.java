@@ -1,12 +1,13 @@
 package exambyte.aggregates.organisatoren;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class TestFormular {
 
-    private ArrayList<TestFrage> testFragen;
+    private List<TestFrage> testFragen;
 
-    public TestFormular(ArrayList<TestFrage> testFragen){
+    public TestFormular(List<TestFrage> testFragen){
         this.testFragen = testFragen;
     }
 
@@ -15,5 +16,13 @@ public class TestFormular {
         TestFrage testFrage = testFragen.get(firstPos - 1);
         testFragen.set(firstPos, testFragen.get(secPos - 1));
         testFragen.set(secPos, testFrage);
+    }
+
+    public List<TestFrage> getTestFragen(){
+        return  testFragen;
+    }
+
+    public void setTestFragen(List<TestFrage> testFragen) {
+        this.testFragen = testFragen;
     }
 }
