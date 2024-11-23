@@ -20,6 +20,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -94,5 +95,19 @@ public class StudentenControllerLandingPageTest {
         mvc.perform(get("/studenten/landingPage/zeigeTest/3"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("studenten/TestPageStudenten"));
+    }
+
+    @Test
+    @DisplayName("Wenn man alle Tests bislang bestanden hat, soll guter Kurs neben Zulassungsstatus stehen")
+    @WithMockOAuth2User(roles = "STUDENT")
+    public void test_zulassungsstatus() throws Exception {
+        StudiTest test = new StudiTest("Mathematik für Informatik 3 Test Woche 5", 3, LocalDate.of(2024, 11, 19), LocalDate.of(2024, 11, 28), LocalDate.of(2024, 12, 5));
+        when(testService.getTestList()).thenReturn(List.of(test));
+        when(testService.zulassungsStatus(any())).thenReturn("Guter Kurs");
+        MvcResult result = mvc.perform(get("/studenten/landingPage"))
+                .andExpect(status().isOk())
+                .andReturn();
+
+        assertThat(result.getResponse().getContentAsString()).contains("Guter Kurs");
     }
 }
