@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="exambyte.controller.studenten.StudentenControllerTestBearbeitenPageTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2024-11-23T22:57:36" hostname="KERSTIN-SURFACE" time="0.032">
+  <properties/>
+  <testcase name="Der Pfad /studenten/testBearbeitung führt für Nicht-Studenten zur Github Anmeldung." classname="exambyte.controller.studenten.StudentenControllerTestBearbeitenPageTest" time="0.009"/>
+  <testcase name="Der Pfad /studenten/testBearbeitung führt zur TestBearbeitenPage" classname="exambyte.controller.studenten.StudentenControllerTestBearbeitenPageTest" time="0.022"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
