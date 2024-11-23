@@ -1,2 +1,5 @@
 Quellenverzeichnis:
 - Quelle des Logos: https://www.design.com/maker/logo/creative-document-file-17357?text=ExamByte&isVariation=True
+- Quelle des grünen Hakens: https://media.istockphoto.com/id/1435212785/de/vektor/h%C3%A4kchensymbol-vektor-design-vorlage-in-wei%C3%9Fem-hintergrund.jpg?s=612x612&w=0&k=20&c=brscOuhUBkRmKJOa4OgxaomCwkwkQbPUZLKSQqjk_jw=
+- Quelle des roten Kreuzes: https://www.google.de/url?sa=i&url=https%3A%2F%2Fwww.vecteezy.com%2Fvector-art%2F28579407-red-cross-wrong-symbol-incorrect-sign-error-in-circle&psig=AOvVaw3Ro9KRujdYvXkyHEgD3Xat&ust=1732453479047000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCJCDqKPC8okDFQAAAAAdAAAAABAE
+- Quelle des Warn-Symbols: https://www.google.de/url?sa=i&url=https%3A%2F%2Fwww.freepik.com%2Fpremium-vector%2Fwarning-sign-with-exclamation-mark-vector-illustration-attention-symbol-information-flat-icon_129857701.htm&psig=AOvVaw0a01_Gcr8e5zTiVaV_5LC8&ust=1732453506334000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCIiWvrHC8okDFQAAAAAdAAAAABAE
