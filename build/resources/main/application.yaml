@@ -9,6 +9,6 @@ spring:
             scope: read:public_repo
 exambyte:
   rollen:
-    organisatoren: 147599239
-    korrektoren: 147599239
+    organisatoren: 147599239, 93320757
+    korrektoren: 147599239, 93320757
 
