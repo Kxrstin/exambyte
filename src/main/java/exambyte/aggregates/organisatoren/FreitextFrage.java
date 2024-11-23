@@ -34,4 +34,8 @@ public class FreitextFrage implements TestFrage {
     public void setFragestellung(String fragestellung) {
         this.fragestellung = fragestellung;
     }
+
+    public boolean istMcFrage(){
+        return false;
+    }
 }

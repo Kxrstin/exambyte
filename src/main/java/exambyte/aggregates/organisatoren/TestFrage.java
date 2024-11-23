@@ -4,4 +4,5 @@ public interface TestFrage {
     Integer getPunkte();
     String getTitel();
     String getFragestellung();
+    boolean istMcFrage();
 }
