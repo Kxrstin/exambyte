@@ -1,13 +1,30 @@
 package exambyte.controller.organisatoren;
 
+import exambyte.aggregates.organisatoren.TestFormular;
+import exambyte.aggregates.organisatoren.TestFrage;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 public class OrganisatorenController {
+
+    private Map<Integer, TestFormular> tests = new HashMap<>();
+
+    @ModelAttribute("testForm")
+    public TestFormular initTestFormular(){
+        return new TestFormular(new ArrayList<>());
+    }
 
     @GetMapping("/organisatoren/landingPage")
     @Secured("ROLE_ORGANISATOR")
@@ -24,7 +41,11 @@ public class OrganisatorenController {
 
     @PostMapping("/organisatoren/testErstellen/addMcFrage")
     @Secured("ROLE_ORGANISATOR")
-    public String addMcFrage(RedirectAttributes redirectAttributes) {
+    public String addMcFrage(RedirectAttributes redirectAttributes,
+                             Model model,
+                             @ModelAttribute TestFormular testForm) {
+        List<TestFrage> testFragen = testForm.getTestFragen();
+
         redirectAttributes.addFlashAttribute("mcFrageButton", true);
 
         return "redirect:/organisatoren/testErstellen";
