@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="exambyte.controller.studenten.StudentenControllerLandingPageTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-11-23T15:32:04" hostname="KERSTIN-SURFACE" time="1.275">
+<testsuite name="exambyte.controller.studenten.StudentenControllerLandingPageTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2024-11-23T22:57:33" hostname="KERSTIN-SURFACE" time="0.305">
   <properties/>
-  <testcase name="Wenn man 1 Mal einen Test nicht bestanden hat, soll ... vorsicht ... ausgegeben werden." classname="exambyte.controller.studenten.StudentenControllerLandingPageTest" time="1.275"/>
-  <system-out><![CDATA[16:31:53.047 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [exambyte.controller.studenten.StudentenControllerLandingPageTest]: StudentenControllerLandingPageTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-16:31:53.433 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration exambyte.ExambyteProjektApplication for test class exambyte.controller.studenten.StudentenControllerLandingPageTest
-]]></system-out>
-  <system-err><![CDATA[WARNING: A Java agent has been loaded dynamically (C:\Users\kerst\.gradle\caches\modules-2\files-2.1\net.bytebuddy\byte-buddy-agent\1.14.19\154da3a65b4f4a909d3e5bdec55d1b2b4cbb6ce1\byte-buddy-agent-1.14.19.jar)
-WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
-WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
-WARNING: Dynamic loading of agents will be disallowed by default in a future release
-]]></system-err>
+  <testcase name="Wenn man 1 Mal einen Test nicht bestanden hat, soll ... vorsicht ... ausgegeben werden." classname="exambyte.controller.studenten.StudentenControllerLandingPageTest" time="0.154"/>
+  <testcase name="Wenn man alle Tests bislang bestanden hat, soll guter Kurs neben Zulassungsstatus stehen" classname="exambyte.controller.studenten.StudentenControllerLandingPageTest" time="0.017"/>
+  <testcase name="Wenn man auf einen Test klickt, soll man zur richtigen TestPage Seite kommen." classname="exambyte.controller.studenten.StudentenControllerLandingPageTest" time="0.035"/>
+  <testcase name="Wenn ein nicht-Student auf die URL /studenten/landingPage/zeigeErgebnis zugreifen will, wird er zu GitHub Anmeldung redirected." classname="exambyte.controller.studenten.StudentenControllerLandingPageTest" time="0.017"/>
+  <testcase name="Auf der LandingPage soll eine Liste von Tests angezeigt werden" classname="exambyte.controller.studenten.StudentenControllerLandingPageTest" time="0.013"/>
+  <testcase name="Die Route /landingPage führt zum Öffnen der LandingPageStudenten.html Seite und es gibt einen 200 Status, wenn man kein Student ist." classname="exambyte.controller.studenten.StudentenControllerLandingPageTest" time="0.011"/>
+  <testcase name="Wenn man 3 Tests nicht bestanden hat, soll ... mehr als 2 Tests nicht bestanden ... ausgegeben werden." classname="exambyte.controller.studenten.StudentenControllerLandingPageTest" time="0.013"/>
+  <testcase name="Die Route /landingPage führt zur GitHub Anmeldung und es gibt einen 3XX Status, wenn man kein Student ist." classname="exambyte.controller.studenten.StudentenControllerLandingPageTest" time="0.009"/>
+  <testcase name="Wenn der Ergebnis-Button auf der Startseite gedrückt wird, wird man weitergeleitet auf die ErgebnisPage, vorausgesetzt man ist Student." classname="exambyte.controller.studenten.StudentenControllerLandingPageTest" time="0.016"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
 </testsuite>
