@@ -2,11 +2,7 @@ body {
     font-family: "Century Gothic";
 }
 
-.imgLogo {
-    height: 70px;
-    width: 85px;
-}
-
+/* Überschriften */
 h1 {
     background-color: lightsteelblue;
     padding: 10px;
@@ -14,6 +10,17 @@ h1 {
     font-family: "Century Gothic";
 }
 
+h2 {
+    margin: 20px;
+}
+
+h3 {
+    margin: 20px;
+    padding-top: 15px;
+}
+
+
+/* Formulare, Button, usw. */
 form {
     margin: 20px;
 }
@@ -34,6 +41,7 @@ button {
 }
 
 
+/* Abschnitte */
 div {
     margin-top: 10px;
 }
@@ -42,14 +50,12 @@ p {
     margin: 20px;
 }
 
-h2 {
-    margin: 20px;
-}
-
 li {
     margin-right: 50px;
 }
 
+
+/* Zulassung */
 .zulassungsstatus {
     margin-left: 30px;
 }
@@ -61,8 +67,7 @@ li {
     margin-left: 20px;
 }
 
-.imgVorsicht
-{
+.imgVorsicht {
     height: 25px;
     width: 30px;
     margin-bottom: 5px;
@@ -74,6 +79,12 @@ li {
     width: 25px;
     margin-bottom: 5px;
     margin-left: 25px;
+}
+
+
+.imgLogo {
+    height: 70px;
+    width: 85px;
 }
 
 
