@@ -12,14 +12,14 @@ public class TestFormular {
     }
 
     //Ermöglicht das Ändern der Reihenfolge, falls User unzufrieden ist
-    public void fragenTauschen(int firstPos, int secPos) {
+    public void tauscheFragen(int firstPos, int secPos) {
         TestFrage testFrage = testFragen.get(firstPos - 1);
         testFragen.set(firstPos, testFragen.get(secPos - 1));
         testFragen.set(secPos, testFrage);
     }
 
     public List<TestFrage> getTestFragen(){
-        return  testFragen;
+        return testFragen;
     }
 
     public void setTestFragen(List<TestFrage> testFragen) {
