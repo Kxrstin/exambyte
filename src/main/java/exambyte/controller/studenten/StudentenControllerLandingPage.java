@@ -26,10 +26,11 @@ public class StudentenControllerLandingPage {
     public String landingpage(Model model) {
         if(testService.getTestList() == null) {
             model.addAttribute("tests", new ArrayList<StudiTest>());
-            model.addAttribute("zulassungsstatus", "Guter Kurs");
+            model.addAttribute("guterKurs", "Guter Kurs");
         } else {
+            String zulassungsstatus = testService.zulassungsStatus(testService.getTestList());
             model.addAttribute("tests", testService.getTestList());
-            model.addAttribute("zulassungsstatus", testService.zulassungsStatus(testService.getTestList()));
+            model.addAttribute(zulassungsstatus, true);
         }
         return "studenten/LandingPageStudenten";
     }
@@ -43,7 +44,7 @@ public class StudentenControllerLandingPage {
     @GetMapping("/studenten/landingPage/zeigeTest/{id}")
     @Secured("ROLE_STUDENT")
     public String zeigeTest(@PathVariable int id, Model model) {
-        // TODO Fehlermeldung
+        // TODO Fehlermeldung und Verbessern
         if(!testService.hasTestWithId(id)) {
             return "redirect:/studenten/landingPage";
         }

@@ -11,13 +11,42 @@
     </head>
     <body>
     <h1>
-        <img class="imgLogo"
-             th:src="@{/Images/Logo/ExamByteLogo.png}"
-             src="../../static/Images/Logo/ExamByteLogo.png">
+        <img class="imgLogo" th:src="@{/Images/Logo/ExamByteLogo.png}" src="../../static/Images/Logo/ExamByteLogo.png" alt="" />
         ExamByte
     </h1>
+
     <h2> Zulassungsstatus</h2>
-    <p> Zulassung: 68% bestanden </p>
+
+    <div th:if="${guterKurs}">
+        <img class="imgGuterKurs" th:src="@{/Images/Zulassung/GuterKurs.jpg}" src="../../static/Images/Zulassung/GuterKurs.jpg" alt="Foto von einem grünen Haken." />
+        <span class="zulassungsstatus-guterKurs">Guter Kurs, du hast bislang alle Tests bestanden!</span>
+    </div>
+
+    <div th:if="${vorsicht}">
+        <img class="imgVorsicht" th:src="@{/Images/Zulassung/WarnSymbol.jpg}" src="../../static/Images/Zulassung/WarnSymbol.jpg" alt="Foto eines Warn Symbols mit einem Ausrufezeichen." />
+        <span class="zulassungsstatus-vorsicht"> Vorsicht! Du hast einen Test bislang nicht bestanden!</span>
+    </div>
+
+    <div th:if="${vorsichtiger}">
+        <img class="imgVorsicht" th:src="@{/Images/Zulassung/WarnSymbol.jpg}" src="../../static/Images/Zulassung/WarnSymbol.jpg" alt="Foto eines Warn Symbols mit einem Ausrufezeichen." />
+        <span class="zulassungsstatus-vorsichtiger"> Wenn du noch einen weiteren Test nicht bestehst, kannst du die Zulassung nicht mehr erreichen!</span>
+    </div>
+
+    <div th:if="${fail}">
+        <img class="imgFail" th:src="@{/Images/Zulassung/FailSymbol.jpg}" src="../../static/Images/Zulassung/FailSymbol.jpg" alt="Foto eines Fail Symbols mit einer roten Fläche und einem Kreuz drin." />
+        <span class="zulassungsstatus-fail">"Zulassungsstatus nicht erreicht! Du hast mehr als 2 Tests nicht bestanden!" </span>
+    </div>
+
+    <div th:if="${zulassungErreicht}">
+        <img class="imgGuterKurs" th:src="@{/Images/Zulassung/GuterKurs.jpg}" src="../../static/Images/Zulassung/GuterKurs.jpg" alt="Foto eines Fail Symbols mit einer roten Fläche und einem Kreuz drin." />
+        <span class="zulassungsstatus-guterKurs"> Zulassung erreicht. Herzlichen Glückwunsch!</span>
+    </div>
+
+    <div th:if="${zulassungNichtErreicht}">
+        <img class="imgFail" th:src="@{/Images/Zulassung/FailSymbol.jpg}" src="../../static/Images/Zulassung/FailSymbol.jpg" alt="Foto eines Fail Symbols mit einer roten Fläche und einem Kreuz drin." />
+        <span class="zulassungsstatus-fail"> Zulassung nicht erreicht.</span>
+    </div>
+
     <h3> Zu bearbeitende Tests: </h3>
 
             <ul th:remove="all-but-first">

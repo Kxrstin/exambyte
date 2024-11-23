@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="exambyte.controller.studenten.StudentenControllerLandingPageTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-11-23T15:32:04" hostname="KERSTIN-SURFACE" time="1.275">
+  <properties/>
+  <testcase name="Wenn man 1 Mal einen Test nicht bestanden hat, soll ... vorsicht ... ausgegeben werden." classname="exambyte.controller.studenten.StudentenControllerLandingPageTest" time="1.275"/>
+  <system-out><![CDATA[16:31:53.047 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [exambyte.controller.studenten.StudentenControllerLandingPageTest]: StudentenControllerLandingPageTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+16:31:53.433 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration exambyte.ExambyteProjektApplication for test class exambyte.controller.studenten.StudentenControllerLandingPageTest
+]]></system-out>
+  <system-err><![CDATA[WARNING: A Java agent has been loaded dynamically (C:\Users\kerst\.gradle\caches\modules-2\files-2.1\net.bytebuddy\byte-buddy-agent\1.14.19\154da3a65b4f4a909d3e5bdec55d1b2b4cbb6ce1\byte-buddy-agent-1.14.19.jar)
+WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
+WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
+WARNING: Dynamic loading of agents will be disallowed by default in a future release
+]]></system-err>
+</testsuite>

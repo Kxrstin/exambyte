@@ -38,9 +38,10 @@ public class StudentenControllerLandingPageTest {
     @DisplayName("Die Route /landingPage führt zum Öffnen der LandingPageStudenten.html Seite und es gibt einen 200 Status, wenn man kein Student ist.")
     @WithMockOAuth2User(roles = "STUDENT")
     public void test_landingPageStudent() throws Exception {
-               mvc.perform(get("/studenten/landingPage"))
-                .andExpect(view().name("studenten/LandingPageStudenten"))
-                .andExpect(status().isOk());
+        when(testService.getTestList()).thenReturn(null);
+        mvc.perform(get("/studenten/landingPage"))
+             .andExpect(view().name("studenten/LandingPageStudenten"))
+             .andExpect(status().isOk());
     }
 
     @Test
@@ -77,6 +78,7 @@ public class StudentenControllerLandingPageTest {
     @WithMockOAuth2User(roles = "STUDENT")
     public void test_testsAnzeigen() throws Exception {
         when(testService.getTestList()).thenReturn(List.of(new StudiTest("Mathematik für Informatik 3 Test Woche 5", 3, LocalDate.of(2024, 11, 19), LocalDate.of(2024, 11, 28), LocalDate.of(2024, 12, 5))));
+        when(testService.zulassungsStatus(any())).thenReturn("guterKurs");
         String textHtml = mvc.perform(get("/studenten/landingPage"))
                 .andExpect(status().isOk())
                 .andReturn()
@@ -103,11 +105,39 @@ public class StudentenControllerLandingPageTest {
     public void test_zulassungsstatus() throws Exception {
         StudiTest test = new StudiTest("Mathematik für Informatik 3 Test Woche 5", 3, LocalDate.of(2024, 11, 19), LocalDate.of(2024, 11, 28), LocalDate.of(2024, 12, 5));
         when(testService.getTestList()).thenReturn(List.of(test));
-        when(testService.zulassungsStatus(any())).thenReturn("Guter Kurs");
+        when(testService.zulassungsStatus(any())).thenReturn("guterKurs");
         MvcResult result = mvc.perform(get("/studenten/landingPage"))
                 .andExpect(status().isOk())
                 .andReturn();
 
         assertThat(result.getResponse().getContentAsString()).contains("Guter Kurs");
+    }
+
+    @Test
+    @DisplayName("Wenn man 3 Tests nicht bestanden hat, soll ... mehr als 2 Tests nicht bestanden ... ausgegeben werden.")
+    @WithMockOAuth2User(roles = "STUDENT")
+    public void test_dreiTestsNichtBestanden() throws Exception {
+        StudiTest test = new StudiTest("Mathematik für Informatik 3 Test Woche 5", 3, LocalDate.of(2024, 11, 19), LocalDate.of(2024, 11, 28), LocalDate.of(2024, 12, 5));
+        when(testService.getTestList()).thenReturn(List.of(test));
+        when(testService.zulassungsStatus(any())).thenReturn("fail");
+        MvcResult result = mvc.perform(get("/studenten/landingPage"))
+                .andExpect(status().isOk())
+                .andReturn();
+
+        assertThat(result.getResponse().getContentAsString()).contains("mehr als 2 Tests nicht bestanden");
+    }
+
+    @Test
+    @DisplayName("Wenn man 1 Mal einen Test nicht bestanden hat, soll ... vorsicht ... ausgegeben werden.")
+    @WithMockOAuth2User(roles = "STUDENT")
+    public void test_einMalNichtBestanden() throws Exception {
+        StudiTest test = new StudiTest("Mathematik für Informatik 3 Test Woche 5", 3, LocalDate.of(2024, 11, 19), LocalDate.of(2024, 11, 28), LocalDate.of(2024, 12, 5));
+        when(testService.getTestList()).thenReturn(List.of(test));
+        when(testService.zulassungsStatus(any())).thenReturn("vorsicht");
+        MvcResult result = mvc.perform(get("/studenten/landingPage"))
+                .andExpect(status().isOk())
+                .andReturn();
+
+        assertThat(result.getResponse().getContentAsString()).contains("vorsicht");
     }
 }

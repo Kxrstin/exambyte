@@ -36,13 +36,18 @@ public class TestService {
                 countBestanden++;
             }
         }
-        if (countBestanden == tests.size()) {
-            return "Guter Kurs, du hast bislang alle Tests bestanden!";
-        } else if (countBestanden == tests.size() - 1) {
-            return "Vorsicht! Du hast einen Test bislang nicht bestanden!";
-        } else if (countBestanden == tests.size() - 2) {
-            return "Wenn du noch einen weiteren Test nicht bestehst, kannst du die Zulassung nicht mehr erreichen!";
+        if(tests.size() == 14 && countBestanden < 14) {
+            return "zulassungNichtErreicht";
+        } else if(tests.size() == 14 && countBestanden == 14){
+            return "zulassungErreicht";
         }
-        return "Zulassungsstatus nicht erreicht! Du hast mehr als 2 Tests nicht bestanden!";
+        if (countBestanden == tests.size()) {
+            return "guterKurs";
+        } else if (countBestanden == tests.size() - 1) {
+            return "vorsicht";
+        } else if (countBestanden == tests.size() - 2) {
+            return "vorsichtiger";
+        }
+        return "fail";
     }
 }
