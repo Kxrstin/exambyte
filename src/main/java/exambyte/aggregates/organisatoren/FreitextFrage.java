@@ -4,11 +4,13 @@ public class FreitextFrage implements TestFrage {
     private Integer punkte;
     private String titel;
     private String fragestellung;
+    private String beschreibung;
 
-    public FreitextFrage(Integer punkte, String titel, String fragestellung) {
+    public FreitextFrage(Integer punkte, String titel, String fragestellung, String beschreibung) {
         this.punkte = punkte;
         this.titel = titel;
         this.fragestellung = fragestellung;
+        this.beschreibung = beschreibung;
     }
 
     public Integer getPunkte() {
@@ -33,6 +35,14 @@ public class FreitextFrage implements TestFrage {
 
     public void setFragestellung(String fragestellung) {
         this.fragestellung = fragestellung;
+    }
+
+    public String getBeschreibung() {
+        return beschreibung;
+    }
+
+    public void setBeschreibung(String beschreibung) {
+        this.beschreibung = beschreibung;
     }
 
     public boolean istMcFrage(){
