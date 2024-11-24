@@ -35,9 +35,10 @@ public class StudentenControllerLandingPage {
         return "studenten/LandingPageStudenten";
     }
 
-    @GetMapping("/studenten/landingPage/zeigeErgebnis")
+    @GetMapping("/studenten/landingPage/zeigeErgebnis/{id}")
     @Secured("ROLE_STUDENT")
-    public String zeigeErgebnis() {
+    public String zeigeErgebnis(Integer id) {
+        // TODO Implementierung
         return "studenten/ErgebnisPageStudenten";
     }
 

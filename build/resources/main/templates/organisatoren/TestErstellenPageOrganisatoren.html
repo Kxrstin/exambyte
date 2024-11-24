@@ -9,6 +9,8 @@
               href="../../static/css/bootstrap.min.css">
         <link rel="stylesheet" href="../../static/css/ExambyteStylesheet.css"
               th:href="@{/css/ExambyteStylesheet.css}">
+        <link rel="stylesheet" href="../../static/css/TestErstellenStyleSheet.css"
+              th:href="@{/css/TestErstellenStyleSheet.css}">
         <meta charset="UTF-8">
     </head>
     <body>
@@ -31,53 +33,86 @@
             <button class="btn-dark" type="submit" id="freitextFrage"> + Freitext Frage hinzufügen</button>
         </form>
 
+        <ul th:remove="all-but-first">
+            <li th:each="testFrage: ${testForm.getTestFragen()}" class="testfragen-alignment">
+                <!--Dieser Abschnitt wird nur angezeigt, falls es sich um eine Mulitple-Choice Frage handelt -->
+                <span th:if="${testFrage.istMcFrage()}">
+                    <form method="post" th:action="@{/organisatoren/testErstellen/updateTitelMC}">
+                        <label for="titelMCID"> Titel: </label>
+                        <input type="text" id="titelMCID" name="titel">
+                    </form>
+
+                    <form method="post" th:action="@{/organisatoren/testErstellen/updateFragestellungMC}">
+                        <label for="multipleChoiceFrageID">Multiple-Choice Fragestellung:</label>
+                        <input type="text" id="multipleChoiceFrageID" name="multipleChoiceFrage">
+                    </form>
+
+                    <form>
+                        <button type="submit" id="antwortHinzufügenMC">+ Antwort hinzufügen</button>
+                    </form>
+
+
+                    <form method="post" th:action="@{/organisatoren/testErstellen/updatePunkteMC}">
+                        <label for="punktzahlMcFrageID"> Punktzahl: </label>
+                        <input type="number" name="punktzahlMC" id="punktzahlMcFrageID">
+                    </form>
+
+                    <span th:if="${antwortHinzufügenMC}">
+                        <label for="erklaerungMCFrageID"> Erklärung: </label>
+                        <textarea id="erklaerungMCFrageID" name="erklaerungMCFrage"></textarea>
+                    </span>
+                </span>
+
+                <!--Dieser Abschnitt wird nur angezeigt, falls es sich um eine Freitextfrage handelt -->
+                <span th:unless="${testFrage.istMcFrage()}">
+                    <form method="post" th:action="@{/organisatoren/testErstellen/updateTitelFT}">
+                        <label for="titelFreitextID"> Titel: </label>
+                        <input type="text" id="titelFreitextID" name="titel">
+                    </form>
+
+                    <form method="post" th:action="@{/organisatoren/testErstellen/updateFragestellungFT}">
+                        <label for="freitextAufgabeID"> Frage: </label>
+                        <input type="text" id="freitextAufgabeID" name="freitextAufgabe">
+                    </form>
+
+                    <form method="post" th:action="@{/organisatoren/testErstellen/updatePunkteFT}">
+                        <label for="punktzahlFreitextFrageID"> Punktzahl: </label>
+                        <input type="number" name="punktzahlFreitextFrage" id="punktzahlFreitextFrageID">
+                    </form>
+                    <label for="loesungID"> Mögliche Lösung: </label>
+                    <textarea name="loesung" id="loesungID"></textarea>
+                </span>
+            </li>
+            <li class="testfragen-alignment">
+                <form method="post" th:action="@{/organisatoren/testErstellen/updateTitelMC}">
+                    <label for="titelMCID"> Titel: </label>
+                    <input type="text"  name="titel">
+                </form>
+
+                <form method="post" th:action="@{/organisatoren/testErstellen/updateFragestellungMC}">
+                    <label for="multipleChoiceFrageID">Multiple-Choice Fragestellung:</label>
+                    <input type="text" name="multipleChoiceFrage">
+                </form>
+
+                <button type="submit" >+ Antwort hinzufügen</button>
+
+                <form method="post" th:action="@{/organisatoren/testErstellen/updatePunkteMC}">
+                    <label for="punktzahlMcFrageID"> Punktzahl: </label>
+                    <input type="number" name="punktzahlMC" >
+                </form>
+
+                <span th:if="${antwortHinzufügenMC}">
+                        <label for="erklaerungMCFrageID"> Erklärung: </label>
+                        <textarea name="erklaerungMCFrage"></textarea>
+                    </span>
+            </li>
+        </ul>
+
         <span th:if="${mcFrageButton}">
                 <!-- Grobe Idee, muss noch getestet werden ob das geht -->
-            <form method="post" th:action="@{/organisatoren/testErstellen/updateTitelMC}">
-                <label for="titelMCID"> Titel: </label>
-                <input type="text" id="titelMCID" name="titel">
-            </form>
-
-            <form method="post" th:action="@{/organisatoren/testErstellen/updateFragestellungMC}">
-                <label for="multipleChoiceFrageID">Multiple-Choice Fragestellung:</label>
-                <input type="text" id="multipleChoiceFrageID" name="multipleChoiceFrage">
-            </form>
-
-            <button type="submit" id="antwortHinzufügenMC">+ Antwort hinzufügen</button>
-
-            <form method="post" th:action="@{/organisatoren/testErstellen/updatePunkteMC}">
-                <label for="punktzahlMcFrageID"> Punktzahl: </label>
-                <input type="number" name="punktzahlMC" id="punktzahlMcFrageID">
-            </form>
-
-            <span th:if="${antwortHinzufügenMC}">
-                <label for="erklaerungMCFrageID"> Erklärung: </label>
-                <textarea id="erklaerungMCFrageID" name="erklaerungMCFrage"></textarea>
-            </span>
         </span>
 
         <span th:if="${freitextFrageButton}">
-            <form method="post" th:action="@{/organisatoren/testErstellen/updateTitelFT}">
-                <label for="titelFreitextID"> Titel: </label>
-            <input type="text" id="titelFreitextID" name="titel">
-            </form>
-
-            <form method="post" th:action="@{/organisatoren/testErstellen/updateFragestellungFT}">
-                <label for="freitextAufgabeID"> Frage: </label>
-            <input type="text" id="freitextAufgabeID" name="freitextAufgabe">
-            </form>
-
-            <form method="post" th:action="@{/organisatoren/testErstellen/updatePunkteFT}">
-                <label for="punktzahlFreitextFrageID"> Punktzahl: </label>
-                <input type="number" name="punktzahlFreitextFrage" id="punktzahlFreitextFrageID">
-            </form>
-
-
-
-
-            <label for="loesungID"> Mögliche Lösung: </label>
-            <textarea name="loesung" id="loesungID"></textarea>
-
 
         </span>
 

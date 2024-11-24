@@ -1,6 +1,6 @@
 package exambyte.aggregates.organisatoren;
 
-public interface TestFrage {
+interface TestFrage {
     Integer getPunkte();
     void setPunkte(Integer punkte);
     String getTitel();
