@@ -1,10 +1,13 @@
 package exambyte.aggregates.organisatoren;
 
+import exambyte.annotations.AggregateRoot;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@AggregateRoot
 public class TestFormular {
-
+    // TODO: addTestfrage
     private List<TestFrage> testFragen;
 
     public TestFormular(List<TestFrage> testFragen){

@@ -1,7 +1,7 @@
 package exambyte.controller.organisatoren;
 
 import exambyte.aggregates.organisatoren.TestFormular;
-import exambyte.aggregates.organisatoren.TestFrage;
+//import exambyte.aggregates.organisatoren.TestFrage;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -44,7 +44,8 @@ public class OrganisatorenController {
     public String addMcFrage(RedirectAttributes redirectAttributes,
                              Model model,
                              @ModelAttribute TestFormular testForm) {
-        List<TestFrage> testFragen = testForm.getTestFragen();
+        // TODO: Mit AggregateRoot arbeiten
+        //List<TestFrage> testFragen = testForm.getTestFragen();
 
         redirectAttributes.addFlashAttribute("mcFrageButton", true);
 

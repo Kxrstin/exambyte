@@ -1,6 +1,10 @@
 package exambyte.aggregates.studenten;
 
+import exambyte.annotations.AggregateRoot;
+
 import java.time.LocalDate;
+
+@AggregateRoot
 public final class StudiTest {
     private String titel;
     private LocalDate startzeitpunkt;
