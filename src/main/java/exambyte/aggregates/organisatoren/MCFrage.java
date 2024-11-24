@@ -1,6 +1,6 @@
 package exambyte.aggregates.organisatoren;
 
-public class MCFrage implements TestFrage {
+class MCFrage implements TestFrage {
     private Integer punkte;
     private String titel;
     private String fragestellung;

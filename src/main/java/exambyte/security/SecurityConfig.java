@@ -10,12 +10,11 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
     @Bean
     public SecurityFilterChain configure(HttpSecurity chainBuilder) throws Exception {
-        chainBuilder.authorizeHttpRequests(
-                config -> config.requestMatchers( "/css/*").permitAll()
-                        .anyRequest().authenticated())
-                .logout(l -> l.logoutSuccessUrl("/").permitAll())
-                .oauth2Login(config ->
-                        config.userInfoEndpoint(Customizer.withDefaults()));
+        chainBuilder.authorizeRequests(
+                        config -> config.requestMatchers( "/css/*").permitAll()
+                                .anyRequest().authenticated())
+                .oauth2Login(Customizer.withDefaults());
         return chainBuilder.build();
     }
+
 }

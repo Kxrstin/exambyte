@@ -1,10 +1,6 @@
 package exambyte.service.studenten;
 
 import exambyte.aggregates.studenten.StudiTest;
-import exambyte.infrastructure.studenten.StudiTestRepoImpl;
-import exambyte.persistence.studenten.StudiTestDB;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,7 +14,7 @@ public class TestService {
     }
 
     public StudiTest getTest(int testId) {
-        return testRepo.findTestById(testId);
+        return testRepo.loadTestWithId(testId);
     }
 
     public boolean hasTestWithId(int testId) {
@@ -26,7 +22,7 @@ public class TestService {
     }
 
     public List<StudiTest> getTestList() {
-        return testRepo.getTestList();
+        return testRepo.loadTestList();
     }
 
     public String zulassungsStatus(List<StudiTest> tests) {
@@ -50,4 +46,10 @@ public class TestService {
         }
         return "fail";
     }
+
+    // TODO Antwort speichern
+    // public void addTestAntwortWithId(Integer id, String antwort)
+    // StudiTest test = testRepo.loadTestWithId(...);
+    // test.addAntwortZuId(id, antwort);
+    // testRepo.safeTestWithId(id);
 }

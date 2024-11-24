@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="exambyte.ArchRuleTests" tests="2" skipped="0" failures="0" errors="0" timestamp="2024-11-23T22:57:25" hostname="KERSTIN-SURFACE" time="2.309">
+<testsuite name="exambyte.ArchRuleTests" tests="3" skipped="0" failures="0" errors="0" timestamp="2024-11-24T10:58:08" hostname="KERSTIN-SURFACE" time="4.1">
   <properties/>
-  <testcase name="nurControllerInControllerKlassen" classname="exambyte.ArchRuleTests" time="2.069"/>
-  <testcase name="onionArchitecture" classname="exambyte.ArchRuleTests" time="0.239"/>
-  <system-out><![CDATA[23:57:25.292 [Test worker] INFO com.tngtech.archunit.core.PluginLoader -- Detected Java version 21.0.2
+  <testcase name="nurControllerInControllerKlassen" classname="exambyte.ArchRuleTests" time="3.69"/>
+  <testcase name="onionArchitecture" classname="exambyte.ArchRuleTests" time="0.404"/>
+  <testcase name="jedesAggregatRootIstAnnotiert" classname="exambyte.ArchRuleTests" time="0.003"/>
+  <system-out><![CDATA[11:58:08.461 [Test worker] INFO com.tngtech.archunit.core.PluginLoader -- Detected Java version 21.0.2
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

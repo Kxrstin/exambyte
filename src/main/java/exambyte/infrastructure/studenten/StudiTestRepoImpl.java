@@ -22,7 +22,7 @@ public class StudiTestRepoImpl implements StudiTestRepo {
     }
 
     @Override
-    public StudiTest findTestById(int id) {
+    public StudiTest loadTestWithId(int id) {
         if(studiTestMap.containsKey(id)) {
             return studiTestMap.get(id);
         }
@@ -35,7 +35,7 @@ public class StudiTestRepoImpl implements StudiTestRepo {
     }
 
     @Override
-    public List<StudiTest> getTestList() {
+    public List<StudiTest> loadTestList() {
         List<StudiTest> studiTests = new ArrayList<>();
         for(Map.Entry<Integer, StudiTest> studiTestEntry: studiTestMap.entrySet()) {
             StudiTest test = studiTestEntry.getValue();

@@ -1,6 +1,6 @@
 package exambyte.aggregates.organisatoren;
 
-public class FreitextFrage implements TestFrage {
+class FreitextFrage implements TestFrage {
     private Integer punkte;
     private String titel;
     private String fragestellung;

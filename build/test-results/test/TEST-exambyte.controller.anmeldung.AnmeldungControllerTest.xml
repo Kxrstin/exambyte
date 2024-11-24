@@ -1,116 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="exambyte.controller.anmeldung.AnmeldungControllerTest" tests="6" skipped="0" failures="1" errors="0" timestamp="2024-11-23T22:57:30" hostname="KERSTIN-SURFACE" time="1.436">
+<testsuite name="exambyte.controller.anmeldung.AnmeldungControllerTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2024-11-24T10:58:22" hostname="KERSTIN-SURFACE" time="1.148">
   <properties/>
-  <testcase name="Ein Student bekommt nur den Studenten Button angezeigt" classname="exambyte.controller.anmeldung.AnmeldungControllerTest" time="1.372"/>
-  <testcase name="Ein User mit allen Rollen bekommt alle drei Buttons angezeigt." classname="exambyte.controller.anmeldung.AnmeldungControllerTest" time="0.011"/>
-  <testcase name="Ein User ohne Rolle bekommt nur eine Info Nachricht angezeigt und keinen Button" classname="exambyte.controller.anmeldung.AnmeldungControllerTest" time="0.015"/>
-  <testcase name="Ein Organisator bekommt nur den Organisator Button angezeigt." classname="exambyte.controller.anmeldung.AnmeldungControllerTest" time="0.007"/>
-  <testcase name="Ein Korrektor bekommt nur den Korrektor Button angezeigt." classname="exambyte.controller.anmeldung.AnmeldungControllerTest" time="0.006"/>
-  <testcase name="Wenn der Pfad / geöffnet wird, soll man zur GitHub Anmeldung redirected werden" classname="exambyte.controller.anmeldung.AnmeldungControllerTest" time="0.018">
-    <failure message="jakarta.servlet.ServletException: Request processing failed: java.lang.NullPointerException: Cannot invoke &quot;org.springframework.security.oauth2.core.user.OAuth2User.getAttribute(String)&quot; because &quot;user&quot; is null" type="jakarta.servlet.ServletException">jakarta.servlet.ServletException: Request processing failed: java.lang.NullPointerException: Cannot invoke &quot;org.springframework.security.oauth2.core.user.OAuth2User.getAttribute(String)&quot; because &quot;user&quot; is null
-	at app//org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1022)
-	at app//org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:903)
-	at app//jakarta.servlet.http.HttpServlet.service(HttpServlet.java:564)
-	at app//org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
-	at app//org.springframework.test.web.servlet.TestDispatcherServlet.service(TestDispatcherServlet.java:72)
-	at app//jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
-	at app//org.springframework.mock.web.MockFilterChain$ServletFilterProxy.doFilter(MockFilterChain.java:165)
-	at app//org.springframework.mock.web.MockFilterChain.doFilter(MockFilterChain.java:132)
-	at app//org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:108)
-	at app//org.springframework.security.web.FilterChainProxy.lambda$doFilterInternal$3(FilterChainProxy.java:231)
-	at app//org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:365)
-	at app//org.springframework.security.web.access.intercept.AuthorizationFilter.doFilter(AuthorizationFilter.java:100)
-	at app//org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
-	at app//org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:126)
-	at app//org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:120)
-	at app//org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
-	at app//org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:100)
-	at app//org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
-	at app//org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:179)
-	at app//org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
-	at app//org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63)
-	at app//org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
-	at app//org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter.doFilterInternal(DefaultLogoutPageGeneratingFilter.java:58)
-	at app//org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
-	at app//org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
-	at app//org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter.doFilter(DefaultLoginPageGeneratingFilter.java:189)
-	at app//org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter.doFilter(DefaultLoginPageGeneratingFilter.java:175)
-	at app//org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
-	at app//org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter.doFilter(AbstractAuthenticationProcessingFilter.java:227)
-	at app//org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter.doFilter(AbstractAuthenticationProcessingFilter.java:221)
-	at app//org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
-	at app//org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestRedirectFilter.doFilterInternal(OAuth2AuthorizationRequestRedirectFilter.java:198)
-	at app//org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
-	at app//org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
-	at app//org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107)
-	at app//org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93)
-	at app//org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
-	at app//org.springframework.security.web.csrf.CsrfFilter.doFilterInternal(CsrfFilter.java:117)
-	at app//org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
-	at app//org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
-	at app//org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90)
-	at app//org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75)
-	at app//org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
-	at app//org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
-	at app//org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82)
-	at app//org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69)
-	at app//org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
-	at app//org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62)
-	at app//org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
-	at app//org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
-	at app//org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42)
-	at app//org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
-	at app//org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
-	at app//org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233)
-	at app//org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191)
-	at app//org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113)
-	at app//org.springframework.web.servlet.handler.HandlerMappingIntrospector.lambda$createCacheFilter$3(HandlerMappingIntrospector.java:195)
-	at app//org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113)
-	at app//org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74)
-	at app//org.springframework.security.config.annotation.web.configuration.WebMvcSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebMvcSecurityConfiguration.java:230)
-	at app//org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:362)
-	at app//org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:278)
-	at app//org.springframework.test.web.servlet.setup.MockMvcFilterDecorator.doFilter(MockMvcFilterDecorator.java:151)
-	at app//org.springframework.mock.web.MockFilterChain.doFilter(MockFilterChain.java:132)
-	at app//org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
-	at app//org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
-	at app//org.springframework.test.web.servlet.setup.MockMvcFilterDecorator.doFilter(MockMvcFilterDecorator.java:151)
-	at app//org.springframework.mock.web.MockFilterChain.doFilter(MockFilterChain.java:132)
-	at app//org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
-	at app//org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
-	at app//org.springframework.test.web.servlet.setup.MockMvcFilterDecorator.doFilter(MockMvcFilterDecorator.java:151)
-	at app//org.springframework.mock.web.MockFilterChain.doFilter(MockFilterChain.java:132)
-	at app//org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
-	at app//org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
-	at app//org.springframework.test.web.servlet.setup.MockMvcFilterDecorator.doFilter(MockMvcFilterDecorator.java:151)
-	at app//org.springframework.mock.web.MockFilterChain.doFilter(MockFilterChain.java:132)
-	at app//org.springframework.test.web.servlet.MockMvc.perform(MockMvc.java:201)
-	at app//exambyte.controller.anmeldung.AnmeldungControllerTest.test_anmeldenPage(AnmeldungControllerTest.java:29)
-	at java.base@21.0.2/java.lang.reflect.Method.invoke(Method.java:580)
-	at java.base@21.0.2/java.util.ArrayList.forEach(ArrayList.java:1596)
-	at java.base@21.0.2/java.util.ArrayList.forEach(ArrayList.java:1596)
-Caused by: java.lang.NullPointerException: Cannot invoke &quot;org.springframework.security.oauth2.core.user.OAuth2User.getAttribute(String)&quot; because &quot;user&quot; is null
-	at exambyte.controller.anmeldung.AnmeldungController.anmeldung(AnmeldungController.java:19)
-	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
-	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:255)
-	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:188)
-	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118)
-	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:926)
-	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:831)
-	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
-	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)
-	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)
-	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)
-	... 80 more
-</failure>
-  </testcase>
-  <system-out><![CDATA[23:57:27.789 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [exambyte.controller.anmeldung.AnmeldungControllerTest]: AnmeldungControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-23:57:27.986 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration exambyte.ExambyteProjektApplication for test class exambyte.controller.anmeldung.AnmeldungControllerTest
-]]></system-out>
-  <system-err><![CDATA[WARNING: A Java agent has been loaded dynamically (C:\Users\kerst\.gradle\caches\modules-2\files-2.1\net.bytebuddy\byte-buddy-agent\1.14.19\154da3a65b4f4a909d3e5bdec55d1b2b4cbb6ce1\byte-buddy-agent-1.14.19.jar)
-WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
-WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
-WARNING: Dynamic loading of agents will be disallowed by default in a future release
-]]></system-err>
+  <testcase name="Ein Student bekommt nur den Studenten Button angezeigt" classname="exambyte.controller.anmeldung.AnmeldungControllerTest" time="1.005"/>
+  <testcase name="Ein User mit allen Rollen bekommt alle drei Buttons angezeigt." classname="exambyte.controller.anmeldung.AnmeldungControllerTest" time="0.017"/>
+  <testcase name="Ein User ohne Rolle bekommt nur eine Info Nachricht angezeigt und keinen Button" classname="exambyte.controller.anmeldung.AnmeldungControllerTest" time="0.051"/>
+  <testcase name="Ein Organisator bekommt nur den Organisator Button angezeigt." classname="exambyte.controller.anmeldung.AnmeldungControllerTest" time="0.022"/>
+  <testcase name="Ein Korrektor bekommt nur den Korrektor Button angezeigt." classname="exambyte.controller.anmeldung.AnmeldungControllerTest" time="0.015"/>
+  <testcase name="Wenn der Pfad / geöffnet wird, soll man zur GitHub Anmeldung redirected werden" classname="exambyte.controller.anmeldung.AnmeldungControllerTest" time="0.023"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
 </testsuite>

@@ -44,4 +44,6 @@ public final class StudiTest {
         // TODO Implementieren
         return true;
     }
+
+    // TODO: Antwort speichern
 }

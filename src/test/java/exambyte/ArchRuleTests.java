@@ -1,17 +1,11 @@
 package exambyte;
 
-import com.tngtech.archunit.core.domain.JavaClasses;
-import com.tngtech.archunit.core.importer.ClassFileImporter;
 import com.tngtech.archunit.junit.AnalyzeClasses;
 import com.tngtech.archunit.junit.ArchTest;
 import com.tngtech.archunit.lang.ArchRule;
-import org.junit.jupiter.api.Test;
+import exambyte.annotations.AggregateRoot;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.context.assertj.ApplicationContextAssert;
 import org.springframework.stereotype.Controller;
-
-import java.lang.annotation.Annotation;
-import exambyte.ExambyteProjektApplication;
 
 import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.classes;
 import static com.tngtech.archunit.library.Architectures.onionArchitecture;
@@ -37,4 +31,13 @@ public class ArchRuleTests {
             .adapter("web", "..controller..")
             .adapter("infrastructure", "..infrastructure..")
             .adapter("persistence", "..persistence..");
+
+    @ArchTest
+    private final ArchRule jedesAggregatRootIstAnnotiert = classes()
+            .that()
+            .resideInAPackage("..aggregates..")
+            .should()
+            .beAnnotatedWith(AggregateRoot.class)
+            .orShould()
+            .notBePublic();
 }
