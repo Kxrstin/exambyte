@@ -1,0 +1,24 @@
+package exambyte.service.organisatoren;
+
+import exambyte.aggregates.organisatoren.TestFormular;
+
+import java.util.Map;
+import java.util.UUID;
+
+public class TestFormRepo {
+    private Map<String, TestFormular> testForms;
+
+    public TestFormRepo(Map<String, TestFormular> testForms) {
+        this.testForms = testForms;
+    }
+
+    public String saveTestForm(TestFormular testForm) {
+        String id = UUID.randomUUID().toString();
+        testForms.put(id, testForm);
+        return id;
+    }
+
+    public TestFormular loadTestForm(String id) {
+        return testForms.get(id);
+    }
+}
