@@ -22,34 +22,35 @@
     </h1>
 
     <span th:if="${freitextFrage}">
-        <from action="post">
-            <label for="idfreitextfrage" th:text="${aufgabenstellung}"> Fragestellung: </label> <br>
+        <from class="form-check" method="post">
+            <label class="aufgabenstellung" for="idfreitextfrage" th:text="${aufgabenstellung}"> Fragestellung: </label> <br>
             <textarea id="idfreitextfrage" name="antwort" th:value="${studiFAntwort}"> </textarea> <br>
-            <button type="submit">Bestätigen</button>
+            <button class="btn btn-dark" type="submit">Bestätigen</button>
         </from>
     </span>
 
     <span th:if="${mcfrage}">
         <from action="post">
-            <label for="idmcfrage" th:text="${aufgabenstellung}"> Fragestellung: </label> <br>
+            <p class="aufgabenstellung" th:text="${aufgabenstellung}"> Fragestellung: </p>
             <span th:each="antwortwahl: ${antworten}">
-                <input type="checkbox" id="button">
-                <label for="button" th:text="${antwortwahl}">Option 1</label> <br>
+                <input class="btnInput" type="checkbox" th:value="${checkBox}" id="checkboxId">
+                <label class="btnLabel" for="checkboxId" th:text="${antwortwahl}">Option 1 </label><br>
             </span>
         </from>
     </span>
+    <br>
 
-    <span th:text="${punktzahl}"> Maximale Punktzahl: 2 Punkte </span>
+    <span class="punktzahl" th:text="${punktzahl}"> Maximale Punktzahl: 2 Punkte </span>
 
     <span th:if="${weiter}">
          <form th:action="@{/studenten/testBearbeitung/{id}/{aufgabe}(id=${id}, aufgabe=${nextAufgabe})}">
-            <button type="submit"> zurück </button>
+            <button class="btn btn-dark" type="submit"> zurück </button>
         </form>
     </span>
 
     <span th:if="${zurueck}">
         <form th:action="@{/studenten/testBearbeitung/{id}/{aufgabe}(id=${id}, aufgabe=${prevAufgabe})}">
-            <button type="submit"> weiter </button>
+            <button class="btn btn-dark" type="submit"> weiter </button>
         </form>
     </span>
     </body>
