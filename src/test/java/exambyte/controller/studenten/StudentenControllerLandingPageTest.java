@@ -5,8 +5,7 @@ import exambyte.aggregates.studenten.StudiTest;
 import exambyte.security.MethodSecurityConfig;
 import exambyte.security.SecurityConfig;
 import exambyte.helper.WithMockOAuth2User;
-import exambyte.service.studenten.TestService;
-import org.junit.jupiter.api.Disabled;
+import exambyte.service.studenten.TestFragenService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +31,7 @@ public class StudentenControllerLandingPageTest {
     MockMvc mvc;
 
     @MockBean
-    TestService testService;
+    TestFragenService testService;
 
     @Test
     @DisplayName("Die Route /landingPage führt zum Öffnen der LandingPageStudenten.html Seite und es gibt einen 200 Status, wenn man kein Student ist.")

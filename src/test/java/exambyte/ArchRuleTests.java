@@ -55,8 +55,6 @@ public class ArchRuleTests {
     private final ArchRule repositoriesSindMitRepositoryAnnotiert = classes()
             .that()
             .resideInAPackage("..persistence..")
-            .or()
-            .resideInAPackage("..service..")
             .and()
             .haveSimpleNameContaining("Repo")
             .should()

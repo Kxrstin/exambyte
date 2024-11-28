@@ -1,6 +1,6 @@
 package exambyte.controller.studenten;
 
-import exambyte.service.studenten.TestService;
+import exambyte.service.studenten.TestFragenService;
 import exambyte.aggregates.studenten.StudiTest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
@@ -9,15 +9,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 @Controller
 public class StudentenControllerLandingPage {
-    TestService testService;
+    TestFragenService testService;
 
     @Autowired
-    public StudentenControllerLandingPage(TestService testService) {
+    public StudentenControllerLandingPage(TestFragenService testService) {
         this.testService = testService;
     }
 
@@ -50,10 +49,10 @@ public class StudentenControllerLandingPage {
             return "redirect:/studenten/landingPage";
         }
         StudiTest test = testService.getTest(id);
-        model.addAttribute("titel", "Titel: " + test.getTitel());
-        model.addAttribute("startzeitpunkt", "Startzeitpunkt: " + test.getStartzeitpunkt().format(DateTimeFormatter.ofPattern("dd.MM.YYYY")));
-        model.addAttribute("endzeitpunkt", "Endzeitpunkt: " + test.getEndzeitpunkt().format(DateTimeFormatter.ofPattern("dd.MM.YYYY")));
-        model.addAttribute("ergebniszeitpunkt", "Ergebniszeitpunkt: " + test.getErgebniszeitpunkt().format(DateTimeFormatter.ofPattern("dd.MM.YYYY")));
+        model.addAttribute("titel", testService.parseTitel(test));
+        model.addAttribute("startzeitpunkt", testService.parseStart(test));
+        model.addAttribute("endzeitpunkt", testService.parseEnde(test));
+        model.addAttribute("ergebniszeitpunkt", testService.parseErgebnis(test));
         return "studenten/TestPageStudenten";
     }
 }
