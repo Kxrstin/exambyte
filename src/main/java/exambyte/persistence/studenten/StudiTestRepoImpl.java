@@ -1,4 +1,4 @@
-package exambyte.infrastructure.studenten;
+package exambyte.persistence.studenten;
 
 import exambyte.aggregates.studenten.StudiTest;
 import exambyte.service.studenten.StudiTestRepo;

@@ -8,3 +8,8 @@ spring:
             client-secret: ${CLIENT_SECRET}
             scope: read:public_repo
 
+exambyte:
+  rollen:
+    studenten: Kxrstin, Narr1M
+    korrektoren: Kxrstin, Narr1M
+    organisatoren: Kxrstin, Narr1M

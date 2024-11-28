@@ -18,11 +18,14 @@ import java.util.Set;
 
 @Component
 public class AppUserService implements OAuth2UserService<OAuth2UserRequest, OAuth2User> {
-    //@Value("${exambyte.rollen.organisatoren}")
-    //private Set<String> organisatoren;
+    @Value("${exambyte.rollen.organisatoren}")
+    private Set<String> organisatoren;
 
-    //@Value("${exambyte.rollen.korrektoren}")
-    //private Set<String> korrektoren;
+    @Value("${exambyte.rollen.korrektoren}")
+    private Set<String> korrektoren;
+
+    @Value("${exambyte.rollen.studenten}")
+    private Set<String> studenten;
 
     private final DefaultOAuth2UserService defaultService = new DefaultOAuth2UserService();
 
@@ -30,12 +33,19 @@ public class AppUserService implements OAuth2UserService<OAuth2UserRequest, OAut
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
             OAuth2User originalUser = defaultService.loadUser(userRequest);
             Set<GrantedAuthority> authorities = new HashSet<>(originalUser.getAuthorities());
-            if("Kxrstin".equals(originalUser.getAttribute("login")) ||
-                    "Narr1M".equals(originalUser.getAttribute("login"))) {
+            String login = originalUser.getAttribute("login");
+            if(studenten.contains(login)) {
+                System.out.println("Added " + login + " as Student.");
                 authorities.add(new SimpleGrantedAuthority("ROLE_STUDENT"));
-                authorities.add(new SimpleGrantedAuthority("ROLE_ORGANISATOR"));
-                authorities.add(new SimpleGrantedAuthority("ROLE_KORREKTOR"));
             }
-            return new DefaultOAuth2User(authorities, originalUser.getAttributes(), "id");
+        if(korrektoren.contains(login)) {
+            System.out.println("Added " + login + " as Korrektor.");
+            authorities.add(new SimpleGrantedAuthority("ROLE_KORREKTOR"));
+        }
+        if(organisatoren.contains(login)) {
+            System.out.println("Added " + login + " as Oranisator.");
+            authorities.add(new SimpleGrantedAuthority("ROLE_ORGANISATOR"));
+        }
+        return new DefaultOAuth2User(authorities, originalUser.getAttributes(), "id");
     }
 }

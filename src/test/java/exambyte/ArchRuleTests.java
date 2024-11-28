@@ -29,7 +29,6 @@ public class ArchRuleTests {
             .applicationServices("..service..")
             .domainServices("..domainService..")
             .adapter("web", "..controller..")
-            .adapter("infrastructure", "..infrastructure..")
             .adapter("persistence", "..persistence..");
 
     @ArchTest

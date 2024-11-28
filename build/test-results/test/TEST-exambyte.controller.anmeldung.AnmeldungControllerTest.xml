@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="exambyte.controller.anmeldung.AnmeldungControllerTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2024-11-24T10:58:22" hostname="KERSTIN-SURFACE" time="1.148">
+<testsuite name="exambyte.controller.anmeldung.AnmeldungControllerTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2024-11-28T11:20:38" hostname="KERSTIN-SURFACE" time="1.536">
   <properties/>
-  <testcase name="Ein Student bekommt nur den Studenten Button angezeigt" classname="exambyte.controller.anmeldung.AnmeldungControllerTest" time="1.005"/>
-  <testcase name="Ein User mit allen Rollen bekommt alle drei Buttons angezeigt." classname="exambyte.controller.anmeldung.AnmeldungControllerTest" time="0.017"/>
-  <testcase name="Ein User ohne Rolle bekommt nur eine Info Nachricht angezeigt und keinen Button" classname="exambyte.controller.anmeldung.AnmeldungControllerTest" time="0.051"/>
-  <testcase name="Ein Organisator bekommt nur den Organisator Button angezeigt." classname="exambyte.controller.anmeldung.AnmeldungControllerTest" time="0.022"/>
-  <testcase name="Ein Korrektor bekommt nur den Korrektor Button angezeigt." classname="exambyte.controller.anmeldung.AnmeldungControllerTest" time="0.015"/>
-  <testcase name="Wenn der Pfad / geöffnet wird, soll man zur GitHub Anmeldung redirected werden" classname="exambyte.controller.anmeldung.AnmeldungControllerTest" time="0.023"/>
+  <testcase name="Ein Student bekommt nur den Studenten Button angezeigt" classname="exambyte.controller.anmeldung.AnmeldungControllerTest" time="1.336"/>
+  <testcase name="Ein User mit allen Rollen bekommt alle drei Buttons angezeigt." classname="exambyte.controller.anmeldung.AnmeldungControllerTest" time="0.032"/>
+  <testcase name="Ein User ohne Rolle bekommt nur eine Info Nachricht angezeigt und keinen Button" classname="exambyte.controller.anmeldung.AnmeldungControllerTest" time="0.055"/>
+  <testcase name="Ein Organisator bekommt nur den Organisator Button angezeigt." classname="exambyte.controller.anmeldung.AnmeldungControllerTest" time="0.021"/>
+  <testcase name="Ein Korrektor bekommt nur den Korrektor Button angezeigt." classname="exambyte.controller.anmeldung.AnmeldungControllerTest" time="0.021"/>
+  <testcase name="Wenn der Pfad / geöffnet wird, soll man zur GitHub Anmeldung redirected werden" classname="exambyte.controller.anmeldung.AnmeldungControllerTest" time="0.052"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

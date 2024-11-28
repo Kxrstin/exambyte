@@ -35,8 +35,11 @@
         </form>
 
         <ul th:remove="all-but-first">
-            <li th:each="testFrage: ${testForm.getTestFragen()}" class="testfragen-alignment">
+            <li th:each="testFrage: ${testForm.getTestFragen()}" class="list-group-item">
                 <!--Dieser Abschnitt wird nur angezeigt, falls es sich um eine Mulitple-Choice Frage handelt -->
+                <p class="fragenüberschrift">
+                    Multiple-Choice Frage:
+                </p>
                 <span th:if="${testFrage.istMcFrage()}">
                     <form method="post" th:action="@{/organisatoren/testErstellen/updateTitelMC}">
                         <label for="titelMCID"> Titel: </label>
@@ -48,8 +51,10 @@
                         <input type="text" id="multipleChoiceFrageID" name="multipleChoiceFrage">
                     </form>
 
+
+
                     <form>
-                        <button type="submit" id="antwortHinzufügenMC">+ Antwort hinzufügen</button>
+                        <button class="btn-dark" type="submit" id="antwortHinzufügenMC">+ Antwort hinzufügen</button>
                     </form>
 
 
@@ -58,14 +63,17 @@
                         <input type="number" name="punktzahlMC" id="punktzahlMcFrageID">
                     </form>
 
-                    <span th:if="${antwortHinzufügenMC}">
+                    <form>
                         <label for="erklaerungMCFrageID"> Erklärung: </label>
                         <textarea id="erklaerungMCFrageID" name="erklaerungMCFrage"></textarea>
-                    </span>
+                    </form>
                 </span>
 
                 <!--Dieser Abschnitt wird nur angezeigt, falls es sich um eine Freitextfrage handelt -->
                 <span th:unless="${testFrage.istMcFrage()}">
+                    <p class="fragenüberschrift">
+                        Freitext Frage:
+                    </p>
                     <form method="post" th:action="@{/organisatoren/testErstellen/updateTitelFT}">
                         <label for="titelFreitextID"> Titel: </label>
                         <input type="text" id="titelFreitextID" name="titel">
@@ -80,11 +88,18 @@
                         <label for="punktzahlFreitextFrageID"> Punktzahl: </label>
                         <input type="number" name="punktzahlFreitextFrage" id="punktzahlFreitextFrageID">
                     </form>
-                    <label for="loesungID"> Mögliche Lösung: </label>
-                    <textarea name="loesung" id="loesungID"></textarea>
+                    <form>
+                        <label for="loesungID"> Mögliche Lösung: </label>
+                        <textarea name="loesung" id="loesungID"></textarea>
+                    </form>
+
                 </span>
             </li>
-            <li class="testfragen-alignment">
+            <!--Vorschau, wie es mit mehreren Testfragen klappen würde:-->
+            <li class="list-group-item">
+                <p class="fragenüberschrift">
+                    Multiple-Choice Frage:
+                </p>
                 <form method="post" th:action="@{/organisatoren/testErstellen/updateTitelMC}">
                     <label for="titelMCID"> Titel: </label>
                     <input type="text"  name="titel">
@@ -95,17 +110,17 @@
                     <input type="text" name="multipleChoiceFrage">
                 </form>
 
-                <button type="submit" >+ Antwort hinzufügen</button>
+                <button class="btn-dark" type="submit" >+ Antwort hinzufügen</button>
 
                 <form method="post" th:action="@{/organisatoren/testErstellen/updatePunkteMC}">
                     <label for="punktzahlMcFrageID"> Punktzahl: </label>
                     <input type="number" name="punktzahlMC" >
                 </form>
 
-                <span th:if="${antwortHinzufügenMC}">
-                        <label for="erklaerungMCFrageID"> Erklärung: </label>
-                        <textarea name="erklaerungMCFrage"></textarea>
-                    </span>
+                <form>
+                    <label for="erklaerungMCFrageID"> Erklärung: </label>
+                    <textarea name="erklaerungMCFrage"></textarea>
+                </form>
             </li>
         </ul>
 
