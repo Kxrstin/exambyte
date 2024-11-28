@@ -23,8 +23,8 @@ public class StudiTestRepoImpl implements StudiTestRepo {
         TestForm testForm2 = new TestForm("Mathematik für Informatik 3 Test Woche 5", LocalDate.of(2024, 11, 21), LocalDate.of(2024, 11, 30), LocalDate.of(2024, 12, 2), 2);
         TestForm testForm3 = new TestForm("Algorithmen und Datenstrukturen Test Woche 5", LocalDate.of(2024, 11, 21), LocalDate.of(2024, 11, 30), LocalDate.of(2024, 12, 2), 3);
         studiTestMap.put(testForm1.getTestId(), new StudiTest(testForm1, List.of(new FreitextAufgabe("Nenne pro Argumente der Onion Architektur", 3))));
-        studiTestMap.put(testForm2.getTestId(), new StudiTest(testForm1, List.of(new MCAufgabe("Was ist das Ergebnis von 2 + 2", List.of("1", "2", "3", "4", "5"), 2))));
-        studiTestMap.put(testForm3.getTestId(), new StudiTest(testForm1, List.of(new FreitextAufgabe("Was ist dynamische Programmierung?", 1))));
+        studiTestMap.put(testForm2.getTestId(), new StudiTest(testForm2, List.of(new MCAufgabe("Was ist das Ergebnis von 2 + 2", List.of("1", "2", "3", "4", "5"), 2))));
+        studiTestMap.put(testForm3.getTestId(), new StudiTest(testForm3, List.of(new FreitextAufgabe("Was ist dynamische Programmierung?", 1))));
     }
 
     @Override
@@ -45,6 +45,7 @@ public class StudiTestRepoImpl implements StudiTestRepo {
         List<StudiTest> studiTests = new ArrayList<>();
         for(Map.Entry<Integer, StudiTest> studiTestEntry: studiTestMap.entrySet()) {
             StudiTest test = studiTestEntry.getValue();
+            System.out.println(test.getTitel());
             studiTests.add(test);
         }
         return studiTests;

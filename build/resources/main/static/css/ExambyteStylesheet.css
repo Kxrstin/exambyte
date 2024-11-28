@@ -103,3 +103,21 @@ li {
     margin-top: 5px;
 }
 
+/* Test Bearbeitung*/
+.aufgabenstellung {
+    margin-top: 15px;
+    margin-bottom: 8px;
+}
+
+.punktzahl {
+    margin-left: 20px;
+
+}
+
+.btnInput {
+    margin-left: 40px;
+}
+
+.btnLabel {
+    margin-left: 13px;
+}
