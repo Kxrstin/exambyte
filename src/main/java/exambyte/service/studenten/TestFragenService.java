@@ -1,7 +1,6 @@
 package exambyte.service.studenten;
 
-import exambyte.aggregates.studenten.StudiTest;
-import exambyte.aggregates.studenten.TestForm;
+import exambyte.aggregates.studenten.StudiTest.StudiTest;
 import org.springframework.stereotype.Service;
 
 import java.time.format.DateTimeFormatter;
@@ -42,7 +41,25 @@ public class TestFragenService {
     }
 
 
-    // TODO: TestAntwort speichern
+    // Test Infos
+    public String getAufgabe(int id, int nr) {
+        return testRepo.loadTestWithId(id).getAufgabe(nr);
+    }
+    public int getPunktzahl(int id, int nr) {
+        return testRepo.loadTestWithId(id).getPunktzahl(nr);
+    }
+    public boolean isFreitextAufgabe(int id, int nr) {
+        return testRepo.loadTestWithId(id).isFreitextAufgabe(nr);
+    }
+    public boolean isMCAufgabe(int id, int nr) {
+        return testRepo.loadTestWithId(id).isMCAufgabe(nr);
+    }
+    public List<String> getAntwortMoeglichkeiten(int id, int nr) {
+        return testRepo.loadTestWithId(id).getAntwortmoeglichkeiten(nr);
+    }
+    public int getAnzahlAufgaben(int id) {
+        return testRepo.loadTestWithId(id).getAnzahlAufgaben();
+    }
 
 
     // TODO: Gehört nicht hier hin

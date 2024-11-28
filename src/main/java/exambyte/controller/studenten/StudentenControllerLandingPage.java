@@ -1,7 +1,7 @@
 package exambyte.controller.studenten;
 
 import exambyte.service.studenten.TestFragenService;
-import exambyte.aggregates.studenten.StudiTest;
+import exambyte.aggregates.studenten.StudiTest.StudiTest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
@@ -53,6 +53,7 @@ public class StudentenControllerLandingPage {
         model.addAttribute("startzeitpunkt", testService.parseStart(test));
         model.addAttribute("endzeitpunkt", testService.parseEnde(test));
         model.addAttribute("ergebniszeitpunkt", testService.parseErgebnis(test));
+        model.addAttribute("id", test.getId());
         return "studenten/TestPageStudenten";
     }
 }

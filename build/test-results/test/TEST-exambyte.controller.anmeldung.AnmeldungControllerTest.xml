@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="exambyte.controller.anmeldung.AnmeldungControllerTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2024-11-28T19:27:27" hostname="KERSTIN-SURFACE" time="1.219">
+  <properties/>
+  <testcase name="Ein Student bekommt nur den Studenten Button angezeigt" classname="exambyte.controller.anmeldung.AnmeldungControllerTest" time="1.08"/>
+  <testcase name="Ein User mit allen Rollen bekommt alle drei Buttons angezeigt." classname="exambyte.controller.anmeldung.AnmeldungControllerTest" time="0.028"/>
+  <testcase name="Ein User ohne Rolle bekommt nur eine Info Nachricht angezeigt und keinen Button" classname="exambyte.controller.anmeldung.AnmeldungControllerTest" time="0.036"/>
+  <testcase name="Ein Organisator bekommt nur den Organisator Button angezeigt." classname="exambyte.controller.anmeldung.AnmeldungControllerTest" time="0.014"/>
+  <testcase name="Ein Korrektor bekommt nur den Korrektor Button angezeigt." classname="exambyte.controller.anmeldung.AnmeldungControllerTest" time="0.015"/>
+  <testcase name="Wenn der Pfad / geöffnet wird, soll man zur GitHub Anmeldung redirected werden" classname="exambyte.controller.anmeldung.AnmeldungControllerTest" time="0.025"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

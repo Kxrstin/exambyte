@@ -1,9 +1,8 @@
 package exambyte.controller.studenten;
 
-
-import exambyte.aggregates.studenten.FreitextAufgabe;
-import exambyte.aggregates.studenten.StudiTest;
-import exambyte.aggregates.studenten.TestForm;
+import exambyte.aggregates.studenten.StudiTest.FreitextAufgabe;
+import exambyte.aggregates.studenten.StudiTest.StudiTest;
+import exambyte.aggregates.studenten.StudiTest.TestForm;
 import exambyte.security.MethodSecurityConfig;
 import exambyte.security.SecurityConfig;
 import exambyte.helper.WithMockOAuth2User;
@@ -30,7 +29,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @Import({SecurityConfig.class, MethodSecurityConfig.class})
 public class StudentenControllerLandingPageTest {
     private TestForm testForm = new TestForm("Algorithmen und Datenstrukturen Test Woche 5", LocalDate.of(2024, 11, 21), LocalDate.of(2024, 11, 30), LocalDate.of(2024, 12, 2), 1);
-    private StudiTest studiTest = new StudiTest(testForm, List.of(new FreitextAufgabe("Nenne pro Argumente der Onion Architektur")));
+    private StudiTest studiTest = new StudiTest(testForm, List.of(new FreitextAufgabe("Nenne pro Argumente der Onion Architektur", 1)));
 
     @Autowired
     MockMvc mvc;

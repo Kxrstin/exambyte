@@ -1,10 +1,9 @@
-package exambyte.aggregates.studenten;
+package exambyte.aggregates.studenten.StudiTest;
 
-import exambyte.annotations.AggregateRoot;
-
+import exambyte.annotations.Wertobjekt;
 import java.time.LocalDate;
 
-@AggregateRoot //TODO: ÄNDERN!
+@Wertobjekt
 public class TestForm {
     private final String titel;
     private final LocalDate startzeitpunkt;
@@ -20,16 +19,16 @@ public class TestForm {
         testId = id;
     }
 
-    String getTitel() {
+    public String getTitel() {
         return titel;
     }
-    LocalDate getStartzeitpunkt() {
+    public LocalDate getStartzeitpunkt() {
         return startzeitpunkt;
     }
-    LocalDate getEndzeitpunkt() {
+    public LocalDate getEndzeitpunkt() {
         return endzeitpunkt;
     }
-    LocalDate getErgebniszeitpunkt() {
+    public LocalDate getErgebniszeitpunkt() {
         return ergebniszeitpunkt;
     }
     public int getTestId() {
