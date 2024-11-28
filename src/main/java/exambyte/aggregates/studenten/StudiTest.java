@@ -3,6 +3,9 @@ package exambyte.aggregates.studenten;
 import exambyte.annotations.AggregateRoot;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 @AggregateRoot
 public final class StudiTest {
@@ -10,18 +13,18 @@ public final class StudiTest {
     private LocalDate startzeitpunkt;
     private LocalDate endzeitpunkt;
     private LocalDate ergebniszeitpunkt;
-    private int id;
+    private int testId;
 
     public StudiTest(String titel, Integer id, LocalDate startzeitpunkt, LocalDate endzeitpunkt, LocalDate ergebniszeitpunkt) {
         this.endzeitpunkt = endzeitpunkt;
-        this.id = id;
+        this.testId = id;
         this.ergebniszeitpunkt = ergebniszeitpunkt;
         this.startzeitpunkt = startzeitpunkt;
         this.titel = titel;
     }
 
     public int getId() {
-        return id;
+        return testId;
     }
 
     public LocalDate getEndzeitpunkt() {
@@ -41,7 +44,7 @@ public final class StudiTest {
     }
 
     public boolean testBestanden() {
-        // TODO Implementieren
+        // TODO Das gehört in einen anderen Service aber nicht hier hin
         return true;
     }
 
