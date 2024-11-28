@@ -1,6 +1,6 @@
 package exambyte.persistence.studenten;
 
-import exambyte.aggregates.studenten.StudiTest;
+import exambyte.aggregates.studenten.*;
 import exambyte.service.studenten.StudiTestRepo;
 import org.springframework.stereotype.Repository;
 
@@ -16,9 +16,12 @@ public class StudiTestRepoImpl implements StudiTestRepo {
 
     // TODO: Durch echte Tests ersetzen, das dient nur als Beispiel
     public StudiTestRepoImpl() {
-        studiTestMap.put(1, new StudiTest("Algorithmen und Datenstrukturen Test Woche 5", 1, LocalDate.of(2024, 11, 21), LocalDate.of(2024, 11, 30), LocalDate.of(2024, 12, 2)));
-        studiTestMap.put(2, new StudiTest("Programmierpraktikum 2 Test Woche 4", 2, LocalDate.of(2024, 11, 20), LocalDate.of(2024, 11, 26), LocalDate.of(2024, 12, 3)));
-        studiTestMap.put(3, new StudiTest("Mathematik für Informatik 3 Test Woche 5", 3, LocalDate.of(2024, 11, 19), LocalDate.of(2024, 11, 28), LocalDate.of(2024, 12, 5)));
+        TestForm testForm1 = new TestForm("Programmierpraktikum 2 Test Woche 4", LocalDate.of(2024, 11, 21), LocalDate.of(2024, 11, 30), LocalDate.of(2024, 12, 2), 1);
+        TestForm testForm2 = new TestForm("Mathematik für Informatik 3 Test Woche 5", LocalDate.of(2024, 11, 21), LocalDate.of(2024, 11, 30), LocalDate.of(2024, 12, 2), 2);
+        TestForm testForm3 = new TestForm("Algorithmen und Datenstrukturen Test Woche 5", LocalDate.of(2024, 11, 21), LocalDate.of(2024, 11, 30), LocalDate.of(2024, 12, 2), 3);
+        studiTestMap.put(testForm1.getTestId(), new StudiTest(testForm1, List.of(new FreitextAufgabe("Nenne pro Argumente der Onion Architektur"))));
+        studiTestMap.put(testForm2.getTestId(), new StudiTest(testForm2, List.of(new MCAufgabe("Was ist das Ergebnis von 2 + 2", List.of("1", "2", "3", "4", "5")))));
+        studiTestMap.put(testForm3.getTestId(), new StudiTest(testForm2, List.of(new FreitextAufgabe("Was ist dynamische Programmierung?"))));
     }
 
     @Override
@@ -26,7 +29,7 @@ public class StudiTestRepoImpl implements StudiTestRepo {
         if(studiTestMap.containsKey(id)) {
             return studiTestMap.get(id);
         }
-        return new StudiTest(null, null, null, null, null);
+        return new StudiTest(null, null);
     }
 
     @Override

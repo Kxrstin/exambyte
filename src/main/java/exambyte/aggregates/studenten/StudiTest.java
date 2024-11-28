@@ -3,23 +3,24 @@ package exambyte.aggregates.studenten;
 import exambyte.annotations.AggregateRoot;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @AggregateRoot
 public final class StudiTest {
     TestForm testForm;
+    List<TestAufgabe> testAufgaben;
 
-    public StudiTest(TestForm testForm) {
+    public StudiTest(TestForm testForm, List<TestAufgabe> testAufgaben) {
         this.testForm = testForm;
+        this.testAufgaben = testAufgaben;
     }
 
-    public String getTitel() {
-        return testForm.getTitel();
-    }
 
+    // TestForm Daten ausgeben
+    public String getTitel() { return testForm.getTitel(); }
     public LocalDate getEndzeitpunkt() {
         return testForm.getEndzeitpunkt();
     }
-
     public LocalDate getStartzeitpunkt() {
         return testForm.getEndzeitpunkt();
     }
@@ -30,10 +31,26 @@ public final class StudiTest {
         return testForm.getTestId();
     }
 
-    public boolean testBestanden() {
-        // TODO Das gehört in einen anderen Service aber nicht hier hin
-        return true;
+
+    // TestAufgaben ausgeben
+    public List<String> getTestAufgaben() {
+        return testAufgaben.stream()
+                .map(n -> n.getAufgabe())
+                .toList();
     }
 
-    // TODO: Antwort speichern
+    // TestAntworten
+    public void addAntwort(String antwort, TestAufgabe testAufgabe) {
+        testAufgabe.addAntwort(antwort);
+    }
+    public List<String> getAntwortMoeglichkeiten(TestAufgabe aufgabe) {
+        if(aufgabe.getClass().equals(MCAufgabe.class)) { return ((MCAufgabe) aufgabe).getAntwortMoeglichkeiten();}
+        return List.of();
+    }
+
+
+    // TODO: Das gehört in einen anderen Service aber nicht hier hin
+    public boolean testBestanden() {
+        return true;
+    }
 }

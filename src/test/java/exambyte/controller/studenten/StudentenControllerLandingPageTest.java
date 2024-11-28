@@ -1,7 +1,9 @@
 package exambyte.controller.studenten;
 
 
+import exambyte.aggregates.studenten.FreitextAufgabe;
 import exambyte.aggregates.studenten.StudiTest;
+import exambyte.aggregates.studenten.TestForm;
 import exambyte.security.MethodSecurityConfig;
 import exambyte.security.SecurityConfig;
 import exambyte.helper.WithMockOAuth2User;
@@ -27,6 +29,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest(StudentenControllerLandingPage.class)
 @Import({SecurityConfig.class, MethodSecurityConfig.class})
 public class StudentenControllerLandingPageTest {
+    private TestForm testForm = new TestForm("Algorithmen und Datenstrukturen Test Woche 5", LocalDate.of(2024, 11, 21), LocalDate.of(2024, 11, 30), LocalDate.of(2024, 12, 2), 1);
+    private StudiTest studiTest = new StudiTest(testForm, List.of(new FreitextAufgabe("Nenne pro Argumente der Onion Architektur")));
+
     @Autowired
     MockMvc mvc;
 
@@ -76,7 +81,7 @@ public class StudentenControllerLandingPageTest {
     @DisplayName("Auf der LandingPage soll eine Liste von Tests angezeigt werden")
     @WithMockOAuth2User(roles = "STUDENT")
     public void test_testsAnzeigen() throws Exception {
-        when(testService.getTestList()).thenReturn(List.of(new StudiTest("Mathematik für Informatik 3 Test Woche 5", 3, LocalDate.of(2024, 11, 19), LocalDate.of(2024, 11, 28), LocalDate.of(2024, 12, 5))));
+        when(testService.getTestList()).thenReturn(List.of(studiTest));
         when(testService.zulassungsStatus(any())).thenReturn("guterKurs");
         String textHtml = mvc.perform(get("/studenten/landingPage"))
                 .andExpect(status().isOk())
@@ -84,7 +89,7 @@ public class StudentenControllerLandingPageTest {
                 .getResponse()
                 .getContentAsString();
 
-        assertThat(textHtml).contains("Mathematik für Informatik 3");
+        assertThat(textHtml).contains("Algorithmen und Datenstrukturen");
     }
 
     @Test
@@ -92,7 +97,7 @@ public class StudentenControllerLandingPageTest {
     @WithMockOAuth2User(roles = "STUDENT")
     public void test_testBearbeiten() throws Exception {
         when(testService.hasTestWithId(3)).thenReturn(true);
-        when(testService.getTest(3)).thenReturn(new StudiTest("Mathematik für Informatik 3 Test Woche 5", 3, LocalDate.of(2024, 11, 19), LocalDate.of(2024, 11, 28), LocalDate.of(2024, 12, 5)));
+        when(testService.getTest(3)).thenReturn(studiTest);
         mvc.perform(get("/studenten/landingPage/zeigeTest/3"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("studenten/TestPageStudenten"));
@@ -102,8 +107,7 @@ public class StudentenControllerLandingPageTest {
     @DisplayName("Wenn man alle Tests bislang bestanden hat, soll guter Kurs neben Zulassungsstatus stehen")
     @WithMockOAuth2User(roles = "STUDENT")
     public void test_zulassungsstatus() throws Exception {
-        StudiTest test = new StudiTest("Mathematik für Informatik 3 Test Woche 5", 3, LocalDate.of(2024, 11, 19), LocalDate.of(2024, 11, 28), LocalDate.of(2024, 12, 5));
-        when(testService.getTestList()).thenReturn(List.of(test));
+        when(testService.getTestList()).thenReturn(List.of(studiTest));
         when(testService.zulassungsStatus(any())).thenReturn("guterKurs");
         MvcResult result = mvc.perform(get("/studenten/landingPage"))
                 .andExpect(status().isOk())
@@ -116,8 +120,7 @@ public class StudentenControllerLandingPageTest {
     @DisplayName("Wenn man 3 Tests nicht bestanden hat, soll ... mehr als 2 Tests nicht bestanden ... ausgegeben werden.")
     @WithMockOAuth2User(roles = "STUDENT")
     public void test_dreiTestsNichtBestanden() throws Exception {
-        StudiTest test = new StudiTest("Mathematik für Informatik 3 Test Woche 5", 3, LocalDate.of(2024, 11, 19), LocalDate.of(2024, 11, 28), LocalDate.of(2024, 12, 5));
-        when(testService.getTestList()).thenReturn(List.of(test));
+        when(testService.getTestList()).thenReturn(List.of(studiTest));
         when(testService.zulassungsStatus(any())).thenReturn("fail");
         MvcResult result = mvc.perform(get("/studenten/landingPage"))
                 .andExpect(status().isOk())
@@ -130,8 +133,7 @@ public class StudentenControllerLandingPageTest {
     @DisplayName("Wenn man 1 Mal einen Test nicht bestanden hat, soll ... vorsicht ... ausgegeben werden.")
     @WithMockOAuth2User(roles = "STUDENT")
     public void test_einMalNichtBestanden() throws Exception {
-        StudiTest test = new StudiTest("Mathematik für Informatik 3 Test Woche 5", 3, LocalDate.of(2024, 11, 19), LocalDate.of(2024, 11, 28), LocalDate.of(2024, 12, 5));
-        when(testService.getTestList()).thenReturn(List.of(test));
+        when(testService.getTestList()).thenReturn(List.of(studiTest));
         when(testService.zulassungsStatus(any())).thenReturn("vorsicht");
         MvcResult result = mvc.perform(get("/studenten/landingPage"))
                 .andExpect(status().isOk())

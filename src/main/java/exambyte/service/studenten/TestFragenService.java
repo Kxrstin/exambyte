@@ -15,34 +15,37 @@ public class TestFragenService {
         this.testRepo = testRepo;
     }
 
+    // StudiTest
     public StudiTest getTest(int testId) {
         return testRepo.loadTestWithId(testId);
     }
-
     public boolean hasTestWithId(int testId) {
        return testRepo.hasTestWithId(testId);
     }
-
     public List<StudiTest> getTestList() {
         return testRepo.loadTestList();
     }
 
+
+    // Testinformationen parsen
     public String parseTitel(StudiTest test) {
         return "Titel: " + test.getTitel();
     }
-
     public String parseStart(StudiTest test) {
         return "Startzeitpunkt: " + test.getStartzeitpunkt().format(DateTimeFormatter.ofPattern("dd.MM.YYYY"));
     }
-
     public String parseEnde(StudiTest test) {
         return "Endzeitpunkt: " + test.getEndzeitpunkt().format(DateTimeFormatter.ofPattern("dd.MM.YYYY"));
     }
-
     public String parseErgebnis(StudiTest test) {
-        return "Ergebniszeitpunkt: " + test.getEndzeitpunkt().format(DateTimeFormatter.ofPattern("dd.MM.YYYY"));
+        return "Ergebniszeitpunkt: " + test.getErgebnisZeitpunkt().format(DateTimeFormatter.ofPattern("dd.MM.YYYY"));
     }
 
+
+    // TODO: TestAntwort speichern
+
+
+    // TODO: Gehört nicht hier hin
     public String zulassungsStatus(List<StudiTest> tests) {
         int countBestanden = 0;
         for (StudiTest test : tests) {
@@ -64,10 +67,4 @@ public class TestFragenService {
         }
         return "fail";
     }
-
-    // TODO Antwort speichern
-    // public void addTestAntwortWithId(Integer id, String antwort)
-    // StudiTest test = testRepo.loadTestWithId(...);
-    // test.addAntwortZuId(id, antwort);
-    // testRepo.safeTestWithId(id);
 }
