@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="exambyte.ArchRuleTests" tests="3" skipped="0" failures="0" errors="0" timestamp="2024-11-28T11:20:08" hostname="KERSTIN-SURFACE" time="8.176">
+<testsuite name="exambyte.ArchRuleTests" tests="5" skipped="0" failures="0" errors="0" timestamp="2024-11-28T11:30:29" hostname="KERSTIN-SURFACE" time="9.249">
   <properties/>
-  <testcase name="nurControllerInControllerKlassen" classname="exambyte.ArchRuleTests" time="7.415"/>
-  <testcase name="onionArchitecture" classname="exambyte.ArchRuleTests" time="0.747"/>
-  <testcase name="jedesAggregatRootIstAnnotiert" classname="exambyte.ArchRuleTests" time="0.008"/>
-  <system-out><![CDATA[12:20:08.380 [Test worker] INFO com.tngtech.archunit.core.PluginLoader -- Detected Java version 21.0.2
+  <testcase name="nurControllerInControllerKlassen" classname="exambyte.ArchRuleTests" time="7.456"/>
+  <testcase name="onionArchitecture" classname="exambyte.ArchRuleTests" time="1.759"/>
+  <testcase name="jedesAggregatRootIstAnnotiert" classname="exambyte.ArchRuleTests" time="0.013"/>
+  <testcase name="serviceKlassenSindMitServiceAnnotiert" classname="exambyte.ArchRuleTests" time="0.003"/>
+  <testcase name="repositoriesSindMitRepositoryAnnotiert" classname="exambyte.ArchRuleTests" time="0.005"/>
+  <system-out><![CDATA[12:30:29.193 [Test worker] INFO com.tngtech.archunit.core.PluginLoader -- Detected Java version 21.0.2
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

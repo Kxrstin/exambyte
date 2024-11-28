@@ -1,21 +1,10 @@
 package exambyte.service.organisatoren;
 
 import exambyte.aggregates.organisatoren.TestFormular;
+import org.springframework.stereotype.Repository;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
-
-public class TestFormRepo {
-    private Map<String, TestFormular> testForms = new HashMap<>();
-
-    public String saveTestForm(TestFormular testForm) {
-        String id = UUID.randomUUID().toString();
-        testForms.put(id, testForm);
-        return id;
-    }
-
-    public TestFormular loadTestForm(String id) {
-        return testForms.get(id);
-    }
+@Repository
+public interface TestFormRepo {
+    String saveTestForm(TestFormular testForm);
+    TestFormular loadTestForm(String id);
 }
