@@ -34,11 +34,12 @@ public class StudentenControllerTestBearbeitenPageTest {
     @DisplayName("Der Pfad /studenten/testBearbeitung/0/0 führt zur TestBearbeitenPage")
     @WithMockOAuth2User(roles = "STUDENT")
     public void test_testBearbeitenPage() throws Exception {
-        when(testService.getPunktzahl(0, 0)).thenReturn(2);
-        when(testService.getAufgabe(0, 0)).thenReturn("Aufgabe Bla Bla");
-        when(testService.isFreitextAufgabe(0, 0)).thenReturn(false);
-        when(testService.isMCAufgabe(0, 0)).thenReturn(false);
-        when(testService.getAnzahlAufgaben(0)).thenReturn(0);
+        new TestServiceBuilder(testService)
+                .withPunktzahl(2)
+                .withAufgabe("Aufgabe Bla Bla")
+                .isFreitext(false)
+                .isMCAufgabe(false)
+                .withAnzahlAufgaben(0);
 
         mvc.perform(get("/studenten/testBearbeitung/0/0"))
                 .andExpect(status().isOk())
@@ -49,11 +50,13 @@ public class StudentenControllerTestBearbeitenPageTest {
     @DisplayName("Der Pfad /studenten/testBearbeitung/0/0 führt zur TestBearbeitenPage und zeigt die Fragestellung und die Punktzahl der Freitextaufgabe.")
     @WithMockOAuth2User(roles = "STUDENT")
     public void test_freitextAufgabeWirdGezeigt() throws Exception {
-        when(testService.getPunktzahl(0, 0)).thenReturn(2);
-        when(testService.getAufgabe(0, 0)).thenReturn("Aufgabe Bla Bla");
-        when(testService.isFreitextAufgabe(0, 0)).thenReturn(true);
-        when(testService.isMCAufgabe(0, 0)).thenReturn(false);
-        when(testService.getAnzahlAufgaben(0)).thenReturn(1);
+        new TestServiceBuilder(testService)
+                .withPunktzahl(2)
+                .withAnzahlAufgaben(1)
+                .isFreitext(true)
+                .isMCAufgabe(false)
+                .withAufgabe("Aufgabe Bla Bla");
+
 
         MvcResult result = mvc.perform(get("/studenten/testBearbeitung/0/0"))
                 .andExpect(status().isOk())
@@ -67,12 +70,13 @@ public class StudentenControllerTestBearbeitenPageTest {
     @DisplayName("Der Pfad /studenten/testBearbeitung/0/0 führt zur TestBearbeitenPage und zeigt die Fragestellung, die Antwortmöglichkeiten und die Punktzahl der MC Aufgabe.")
     @WithMockOAuth2User(roles = "STUDENT")
     public void test_mcAufgabeWirdGezeigt() throws Exception {
-        when(testService.getPunktzahl(0, 0)).thenReturn(2);
-        when(testService.getAufgabe(0, 0)).thenReturn("Aufgabe Bla Bla");
-        when(testService.isFreitextAufgabe(0, 0)).thenReturn(false);
-        when(testService.isMCAufgabe(0, 0)).thenReturn(true);
-        when(testService.getAnzahlAufgaben(0)).thenReturn(1);
-        when(testService.getAntwortMoeglichkeiten(0, 0)).thenReturn(List.of("Antwort A", "Antwort B", "Antwort C"));
+        new TestServiceBuilder(testService)
+                .withPunktzahl(2)
+                .withAnzahlAufgaben(1)
+                .withAntwortMoeglichkeiten(List.of("Antwort A", "Antwort B", "Antwort C"))
+                .isMCAufgabe(true)
+                .isFreitext(false)
+                .withAufgabe("Aufgabe Bla Bla");
 
         MvcResult result = mvc.perform(get("/studenten/testBearbeitung/0/0"))
                 .andExpect(status().isOk())
@@ -98,10 +102,11 @@ public class StudentenControllerTestBearbeitenPageTest {
     @DisplayName("Der Pfad /studenten/testBearbeitung/0/1 führt zur TestBearbeitenPage zeigt die Weiter und Zurück Buttons.")
     @WithMockOAuth2User(roles = "STUDENT")
     public void test_buttonsWerdenRichtigAngezeigt() throws Exception {
-        when(testService.getPunktzahl(0, 1)).thenReturn(2);
-        when(testService.isFreitextAufgabe(0, 0)).thenReturn(false);
-        when(testService.isMCAufgabe(0, 0)).thenReturn(false);
-        when(testService.getAnzahlAufgaben(0)).thenReturn(3);
+        new TestServiceBuilder(testService)
+                .withPunktzahl(2)
+                .isFreitext(false)
+                .isMCAufgabe(false)
+                .withAnzahlAufgaben(3);
 
         MvcResult result = mvc.perform(get("/studenten/testBearbeitung/0/1"))
                 .andExpect(status().isOk())
@@ -116,10 +121,11 @@ public class StudentenControllerTestBearbeitenPageTest {
     @DisplayName("Der Pfad /studenten/testBearbeitung/0/0 führt zur TestBearbeitenPage zeigt nicht die Weiter und Zurück Buttons.")
     @WithMockOAuth2User(roles = "STUDENT")
     public void test_buttonsWerdenNichtAngezeigt() throws Exception {
-        when(testService.getPunktzahl(0, 1)).thenReturn(2);
-        when(testService.isFreitextAufgabe(0, 0)).thenReturn(false);
-        when(testService.isMCAufgabe(0, 0)).thenReturn(false);
-        when(testService.getAnzahlAufgaben(0)).thenReturn(1);
+        new TestServiceBuilder(testService)
+                .withPunktzahl(2)
+                .isMCAufgabe(false)
+                .isFreitext(false)
+                .withAnzahlAufgaben(1);
 
         MvcResult result = mvc.perform(get("/studenten/testBearbeitung/0/0"))
                 .andExpect(status().isOk())
