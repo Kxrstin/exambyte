@@ -43,7 +43,7 @@ public class StudentenControllerTestBearbeitenPage {
             model.addAttribute("weiter", true);
             model.addAttribute("nextAufgabe", aufgabenNr+1);
         }
-        if (aufgabenNr - 1 <= 0 && aufgabenNr - 1 < testService.getAnzahlAufgaben(testId)) {
+        if (aufgabenNr - 1 >= 0 && aufgabenNr - 1 < testService.getAnzahlAufgaben(testId)) {
             model.addAttribute("zurueck", true);
             model.addAttribute("prevAufgabe", aufgabenNr-1);
         }

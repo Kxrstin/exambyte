@@ -44,13 +44,13 @@
 
     <span th:if="${weiter}">
          <form th:action="@{/studenten/testBearbeitung/{id}/{aufgabe}(id=${id}, aufgabe=${nextAufgabe})}">
-            <button class="btn btn-dark" type="submit"> zurück </button>
+            <button class="btn btn-dark" type="submit"> Weiter </button>
         </form>
     </span>
 
     <span th:if="${zurueck}">
         <form th:action="@{/studenten/testBearbeitung/{id}/{aufgabe}(id=${id}, aufgabe=${prevAufgabe})}">
-            <button class="btn btn-dark" type="submit"> weiter </button>
+            <button class="btn btn-dark" type="submit"> Zurück </button>
         </form>
     </span>
     </body>
