@@ -126,11 +126,22 @@ li {
     padding: 3px 6px;
     font-size: 16px;
     color: black;
-    background-color: #bebebf;
+    background-color: #ededf1;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    margin: 5px;
+    margin-top: 7px;
+}
+.btnBestaetigenMC {
+    padding: 3px 6px;
+    font-size: 16px;
+    color: black;
+    background-color: #ededf1;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 40px;
+    margin-top: 10px;
 }
 
 .btnWeiterZurueck {
