@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="exambyte.ArchRuleTests" tests="5" skipped="0" failures="0" errors="0" timestamp="2024-11-30T12:00:46" hostname="KERSTIN-SURFACE" time="4.462">
+  <properties/>
+  <testcase name="nurControllerInControllerKlassen" classname="exambyte.ArchRuleTests" time="3.945"/>
+  <testcase name="onionArchitecture" classname="exambyte.ArchRuleTests" time="0.506"/>
+  <testcase name="jedesAggregatRootIstAnnotiert" classname="exambyte.ArchRuleTests" time="0.003"/>
+  <testcase name="serviceKlassenSindMitServiceAnnotiert" classname="exambyte.ArchRuleTests" time="0.002"/>
+  <testcase name="repositoriesSindMitRepositoryAnnotiert" classname="exambyte.ArchRuleTests" time="0.001"/>
+  <system-out><![CDATA[13:00:46.582 [Test worker] INFO com.tngtech.archunit.core.PluginLoader -- Detected Java version 21.0.2
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

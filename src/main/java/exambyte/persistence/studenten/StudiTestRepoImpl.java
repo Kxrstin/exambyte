@@ -37,7 +37,7 @@ public class StudiTestRepoImpl implements StudiTestRepo {
         if(studiTestMap.containsKey(id)) {
             return studiTestMap.get(id);
         }
-        return new StudiTest(null, null);
+        return null;
     }
 
     @Override

@@ -22,21 +22,22 @@
     </h1>
 
     <span th:if="${freitextFrage}">
-        <from class="form-check" method="post">
+        <form class="form-check" method="post" th:action="@{/studenten/testBearbeitung/{id}/{aufgabe}(id=${id}, aufgabe=${aufgabe})}">
             <label class="aufgabenstellung" for="idfreitextfrage" th:text="${aufgabenstellung}"> Fragestellung: </label> <br>
-            <textarea id="idfreitextfrage" name="antwort" th:value="${studiFAntwort}"> </textarea> <br>
+            <textarea id="idfreitextfrage" name="studiFAntwort" th:text="${studiFAntwort}"> </textarea> <br>
             <button class="btnBestaetigen" type="submit">Bestätigen</button>
-        </from>
+        </form>
     </span>
 
     <span th:if="${mcfrage}">
-        <from action="post">
+        <form method="post" th:action="@{/studenten/testBearbeitung/{id}/{aufgabe}(id=${id}, aufgabe=${aufgabe})}">
             <p class="aufgabenstellung" th:text="${aufgabenstellung}"> Fragestellung: </p>
             <span th:each="antwortwahl: ${antworten}">
-                <input class="btnInput" type="checkbox" th:value="${checkBox}" id="checkboxId">
+                <input class="btnInput" type="checkbox" th:name="checkboxWahlen" th:value="${antwortwahl}" id="checkboxId" th:checked="${gewaehlteAntworten.contains(antwortwahl)}">
                 <label class="btnLabel" for="checkboxId" th:text="${antwortwahl}">Option 1 </label><br>
             </span>
-        </from>
+            <button class="btnBestaetigen" type="submit">Bestätigen</button>
+        </form>
     </span>
     <br>
 

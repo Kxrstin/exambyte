@@ -2,24 +2,21 @@ package exambyte.aggregates.studenten.StudiAntwort;
 
 import exambyte.annotations.AggregateRoot;
 
-import java.util.List;
-
 
 @AggregateRoot
 public class StudiAntwort {
     private TestAntwort testAntwort;
 
-    public void isMCAufgabe() {
+    public void setMCAufgabe() {
         testAntwort = new MCAntwort();
     }
-    public void isFreitextAufgabeAufgabe() {
+    public void setFreitextAufgabe() {
         testAntwort = new FreitextAntwort();
     }
 
     public void addAntwort(String antwort) {
         testAntwort.addAntwort(antwort);
     }
-
     public void removeAntwort(String antwort) {
         if(testAntwort.isFreitextAufgabe()) {
             ((FreitextAntwort) testAntwort).removeAntwort();
@@ -28,18 +25,10 @@ public class StudiAntwort {
         }
     }
 
-    public List<String> getAntwortWahl() {
-        try {
-            return ((MCAntwort) testAntwort).getAntwortWahl();
-        }
-        catch(Exception e) {
-            return List.of();
-        }
-    }
-
     public String getAntwort() {
-        try {
-            return ((FreitextAntwort) testAntwort).getAntwort();
+        try{
+            return testAntwort.getAntwort();
+
         } catch(Exception e) {
             return "";
         }

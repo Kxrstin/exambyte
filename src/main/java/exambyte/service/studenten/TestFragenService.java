@@ -1,5 +1,6 @@
 package exambyte.service.studenten;
 
+import exambyte.aggregates.studenten.StudiTest.MCAufgabe;
 import exambyte.aggregates.studenten.StudiTest.StudiTest;
 import org.springframework.stereotype.Service;
 
@@ -61,6 +62,18 @@ public class TestFragenService {
         return testRepo.loadTestWithId(id).getAnzahlAufgaben();
     }
 
+
+    // Antworten speichern
+    public void addAntwort(int testId, int aufgabeNr, String antwort) {
+        StudiTest test = testRepo.loadTestWithId(testId);
+        if(test != null) { test.addAntwort(antwort, aufgabeNr);}
+        testRepo.saveTest(test);
+    }
+    public String getAntwort(int testId, int aufgabe) {
+        StudiTest test = testRepo.loadTestWithId(testId);
+        if(test != null) { return test.getAntwort(aufgabe);}
+        return "";
+    }
 
     // TODO: Gehört nicht hier hin
     public String zulassungsStatus(List<StudiTest> tests) {

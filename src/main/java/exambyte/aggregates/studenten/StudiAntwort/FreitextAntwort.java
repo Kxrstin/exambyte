@@ -11,11 +11,9 @@ class FreitextAntwort implements TestAntwort{
     public boolean isFreitextAufgabe() {
         return true;
     }
-
     public void removeAntwort() {
         this.antwort = "";
     }
-
     public String getAntwort() {
         return antwort;
     }

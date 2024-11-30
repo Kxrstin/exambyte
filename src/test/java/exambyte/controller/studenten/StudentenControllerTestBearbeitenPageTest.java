@@ -16,8 +16,9 @@ import org.springframework.test.web.servlet.MvcResult;
 import java.util.List;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
-import static org.mockito.Mockito.when;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
@@ -33,7 +34,7 @@ public class StudentenControllerTestBearbeitenPageTest {
     @Test
     @DisplayName("Der Pfad /studenten/testBearbeitung/0/0 führt zur TestBearbeitenPage")
     @WithMockOAuth2User(roles = "STUDENT")
-    public void test_testBearbeitenPage() throws Exception {
+    void test_testBearbeitenPage() throws Exception {
         new TestServiceBuilder(testService)
                 .withPunktzahl(2)
                 .withAufgabe("Aufgabe Bla Bla")
@@ -49,7 +50,7 @@ public class StudentenControllerTestBearbeitenPageTest {
     @Test
     @DisplayName("Der Pfad /studenten/testBearbeitung/0/0 führt zur TestBearbeitenPage und zeigt die Fragestellung und die Punktzahl der Freitextaufgabe.")
     @WithMockOAuth2User(roles = "STUDENT")
-    public void test_freitextAufgabeWirdGezeigt() throws Exception {
+    void test_freitextAufgabeWirdGezeigt() throws Exception {
         new TestServiceBuilder(testService)
                 .withPunktzahl(2)
                 .withAnzahlAufgaben(1)
@@ -69,7 +70,7 @@ public class StudentenControllerTestBearbeitenPageTest {
     @Test
     @DisplayName("Der Pfad /studenten/testBearbeitung/0/0 führt zur TestBearbeitenPage und zeigt die Fragestellung, die Antwortmöglichkeiten und die Punktzahl der MC Aufgabe.")
     @WithMockOAuth2User(roles = "STUDENT")
-    public void test_mcAufgabeWirdGezeigt() throws Exception {
+    void test_mcAufgabeWirdGezeigt() throws Exception {
         new TestServiceBuilder(testService)
                 .withPunktzahl(2)
                 .withAnzahlAufgaben(1)
@@ -89,7 +90,7 @@ public class StudentenControllerTestBearbeitenPageTest {
 
     @Test
     @DisplayName("Der Pfad /studenten/testBearbeitung/0/0 führt für Nicht-Studenten zur Github Anmeldung.")
-    public void test_testBearbeitenPageNichtStudent() throws Exception {
+    void test_testBearbeitenPageNichtStudent() throws Exception {
         MvcResult result = mvc.perform(get("/studenten/testBearbeitung/0/0"))
                 .andExpect(status().is3xxRedirection())
                 .andReturn();
@@ -101,7 +102,7 @@ public class StudentenControllerTestBearbeitenPageTest {
     @Test
     @DisplayName("Der Pfad /studenten/testBearbeitung/0/1 führt zur TestBearbeitenPage zeigt die Weiter und Zurück Buttons.")
     @WithMockOAuth2User(roles = "STUDENT")
-    public void test_buttonsWerdenRichtigAngezeigt() throws Exception {
+    void test_buttonsWerdenRichtigAngezeigt() throws Exception {
         new TestServiceBuilder(testService)
                 .withPunktzahl(2)
                 .isFreitext(false)
@@ -120,7 +121,7 @@ public class StudentenControllerTestBearbeitenPageTest {
     @Test
     @DisplayName("Der Pfad /studenten/testBearbeitung/0/0 führt zur TestBearbeitenPage zeigt nicht die Weiter und Zurück Buttons.")
     @WithMockOAuth2User(roles = "STUDENT")
-    public void test_buttonsWerdenNichtAngezeigt() throws Exception {
+    void test_buttonsWerdenNichtAngezeigt() throws Exception {
         new TestServiceBuilder(testService)
                 .withPunktzahl(2)
                 .isMCAufgabe(false)
@@ -134,5 +135,15 @@ public class StudentenControllerTestBearbeitenPageTest {
 
         assertThat(result.getResponse().getContentAsString()).doesNotContain(
                 "Weiter", "Zurück");
+    }
+
+    @Test
+    @DisplayName("Wenn man eine Antwort in die Freitextaufgabe eingibt, wird diese gespeichert.")
+    @WithMockOAuth2User(roles = "STUDENT")
+    void test_antwortWirdGespeichert() throws Exception {
+        mvc.perform(post("/studenten/testBearbeitung/0/0")
+                        .with(csrf())
+                        .param("antwort", "Die Test-Antwort."))
+                .andExpect(status().is3xxRedirection());;
     }
 }
