@@ -2,6 +2,7 @@ package exambyte.controller.organisatoren;
 
 import exambyte.aggregates.organisatoren.TestFormular;
 //import exambyte.aggregates.organisatoren.TestFrage;
+import exambyte.persistence.organisatoren.TestFormRepoImpl;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,13 +19,7 @@ import java.util.Map;
 
 @Controller
 public class OrganisatorenController {
-
-    private Map<Integer, TestFormular> tests = new HashMap<>();
-
-    @ModelAttribute("testForm")
-    public TestFormular initTestFormular(){
-        return new TestFormular(new ArrayList<>());
-    }
+    private TestFormRepoImpl testFormRepo = new TestFormRepoImpl();
 
     @GetMapping("/organisatoren/landingPage")
     @Secured("ROLE_ORGANISATOR")
@@ -42,12 +37,8 @@ public class OrganisatorenController {
     @PostMapping("/organisatoren/testErstellen/addMcFrage")
     @Secured("ROLE_ORGANISATOR")
     public String addMcFrage(RedirectAttributes redirectAttributes,
-                             Model model,
-                             @ModelAttribute TestFormular testForm) {
-        // TODO: Mit AggregateRoot arbeiten
-        //List<TestFrage> testFragen = testForm.getTestFragen();
-
-        redirectAttributes.addFlashAttribute("mcFrageButton", true);
+                             Model model) {
+        testFormRepo.saveTestForm(new TestFormular(new ArrayList<>()));
 
         return "redirect:/organisatoren/testErstellen";
     }
@@ -82,5 +73,11 @@ public class OrganisatorenController {
     @Secured("ROLE_ORGANISATOR")
     public String korrekturStand() {
         return "/organisatoren/KorrekturstandOrganisatoren";
+    }
+
+    @PostMapping("/organisatoren/testErstellen/testFertigstellen")
+    @Secured("ROLE_ORGANISATOR")
+    public String testFertigStellen() {
+        return "redirect:/organisatoren/landingPage";
     }
 }

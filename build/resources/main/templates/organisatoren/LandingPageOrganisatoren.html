@@ -21,33 +21,34 @@
         ExamByte
     </h1>
 
-        <!--TODO:  -->
+
         <h2>Übersicht</h2>
             <form action="/organisatoren/korrekturstand">
-                <button type="submit">Korrekturstand</button>
+                <button class="btnBestaetigen" type="submit">Korrekturstand</button>
             </form>
 
-        <!--TODO:  -->
+
             <form action="/studenten/landingPage/zeigeErgebnis">
-                <button type="submit">Ergebnisübersicht</button>
+                <button class="btnBestaetigen" type="submit">Ergebnisübersicht</button>
             </form>
 
         <!--TODO: th:each Schleife benutzen und alle gespeicherten Tests anzeigen lassen-->
-        <ul>
-            <li><button type="button">Test 1</button></li>
-            <li><button type="button">Test 2</button></li>
-            <li>...</li>
-        </ul>
+        <div class="card">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                    <a href="">Test 1</a>
 
-        <!--TODO:  -->
+                </li>
+                <li class="list-group-item">
+                    <a href="">Test 2</a>
+
+                </li>
+            </ul>
+        </div>
+
+
         <form action="/organisatoren/testErstellen">
-            <button type="submit">+ Test erstellen</button>
+            <button class="btnBestaetigen" type="submit">+ Test erstellen</button>
         </form>
-
-        <!--TODO:  -->
-        <form action="/organisatoren/landingPage">
-            <button type="submit">- Test löschen</button>
-        </form>
-
     </body>
 </html>

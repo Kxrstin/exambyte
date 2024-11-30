@@ -43,12 +43,12 @@
                 <span th:if="${testFrage.istMcFrage()}">
                     <form method="post" th:action="@{/organisatoren/testErstellen/updateTitelMC}">
                         <label for="titelMCID"> Titel: </label>
-                        <input type="text" id="titelMCID" name="titel">
+                        <input type="text" id="titelMCID" th:value="${}">
                     </form>
 
                     <form method="post" th:action="@{/organisatoren/testErstellen/updateFragestellungMC}">
                         <label for="multipleChoiceFrageID">Multiple-Choice Fragestellung:</label>
-                        <input type="text" id="multipleChoiceFrageID" name="multipleChoiceFrage">
+                        <input type="text" id="multipleChoiceFrageID" th:value="${mcFragenstellung}">
                     </form>
 
 
@@ -132,12 +132,11 @@
 
         </span>
 
-    <!--TODO:-->
-    <form method="get" action="/organisatoren/landingPage">
+    <form method="get" th:action="@{/organisatoren/landingPage}">
         <button type="submit">Test fertigstellen</button>
     </form>
 
-    <form method="get" action="organisatoren/landingPage">
+    <form method="get" th:action="@{/organisatoren/landingPage}">
         <button type="submit">Zurück zur Startseite</button>
     </form>
     </body>

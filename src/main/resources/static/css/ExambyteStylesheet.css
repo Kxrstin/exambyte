@@ -160,3 +160,7 @@ li {
     justify-content: space-between;
     width: 100%;
 }
+
+.entfernePunkt {
+    list-style-type: none;
+}

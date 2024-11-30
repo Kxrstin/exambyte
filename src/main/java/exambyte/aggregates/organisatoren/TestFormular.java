@@ -7,7 +7,6 @@ import java.util.List;
 
 @AggregateRoot
 public class TestFormular {
-    // TODO: addTestfrage
     private List<TestFrage> testFragen;
 
     public TestFormular(List<TestFrage> testFragen){
@@ -21,6 +20,9 @@ public class TestFormular {
         testFragen.set(secPos, testFrage);
     }
 
+    public void addTestfrage(TestFrage testFrage) {
+        testFragen.add(testFrage);
+    }
     public List<TestFrage> getTestFragen(){
         return testFragen;
     }

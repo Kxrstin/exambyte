@@ -82,4 +82,12 @@ public class OrganisatorenControllerTest {
         mvc.perform(post("/organisatoren/testErstellen/updatePunkteMC").with(csrf()))
                 .andExpect(redirectedUrl("/organisatoren/testErstellen"));
     }
+
+    @Test
+    @WithMockOAuth2User(login = "JoeSchmoe", roles = "ORGANISATOR")
+    @DisplayName("Fertigstellen Button leitet einen auf Startseite weiter")
+    void test_09() throws Exception {
+        mvc.perform(post("/organisatoren/testErstellen/testFertigstellen"))
+                .andExpect(redirectedUrl("/organisatoren/landingPage"));
+    }
 }
