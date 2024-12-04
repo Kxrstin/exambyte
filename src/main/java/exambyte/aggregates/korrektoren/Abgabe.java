@@ -8,14 +8,16 @@ public class Abgabe {
     private final String studiAntwort;
     private final String aufgabe;
     private final String testname;
-    private String feedback = "";
+    private String feedback;
     private Integer punktzahl;
+    private final int maxPunktzahl;
 
-    public Abgabe(int id, String testname, String aufgabe, String studiAntwort) {
+    public Abgabe(int id, String testname, String aufgabe, String studiAntwort, int maxPunktzahl) {
         this.id = id;
         this.aufgabe = aufgabe;
         this.studiAntwort = studiAntwort;
         this.testname = testname;
+        this.maxPunktzahl = maxPunktzahl;
     }
 
     public int getId() {
@@ -42,7 +44,15 @@ public class Abgabe {
         return testname;
     }
 
+    public int getMaxPunktzahl() {
+        return maxPunktzahl;
+    }
+
     public void setPunktzahl(Integer punktzahl) {
         this.punktzahl = punktzahl;
+    }
+
+    public Integer getPunktzahl() {
+        return punktzahl;
     }
 }

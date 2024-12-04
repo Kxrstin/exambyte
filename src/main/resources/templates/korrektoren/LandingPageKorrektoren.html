@@ -18,17 +18,14 @@
         ExamByte - Übersicht
     </h1>
 
-    <h2> Zu korrigierende Aufgaben: </h2>
-    <ul th:remove="all-but-first">
-        <li class="list-group-item" th:each="aufgabe : ${aufgaben}">
-            <form th:action="@{/korrektoren/landingPage/zeigeAufgaben/{aufgabe}(aufgabe=${aufgabe})}" class="form-group">
-                <a th:href="@{/korrektoren/landingPage/zeigeAufgabe/{aufgabe}(aufgabe=${aufgabe})}">
-                    <span th:text="${aufgabe}"> Test 1</span></a> <br>
+    <h2> Zu korrigierende Tests: </h2>
+    <ul>
+        <li class="list-group-item" th:each="testname : ${testnamen}">
+            <form th:action="@{/korrektoren/landingPage/zeigeAufgaben/{testname}(testname=${testname})}" class="form-group">
+                <a th:href="@{/korrektoren/landingPage/zeigeAufgaben/{testname}(testname=${testname})}">
+                    <span th:text="${testname}"> Test 1</span></a> <br>
             </form>
         </li>
-
-        <li class="list-group-item"> <a href="/studenten/landingPage/zeigeTest/2">Test 2</a></li>
-        <li class="list-group-item"> <a href="/studenten/landingPage/zeigeTest/3">Test 3</a></li>
     </ul>
 
 </body>

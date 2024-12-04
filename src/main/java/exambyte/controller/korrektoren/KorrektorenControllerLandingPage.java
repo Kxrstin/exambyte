@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 
@@ -23,10 +25,56 @@ public class KorrektorenControllerLandingPage {
     @Secured("ROLE_KORREKTOR")
     public String landingPage(Model model) {
         if(abgabenService.getTestnamen() == null){
-            model.addAttribute("aufgaben", new ArrayList<>());
+            model.addAttribute("testnamen", new ArrayList<>());
         } else {
-            model.addAttribute("aufgaben", abgabenService.getTestnamen());
+            model.addAttribute("testnamen", abgabenService.getTestnamen());
         }
         return "korrektoren/LandingPageKorrektoren";
+    }
+
+    @GetMapping("/korrektoren/landingPage/zeigeAufgaben/{testname}")
+    @Secured("ROLE_KORREKTOR")
+    public String aufgaben(Model model, @PathVariable("testname") String testname) {
+        model.addAttribute("testname", testname);
+        if(abgabenService.getTestnamen() == null){
+            model.addAttribute("aufgaben", new ArrayList<>());
+        } else {
+            model.addAttribute("aufgaben", abgabenService.getAufgabenVonTest(testname));
+        }
+        return "korrektoren/AufgabenPageKorrektoren";
+    }
+
+    @GetMapping("/korrektoren/landingPage/zeigeAbgaben/{testname}/{aufgabe}")
+    @Secured("ROLE_KORREKTOR")
+    public String abgaben(Model model, @PathVariable("aufgabe") String aufgabe, @PathVariable("testname") String testname) {
+        if(abgabenService.getAbgabenMitTestnameAufgabe(testname, aufgabe) == null){
+            model.addAttribute("abgaben", new ArrayList<>());
+        } else {
+            model.addAttribute("abgaben", abgabenService.getAbgabenMitTestnameAufgabe(testname, aufgabe));
+        }
+        return "korrektoren/AbgabenPageKorrektoren";
+    }
+
+    @GetMapping("/korrektoren/landingPage/zeigeAbgabe/{abgabeId}")
+    @Secured("ROLE_KORREKTOR")
+    public String abgabeVonStudi(Model model, @PathVariable("abgabeId") int abgabeId) {
+        if(!abgabenService.containsAbgabe(abgabeId)){
+            model.addAttribute("abgabeVorhanden", false);
+        } else {
+            model.addAttribute("abgabeVorhanden", true);
+            model.addAttribute("abgabe", abgabenService.getAbgabe(abgabeId));
+
+        }
+        return "korrektoren/AbgabeVonStudiPageKorrektoren";
+    }
+
+    @PostMapping("/korrektoren/landingPage/zeigeAbgabe/{abgabeId}")
+    @Secured("ROLE_KORREKTOR")
+    public String korrekturAbschicken(@PathVariable("abgabeId") int abgabeId, @RequestParam(name="feedbackText", defaultValue="") String feedback, @RequestParam(name="punkteVergabe", defaultValue="-1") Integer punkteVergabe) {
+        if(!feedback.equals("") && punkteVergabe >= 0) {
+            abgabenService.addKorrektur(punkteVergabe, feedback, abgabeId);
+        }
+
+        return "redirect:/korrektoren/landingPage/zeigeAbgaben/" + abgabenService.getTestname(abgabeId) + "/" + abgabenService.getAufgabe(abgabeId);
     }
 }
