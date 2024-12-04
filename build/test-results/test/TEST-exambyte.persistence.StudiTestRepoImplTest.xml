@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="exambyte.persistence.StudiTestRepoImplTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2024-12-04T17:05:22" hostname="KERSTIN-SURFACE" time="0.123">
+  <properties/>
+  <testcase name="Der StudiTest mit ID = 1627 kann gespeichert und geladen werden" classname="exambyte.persistence.StudiTestRepoImplTest" time="0.099"/>
+  <testcase name="Der StudiTest mit ID = 1627 kann gespeichert werden und die hasTestWithId Methode funktioniert." classname="exambyte.persistence.StudiTestRepoImplTest" time="0.002"/>
+  <testcase name="Die loadTestList beinhaltet die gespeicherten Tests." classname="exambyte.persistence.StudiTestRepoImplTest" time="0.016"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

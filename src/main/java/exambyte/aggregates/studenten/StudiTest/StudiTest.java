@@ -19,10 +19,11 @@ public final class StudiTest {
 
     public StudiTest(TestForm testForm, List<TestAufgabe> testAufgaben) {
         this.testForm = testForm;
-        this.testAufgaben.addAll(testAufgaben);
-
-        for (TestAufgabe testAufgabe : testAufgaben) {
-            aufgabeMitAntwort.put(testAufgabe, new StudiAntwort());
+        if(testAufgaben != null) {
+            this.testAufgaben.addAll(testAufgaben);
+            for (TestAufgabe testAufgabe : testAufgaben) {
+                aufgabeMitAntwort.put(testAufgabe, new StudiAntwort());
+            }
         }
     }
 
