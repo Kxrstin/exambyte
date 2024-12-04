@@ -112,4 +112,8 @@ public class TestFragenService {
     public int getId(int testId) {
         return testRepo.loadTestWithId(testId).getId();
     }
+
+    public boolean isAbgelaufen(int testId) {
+        return getAbgelaufeneTests().contains(getTest(testId));
+    }
 }

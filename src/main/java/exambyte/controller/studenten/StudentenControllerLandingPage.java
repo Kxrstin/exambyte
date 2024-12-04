@@ -53,6 +53,8 @@ public class StudentenControllerLandingPage {
         model.addAttribute("endzeitpunkt", testService.parseEnde(testId));
         model.addAttribute("ergebniszeitpunkt", testService.parseErgebnis(testId));
         model.addAttribute("id", testService.getId(testId));
+        model.addAttribute("isAbgelaufen", testService.isAbgelaufen(testId));
+
         return "studenten/TestPageStudenten";
     }
 }

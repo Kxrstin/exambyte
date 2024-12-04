@@ -26,7 +26,12 @@
     <li class="list-group-item" th:text="${ergebniszeitpunkt}"> Ergebniszeitpunkt: 28.11.2024, 12:00 Uhr</li>
 
     <form th:action="@{/studenten/testBearbeitung/{id}(id=${id})}">
-        <button class="btn btn-dark" type="submit"> Test bearbeiten </button>
+        <span th:unless="${isAbgelaufen}">
+            <button class="btn btn-dark" type="submit"> Test bearbeiten </button>
+        </span>
+        <span th:if="${isAbgelaufen}">
+            <button class="btn btn-dark" type="submit"> Test anschauen </button>
+        </span>
     </form>
     </body>
 </html>
