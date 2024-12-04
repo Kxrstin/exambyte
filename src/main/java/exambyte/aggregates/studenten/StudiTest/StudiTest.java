@@ -2,6 +2,7 @@ package exambyte.aggregates.studenten.StudiTest;
 
 import exambyte.aggregates.studenten.StudiAntwort.StudiAntwort;
 import exambyte.annotations.AggregateRoot;
+import org.springframework.cglib.core.Local;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -63,6 +64,22 @@ public final class StudiTest {
             return ((MCAufgabe) testAufgaben.get(nr)).getAntwortMoeglichkeiten();
         }
         return List.of();
+    }
+
+
+    // Zeitpunkte
+    public boolean isBearbeitbar(LocalDate now) {
+        if (now.isBefore(testForm.getEndzeitpunkt()) && now.isAfter(testForm.getStartzeitpunkt())) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean isAbgelaufen(LocalDate now) {
+        if (now.isAfter(testForm.getEndzeitpunkt()) && now.isAfter(testForm.getStartzeitpunkt())) {
+            return true;
+        }
+        return false;
     }
 
     // TestAntworten

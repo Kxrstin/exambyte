@@ -23,12 +23,19 @@ public class StudentenControllerLandingPage {
     @GetMapping("/studenten/landingPage")
     @Secured("ROLE_STUDENT")
     public String landingpage(Model model) {
-        if(testService.getTestList() == null) {
-            model.addAttribute("tests", new ArrayList<StudiTest>());
+        if(testService.getBearbeitbareTests() == null) {
+            model.addAttribute("bearbeitbareTests", new ArrayList<StudiTest>());
             model.addAttribute("guterKurs", "Guter Kurs");
         } else {
-            String zulassungsstatus = testService.zulassungsStatus(testService.getTestList());
-            model.addAttribute("tests", testService.getTestList());
+            model.addAttribute("bearbeitbareTests", testService.getBearbeitbareTests());
+        }
+
+        if(testService.getAbgelaufeneTests() == null) {
+            model.addAttribute("abgelaufeneTests", new ArrayList<StudiTest>());
+            model.addAttribute("guterKurs", "Guter Kurs");
+        } else {
+            String zulassungsstatus = testService.zulassungsStatus(testService.getAbgelaufeneTests());
+            model.addAttribute("abgelaufeneTests", testService.getAbgelaufeneTests());
             model.addAttribute(zulassungsstatus, true);
         }
         return "studenten/LandingPageStudenten";

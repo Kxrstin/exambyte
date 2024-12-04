@@ -50,16 +50,26 @@
     <h3> Zu bearbeitende Tests: </h3>
 
     <ul th:remove="all-but-first">
-        <li class="list-group-item" th:each="test : ${tests}">
+        <li class="list-group-item" th:each="test : ${bearbeitbareTests}">
             <form th:action="@{/studenten/landingPage/zeigeErgebnis/{id}(id=${test.getId()})}" class="form-group">
                 <a th:href="@{/studenten/landingPage/zeigeTest/{id}(id=${test.getId()})}">
                     <span th:text="${test.getTitel()}"> Test 1</span></a> <br>
-                    <button class="btnStudi" type="submit"> Ergebnis </button>
             </form>
         </li>
 
         <li class="list-group-item"> <a href="/studenten/landingPage/zeigeTest/2">Test 2</a></li>
         <li class="list-group-item"> <a href="/studenten/landingPage/zeigeTest/3">Test 3</a></li>
+    </ul>
+    <br>
+    <h3> Abgelaufene Tests: </h3>
+    <ul th:remove="all-but-first">
+        <li class="list-group-item" th:each="test : ${abgelaufeneTests}">
+            <form th:action="@{/studenten/landingPage/zeigeErgebnis/{id}(id=${test.getId()})}" class="form-group">
+                <a th:href="@{/studenten/landingPage/zeigeTest/{id}(id=${test.getId()})}">
+                    <span th:text="${test.getTitel()}"> Test 1</span></a> <br>
+                <button class="btnStudi" type="submit"> Ergebnis </button>
+            </form>
+        </li>
     </ul>
     </body>
 </html>

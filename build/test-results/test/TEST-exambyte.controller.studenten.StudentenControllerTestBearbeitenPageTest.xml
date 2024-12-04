@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="exambyte.controller.studenten.StudentenControllerTestBearbeitenPageTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2024-12-04T12:05:50" hostname="KERSTIN-SURFACE" time="0.918">
+<testsuite name="exambyte.controller.studenten.StudentenControllerTestBearbeitenPageTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2024-12-04T13:23:30" hostname="KERSTIN-SURFACE" time="0.184">
   <properties/>
-  <testcase name="Der Pfad /studenten/testBearbeitung/0/1 führt zur TestBearbeitenPage zeigt die Weiter und Zurück Buttons." classname="exambyte.controller.studenten.StudentenControllerTestBearbeitenPageTest" time="0.59"/>
-  <testcase name="Wenn man eine Antwort in die Freitextaufgabe eingibt, wird diese gespeichert." classname="exambyte.controller.studenten.StudentenControllerTestBearbeitenPageTest" time="0.07"/>
-  <testcase name="Der Pfad /studenten/testBearbeitung/0/0 führt zur TestBearbeitenPage und zeigt die Fragestellung, die Antwortmöglichkeiten und die Punktzahl der MC Aufgabe." classname="exambyte.controller.studenten.StudentenControllerTestBearbeitenPageTest" time="0.109"/>
-  <testcase name="Der Pfad /studenten/testBearbeitung/0/0 führt für Nicht-Studenten zur Github Anmeldung." classname="exambyte.controller.studenten.StudentenControllerTestBearbeitenPageTest" time="0.045"/>
-  <testcase name="Der Pfad /studenten/testBearbeitung/0/0 führt zur TestBearbeitenPage und zeigt die Fragestellung und die Punktzahl der Freitextaufgabe." classname="exambyte.controller.studenten.StudentenControllerTestBearbeitenPageTest" time="0.028"/>
-  <testcase name="Der Pfad /studenten/testBearbeitung/0/0 führt zur TestBearbeitenPage" classname="exambyte.controller.studenten.StudentenControllerTestBearbeitenPageTest" time="0.021"/>
-  <testcase name="Der Pfad /studenten/testBearbeitung/0/0 führt zur TestBearbeitenPage zeigt nicht die Weiter und Zurück Buttons." classname="exambyte.controller.studenten.StudentenControllerTestBearbeitenPageTest" time="0.024"/>
+  <testcase name="Der Pfad /studenten/testBearbeitung/0/1 führt zur TestBearbeitenPage zeigt die Weiter und Zurück Buttons." classname="exambyte.controller.studenten.StudentenControllerTestBearbeitenPageTest" time="0.046"/>
+  <testcase name="Wenn man eine Antwort in die Freitextaufgabe eingibt, wird diese gespeichert." classname="exambyte.controller.studenten.StudentenControllerTestBearbeitenPageTest" time="0.041"/>
+  <testcase name="Der Pfad /studenten/testBearbeitung/0/0 führt zur TestBearbeitenPage und zeigt die Fragestellung, die Antwortmöglichkeiten und die Punktzahl der MC Aufgabe." classname="exambyte.controller.studenten.StudentenControllerTestBearbeitenPageTest" time="0.027"/>
+  <testcase name="Der Pfad /studenten/testBearbeitung/0/0 führt für Nicht-Studenten zur Github Anmeldung." classname="exambyte.controller.studenten.StudentenControllerTestBearbeitenPageTest" time="0.009"/>
+  <testcase name="Der Pfad /studenten/testBearbeitung/0/0 führt zur TestBearbeitenPage und zeigt die Fragestellung und die Punktzahl der Freitextaufgabe." classname="exambyte.controller.studenten.StudentenControllerTestBearbeitenPageTest" time="0.014"/>
+  <testcase name="Der Pfad /studenten/testBearbeitung/0/0 führt zur TestBearbeitenPage" classname="exambyte.controller.studenten.StudentenControllerTestBearbeitenPageTest" time="0.016"/>
+  <testcase name="Der Pfad /studenten/testBearbeitung/0/0 führt zur TestBearbeitenPage zeigt nicht die Weiter und Zurück Buttons." classname="exambyte.controller.studenten.StudentenControllerTestBearbeitenPageTest" time="0.017"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

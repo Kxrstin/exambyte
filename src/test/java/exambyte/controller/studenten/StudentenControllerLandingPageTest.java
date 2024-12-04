@@ -41,7 +41,7 @@ public class StudentenControllerLandingPageTest {
     @DisplayName("Die Route /landingPage führt zum Öffnen der LandingPageStudenten.html Seite und es gibt einen 200 Status, wenn man Student ist.")
     @WithMockOAuth2User(roles = "STUDENT")
     void test_landingPageStudent() throws Exception {
-        when(testService.getTestList()).thenReturn(null);
+        when(testService.getBearbeitbareTests()).thenReturn(null);
         mvc.perform(get("/studenten/landingPage"))
              .andExpect(view().name("studenten/LandingPageStudenten"))
              .andExpect(status().isOk());
@@ -71,7 +71,7 @@ public class StudentenControllerLandingPageTest {
     @DisplayName("Auf der LandingPage soll eine Liste von Tests angezeigt werden")
     @WithMockOAuth2User(roles = "STUDENT")
     void test_testsAnzeigen() throws Exception {
-        when(testService.getTestList()).thenReturn(List.of(studiTest));
+        when(testService.getBearbeitbareTests()).thenReturn(List.of(studiTest));
         when(testService.zulassungsStatus(any())).thenReturn("guterKurs");
         String textHtml = mvc.perform(get("/studenten/landingPage"))
                 .andExpect(status().isOk())
@@ -97,7 +97,7 @@ public class StudentenControllerLandingPageTest {
     @DisplayName("Wenn man alle Tests bislang bestanden hat, soll guter Kurs neben Zulassungsstatus stehen")
     @WithMockOAuth2User(roles = "STUDENT")
     void test_zulassungsstatus() throws Exception {
-        when(testService.getTestList()).thenReturn(List.of(studiTest));
+        when(testService.getBearbeitbareTests()).thenReturn(List.of(studiTest));
         when(testService.zulassungsStatus(any())).thenReturn("guterKurs");
         MvcResult result = mvc.perform(get("/studenten/landingPage"))
                 .andExpect(status().isOk())
@@ -110,7 +110,7 @@ public class StudentenControllerLandingPageTest {
     @DisplayName("Wenn man 3 Tests nicht bestanden hat, soll ... mehr als 2 Tests nicht bestanden ... ausgegeben werden.")
     @WithMockOAuth2User(roles = "STUDENT")
     void test_dreiTestsNichtBestanden() throws Exception {
-        when(testService.getTestList()).thenReturn(List.of(studiTest));
+        when(testService.getBearbeitbareTests()).thenReturn(List.of(studiTest));
         when(testService.zulassungsStatus(any())).thenReturn("fail");
         MvcResult result = mvc.perform(get("/studenten/landingPage"))
                 .andExpect(status().isOk())
@@ -123,7 +123,7 @@ public class StudentenControllerLandingPageTest {
     @DisplayName("Wenn man 1 Mal einen Test nicht bestanden hat, soll ... vorsicht ... ausgegeben werden.")
     @WithMockOAuth2User(roles = "STUDENT")
     void test_einMalNichtBestanden() throws Exception {
-        when(testService.getTestList()).thenReturn(List.of(studiTest));
+        when(testService.getBearbeitbareTests()).thenReturn(List.of(studiTest));
         when(testService.zulassungsStatus(any())).thenReturn("vorsicht");
         MvcResult result = mvc.perform(get("/studenten/landingPage"))
                 .andExpect(status().isOk())

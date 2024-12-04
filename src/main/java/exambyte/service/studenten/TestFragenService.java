@@ -1,9 +1,9 @@
 package exambyte.service.studenten;
 
-import exambyte.aggregates.studenten.StudiTest.MCAufgabe;
 import exambyte.aggregates.studenten.StudiTest.StudiTest;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
@@ -19,11 +19,22 @@ public class TestFragenService {
     public StudiTest getTest(int testId) {
         return testRepo.loadTestWithId(testId);
     }
+
     public boolean hasTestWithId(int testId) {
        return testRepo.hasTestWithId(testId);
     }
-    public List<StudiTest> getTestList() {
-        return testRepo.loadTestList();
+    public List<StudiTest> getBearbeitbareTests() {
+        LocalDate now = LocalDate.now();
+        return testRepo.loadTestList().stream()
+                .filter(test -> test.isBearbeitbar(now))
+                .toList();
+    }
+
+    public List<StudiTest> getAbgelaufeneTests() {
+        LocalDate now = LocalDate.now();
+        return testRepo.loadTestList().stream()
+                .filter(test -> test.isAbgelaufen(now))
+                .toList();
     }
 
 

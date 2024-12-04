@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="exambyte.controller.organisatoren.OrganisatorenControllerTest" tests="9" skipped="0" failures="2" errors="0" timestamp="2024-12-04T12:05:44" hostname="KERSTIN-SURFACE" time="2.569">
+<testsuite name="exambyte.controller.organisatoren.OrganisatorenControllerTest" tests="9" skipped="0" failures="2" errors="0" timestamp="2024-12-04T13:23:20" hostname="KERSTIN-SURFACE" time="1.893">
   <properties/>
-  <testcase name="Die Organisatoren LandingPage ist unter /organisatoren/landingPage erreichbar" classname="exambyte.controller.organisatoren.OrganisatorenControllerTest" time="2.241"/>
-  <testcase name="Test Erstellen Seite ist unter /organisatoren/testErstellen erreichbar" classname="exambyte.controller.organisatoren.OrganisatorenControllerTest" time="0.16">
+  <testcase name="Die Organisatoren LandingPage ist unter /organisatoren/landingPage erreichbar" classname="exambyte.controller.organisatoren.OrganisatorenControllerTest" time="1.543"/>
+  <testcase name="Test Erstellen Seite ist unter /organisatoren/testErstellen erreichbar" classname="exambyte.controller.organisatoren.OrganisatorenControllerTest" time="0.163">
     <failure message="jakarta.servlet.ServletException: Request processing failed: org.thymeleaf.exceptions.TemplateProcessingException: Exception evaluating SpringEL expression: &quot;testForm.getTestFragen()&quot; (template: &quot;/organisatoren/TestErstellenPageOrganisatoren&quot; - line 38, col 17)" type="jakarta.servlet.ServletException">jakarta.servlet.ServletException: Request processing failed: org.thymeleaf.exceptions.TemplateProcessingException: Exception evaluating SpringEL expression: &quot;testForm.getTestFragen()&quot; (template: &quot;/organisatoren/TestErstellenPageOrganisatoren&quot; - line 38, col 17)
 	at app//org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1022)
 	at app//org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:903)
@@ -128,13 +128,13 @@ Caused by: org.springframework.expression.spel.SpelEvaluationException: EL1011E:
 	... 109 more
 </failure>
   </testcase>
-  <testcase name="Korrekturstand Seite ist unter /organisatoren/korrekturstand erreichbar" classname="exambyte.controller.organisatoren.OrganisatorenControllerTest" time="0.015"/>
-  <testcase name="MC-Frage Seite redirected zu /organisatoren/testErstellen" classname="exambyte.controller.organisatoren.OrganisatorenControllerTest" time="0.059"/>
-  <testcase name="Freitext-Frage Seite redirected zu /organisatoren/testErstellen" classname="exambyte.controller.organisatoren.OrganisatorenControllerTest" time="0.017"/>
-  <testcase name="Hinzufügen eines Titels bei MC-Frage redirected zu /organisatoren/testErstellen" classname="exambyte.controller.organisatoren.OrganisatorenControllerTest" time="0.008"/>
-  <testcase name="Hinzufügen einer Fragestellung bei MC-Frage redirected zu /organisatoren/testErstellen" classname="exambyte.controller.organisatoren.OrganisatorenControllerTest" time="0.011"/>
-  <testcase name="Hinzufügen einer Punktzahl bei MC-Frage redirected zu /organisatoren/testErstellen" classname="exambyte.controller.organisatoren.OrganisatorenControllerTest" time="0.008"/>
-  <testcase name="Fertigstellen Button leitet einen auf Startseite weiter" classname="exambyte.controller.organisatoren.OrganisatorenControllerTest" time="0.017">
+  <testcase name="Korrekturstand Seite ist unter /organisatoren/korrekturstand erreichbar" classname="exambyte.controller.organisatoren.OrganisatorenControllerTest" time="0.017"/>
+  <testcase name="MC-Frage Seite redirected zu /organisatoren/testErstellen" classname="exambyte.controller.organisatoren.OrganisatorenControllerTest" time="0.044"/>
+  <testcase name="Freitext-Frage Seite redirected zu /organisatoren/testErstellen" classname="exambyte.controller.organisatoren.OrganisatorenControllerTest" time="0.013"/>
+  <testcase name="Hinzufügen eines Titels bei MC-Frage redirected zu /organisatoren/testErstellen" classname="exambyte.controller.organisatoren.OrganisatorenControllerTest" time="0.014"/>
+  <testcase name="Hinzufügen einer Fragestellung bei MC-Frage redirected zu /organisatoren/testErstellen" classname="exambyte.controller.organisatoren.OrganisatorenControllerTest" time="0.018"/>
+  <testcase name="Hinzufügen einer Punktzahl bei MC-Frage redirected zu /organisatoren/testErstellen" classname="exambyte.controller.organisatoren.OrganisatorenControllerTest" time="0.012"/>
+  <testcase name="Fertigstellen Button leitet einen auf Startseite weiter" classname="exambyte.controller.organisatoren.OrganisatorenControllerTest" time="0.051">
     <failure message="java.lang.AssertionError: Redirected URL expected:&lt;/organisatoren/landingPage&gt; but was:&lt;null&gt;" type="java.lang.AssertionError">java.lang.AssertionError: Redirected URL expected:&lt;/organisatoren/landingPage&gt; but was:&lt;null&gt;
 	at org.springframework.test.util.AssertionErrors.fail(AssertionErrors.java:59)
 	at org.springframework.test.util.AssertionErrors.assertEquals(AssertionErrors.java:122)
@@ -146,9 +146,9 @@ Caused by: org.springframework.expression.spel.SpelEvaluationException: EL1011E:
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
 </failure>
   </testcase>
-  <system-out><![CDATA[13:05:38.798 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [exambyte.controller.organisatoren.OrganisatorenControllerTest]: OrganisatorenControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-13:05:39.193 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration exambyte.ExambyteProjektApplication for test class exambyte.controller.organisatoren.OrganisatorenControllerTest
-2024-12-04T13:05:46.837+01:00 ERROR 10496 --- [ExambyteProjekt] [    Test worker] org.thymeleaf.TemplateEngine             : [THYMELEAF][Test worker] Exception processing template "/organisatoren/TestErstellenPageOrganisatoren": Exception evaluating SpringEL expression: "testForm.getTestFragen()" (template: "/organisatoren/TestErstellenPageOrganisatoren" - line 38, col 17)
+  <system-out><![CDATA[14:23:16.358 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [exambyte.controller.organisatoren.OrganisatorenControllerTest]: OrganisatorenControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+14:23:16.667 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration exambyte.ExambyteProjektApplication for test class exambyte.controller.organisatoren.OrganisatorenControllerTest
+2024-12-04T14:23:21.635+01:00 ERROR 5136 --- [ExambyteProjekt] [    Test worker] org.thymeleaf.TemplateEngine             : [THYMELEAF][Test worker] Exception processing template "/organisatoren/TestErstellenPageOrganisatoren": Exception evaluating SpringEL expression: "testForm.getTestFragen()" (template: "/organisatoren/TestErstellenPageOrganisatoren" - line 38, col 17)
 
 org.thymeleaf.exceptions.TemplateProcessingException: Exception evaluating SpringEL expression: "testForm.getTestFragen()" (template: "/organisatoren/TestErstellenPageOrganisatoren" - line 38, col 17)
 	at org.thymeleaf.spring6.expression.SPELVariableExpressionEvaluator.evaluate(SPELVariableExpressionEvaluator.java:292) ~[thymeleaf-spring6-3.1.2.RELEASE.jar:3.1.2.RELEASE]
@@ -356,7 +356,7 @@ MockHttpServletRequest:
        Parameters = {}
           Headers = []
              Body = null
-    Session Attrs = {org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository.CSRF_TOKEN=org.springframework.security.web.csrf.DefaultCsrfToken@6f525793, SPRING_SECURITY_CONTEXT=SecurityContextImpl [Authentication=OAuth2AuthenticationToken [Principal=Name: [666666], Granted Authorities: [[ROLE_ORGANISATOR]], User Attributes: [{login=JoeSchmoe, id=666666}], Credentials=[PROTECTED], Authenticated=true, Details=null, Granted Authorities=[ROLE_ORGANISATOR]]]}
+    Session Attrs = {org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository.CSRF_TOKEN=org.springframework.security.web.csrf.DefaultCsrfToken@1a4323ac, SPRING_SECURITY_CONTEXT=SecurityContextImpl [Authentication=OAuth2AuthenticationToken [Principal=Name: [666666], Granted Authorities: [[ROLE_ORGANISATOR]], User Attributes: [{login=JoeSchmoe, id=666666}], Credentials=[PROTECTED], Authenticated=true, Details=null, Granted Authorities=[ROLE_ORGANISATOR]]]}
 
 Handler:
              Type = null
