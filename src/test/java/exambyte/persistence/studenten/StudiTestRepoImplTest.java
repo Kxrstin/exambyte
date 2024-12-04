@@ -1,8 +1,7 @@
-package exambyte.persistence;
+package exambyte.persistence.studenten;
 
 import exambyte.aggregates.studenten.StudiTest.StudiTest;
 import exambyte.aggregates.studenten.StudiTest.TestForm;
-import exambyte.persistence.studenten.StudiTestRepoImpl;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
