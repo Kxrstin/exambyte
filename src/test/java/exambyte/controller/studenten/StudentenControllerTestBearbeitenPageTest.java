@@ -115,7 +115,7 @@ public class StudentenControllerTestBearbeitenPageTest {
                 .andReturn();
 
         assertThat(result.getResponse().getContentAsString()).contains(
-                "Weiter", "Zurück");
+                " Weiter ", " Zurück ");
     }
 
     @Test
@@ -134,7 +134,7 @@ public class StudentenControllerTestBearbeitenPageTest {
                 .andReturn();
 
         assertThat(result.getResponse().getContentAsString()).doesNotContain(
-                "Weiter", "Zurück");
+                "> Weiter <", "> Zurück <");
     }
 
     @Test

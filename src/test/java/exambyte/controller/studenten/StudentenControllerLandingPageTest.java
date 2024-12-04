@@ -58,15 +58,6 @@ public class StudentenControllerLandingPageTest {
     }
 
     @Test
-    @DisplayName("Wenn der Ergebnis-Button auf der Startseite gedrückt wird, wird man weitergeleitet auf die ErgebnisPage, vorausgesetzt man ist Student.")
-    @WithMockOAuth2User(roles = "STUDENT")
-    void test_ergebnisPageAnzeigen() throws Exception {
-        mvc.perform(get("/studenten/landingPage/zeigeErgebnis/1"))
-                .andExpect(status().isOk())
-                .andExpect(view().name("studenten/ErgebnisPageStudenten"));
-    }
-
-    @Test
     @DisplayName("Wenn ein nicht-Student auf die URL /studenten/landingPage/zeigeErgebnis zugreifen will, wird er zu GitHub Anmeldung redirected.")
     void test_ergebnisPageAnzeigenNichtStudent() throws Exception {
         MvcResult result = mvc.perform(get("/studenten/landingPage/zeigeErgebnis/1"))

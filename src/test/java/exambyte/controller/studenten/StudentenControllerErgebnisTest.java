@@ -4,12 +4,15 @@ import exambyte.aggregates.studenten.StudiTest.FreitextAufgabe;
 import exambyte.aggregates.studenten.StudiTest.StudiTest;
 import exambyte.aggregates.studenten.StudiTest.TestForm;
 import exambyte.helper.WithMockOAuth2User;
+import exambyte.security.MethodSecurityConfig;
+import exambyte.security.SecurityConfig;
 import exambyte.service.studenten.TestFragenService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Import;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
@@ -23,6 +26,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 @WebMvcTest(StudentenControllerErgebnis.class)
+@Import({SecurityConfig.class, MethodSecurityConfig.class})
 public class StudentenControllerErgebnisTest {
     private TestForm testForm = new TestForm("Algorithmen und Datenstrukturen Test Woche 5", LocalDate.of(2024, 11, 21), LocalDate.of(2024, 11, 30), LocalDate.of(2024, 12, 2), 0);
     private StudiTest studiTest = new StudiTest(testForm, List.of(new FreitextAufgabe("Nenne pro Argumente der Onion Architektur", 1)));
@@ -38,7 +42,7 @@ public class StudentenControllerErgebnisTest {
     @WithMockOAuth2User(roles = "STUDENT")
     void test_landingPageStudent() throws Exception {
         when(testService.hasTestWithId(0)).thenReturn(true);
-        when(testService.getTest(0)).thenReturn(studiTest);
+        when(testService.parseErgebnis(0)).thenReturn("02.12.2024");
         MvcResult result = mvc.perform(get("/studenten/landingPage/zeigeErgebnis/0"))
                 .andExpect(view().name("studenten/ErgebnisPageStudenten"))
                 .andExpect(status().isOk())

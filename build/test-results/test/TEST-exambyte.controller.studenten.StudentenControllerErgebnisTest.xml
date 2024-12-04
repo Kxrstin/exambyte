@@ -1,13 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="exambyte.controller.studenten.StudentenControllerErgebnisTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-12-04T11:05:15" hostname="KERSTIN-SURFACE" time="1.299">
+<testsuite name="exambyte.controller.studenten.StudentenControllerErgebnisTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2024-12-04T12:05:56" hostname="KERSTIN-SURFACE" time="0.069">
   <properties/>
-  <testcase name="Die Route /zeigeErgebnis/0 führt zum Öffnen der ErgebnisPage.html Seite und es gibt einen 200 Status, wenn man Student ist." classname="exambyte.controller.studenten.StudentenControllerErgebnisTest" time="1.299"/>
-  <system-out><![CDATA[12:05:06.227 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [exambyte.controller.studenten.StudentenControllerErgebnisTest]: StudentenControllerErgebnisTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-12:05:06.572 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration exambyte.ExambyteProjektApplication for test class exambyte.controller.studenten.StudentenControllerErgebnisTest
-]]></system-out>
-  <system-err><![CDATA[WARNING: A Java agent has been loaded dynamically (C:\Users\kerst\.gradle\caches\modules-2\files-2.1\net.bytebuddy\byte-buddy-agent\1.14.19\154da3a65b4f4a909d3e5bdec55d1b2b4cbb6ce1\byte-buddy-agent-1.14.19.jar)
-WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
-WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
-WARNING: Dynamic loading of agents will be disallowed by default in a future release
-]]></system-err>
+  <testcase name="Die Route /zeigeErgebnis/0 führt zum Öffnen der ErgebnisPage.html Seite und es gibt einen 200 Status, wenn man Student ist." classname="exambyte.controller.studenten.StudentenControllerErgebnisTest" time="0.042"/>
+  <testcase name="Die Route /zeigeErgebnis/0 führt zur GitHub Anmeldung und es gibt einen 3XX Status, wenn man kein Student ist." classname="exambyte.controller.studenten.StudentenControllerErgebnisTest" time="0.025"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
 </testsuite>

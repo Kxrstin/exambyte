@@ -19,7 +19,8 @@ import java.util.Map;
 
 @Controller
 public class OrganisatorenController {
-    private TestFormRepoImpl testFormRepo = new TestFormRepoImpl();
+    //TODO über Service mit Repo Arbeiten
+    //private TestFormRepoImpl testFormRepo = new TestFormRepoImpl();
 
     @GetMapping("/organisatoren/landingPage")
     @Secured("ROLE_ORGANISATOR")
@@ -38,7 +39,9 @@ public class OrganisatorenController {
     @Secured("ROLE_ORGANISATOR")
     public String addMcFrage(RedirectAttributes redirectAttributes,
                              Model model) {
-        testFormRepo.saveTestForm(new TestFormular(new ArrayList<>()));
+        // TODO Testformrepo darf NUR von Service via Interface aufgerufen werden
+        // TODO: Verstoß gegen Onion Architektur!!!
+        // testFormRepo.saveTestForm(new TestFormular(new ArrayList<>()));
 
         return "redirect:/organisatoren/testErstellen";
     }
