@@ -22,25 +22,39 @@
     </h1>
 
     <span th:if="${freitextFrage}">
-        <form class="form-check" method="post" th:action="@{/studenten/testBearbeitung/{id}/{aufgabe}(id=${id}, aufgabe=${aufgabe})}">
-            <label class="aufgabenstellung" for="idfreitextfrage" th:text="${aufgabenstellung}"> Fragestellung: </label> <br>
-            <textarea class="form-control" id="idfreitextfrage" name="studiFAntwort" th:text="${studiFAntwort}"> </textarea>
-            <button class="btnBestaetigen" type="submit">Bestätigen</button>
-        </form>
+            <form class="form-check" method="post" th:action="@{/studenten/testBearbeitung/{id}/{aufgabe}(id=${id}, aufgabe=${aufgabe})}">
+                <label class="aufgabenstellung" for="idfreitextfrage" th:text="${aufgabenstellung}"> Fragestellung: </label> <br>
+                <span th:unless="${isAbgelaufen}">
+                    <textarea class="form-control" id="idfreitextfrage" name="studiFAntwort" th:text="${studiFAntwort}"> </textarea>
+                    <button class="btnBestaetigen" type="submit">Bestätigen</button>
+                </span>
+            </form>
+
+        <span th:if="${isAbgelaufen}">
+            <p class="" th:text="${studiFAntwort}"> Die Studi Antwort. </p>
+        </span>
     </span>
 
     <span th:if="${mcfrage}">
         <form method="post" th:action="@{/studenten/testBearbeitung/{id}/{aufgabe}(id=${id}, aufgabe=${aufgabe})}">
             <p class="aufgabenstellung" th:text="${aufgabenstellung}"> Fragestellung: </p>
-            <span th:each="antwortwahl: ${antworten}">
-                <input class="btnInput" type="checkbox" th:name="checkboxWahlen" th:value="${antwortwahl}" id="checkboxId" th:checked="${gewaehlteAntworten.contains(antwortwahl)}">
-                <label class="btnLabel" for="checkboxId" th:text="${antwortwahl}">Option 1 </label><br>
+            <span th:unless="${isAbgelaufen}">
+                <span th:each="antwortwahl: ${antworten}">
+                    <input class="btnInput" type="checkbox" th:name="checkboxWahlen" th:value="${antwortwahl}" id="checkboxId" th:checked="${gewaehlteAntworten.contains(antwortwahl)}">
+                    <label class="btnLabel" for="checkboxId" th:text="${antwortwahl}">Option 1 </label><br>
+                </span>
+                <button class="btnBestaetigenMC" type="submit">Bestätigen</button>
             </span>
-            <button class="btnBestaetigenMC" type="submit">Bestätigen</button>
         </form>
-    </span>
-    <br>
 
+       <span th:if="${isAbgelaufen}" th:each="antwortwahl: ${antworten}">
+            <!-- Das 'disabled' Attribut blockiert die Interaktion, aber zeigt den vorherigen Zustand an -->
+            <input class="btnInput" type="checkbox" th:name="checkboxWahlen" th:value="${antwortwahl}" id="checkboxId2"
+                   th:checked="${gewaehlteAntworten.contains(antwortwahl)}" disabled>
+            <label class="btnLabel" for="checkboxId2" th:text="${antwortwahl}">Option 1 </label><br>
+        </span>
+    <br>
+    </span>
     <span class="punktzahl" th:text="${punktzahl}"> Maximale Punktzahl: 2 Punkte </span>
 
     <div class="buttonContainer">

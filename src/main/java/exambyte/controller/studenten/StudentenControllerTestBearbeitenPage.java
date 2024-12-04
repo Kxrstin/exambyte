@@ -33,6 +33,7 @@ public class StudentenControllerTestBearbeitenPage {
     @GetMapping("/studenten/testBearbeitung/{id}/{aufgabe}")
     @Secured("ROLE_STUDENT")
     public String aufgabenBearbeitung(Model model, @PathVariable("id") Integer testId, @PathVariable("aufgabe") Integer aufgabenNr) {
+        model.addAttribute("isAbgelaufen", testService.isAbgelaufen(testId));
         model.addAttribute("aufgabe", aufgabenNr);
         model.addAttribute("id", testId);
         model.addAttribute("aufgabenstellung", "Aufgabe: " + testService.getAufgabe(testId, aufgabenNr));

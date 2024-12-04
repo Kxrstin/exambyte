@@ -41,7 +41,7 @@
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">1.875s</div>
+<div class="counter">2.191s</div>
 <p>duration</p>
 </div>
 </td>
@@ -236,13 +236,13 @@ Caused by: org.springframework.expression.spel.SpelEvaluationException: EL1011E:
 <tr>
 <td class="success">Die Organisatoren LandingPage ist unter /organisatoren/landingPage erreichbar</td>
 <td class="success">test_01()</td>
-<td class="success">1.543s</td>
+<td class="success">1.934s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="failures">Test Erstellen Seite ist unter /organisatoren/testErstellen erreichbar</td>
 <td class="failures">test_02()</td>
-<td class="failures">0.163s</td>
+<td class="failures">0.150s</td>
 <td class="failures">failed</td>
 </tr>
 <tr>
@@ -254,37 +254,37 @@ Caused by: org.springframework.expression.spel.SpelEvaluationException: EL1011E:
 <tr>
 <td class="success">MC-Frage Seite redirected zu /organisatoren/testErstellen</td>
 <td class="success">test_04()</td>
-<td class="success">0.044s</td>
+<td class="success">0.035s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">Freitext-Frage Seite redirected zu /organisatoren/testErstellen</td>
 <td class="success">test_05()</td>
-<td class="success">0.013s</td>
+<td class="success">0.011s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">Hinzufügen eines Titels bei MC-Frage redirected zu /organisatoren/testErstellen</td>
 <td class="success">test_06()</td>
-<td class="success">0.014s</td>
+<td class="success">0.009s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">Hinzufügen einer Fragestellung bei MC-Frage redirected zu /organisatoren/testErstellen</td>
 <td class="success">test_07()</td>
-<td class="success">0.018s</td>
+<td class="success">0.010s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">Hinzufügen einer Punktzahl bei MC-Frage redirected zu /organisatoren/testErstellen</td>
 <td class="success">test_08()</td>
-<td class="success">0.012s</td>
+<td class="success">0.010s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="failures">Fertigstellen Button leitet einen auf Startseite weiter</td>
 <td class="failures">test_09()</td>
-<td class="failures">0.051s</td>
+<td class="failures">0.015s</td>
 <td class="failures">failed</td>
 </tr>
 </table>
@@ -292,9 +292,9 @@ Caused by: org.springframework.expression.spel.SpelEvaluationException: EL1011E:
 <div id="tab2" class="tab">
 <h2>Standard output</h2>
 <span class="code">
-<pre>14:23:16.358 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [exambyte.controller.organisatoren.OrganisatorenControllerTest]: OrganisatorenControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-14:23:16.667 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration exambyte.ExambyteProjektApplication for test class exambyte.controller.organisatoren.OrganisatorenControllerTest
-2024-12-04T14:23:21.635+01:00 ERROR 5136 --- [ExambyteProjekt] [    Test worker] org.thymeleaf.TemplateEngine             : [THYMELEAF][Test worker] Exception processing template &quot;/organisatoren/TestErstellenPageOrganisatoren&quot;: Exception evaluating SpringEL expression: &quot;testForm.getTestFragen()&quot; (template: &quot;/organisatoren/TestErstellenPageOrganisatoren&quot; - line 38, col 17)
+<pre>17:51:53.100 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [exambyte.controller.organisatoren.OrganisatorenControllerTest]: OrganisatorenControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+17:51:53.394 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration exambyte.ExambyteProjektApplication for test class exambyte.controller.organisatoren.OrganisatorenControllerTest
+2024-12-04T17:51:58.712+01:00 ERROR 10672 --- [ExambyteProjekt] [    Test worker] org.thymeleaf.TemplateEngine             : [THYMELEAF][Test worker] Exception processing template &quot;/organisatoren/TestErstellenPageOrganisatoren&quot;: Exception evaluating SpringEL expression: &quot;testForm.getTestFragen()&quot; (template: &quot;/organisatoren/TestErstellenPageOrganisatoren&quot; - line 38, col 17)
 
 org.thymeleaf.exceptions.TemplateProcessingException: Exception evaluating SpringEL expression: &quot;testForm.getTestFragen()&quot; (template: &quot;/organisatoren/TestErstellenPageOrganisatoren&quot; - line 38, col 17)
 	at org.thymeleaf.spring6.expression.SPELVariableExpressionEvaluator.evaluate(SPELVariableExpressionEvaluator.java:292) ~[thymeleaf-spring6-3.1.2.RELEASE.jar:3.1.2.RELEASE]
@@ -502,7 +502,7 @@ MockHttpServletRequest:
        Parameters = {}
           Headers = []
              Body = null
-    Session Attrs = {org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository.CSRF_TOKEN=org.springframework.security.web.csrf.DefaultCsrfToken@1a4323ac, SPRING_SECURITY_CONTEXT=SecurityContextImpl [Authentication=OAuth2AuthenticationToken [Principal=Name: [666666], Granted Authorities: [[ROLE_ORGANISATOR]], User Attributes: [{login=JoeSchmoe, id=666666}], Credentials=[PROTECTED], Authenticated=true, Details=null, Granted Authorities=[ROLE_ORGANISATOR]]]}
+    Session Attrs = {org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository.CSRF_TOKEN=org.springframework.security.web.csrf.DefaultCsrfToken@77cbedfb, SPRING_SECURITY_CONTEXT=SecurityContextImpl [Authentication=OAuth2AuthenticationToken [Principal=Name: [666666], Granted Authorities: [[ROLE_ORGANISATOR]], User Attributes: [{login=JoeSchmoe, id=666666}], Credentials=[PROTECTED], Authenticated=true, Details=null, Granted Authorities=[ROLE_ORGANISATOR]]]}
 
 Handler:
              Type = null
@@ -552,7 +552,7 @@ WARNING: Dynamic loading of agents will be disallowed by default in a future rel
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="http://www.gradle.org">Gradle 8.10.2</a> at 04.12.2024, 14:23:30</p>
+<a href="http://www.gradle.org">Gradle 8.10.2</a> at 04.12.2024, 17:52:05</p>
 </div>
 </div>
 </body>

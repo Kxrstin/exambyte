@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="exambyte.controller.studenten.StudentenControllerErgebnisTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2024-12-04T13:23:27" hostname="KERSTIN-SURFACE" time="0.257">
+<testsuite name="exambyte.controller.studenten.StudentenControllerErgebnisTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2024-12-04T16:52:04" hostname="KERSTIN-SURFACE" time="0.041">
   <properties/>
-  <testcase name="Die Route /zeigeErgebnis/0 führt zum Öffnen der ErgebnisPage.html Seite und es gibt einen 200 Status, wenn man Student ist." classname="exambyte.controller.studenten.StudentenControllerErgebnisTest" time="0.23"/>
-  <testcase name="Die Route /zeigeErgebnis/0 führt zur GitHub Anmeldung und es gibt einen 3XX Status, wenn man kein Student ist." classname="exambyte.controller.studenten.StudentenControllerErgebnisTest" time="0.023"/>
+  <testcase name="Die Route /zeigeErgebnis/0 führt zum Öffnen der ErgebnisPage.html Seite und es gibt einen 200 Status, wenn man Student ist." classname="exambyte.controller.studenten.StudentenControllerErgebnisTest" time="0.031"/>
+  <testcase name="Die Route /zeigeErgebnis/0 führt zur GitHub Anmeldung und es gibt einen 3XX Status, wenn man kein Student ist." classname="exambyte.controller.studenten.StudentenControllerErgebnisTest" time="0.008"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

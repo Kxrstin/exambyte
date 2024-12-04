@@ -4,6 +4,8 @@ import exambyte.aggregates.studenten.StudiTest.StudiTest;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
@@ -24,14 +26,14 @@ public class TestFragenService {
        return testRepo.hasTestWithId(testId);
     }
     public List<StudiTest> getBearbeitbareTests() {
-        LocalDate now = LocalDate.now();
+        LocalDateTime now = LocalDateTime.now();
         return testRepo.loadTestList().stream()
                 .filter(test -> test.isBearbeitbar(now))
                 .toList();
     }
 
     public List<StudiTest> getAbgelaufeneTests() {
-        LocalDate now = LocalDate.now();
+        LocalDateTime now = LocalDateTime.now();
         return testRepo.loadTestList().stream()
                 .filter(test -> test.isAbgelaufen(now))
                 .toList();
@@ -43,13 +45,13 @@ public class TestFragenService {
         return "Titel: " + testRepo.loadTestWithId(id).getTitel();
     }
     public String parseStart(int id) {
-        return "Startzeitpunkt: " + testRepo.loadTestWithId(id).getStartzeitpunkt().format(DateTimeFormatter.ofPattern("dd.MM.YYYY"));
+        return "Startzeitpunkt: " + parseTime(testRepo.loadTestWithId(id).getStartzeitpunkt());
     }
     public String parseEnde(int id) {
-        return "Endzeitpunkt: " + testRepo.loadTestWithId(id).getEndzeitpunkt().format(DateTimeFormatter.ofPattern("dd.MM.YYYY"));
+        return "Endzeitpunkt: " + parseTime(testRepo.loadTestWithId(id).getEndzeitpunkt());
     }
     public String parseErgebnis(int id) {
-        return "Ergebniszeitpunkt: " + testRepo.loadTestWithId(id).getErgebnisZeitpunkt().format(DateTimeFormatter.ofPattern("dd.MM.YYYY"));
+        return "Ergebniszeitpunkt: " + parseTime(testRepo.loadTestWithId(id).getErgebnisZeitpunkt());
     }
 
 
@@ -71,6 +73,12 @@ public class TestFragenService {
     }
     public int getAnzahlAufgaben(int id) {
         return testRepo.loadTestWithId(id).getAnzahlAufgaben();
+    }
+    public int getId(int testId) {
+        return testRepo.loadTestWithId(testId).getId();
+    }
+    public boolean isAbgelaufen(int testId) {
+        return getAbgelaufeneTests().contains(getTest(testId));
     }
 
 
@@ -109,11 +117,9 @@ public class TestFragenService {
         return "fail";
     }
 
-    public int getId(int testId) {
-        return testRepo.loadTestWithId(testId).getId();
-    }
-
-    public boolean isAbgelaufen(int testId) {
-        return getAbgelaufeneTests().contains(getTest(testId));
+    public String parseTime(LocalDateTime time) {
+        String uhrzeit = time.format(DateTimeFormatter.ofPattern("HH:mm"));
+        String datum = time.format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+        return uhrzeit+ ", " + datum;
     }
 }

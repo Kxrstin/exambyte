@@ -2,16 +2,17 @@ package exambyte.aggregates.studenten.StudiTest;
 
 import exambyte.annotations.Wertobjekt;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Wertobjekt
 public class TestForm {
     private final String titel;
-    private final LocalDate startzeitpunkt;
-    private final LocalDate endzeitpunkt;
-    private final LocalDate ergebniszeitpunkt;
+    private final LocalDateTime startzeitpunkt;
+    private final LocalDateTime endzeitpunkt;
+    private final LocalDateTime ergebniszeitpunkt;
     private final int testId;
 
-    public TestForm(String titel, LocalDate start, LocalDate ende, LocalDate ergebnis, int id) {
+    public TestForm(String titel, LocalDateTime start, LocalDateTime ende, LocalDateTime ergebnis, int id) {
         this.titel = titel;
         startzeitpunkt = start;
         endzeitpunkt = ende;
@@ -22,13 +23,13 @@ public class TestForm {
     public String getTitel() {
         return titel;
     }
-    public LocalDate getStartzeitpunkt() {
+    public LocalDateTime getStartzeitpunkt() {
         return startzeitpunkt;
     }
-    public LocalDate getEndzeitpunkt() {
+    public LocalDateTime getEndzeitpunkt() {
         return endzeitpunkt;
     }
-    public LocalDate getErgebniszeitpunkt() {
+    public LocalDateTime getErgebniszeitpunkt() {
         return ergebniszeitpunkt;
     }
     public int getTestId() {

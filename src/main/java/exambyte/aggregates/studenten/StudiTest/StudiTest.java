@@ -5,6 +5,7 @@ import exambyte.annotations.AggregateRoot;
 import org.springframework.cglib.core.Local;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -28,13 +29,13 @@ public final class StudiTest {
 
     // TestForm Daten ausgeben
     public String getTitel() { return testForm.getTitel(); }
-    public LocalDate getEndzeitpunkt() {
+    public LocalDateTime getEndzeitpunkt() {
         return testForm.getEndzeitpunkt();
     }
-    public LocalDate getStartzeitpunkt() {
+    public LocalDateTime getStartzeitpunkt() {
         return testForm.getStartzeitpunkt();
     }
-    public LocalDate getErgebnisZeitpunkt() {
+    public LocalDateTime getErgebnisZeitpunkt() {
         return testForm.getErgebniszeitpunkt();
     }
     public int getId() {
@@ -68,14 +69,14 @@ public final class StudiTest {
 
 
     // Zeitpunkte
-    public boolean isBearbeitbar(LocalDate now) {
+    public boolean isBearbeitbar(LocalDateTime now) {
         if (now.isBefore(testForm.getEndzeitpunkt()) && now.isAfter(testForm.getStartzeitpunkt())) {
             return true;
         }
         return false;
     }
 
-    public boolean isAbgelaufen(LocalDate now) {
+    public boolean isAbgelaufen(LocalDateTime now) {
         if (now.isAfter(testForm.getEndzeitpunkt()) && now.isAfter(testForm.getStartzeitpunkt())) {
             return true;
         }
