@@ -24,8 +24,7 @@ public class StudentenControllerErgebnis {
     @Secured("ROLE_STUDENT")
     public String zeigeErgebnis(@PathVariable("id") Integer testId, Model model) {
         if(testService.hasTestWithId(testId)) {
-            StudiTest test = testService.getTest(testId);
-            model.addAttribute("ergebnisZeitpunkt", test.getErgebnisZeitpunkt().format(DateTimeFormatter.ofPattern("dd.MM.YYYY")));
+            model.addAttribute("ergebnisZeitpunkt", testService.parseErgebnis(testId));
         } else {
             model.addAttribute("ergebnisZeitpunkt", "Keine Angaben!");
         }

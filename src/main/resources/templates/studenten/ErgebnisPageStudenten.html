@@ -22,11 +22,15 @@
         ExamByte - Ergebnis
     </h1>
             <ul>
-                <li class="list-group-item" > Ergebnisveröffentlichung: <span th:text="${ergebnisZeitpunkt}">14.12.2024</span> </li>
+                <li class="list-group-item" > <span th:text="${ergebnisZeitpunkt}">Ergebnisveröffentlichung: 14.12.2024</span> </li>
                 <!-- TODO -->
                 <li class="list-group-item" > Ergebnis: In Bearbeitung<br> </li>
                 <li class="list-group-item" > Punkte: In Bearbeitung </li>
                 <li class="list-group-item" > Test bestanden? In Bearbeitung </li>
             </ul>
+
+    <form th:action="@{/studenten/landingPage}">
+        <button class="btnWeiterZurueck" type="submit"> Zurück zur Landing Page </button>
+    </form>
     </body>
 </html>

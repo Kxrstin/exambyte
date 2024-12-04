@@ -22,10 +22,15 @@
         ExamByte - Ergebnis
     </h1>
             <ul>
-                <li class="list-group-item" > Ergebnisveröffentlichung: aa.bb.cccc </li>
-                <li class="list-group-item" > Ergebnis: 71 % <br> </li>
-                <li class="list-group-item" > Punkte: 71 / 100 Pkt. </li>
-                <li class="list-group-item" > Herzlichen Glückwunsch, Sie haben den Test bestanden! </li>
+                <li class="list-group-item" > <span th:text="${ergebnisZeitpunkt}">Ergebnisveröffentlichung: 14.12.2024</span> </li>
+                <!-- TODO -->
+                <li class="list-group-item" > Ergebnis: In Bearbeitung<br> </li>
+                <li class="list-group-item" > Punkte: In Bearbeitung </li>
+                <li class="list-group-item" > Test bestanden? In Bearbeitung </li>
             </ul>
+
+    <form th:action="@{/studenten/landingPage}">
+        <button class="btnWeiterZurueck" type="submit"> Zurück zur Landing Page </button>
+    </form>
     </body>
 </html>

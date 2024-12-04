@@ -28,17 +28,17 @@ public class TestFragenService {
 
 
     // Testinformationen parsen
-    public String parseTitel(StudiTest test) {
-        return "Titel: " + test.getTitel();
+    public String parseTitel(int id) {
+        return "Titel: " + testRepo.loadTestWithId(id).getTitel();
     }
-    public String parseStart(StudiTest test) {
-        return "Startzeitpunkt: " + test.getStartzeitpunkt().format(DateTimeFormatter.ofPattern("dd.MM.YYYY"));
+    public String parseStart(int id) {
+        return "Startzeitpunkt: " + testRepo.loadTestWithId(id).getStartzeitpunkt().format(DateTimeFormatter.ofPattern("dd.MM.YYYY"));
     }
-    public String parseEnde(StudiTest test) {
-        return "Endzeitpunkt: " + test.getEndzeitpunkt().format(DateTimeFormatter.ofPattern("dd.MM.YYYY"));
+    public String parseEnde(int id) {
+        return "Endzeitpunkt: " + testRepo.loadTestWithId(id).getEndzeitpunkt().format(DateTimeFormatter.ofPattern("dd.MM.YYYY"));
     }
-    public String parseErgebnis(StudiTest test) {
-        return "Ergebniszeitpunkt: " + test.getErgebnisZeitpunkt().format(DateTimeFormatter.ofPattern("dd.MM.YYYY"));
+    public String parseErgebnis(int id) {
+        return "Ergebniszeitpunkt: " + testRepo.loadTestWithId(id).getErgebnisZeitpunkt().format(DateTimeFormatter.ofPattern("dd.MM.YYYY"));
     }
 
 
@@ -96,5 +96,9 @@ public class TestFragenService {
             return "vorsichtiger";
         }
         return "fail";
+    }
+
+    public int getId(int testId) {
+        return testRepo.loadTestWithId(testId).getId();
     }
 }

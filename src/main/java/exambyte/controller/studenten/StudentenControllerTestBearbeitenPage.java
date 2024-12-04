@@ -46,6 +46,7 @@ public class StudentenControllerTestBearbeitenPage {
             model.addAttribute("mcfrage", true);
             model.addAttribute("antworten", testService.getAntwortMoeglichkeiten(testId, aufgabenNr));
             String gespeicherteAntwort = testService.getAntwort(testId, aufgabenNr);
+
             if (gespeicherteAntwort != null && !gespeicherteAntwort.isEmpty()) {
                 List<String> gewaehlteAntworten = Arrays.asList(gespeicherteAntwort.substring(1, gespeicherteAntwort.length()-1).split(", "));
                 model.addAttribute("gewaehlteAntworten", gewaehlteAntworten);
