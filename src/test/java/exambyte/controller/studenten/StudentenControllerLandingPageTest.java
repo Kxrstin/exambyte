@@ -38,7 +38,7 @@ public class StudentenControllerLandingPageTest {
     TestFragenService testService;
 
     @Test
-    @DisplayName("Die Route /landingPage führt zum Öffnen der LandingPageStudenten.html Seite und es gibt einen 200 Status, wenn man kein Student ist.")
+    @DisplayName("Die Route /landingPage führt zum Öffnen der LandingPageStudenten.html Seite und es gibt einen 200 Status, wenn man Student ist.")
     @WithMockOAuth2User(roles = "STUDENT")
     void test_landingPageStudent() throws Exception {
         when(testService.getTestList()).thenReturn(null);

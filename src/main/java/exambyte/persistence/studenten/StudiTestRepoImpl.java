@@ -20,8 +20,8 @@ public class StudiTestRepoImpl implements StudiTestRepo {
     // TODO: Durch echte Tests ersetzen, das dient nur als Beispiel
     public StudiTestRepoImpl() {
         TestForm testForm1 = new TestForm("Programmierpraktikum 2 Test Woche 4", LocalDate.of(2024, 11, 21), LocalDate.of(2024, 11, 30), LocalDate.of(2024, 12, 2), 1);
-        TestForm testForm2 = new TestForm("Mathematik für Informatik 3 Test Woche 5", LocalDate.of(2024, 11, 21), LocalDate.of(2024, 11, 30), LocalDate.of(2024, 12, 2), 2);
-        TestForm testForm3 = new TestForm("Algorithmen und Datenstrukturen Test Woche 5", LocalDate.of(2024, 11, 21), LocalDate.of(2024, 11, 30), LocalDate.of(2024, 12, 2), 3);
+        TestForm testForm2 = new TestForm("Mathematik für Informatik 3 Test Woche 5", LocalDate.of(2024, 11, 21), LocalDate.of(2024, 11, 30), LocalDate.of(2024, 12, 5), 2);
+        TestForm testForm3 = new TestForm("Algorithmen und Datenstrukturen Test Woche 5", LocalDate.of(2024, 11, 21), LocalDate.of(2024, 11, 30), LocalDate.of(2024, 12, 4), 3);
         studiTestMap.put(testForm1.getTestId(),
                 new StudiTest(testForm1, List.of(new FreitextAufgabe("Nenne pro Argumente der Onion Architektur", 3),
                 new MCAufgabe("Mit welchem Test kann man die Onion Architektur prüfen?", List.of("ArchTest", "WebMvc Test", "AssertJ Test"), 2))));
