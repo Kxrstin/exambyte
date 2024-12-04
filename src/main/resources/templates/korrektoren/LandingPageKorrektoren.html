@@ -1,24 +1,35 @@
 <html lang="de">
-<head>
-    <title> ExamByte | Übersicht </title>
-    <link rel="icon" type="image/png"
-          href="../../static/Images/Logo/ExamByteLogoOhneUnterschrift.png"
-          th:href="@{/Images/Logo/ExamByteLogoOhneUnterschrift.png}">
-    <link rel="stylesheet" href="../../static/css/ExambyteStylesheet.css"
-          th:href="@{/css/ExambyteStylesheet.css}">
-    <link rel = "stylesheet" th:href="@{/css/bootstrap.min.css}"
-          href="../../static/css/bootstrap.min.css">
-</head>
+    <head>
+        <title> ExamByte | Übersicht </title>
+        <link rel="icon" type="image/png"
+              href="../../static/Images/Logo/ExamByteLogoOhneUnterschrift.png"
+              th:href="@{/Images/Logo/ExamByteLogoOhneUnterschrift.png}">
+        <link rel="stylesheet" href="../../static/css/ExambyteStylesheet.css"
+              th:href="@{/css/ExambyteStylesheet.css}">
+        <link rel = "stylesheet" th:href="@{/css/bootstrap.min.css}"
+              href="../../static/css/bootstrap.min.css">
+    </head>
 <body>
-<h1>
-    <img class="imgLogo"
-         th:src="@{/Images/Logo/ExamByteLogo.png}"
-         src="../../static/Images/Logo/ExamByteLogo.png"
-         alt="">
-    ExamByte - Übersicht
-</h1>
+    <h1>
+        <img class="imgLogo"
+             th:src="@{/Images/Logo/ExamByteLogo.png}"
+             src="../../static/Images/Logo/ExamByteLogo.png"
+             alt="">
+        ExamByte - Übersicht
+    </h1>
 
-<!-- TODO: Überarbeiten -->
+    <h2> Zu korrigierende Aufgaben: </h2>
+    <ul th:remove="all-but-first">
+        <li class="list-group-item" th:each="aufgabe : ${aufgaben}">
+            <form th:action="@{/korrektoren/landingPage/zeigeAufgaben/{aufgabe}(aufgabe=${aufgabe})}" class="form-group">
+                <a th:href="@{/korrektoren/landingPage/zeigeAufgabe/{aufgabe}(aufgabe=${aufgabe})}">
+                    <span th:text="${aufgabe}"> Test 1</span></a> <br>
+            </form>
+        </li>
+
+        <li class="list-group-item"> <a href="/studenten/landingPage/zeigeTest/2">Test 2</a></li>
+        <li class="list-group-item"> <a href="/studenten/landingPage/zeigeTest/3">Test 3</a></li>
+    </ul>
 
 </body>
 </html>
