@@ -52,7 +52,9 @@ public class ArchRuleTests {
             .and()
             .haveSimpleNameContaining("Service")
             .should()
-            .beAnnotatedWith(Service.class);
+            .beAnnotatedWith(Service.class)
+            .orShould()
+            .haveSimpleNameEndingWith("Test");
 
     @ArchTest
     private final ArchRule repositoriesSindMitRepositoryAnnotiert = classes()
@@ -61,5 +63,7 @@ public class ArchRuleTests {
             .and()
             .haveSimpleNameContaining("Repo")
             .should()
-            .beAnnotatedWith(Repository.class);
+            .beAnnotatedWith(Repository.class)
+            .orShould()
+            .haveSimpleNameEndingWith("Test");
 }

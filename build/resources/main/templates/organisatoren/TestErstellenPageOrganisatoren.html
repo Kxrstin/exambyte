@@ -44,30 +44,25 @@
                     </p>
 
                     <form method="post" th:action="@{/organisatoren/testErstellen/updateTitelMC}">
-                        <label for="titelMCID"> Titel: </label>
-                        <input type="text" id="titelMCID" name="titel" th:value="${testFrage.titel}">
+
                     </form>
 
                     <form method="post" th:action="@{/organisatoren/testErstellen/updateFragestellungMC}">
+
+                    </form>
+                    <!--TODO: zugehörige ID zur URL hinzufügen-->
+                    <form method="post" th:action="@{/organisatoren/testErstellen/updateTestfrage}">
+                        <label for="titelMCID"> Titel: </label>
+                        <input type="text" id="titelMCID" name="titel" th:value="${testFrage.titel}">
                         <label for="multipleChoiceFrageID">Multiple-Choice Fragestellung:</label>
                         <input type="text" id="multipleChoiceFrageID" name="fragestellung" th:value="${testFrage.fragestellung}">
-                    </form>
-
-                    <form>
                         <button class="btn-dark" type="submit" id="antwortHinzufügenMC">+ Antwort hinzufügen</button>
-                    </form>
-
-
-                    <form method="post" th:action="@{/organisatoren/testErstellen/updatePunkteMC}">
                         <label for="punktzahlMcFrageID"> Punktzahl: </label>
                         <input type="number" id="punktzahlMcFrageID" name="punkte" th:value="${testFrage.punkte}">
-                    </form>
-
-                    <form>
                         <label for="erklaerungMCFrageID"> Erklärung: </label>
                         <textarea id="erklaerungMCFrageID" name="erklaerung" th:value="${testFrage.erklaerung}"></textarea>
+                        <button type="submit">Zwischenspeichern</button>
                     </form>
-
 
                 </span>
 
