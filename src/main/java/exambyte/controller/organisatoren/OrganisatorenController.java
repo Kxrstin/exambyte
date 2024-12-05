@@ -1,15 +1,12 @@
 package exambyte.controller.organisatoren;
 
 import exambyte.aggregates.organisatoren.TestFormular;
-//import exambyte.aggregates.organisatoren.TestFrage;
-import exambyte.persistence.organisatoren.TestFormRepoImpl;
+import exambyte.service.organisatoren.TestFormService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.ArrayList;
@@ -19,8 +16,11 @@ import java.util.Map;
 
 @Controller
 public class OrganisatorenController {
-    //TODO über Service mit Repo Arbeiten
-    //private TestFormRepoImpl testFormRepo = new TestFormRepoImpl();
+    private TestFormService service;
+
+    public OrganisatorenController(TestFormService service) {
+        this.service = service;
+    }
 
     @GetMapping("/organisatoren/landingPage")
     @Secured("ROLE_ORGANISATOR")
@@ -31,20 +31,40 @@ public class OrganisatorenController {
 
     @GetMapping("/organisatoren/testErstellen")
     @Secured("ROLE_ORGANISATOR")
-    public String testErstellen() {
+    public String testErstellen(Model model) {
+        boolean redirect = false;
+        int id = 0;
+
+        if(model.getAttribute("redirect") != null) {
+            redirect = (boolean) model.getAttribute("redirect");
+        }
+
+        if(redirect == false) {
+            id = service.addNewTestForm();
+            model.addAttribute("id", id);
+        } else {
+            id = (int) model.getAttribute("id");
+        }
+
+        model.addAttribute("testForm", service.getTestFormById(id));
         return "/organisatoren/TestErstellenPageOrganisatoren";
     }
 
-    @PostMapping("/organisatoren/testErstellen/addMcFrage")
+    @PostMapping("/organisatoren/testErstellen/addMcFrage/{id}")
     @Secured("ROLE_ORGANISATOR")
     public String addMcFrage(RedirectAttributes redirectAttributes,
-                             Model model) {
-        // TODO Testformrepo darf NUR von Service via Interface aufgerufen werden
-        // TODO: Verstoß gegen Onion Architektur!!!
-        // testFormRepo.saveTestForm(new TestFormular(new ArrayList<>()));
-
+                             Model model,
+                             @PathVariable int id) {
+        TestFormular testForm = service.getTestFormById(id);
+        testForm.addNewMCFrage();
+        service.saveTestForm(testForm);
+        redirectAttributes.addFlashAttribute("id", id);
+        redirectAttributes.addFlashAttribute("redirect", true);
         return "redirect:/organisatoren/testErstellen";
     }
+
+    //TODO: alle Methoden, die auf update... antworten ersetzen mit einer einzigen update-Methode, die zugehörige IDs
+    //      annimmt.
 
     @PostMapping("/organisatoren/testErstellen/updateTitelMC")
     @Secured("ROLE_ORGANISATOR")

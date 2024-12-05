@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 
 
 public interface TestFormRepo {
-    String saveTestForm(TestFormular testForm);
-    TestFormular loadTestForm(String id);
+    int saveTestForm(TestFormular testForm);
+    TestFormular loadTestForm(Integer id);
+    int addNewTestForm();
 }

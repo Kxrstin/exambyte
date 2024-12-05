@@ -4,13 +4,17 @@ import exambyte.annotations.AggregateRoot;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @AggregateRoot
 public class TestFormular {
     private List<TestFrage> testFragen;
+    private int id;
 
     public TestFormular(List<TestFrage> testFragen){
         this.testFragen = testFragen;
+        //id = Integer.parseInt(UUID.randomUUID().toString());
+        id = UUID.randomUUID().hashCode();
     }
 
     //Ermöglicht das Ändern der Reihenfolge, falls User unzufrieden ist
@@ -20,9 +24,22 @@ public class TestFormular {
         testFragen.set(secPos, testFrage);
     }
 
+    public int getId() {
+        return id;
+    }
+
     public void addTestfrage(TestFrage testFrage) {
         testFragen.add(testFrage);
     }
+
+    public void addNewMCFrage() {
+        addTestfrage(new MCFrage(0, "", "", "", ""));
+    }
+
+    public void addNewFreitextFrage() {
+        addTestfrage(new FreitextFrage(0, "", "", "", ""));
+    }
+
     public List<TestFrage> getTestFragen(){
         return testFragen;
     }
