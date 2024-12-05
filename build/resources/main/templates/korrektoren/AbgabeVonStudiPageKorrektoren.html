@@ -1,0 +1,34 @@
+<html lang="de">
+    <head>
+        <title> ExamByte | Übersicht </title>
+        <link rel="icon" type="image/png"
+              href="../../static/Images/Logo/ExamByteLogoOhneUnterschrift.png"
+              th:href="@{/Images/Logo/ExamByteLogoOhneUnterschrift.png}">
+        <link rel="stylesheet" href="../../static/css/ExambyteStylesheet.css"
+              th:href="@{/css/ExambyteStylesheet.css}">
+        <link rel = "stylesheet" th:href="@{/css/bootstrap.min.css}"
+              href="../../static/css/bootstrap.min.css">
+    </head>
+    <body>
+        <h1>
+            <img class="imgLogo"
+                 th:src="@{/Images/Logo/ExamByteLogo.png}"
+                 src="../../static/Images/Logo/ExamByteLogo.png"
+                 alt="">
+            ExamByte - Aufgaben
+        </h1>
+
+        <span th:if="${abgabeVorhanden}">
+            <p> Aufgabe: <span th:text="${abgabe.getAufgabe()}"> Was ist 2 + 2? </span></p>
+            <p> Antwort: <span th:text="${abgabe.getStudiAntwort()}"> 4 </span></p>
+            <p> Maximale Punktzahl: <span th:text="${abgabe.getMaxPunktzahl()}"> 1 </span> Punkt</p>
+            <form method="post" th:action="@{/korrektoren/landingPage/zeigeAbgabe/{abgabeId}(abgabeId=${abgabeId})}">
+                <label for="feedbackId"> Feedback:</label>
+                <textarea id="feedbackId" name="feedbackText" th:value="${feedbackText}"></textarea>
+                <label for="punkteId"> Feedback:</label>
+                <input type="number" id="punkteId" name="punkteVergabe" th:value="${punkteVergabe}">
+                <button class="btnBestaetigen" type="submit"> Abschicken </button>
+            </form>
+        </span>
+    </body>
+</html>

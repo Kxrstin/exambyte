@@ -1,0 +1,32 @@
+<html lang="de">
+<head>
+    <title> ExamByte | Übersicht </title>
+    <link rel="icon" type="image/png"
+          href="../../static/Images/Logo/ExamByteLogoOhneUnterschrift.png"
+          th:href="@{/Images/Logo/ExamByteLogoOhneUnterschrift.png}">
+    <link rel="stylesheet" href="../../static/css/ExambyteStylesheet.css"
+          th:href="@{/css/ExambyteStylesheet.css}">
+    <link rel = "stylesheet" th:href="@{/css/bootstrap.min.css}"
+          href="../../static/css/bootstrap.min.css">
+</head>
+<body>
+<h1>
+    <img class="imgLogo"
+         th:src="@{/Images/Logo/ExamByteLogo.png}"
+         src="../../static/Images/Logo/ExamByteLogo.png"
+         alt="">
+    ExamByte - Aufgaben
+</h1>
+
+<h2> Zu korrigierende Aufgaben: </h2>
+<ul>
+    <li class="list-group-item" th:each="abgabeId : ${abgaben}">
+        <form th:action="@{/korrektoren/landingPage/zeigeAbgabe/{abgabeId}(abgabeId=${abgabeId})}" class="form-group">
+            <a th:href="@{/korrektoren/landingPage/zeigeAbgabe/{abgabeId}(abgabeId=${abgabeId})}">
+                Test von Student mit ID: <span th:text="${abgabeId}"> 1256</span></a> <br>
+        </form>
+    </li>
+</ul>
+
+</body>
+</html>
