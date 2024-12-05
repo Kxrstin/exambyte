@@ -28,5 +28,9 @@
     </li>
 </ul>
 
+<form class="form-check" th:action="@{/korrektoren/landingPage/zeigeAufgaben/{testname}(testname=${testname.replace(' ', '_')})}">
+    <button type="submit" class="btnWeiterZurueck"> Zurück zur Aufgabenansicht </button>
+</form>
+
 </body>
 </html>

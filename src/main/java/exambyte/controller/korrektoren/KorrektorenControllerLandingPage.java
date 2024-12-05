@@ -9,12 +9,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.ArrayList;
 
 @Controller
 public class KorrektorenControllerLandingPage {
-    private AbgabenService abgabenService;
+    private final AbgabenService abgabenService;
 
     @Autowired
     public KorrektorenControllerLandingPage(AbgabenService abgabenService) {
@@ -35,11 +36,11 @@ public class KorrektorenControllerLandingPage {
     @GetMapping("/korrektoren/landingPage/zeigeAufgaben/{testname}")
     @Secured("ROLE_KORREKTOR")
     public String aufgaben(Model model, @PathVariable("testname") String testname) {
-        model.addAttribute("testname", testname);
+        model.addAttribute("testname", testname.replace('_', ' '));
         if(abgabenService.getTestnamen() == null){
             model.addAttribute("aufgaben", new ArrayList<>());
         } else {
-            model.addAttribute("aufgaben", abgabenService.getAufgabenVonTest(testname));
+            model.addAttribute("aufgaben", abgabenService.getAufgabenVonTest(testname.replace('_', ' ')));
         }
         return "korrektoren/AufgabenPageKorrektoren";
     }
@@ -47,10 +48,12 @@ public class KorrektorenControllerLandingPage {
     @GetMapping("/korrektoren/landingPage/zeigeAbgaben/{testname}/{aufgabe}")
     @Secured("ROLE_KORREKTOR")
     public String abgaben(Model model, @PathVariable("aufgabe") String aufgabe, @PathVariable("testname") String testname) {
-        if(abgabenService.getAbgabenMitTestnameAufgabe(testname, aufgabe) == null){
+        String aufgabeKorrekt = aufgabe.replace('_',' ');
+        String testnameKorrekt = testname.replace('_',' ');
+        if(abgabenService.getAbgabenMitTestnameAufgabe(testnameKorrekt, aufgabeKorrekt) == null){
             model.addAttribute("abgaben", new ArrayList<>());
         } else {
-            model.addAttribute("abgaben", abgabenService.getAbgabenMitTestnameAufgabe(testname, aufgabe));
+            model.addAttribute("abgaben", abgabenService.getAbgabenMitTestnameAufgabe(testnameKorrekt, aufgabeKorrekt));
         }
         return "korrektoren/AbgabenPageKorrektoren";
     }
@@ -70,11 +73,20 @@ public class KorrektorenControllerLandingPage {
 
     @PostMapping("/korrektoren/landingPage/zeigeAbgabe/{abgabeId}")
     @Secured("ROLE_KORREKTOR")
-    public String korrekturAbschicken(@PathVariable("abgabeId") int abgabeId, @RequestParam(name="feedbackText", defaultValue="") String feedback, @RequestParam(name="punkteVergabe", defaultValue="-1") Integer punkteVergabe) {
-        if(!feedback.equals("") && punkteVergabe >= 0) {
-            abgabenService.addKorrektur(punkteVergabe, feedback, abgabeId);
+    public String korrekturAbschicken(RedirectAttributes redirectAttributes, @PathVariable("abgabeId") int abgabeId, @RequestParam(name="feedbackText", defaultValue="") String feedback, @RequestParam(name="punkteVergabe", defaultValue="-1") Integer punkteVergabe) {
+        String fehler = "";
+        if(feedback.equals("")){
+            fehler += "Das Feedback darf nicht leer sein! ";
         }
-
-        return "redirect:/korrektoren/landingPage/zeigeAbgaben/" + abgabenService.getTestname(abgabeId) + "/" + abgabenService.getAufgabe(abgabeId);
+        int maxPunkte =abgabenService.getAbgabe(abgabeId).getMaxPunktzahl();
+        if(punkteVergabe < 0 || punkteVergabe > maxPunkte) {
+            fehler += "Die Punktevergabe muss zwischen 0 und " + maxPunkte + " liegen. ";
+        }
+        if(fehler.equals("")) {
+            abgabenService.addKorrektur(punkteVergabe, feedback, abgabeId);
+            return "redirect:/korrektoren/landingPage/zeigeAbgaben/" + abgabenService.getTestname(abgabeId).replace(" ", "_") + "/" + abgabenService.getAufgabe(abgabeId).replace(" ", "_");
+        }
+        redirectAttributes.addFlashAttribute("falscheEingabe", fehler);
+        return "redirect:/korrektoren/landingPage/zeigeAbgabe/{abgabeId}";
     }
 }
