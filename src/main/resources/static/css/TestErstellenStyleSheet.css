@@ -1,7 +1,22 @@
-.testfragen-alignment {
+.fragen-alignment {
     margin-left: 30px;
 }
 
-.fragenüberschrift {
+.fragen-überschrift {
     font-size: 25px;
+}
+
+.textfeld {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.lösung-textfeld {
+    width: 400px;
+    height: 100px;
+}
+
+.button-abstand {
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
