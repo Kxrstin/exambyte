@@ -21,12 +21,17 @@
 <h2> Zu korrigierende Aufgaben: </h2>
 <ul>
     <li class="list-group-item" th:each="aufgabe : ${aufgaben}">
-        <form th:action="@{/korrektoren/landingPage/zeigeAbgaben/{testname}/{aufgabe}(aufgabe=${aufgabe}, testname=${testname})}" class="form-group">
-            <a th:href="@{/korrektoren/landingPage/zeigeAbgaben/{testname}/{aufgabe}(aufgabe=${aufgabe}, testname=${testname})}">
-               <span th:text="${aufgabe}"> Test 1</span></a> <br>
+        <form class="form-group">
+            <a th:href="@{/korrektoren/landingPage/zeigeAbgaben/{testname}/{aufgabe}(aufgabe=${aufgabe.replace(' ', '_')}, testname=${testname.replace(' ', '_')})}">
+                <span th:text="${aufgabe}"> Test 1</span></a> <br>
         </form>
     </li>
 </ul>
+</ul>
+
+<form class="form-check" th:action="@{/korrektoren/landingPage}">
+    <button type="submit" class="btnWeiterZurueck"> Zurück zur Landing Page </button>
+</form>
 
 </body>
 </html>

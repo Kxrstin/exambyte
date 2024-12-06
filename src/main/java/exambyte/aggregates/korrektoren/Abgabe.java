@@ -49,7 +49,7 @@ public class Abgabe {
     }
 
     public void setPunktzahl(Integer punktzahl) {
-        this.punktzahl = punktzahl;
+        this.punktzahl=punktzahl;
     }
 
     public Integer getPunktzahl() {

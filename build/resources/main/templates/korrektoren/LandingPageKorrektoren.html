@@ -21,8 +21,8 @@
     <h2> Zu korrigierende Tests: </h2>
     <ul>
         <li class="list-group-item" th:each="testname : ${testnamen}">
-            <form th:action="@{/korrektoren/landingPage/zeigeAufgaben/{testname}(testname=${testname})}" class="form-group">
-                <a th:href="@{/korrektoren/landingPage/zeigeAufgaben/{testname}(testname=${testname})}">
+            <form class="form-group">
+                <a th:href="@{/korrektoren/landingPage/zeigeAufgaben/{testname}(testname=${testname.replace(' ', '_')})}">
                     <span th:text="${testname}"> Test 1</span></a> <br>
             </form>
         </li>

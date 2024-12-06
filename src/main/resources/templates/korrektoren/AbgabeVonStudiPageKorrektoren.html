@@ -21,14 +21,18 @@
         <span th:if="${abgabeVorhanden}">
             <p> Aufgabe: <span th:text="${abgabe.getAufgabe()}"> Was ist 2 + 2? </span></p>
             <p> Antwort: <span th:text="${abgabe.getStudiAntwort()}"> 4 </span></p>
-            <p> Maximale Punktzahl: <span th:text="${abgabe.getMaxPunktzahl()}"> 1 </span> Punkt</p>
-            <form method="post" th:action="@{/korrektoren/landingPage/zeigeAbgabe/{abgabeId}(abgabeId=${abgabeId})}">
+            <p> Maximale Punktzahl: <span th:text="${abgabe.getMaxPunktzahl()}"> 2 </span> Punkte</p>
+            <form method="post" th:action="@{/korrektoren/landingPage/zeigeAbgabe/{abgabeId}(abgabeId=${abgabeId})}" class="form-check">
                 <label for="feedbackId"> Feedback:</label>
-                <textarea id="feedbackId" name="feedbackText" th:value="${feedbackText}"></textarea>
-                <label for="punkteId"> Feedback:</label>
-                <input type="number" id="punkteId" name="punkteVergabe" th:value="${punkteVergabe}">
+                <textarea class="form-control" id="feedbackId" name="feedbackText"></textarea> <br>
+                <label for="punkteId"> Punktzahl:</label>
+                <input class="form-control" type="number" id="punkteId" name="punkteVergabe" min="0" th:max="${abgabe.getMaxPunktzahl()}" th:value="${punkteVergabe}">
                 <button class="btnBestaetigen" type="submit"> Abschicken </button>
             </form>
+        </span>
+
+        <span th:if="${falscheEingabe}">
+            <p class="text-danger" th:text="${falscheEingabe}"> Der Text darf nicht leer sein </p>
         </span>
     </body>
 </html>
