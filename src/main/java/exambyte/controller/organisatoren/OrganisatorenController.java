@@ -66,21 +66,10 @@ public class OrganisatorenController {
     //TODO: alle Methoden, die auf update... antworten ersetzen mit einer einzigen update-Methode, die zugehörige IDs
     //      annimmt.
 
-    @PostMapping("/organisatoren/testErstellen/updateTitelMC")
+    @PostMapping("/organisatoren/testErstellen/updateTestfrage/{id}")
     @Secured("ROLE_ORGANISATOR")
-    public String updateTitelMC() {
-        return "redirect:/organisatoren/testErstellen";
-    }
-
-    @PostMapping("/organisatoren/testErstellen/updateFragestellungMC")
-    @Secured("ROLE_ORGANISATOR")
-    public String updateFragestellungMC() {
-        return "redirect:/organisatoren/testErstellen";
-    }
-
-    @PostMapping("/organisatoren/testErstellen/updatePunkteMC")
-    @Secured("ROLE_ORGANISATOR")
-    public String updatePunkteMC() {
+    public String updateTestFrage(@PathVariable int id,
+                                  RedirectAttributes redirectAttributes) {
         return "redirect:/organisatoren/testErstellen";
     }
 
