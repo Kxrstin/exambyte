@@ -24,7 +24,7 @@
             <p> Maximale Punktzahl: <span th:text="${abgabe.getMaxPunktzahl()}"> 2 </span> Punkte</p>
             <form method="post" th:action="@{/korrektoren/landingPage/zeigeAbgabe/{abgabeId}(abgabeId=${abgabeId})}" class="form-check">
                 <label for="feedbackId"> Feedback:</label>
-                <textarea class="form-control" id="feedbackId" name="feedbackText" required></textarea> <br>
+                <textarea class="form-control" id="feedbackId" name="feedbackText"></textarea> <br>
                 <label for="punkteId"> Punktzahl:</label>
                 <input class="form-control" type="number" id="punkteId" name="punkteVergabe" min="0" th:max="${abgabe.getMaxPunktzahl()}" th:value="${punkteVergabe}">
                 <button class="btnBestaetigen" type="submit"> Abschicken </button>

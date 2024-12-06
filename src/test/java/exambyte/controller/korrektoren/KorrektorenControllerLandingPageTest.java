@@ -31,6 +31,8 @@ public class KorrektorenControllerLandingPageTest {
     private final List<String> aufgaben = List.of("Mathematik für Informatik 2 Aufgabe", "Programmierpraktikum 2 Aufgabe", "Wissenschaftliches Arbeiten Aufgabe");
     private final List<Integer> id = List.of(1, 2, 3, 4, 5, 6, 7, 8, 9);
     private final Abgabe abgabe = new Abgabe(122, "Propra 2 Test 7", "Was ist Onion Architektur?", "Onion Architektur ist...", 3);
+    private final Abgabe abgabeOhneStudiAntwort = new Abgabe(122, "Propra 2 Test 7", "Was ist Onion Architektur?", "", 3);
+
 
     @Autowired
     MockMvc mvc;
@@ -115,10 +117,44 @@ public class KorrektorenControllerLandingPageTest {
         when(abgabenService.getAufgabe(122)).thenReturn("Was ist Onion Architektur");
         mvc.perform(post("/korrektoren/landingPage/zeigeAbgabe/122")
                         .with(csrf())
-                        .param("punkteVergabe", "3")
+                        .param("punkteVergabe", "1")
                         .param("feedbackText", "Die Antwort ist korrekt"))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/korrektoren/landingPage/zeigeAbgaben/Propra_2_Test_7/Was_ist_Onion_Architektur"));
-        verify(abgabenService).addKorrektur(3, "Die Antwort ist korrekt", 122);
+        verify(abgabenService).addKorrektur(1, "Die Antwort ist korrekt", 122);
+    }
+
+    @Test
+    @WithMockOAuth2User(roles = "KORREKTOR")
+    @DisplayName("Eine leerer Feedbacktext darf bei voller Punktzahl abgeschickt werden.")
+    void test_08() throws Exception {
+        when(abgabenService.containsAbgabe(122)).thenReturn(true);
+        when(abgabenService.getAbgabe(122)).thenReturn(abgabe);
+        when(abgabenService.getTestname(122)).thenReturn("Propra 2 Test 7");
+        when(abgabenService.getAufgabe(122)).thenReturn("Was ist Onion Architektur");
+        mvc.perform(post("/korrektoren/landingPage/zeigeAbgabe/122")
+                        .with(csrf())
+                        .param("punkteVergabe", "3")
+                        .param("feedbackText", ""))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/korrektoren/landingPage/zeigeAbgaben/Propra_2_Test_7/Was_ist_Onion_Architektur"));
+        verify(abgabenService).addKorrektur(3, "", 122);
+    }
+
+    @Test
+    @WithMockOAuth2User(roles = "KORREKTOR")
+    @DisplayName("Eine leerer Feedbacktext darf bei leerer StudiAntwort abgeschickt werden.")
+    void test_09() throws Exception {
+        when(abgabenService.containsAbgabe(122)).thenReturn(true);
+        when(abgabenService.getAbgabe(122)).thenReturn(abgabeOhneStudiAntwort);
+        when(abgabenService.getTestname(122)).thenReturn("Propra 2 Test 7");
+        when(abgabenService.getAufgabe(122)).thenReturn("Was ist Onion Architektur");
+        mvc.perform(post("/korrektoren/landingPage/zeigeAbgabe/122")
+                        .with(csrf())
+                        .param("punkteVergabe", "0")
+                        .param("feedbackText", ""))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/korrektoren/landingPage/zeigeAbgaben/Propra_2_Test_7/Was_ist_Onion_Architektur"));
+        verify(abgabenService).addKorrektur(0, "", 122);
     }
 }

@@ -75,10 +75,14 @@ public class KorrektorenControllerLandingPage {
     @Secured("ROLE_KORREKTOR")
     public String korrekturAbschicken(RedirectAttributes redirectAttributes, @PathVariable("abgabeId") int abgabeId, @RequestParam(name="feedbackText", defaultValue="") String feedback, @RequestParam(name="punkteVergabe", defaultValue="-1") Integer punkteVergabe) {
         String fehler = "";
-        if(feedback.equals("")){
-            fehler += "Das Feedback darf nicht leer sein! ";
-        }
         int maxPunkte =abgabenService.getAbgabe(abgabeId).getMaxPunktzahl();
+
+        if(feedback.equals("") && !abgabenService.getAbgabe(abgabeId).getStudiAntwort().equals("")){
+            if(punkteVergabe != maxPunkte) {
+                fehler += "Das Feedback darf nicht leer sein! ";
+            }
+        }
+
         if(punkteVergabe < 0 || punkteVergabe > maxPunkte) {
             fehler += "Die Punktevergabe muss zwischen 0 und " + maxPunkte + " liegen. ";
         }
