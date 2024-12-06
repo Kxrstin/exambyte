@@ -75,40 +75,16 @@ public class OrganisatorenControllerTest {
 
     @Test
     @WithMockOAuth2User(login = "JoeSchmoe", roles = "ORGANISATOR")
-    @DisplayName("Hinzufügen eines Titels bei MC-Frage redirected zu /organisatoren/testErstellen")
+    @DisplayName("")
     void test_06() throws Exception {
-        mvc.perform(post("/organisatoren/testErstellen/updateTitelMC").with(csrf()))
+        mvc.perform(post("/organisatoren/testErstellen/updateTestfrage/").with(csrf()))
                 .andExpect(redirectedUrl("/organisatoren/testErstellen"));
-    }
-
-    @Test
-    @WithMockOAuth2User(login = "JoeSchmoe", roles = "ORGANISATOR")
-    @DisplayName("Hinzufügen einer Fragestellung bei MC-Frage redirected zu /organisatoren/testErstellen")
-    void test_07() throws Exception {
-        mvc.perform(post("/organisatoren/testErstellen/updateFragestellungMC").with(csrf()))
-                .andExpect(redirectedUrl("/organisatoren/testErstellen"));
-    }
-
-    @Test
-    @WithMockOAuth2User(login = "JoeSchmoe", roles = "ORGANISATOR")
-    @DisplayName("Hinzufügen einer Punktzahl bei MC-Frage redirected zu /organisatoren/testErstellen")
-    void test_08() throws Exception {
-        mvc.perform(post("/organisatoren/testErstellen/updatePunkteMC").with(csrf()))
-                .andExpect(redirectedUrl("/organisatoren/testErstellen"));
-    }
-
-    @Test
-    @WithMockOAuth2User(login = "JoeSchmoe", roles = "ORGANISATOR")
-    @DisplayName("Fertigstellen Button leitet einen auf Startseite weiter")
-    void test_09() throws Exception {
-        mvc.perform(post("/organisatoren/testErstellen/testFertigstellen"))
-                .andExpect(redirectedUrl("/organisatoren/landingPage"));
     }
 
     @Test
     @WithMockOAuth2User(login = "JoeSchmoe", roles = "ORGANISATOR")
     @DisplayName("TestErstellenPage hat im hidden-Field die ID des Tests")
-    void test_10() throws Exception {
+    void test_07() throws Exception {
         int id = 69420;
         TestFormular testForm = mock(TestFormular.class);
         when(testForm.getTestFragen()).thenReturn(List.of());
@@ -123,4 +99,14 @@ public class OrganisatorenControllerTest {
 
         assertThat(mvcResult).contains("" + id);
     }
+
+    @Test
+    @WithMockOAuth2User(login = "JoeSchmoe", roles = "ORGANISATOR")
+    @DisplayName("Fertigstellen Button leitet einen auf Startseite weiter")
+    void test_08() throws Exception {
+        mvc.perform(post("/organisatoren/testErstellen/testFertigstellen"))
+                .andExpect(redirectedUrl("/organisatoren/landingPage"));
+    }
+
+
 }
