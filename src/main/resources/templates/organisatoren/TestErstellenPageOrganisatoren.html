@@ -24,44 +24,41 @@
 
         <input type="hidden" th:value="${id}">
 
-        <!--TODO:-->
+        <label class="test-titel" for="testFormTitel">Test Titel:</label>
+        <input class="test-titel-textfeld" type="text" id="testFormTitel" name="testTitel" th:value="${testForm.testTitel}">
+
         <form th:action="@{/organisatoren/testErstellen/addMcFrage/{id}(id=${id})}" method="post">
             <button class="btn-dark" type="submit" id="mcFrageButton">+ Multiple-Choice Frage hinzufügen</button>
         </form>
 
-        <!--TODO: -->
-        <form th:action="@{/organisatoren/testErstellen/addFreitextFrage}" method="post">
+        <form th:action="@{/organisatoren/testErstellen/addFreitextFrage/{id}(id=${id})}" method="post">
             <button class="btn-dark" type="submit" id="freitextFrage"> + Freitext Frage hinzufügen</button>
         </form>
 
         <ul th:remove="all-but-first">
             <li th:each="testFrage: ${testForm.getTestFragen()}" class="list-group-item">
-                <!--Dieser Abschnitt wird nur angezeigt, falls es sich um eine Mulitple-Choice Frage handelt -->
-
+                <input type="hidden" name="testfragenIds[]" th:value="${testFrage.id}">
                 <span th:if="${testFrage.istMcFrage()}">
                     <p class="fragen-überschrift">Multiple-Choice Frage</p>
                     <!--TODO: zugehörige ID zur URL hinzufügen-->
                     <form method="post" th:action="@{/organisatoren/testErstellen/updateTestfrage/{id}(id=${id})}">
                         <label for="titelMCID"> Titel: </label>
-                        <input class="textfeld" type="text" id="titelMCID" name="titel" th:value="${testFrage.titel}">
+                        <input class="textfeld" type="text" id="titelMCID" name="fragenTitel[]" th:value="${testFrage.titel}">
                         <br>
                         <label for="multipleChoiceFrageID">Multiple-Choice Fragestellung:</label>
-                        <input class="textfeld" type="text" id="multipleChoiceFrageID" name="fragestellung" th:value="${testFrage.fragestellung}">
+                        <input class="textfeld" type="text" id="multipleChoiceFrageID" name="fragestellungen[]" th:value="${testFrage.fragestellung}">
                         <br>
                         <button class="button-abstand" type="submit" id="antwortHinzufügenMC">+ Antwort hinzufügen</button>
                         <br>
                         <label for="punktzahlMcFrageID"> Punktzahl: </label>
-                        <input class="textfeld" type="number" id="punktzahlMcFrageID" name="punkte" th:value="${testFrage.punkte}">
+                        <input class="textfeld" type="number" id="punktzahlMcFrageID" name="punkte[]" th:value="${testFrage.punkte}">
                         <br>
                         <label for="erklaerungMCFrageID"> Erklärung: </label>
-                        <textarea class="lösung-textfeld" id="erklaerungMCFrageID" name="erklaerung" th:value="${testFrage.erklaerung}"></textarea>
+                        <textarea class="lösung-textfeld" id="erklaerungMCFrageID" name="erklaerungen[]" th:value="${testFrage.erklaerung}"></textarea>
                         <br>
-                        <button class="button-abstand" type="submit">Zwischenspeichern</button>
                     </form>
-
                 </span>
 
-                <!--Dieser Abschnitt wird nur angezeigt, falls es sich um eine Freitextfrage handelt -->
                 <span th:unless="${testFrage.istMcFrage()}">
                     <p class="fragen-überschrift">Freitext Frage</p>
 
@@ -80,44 +77,9 @@
                     </form>
                 </span>
             </li>
-            <!--Vorschau, wie es mit mehreren Testfragen klappen würde:-->
-            <li class="list-group-item">
-                <p class="fragenüberschrift">
-                    Multiple-Choice Frage:
-                </p>
-                <form method="post" th:action="@{/organisatoren/testErstellen/updateTitelMC}">
-                    <label for="titelMCID"> Titel: </label>
-                    <input type="text"  name="titel">
-                </form>
-
-                <form method="post" th:action="@{/organisatoren/testErstellen/updateFragestellungMC}">
-                    <label for="multipleChoiceFrageID">Multiple-Choice Fragestellung:</label>
-                    <input type="text" name="multipleChoiceFrage">
-                </form>
-
-                <button class="btn-dark" type="submit" >+ Antwort hinzufügen</button>
-
-                <form method="post" th:action="@{/organisatoren/testErstellen/updatePunkteMC}">
-                    <label for="punktzahlMcFrageID"> Punktzahl: </label>
-                    <input type="number" name="punktzahlMC" >
-                </form>
-
-                <form>
-                    <label for="erklaerungMCFrageID"> Erklärung: </label>
-                    <textarea name="erklaerungMCFrage"></textarea>
-                </form>
-            </li>
         </ul>
 
-        <span th:if="${mcFrageButton}">
-                <!-- Grobe Idee, muss noch getestet werden ob das geht -->
-        </span>
-
-        <span th:if="${freitextFrageButton}">
-
-        </span>
-
-    <form method="get" th:action="@{/organisatoren/landingPage}">
+    <form method="get" th:action="@{/organisatoren/landingPage/testFertigstellen/{id}(id=${id})}">
         <button type="submit">Test fertigstellen</button>
     </form>
 
