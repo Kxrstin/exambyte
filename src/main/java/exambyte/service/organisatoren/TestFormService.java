@@ -4,6 +4,8 @@ import exambyte.aggregates.organisatoren.TestFormular;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class TestFormService {
     private TestFormRepo repository;
@@ -22,5 +24,9 @@ public class TestFormService {
 
     public int saveTestForm(TestFormular testForm) {
         return repository.saveTestForm(testForm);
+    }
+
+    public List<TestFormular> getTestForms() {
+        return repository.getTestForms();
     }
 }

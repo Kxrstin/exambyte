@@ -2,12 +2,10 @@ package exambyte.persistence.organisatoren;
 
 import exambyte.aggregates.organisatoren.TestFormular;
 import exambyte.service.organisatoren.TestFormRepo;
+import exambyte.service.organisatoren.TestFormService;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 @Repository
 public class TestFormRepoImpl implements TestFormRepo {
@@ -24,8 +22,14 @@ public class TestFormRepoImpl implements TestFormRepo {
     }
 
     public int addNewTestForm() {
-        TestFormular testForm = new TestFormular(new ArrayList<>());
+        TestFormular testForm = new TestFormular("", new HashMap<>());
         testForms.put(testForm.getId(), testForm);
         return testForm.getId();
+    }
+
+    public List<TestFormular> getTestForms() {
+        return testForms.entrySet().stream()
+                .map(entry -> entry.getValue())
+                .toList();
     }
 }
