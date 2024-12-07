@@ -1,7 +1,10 @@
 package exambyte.controller.organisatoren;
 
 import exambyte.aggregates.organisatoren.TestFormular;
+import exambyte.aggregates.organisatoren.TestFrage;
+import exambyte.aggregates.studenten.StudiTest.TestForm;
 import exambyte.service.organisatoren.TestFormService;
+import exambyte.service.studenten.TestFragenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
@@ -24,7 +27,8 @@ public class OrganisatorenController {
 
     @GetMapping("/organisatoren/landingPage")
     @Secured("ROLE_ORGANISATOR")
-    public String landingPage() {
+    public String landingPage(Model model) {
+        model.addAttribute("testForms", service.getTestForms());
         return "/organisatoren/LandingPageOrganisatoren";
     }
 
@@ -53,7 +57,6 @@ public class OrganisatorenController {
     @PostMapping("/organisatoren/testErstellen/addMcFrage/{id}")
     @Secured("ROLE_ORGANISATOR")
     public String addMcFrage(RedirectAttributes redirectAttributes,
-                             Model model,
                              @PathVariable int id) {
         TestFormular testForm = service.getTestFormById(id);
         testForm.addNewMCFrage();
@@ -63,21 +66,25 @@ public class OrganisatorenController {
         return "redirect:/organisatoren/testErstellen";
     }
 
-    //TODO: alle Methoden, die auf update... antworten ersetzen mit einer einzigen update-Methode, die zugehörige IDs
-    //      annimmt.
-
+    //TODO: Update Methode so schreiben, dass sie alles ins richtige TestFormular schreibt
     @PostMapping("/organisatoren/testErstellen/updateTestfrage/{id}")
     @Secured("ROLE_ORGANISATOR")
     public String updateTestFrage(@PathVariable int id,
                                   RedirectAttributes redirectAttributes) {
+        TestFormular testFormular = service.getTestFormById(id);
+
         return "redirect:/organisatoren/testErstellen";
     }
 
-    @PostMapping("/organisatoren/testErstellen/addFreitextFrage")
+    @PostMapping("/organisatoren/testErstellen/addFreitextFrage/{id}")
     @Secured("ROLE_ORGANISATOR")
-    public String addFreitextFrage(RedirectAttributes redirectAttributes) {
-        redirectAttributes.addFlashAttribute("freitextFrageButton", true);
-
+    public String addFreitextFrage(RedirectAttributes redirectAttributes,
+                                   @PathVariable int id) {
+        TestFormular testForm = service.getTestFormById(id);
+        testForm.addNewFreitextFrage();
+        service.saveTestForm(testForm);
+        redirectAttributes.addFlashAttribute("id", id);
+        redirectAttributes.addFlashAttribute("redirect", true);
         return "redirect:/organisatoren/testErstellen";
     }
 
@@ -87,9 +94,21 @@ public class OrganisatorenController {
         return "/organisatoren/KorrekturstandOrganisatoren";
     }
 
-    @PostMapping("/organisatoren/testErstellen/testFertigstellen")
+    @PostMapping("/organisatoren/testErstellen/testFertigstellen/{id}")
     @Secured("ROLE_ORGANISATOR")
-    public String testFertigStellen() {
+    public String testFertigStellen(@PathVariable int id,
+                                    @RequestParam(value = "testfragenIds[]", required = false) List<Integer> testfragenIds,
+                                    @RequestParam(value = "fragenTitel[]", required = false) List<String> titelListe,
+                                    @RequestParam(value = "fragestellungen[]", required = false) List<String> fragestellungen,
+                                    @RequestParam(value = "punkte[]", required = false) List<Integer> punkte,
+                                    @RequestParam(value = "erklaerungen[]", required = false) List<String> erklaerungen) {
+        if(testfragenIds != null) {
+            TestFormular testForm = service.getTestFormById(id);
+            for(int i = 0; i < testfragenIds.size(); i++) {
+                TestFrage testFragen = testForm.getTestFrageById(testfragenIds.get(i));
+            }
+        }
+
         return "redirect:/organisatoren/landingPage";
     }
 }
