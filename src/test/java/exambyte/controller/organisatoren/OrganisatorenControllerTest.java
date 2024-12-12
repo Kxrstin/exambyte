@@ -1,17 +1,15 @@
 package exambyte.controller.organisatoren;
 
 import exambyte.aggregates.organisatoren.TestFormular;
-import exambyte.controller.organisatoren.OrganisatorenController;
 import exambyte.helper.WithMockOAuth2User;
 import exambyte.service.organisatoren.TestFormService;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
 
 import java.util.List;
 
@@ -33,6 +31,9 @@ public class OrganisatorenControllerTest {
     @MockBean
     TestFormService testFormService;
 
+    TestFormular mockTestForm = mock(TestFormular.class);
+    int testId = 69420;
+
     @Test
     @WithMockOAuth2User(login = "JoeSchmoe", roles = "ORGANISATOR")
     @DisplayName("Die Organisatoren LandingPage ist unter /organisatoren/landingPage erreichbar")
@@ -45,6 +46,8 @@ public class OrganisatorenControllerTest {
     @WithMockOAuth2User(login = "JoeSchmoe", roles = "ORGANISATOR")
     @DisplayName("Test Erstellen Seite ist unter /organisatoren/testErstellen erreichbar")
     void test_02() throws Exception {
+        mockTestFormMethoden();
+        mockTestFormServiceMethoden();
         mvc.perform(get("/organisatoren/testErstellen"))
                 .andExpect(status().isOk());
     }
@@ -59,68 +62,80 @@ public class OrganisatorenControllerTest {
 
     @Test
     @WithMockOAuth2User(login = "JoeSchmoe", roles = "ORGANISATOR")
-    @DisplayName("MC-Frage Seite redirected zu /organisatoren/testErstellen")
+    @DisplayName("Post-Request auf /addMcFrage Seite redirected zu /organisatoren/testErstellen")
     void test_04() throws Exception {
-        mvc.perform(post("/organisatoren/testErstellen/addMcFrage").with(csrf()))
+        mockTestFormMethoden();
+        mockTestFormServiceMethoden();
+
+        mvc.perform(post("/organisatoren/testErstellen/addMcFrage/123").with(csrf()))
                 .andExpect(redirectedUrl("/organisatoren/testErstellen"));
     }
 
     @Test
     @WithMockOAuth2User(login = "JoeSchmoe", roles = "ORGANISATOR")
-    @DisplayName("Freitext-Frage Seite redirected zu /organisatoren/testErstellen")
+    @DisplayName("Post-Request auf /addFreitextFrage Seite redirected zu /organisatoren/testErstellen")
     void test_05() throws Exception {
-        mvc.perform(post("/organisatoren/testErstellen/addFreitextFrage").with(csrf()))
+        mockTestFormMethoden();
+        mockTestFormServiceMethoden();
+
+        mvc.perform(post("/organisatoren/testErstellen/addFreitextFrage/123").with(csrf()))
                 .andExpect(redirectedUrl("/organisatoren/testErstellen"));
     }
 
     @Test
     @WithMockOAuth2User(login = "JoeSchmoe", roles = "ORGANISATOR")
-    @DisplayName("Hinzufügen eines Titels bei MC-Frage redirected zu /organisatoren/testErstellen")
+    @DisplayName("Aufruf von /organisatoren/testErstellen/updateTestfrage leitet einen wieder auf Test Erstellen zurück")
     void test_06() throws Exception {
-        mvc.perform(post("/organisatoren/testErstellen/updateTitelMC").with(csrf()))
+        mvc.perform(post("/organisatoren/testErstellen/updateTestfrage/123").with(csrf()))
                 .andExpect(redirectedUrl("/organisatoren/testErstellen"));
     }
 
     @Test
+    @Disabled
     @WithMockOAuth2User(login = "JoeSchmoe", roles = "ORGANISATOR")
-    @DisplayName("Hinzufügen einer Fragestellung bei MC-Frage redirected zu /organisatoren/testErstellen")
+    @DisplayName("Testfragen lassen sich im Repo speichern und sind nach /testFertigStellen im Repo")
     void test_07() throws Exception {
-        mvc.perform(post("/organisatoren/testErstellen/updateFragestellungMC").with(csrf()))
-                .andExpect(redirectedUrl("/organisatoren/testErstellen"));
-    }
+        mockTestFormMethoden();
+        mockTestFormServiceMethoden();
 
-    @Test
-    @WithMockOAuth2User(login = "JoeSchmoe", roles = "ORGANISATOR")
-    @DisplayName("Hinzufügen einer Punktzahl bei MC-Frage redirected zu /organisatoren/testErstellen")
-    void test_08() throws Exception {
-        mvc.perform(post("/organisatoren/testErstellen/updatePunkteMC").with(csrf()))
-                .andExpect(redirectedUrl("/organisatoren/testErstellen"));
-    }
-
-    @Test
-    @WithMockOAuth2User(login = "JoeSchmoe", roles = "ORGANISATOR")
-    @DisplayName("Fertigstellen Button leitet einen auf Startseite weiter")
-    void test_09() throws Exception {
-        mvc.perform(post("/organisatoren/testErstellen/testFertigstellen"))
-                .andExpect(redirectedUrl("/organisatoren/landingPage"));
+        mvc.perform(get("/organisatoren/testErstellen/"));
     }
 
     @Test
     @WithMockOAuth2User(login = "JoeSchmoe", roles = "ORGANISATOR")
     @DisplayName("TestErstellenPage hat im hidden-Field die ID des Tests")
-    void test_10() throws Exception {
-        int id = 69420;
-        TestFormular testForm = mock(TestFormular.class);
-        when(testForm.getTestFragen()).thenReturn(List.of());
-        when(testForm.getId()).thenReturn(id);
-
-        when(testFormService.addNewTestForm()).thenReturn(id);
-        when(testFormService.getTestFormById(any())).thenReturn(testForm);
+    void test_09() throws Exception {
+        mockTestFormMethoden();
+        mockTestFormServiceMethoden();
         String mvcResult = mvc.perform(get("/organisatoren/testErstellen"))
                 .andReturn()
                 .getResponse()
                 .getContentAsString();
 
-        assertThat(mvcResult).contains("" + id);
+        assertThat(mvcResult).contains("" + testId);
     }
+
+    @Test
+    @WithMockOAuth2User(login = "JoeSchmoe", roles = "ORGANISATOR")
+    @DisplayName("Fertigstellen Button leitet einen auf Startseite weiter")
+    void test_10() throws Exception {
+        mockTestFormMethoden();
+        mockTestFormServiceMethoden();
+
+        mvc.perform(post("/organisatoren/testErstellen/testFertigstellen/123")
+                        .with(csrf()))
+                .andExpect(redirectedUrl("/organisatoren/landingPage"));
+    }
+
+    public void mockTestFormMethoden() {
+        when(mockTestForm.getTestFragen()).thenReturn(List.of());
+        when(mockTestForm.getId()).thenReturn(testId);
+    }
+
+    public void mockTestFormServiceMethoden() {
+        when(testFormService.addNewTestForm()).thenReturn(testId);
+        when(testFormService.getTestFormById(any())).thenReturn(mockTestForm);
+    }
+
+
 }
