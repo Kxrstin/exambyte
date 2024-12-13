@@ -1,6 +1,6 @@
 <html lang="de">
 <head>
-    <title> ExamByte | Übersicht </title>
+    <title> ExamByte | Aufgabenstellung </title>
     <link rel="icon" type="image/png"
           href="../../static/Images/Logo/ExamByteLogoOhneUnterschrift.png"
           th:href="@{/Images/Logo/ExamByteLogoOhneUnterschrift.png}">
@@ -15,10 +15,10 @@
          th:src="@{/Images/Logo/ExamByteLogo.png}"
          src="../../static/Images/Logo/ExamByteLogo.png"
          alt="">
-    ExamByte - Aufgaben
+    ExamByte - Aufgabenstellung
 </h1>
 
-<h2> Zu korrigierende Aufgaben: </h2>
+<h2> Aufgabenstellungen der zu korrigierenden Aufgaben: </h2>
 <ul>
     <li class="list-group-item" th:each="aufgabe : ${aufgaben}">
         <form class="form-group">

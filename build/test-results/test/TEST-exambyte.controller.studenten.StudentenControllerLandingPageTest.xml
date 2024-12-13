@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="exambyte.controller.studenten.StudentenControllerLandingPageTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2024-12-13T21:28:12" hostname="KERSTIN-SURFACE" time="0.108">
+  <properties/>
+  <testcase name="Wenn man 1 Mal einen Test nicht bestanden hat, soll ... vorsicht ... ausgegeben werden." classname="exambyte.controller.studenten.StudentenControllerLandingPageTest" time="0.033"/>
+  <testcase name="Wenn man alle Tests bislang bestanden hat, soll guter Kurs neben Zulassungsstatus stehen" classname="exambyte.controller.studenten.StudentenControllerLandingPageTest" time="0.009"/>
+  <testcase name="Wenn man auf einen Test klickt, soll man zur richtigen TestPage Seite kommen." classname="exambyte.controller.studenten.StudentenControllerLandingPageTest" time="0.014"/>
+  <testcase name="Wenn ein nicht-Student auf die URL /studenten/landingPage/zeigeErgebnis zugreifen will, wird er zu GitHub Anmeldung redirected." classname="exambyte.controller.studenten.StudentenControllerLandingPageTest" time="0.007"/>
+  <testcase name="Auf der LandingPage soll eine Liste von Tests angezeigt werden" classname="exambyte.controller.studenten.StudentenControllerLandingPageTest" time="0.01"/>
+  <testcase name="Die Route /landingPage führt zum Öffnen der LandingPageStudenten.html Seite und es gibt einen 200 Status, wenn man Student ist." classname="exambyte.controller.studenten.StudentenControllerLandingPageTest" time="0.009"/>
+  <testcase name="Wenn man 3 Tests nicht bestanden hat, soll ... mehr als 2 Tests nicht bestanden ... ausgegeben werden." classname="exambyte.controller.studenten.StudentenControllerLandingPageTest" time="0.009"/>
+  <testcase name="Die Route /landingPage führt zur GitHub Anmeldung und es gibt einen 3XX Status, wenn man kein Student ist." classname="exambyte.controller.studenten.StudentenControllerLandingPageTest" time="0.006"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
