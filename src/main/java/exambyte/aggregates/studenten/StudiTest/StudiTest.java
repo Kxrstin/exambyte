@@ -2,9 +2,6 @@ package exambyte.aggregates.studenten.StudiTest;
 
 import exambyte.aggregates.studenten.StudiAntwort.StudiAntwort;
 import exambyte.annotations.AggregateRoot;
-import org.springframework.cglib.core.Local;
-
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;

@@ -1,7 +1,6 @@
 package exambyte.controller.organisatoren;
 
 import exambyte.aggregates.organisatoren.TestFormular;
-import exambyte.aggregates.organisatoren.TestFrage;
 import exambyte.aggregates.studenten.StudiTest.TestForm;
 import exambyte.service.organisatoren.TestFormService;
 import exambyte.service.studenten.TestFragenService;
@@ -105,7 +104,9 @@ public class OrganisatorenController {
         if(testfragenIds != null) {
             TestFormular testForm = service.getTestFormById(id);
             for(int i = 0; i < testfragenIds.size(); i++) {
-                TestFrage testFragen = testForm.getTestFrageById(testfragenIds.get(i));
+                // TODO: Testfragen ist kein Aggregat Root, dementsprechend darf das hier nicht stehen!
+                // TODO: Man muss mittels des Aggregat Roots den Test fertigstellen!
+                //TestFrage testFragen = testForm.getTestFrageById(testfragenIds.get(i));
             }
         }
 
