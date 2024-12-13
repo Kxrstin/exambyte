@@ -14,6 +14,8 @@
     <body>
 
     <h1>
+        <a class="navLink" th:href="@{/}">Zur Anmeldung</a>
+        <a class="navLink-2" th:href="@{/studenten/landingPage}">Zur Landing Page</a>
         <img class="imgLogo"
              th:src="@{/Images/Logo/ExamByteLogo.png}"
              src="../../static/Images/Logo/ExamByteLogo.png"
@@ -69,9 +71,5 @@
         </form>
     </span>
     </div>
-
-    <form th:action="@{/studenten/landingPage}">
-        <button class="btnWeiterZurueck" type="submit"> Zurück zur Landing Page </button>
-    </form>
     </body>
 </html>

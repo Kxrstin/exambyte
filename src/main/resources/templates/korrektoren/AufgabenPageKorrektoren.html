@@ -11,6 +11,8 @@
 </head>
 <body>
 <h1>
+    <a class="navLink" th:href="@{/}">Zur Anmeldung</a>
+    <a class="navLink-2" th:href="@{/korrektoren/landingPage}">Zur Landing Page</a>
     <img class="imgLogo"
          th:src="@{/Images/Logo/ExamByteLogo.png}"
          src="../../static/Images/Logo/ExamByteLogo.png"
@@ -28,10 +30,6 @@
     </li>
 </ul>
 </ul>
-
-<form class="form-check" th:action="@{/korrektoren/landingPage}">
-    <button type="submit" class="btnWeiterZurueck"> Zurück zur Landing Page </button>
-</form>
 
 </body>
 </html>

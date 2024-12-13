@@ -26,10 +26,6 @@ form {
     margin: 20px;
 }
 
-button {
-
-}
-
 .buttonAnmeldung {
     padding: 10px 20px;
     font-size: 16px;
@@ -133,6 +129,7 @@ li {
     cursor: pointer;
     margin-top: 7px;
 }
+
 .btnBestaetigenMC {
     padding: 3px 6px;
     font-size: 16px;
@@ -165,4 +162,29 @@ li {
 
 .entfernePunkt {
     list-style-type: none;
+}
+
+.navLink {
+    position: absolute;
+    top: 22px;
+    right: 10px;
+    color: #2c3034;
+    padding: 10px;
+    font-size: 16px;
+}
+.navLink-2 {
+     position: absolute;
+     top: 22px;
+     right: 145px;
+     color: #2c3034;
+     padding: 10px;
+     font-size: 16px;
+ }
+.navLink-Strich {
+    position: absolute;
+    top: 22px;
+    right: 110px;
+    color: #2c3034;
+    padding: 10px;
+    font-size: 16px;
 }

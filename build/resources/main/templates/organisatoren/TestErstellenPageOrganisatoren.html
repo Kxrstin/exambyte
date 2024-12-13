@@ -15,6 +15,8 @@
     </head>
     <body>
         <h1>
+            <a class="navLink" th:href="@{/}">Zur Anmeldung</a>
+            <a class="navLink-2" th:href="@{/organisatoren/landingPage}">Zur Landing Page</a>
             <img class="imgLogo"
                     th:src="@{/Images/Logo/ExamByteLogo.png}"
                  src="../../static/Images/Logo/ExamByteLogo.png"
@@ -81,10 +83,6 @@
 
     <form method="get" th:action="@{/organisatoren/landingPage/testFertigstellen/{id}(id=${id})}">
         <button type="submit">Test fertigstellen</button>
-    </form>
-
-    <form method="get" th:action="@{/organisatoren/landingPage}">
-        <button type="submit">Zurück zur Startseite</button>
     </form>
     </body>
 </html>

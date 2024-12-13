@@ -1,6 +1,6 @@
 <html lang="de">
 <head>
-    <title> ExamByte | Übersicht </title>
+    <title> ExamByte | Aufgabenstellung </title>
     <link rel="icon" type="image/png"
           href="../../static/Images/Logo/ExamByteLogoOhneUnterschrift.png"
           th:href="@{/Images/Logo/ExamByteLogoOhneUnterschrift.png}">
@@ -11,14 +11,16 @@
 </head>
 <body>
 <h1>
+    <a class="navLink" th:href="@{/}">Zur Anmeldung</a>
+    <a class="navLink-2" th:href="@{/korrektoren/landingPage}">Zur Landing Page</a>
     <img class="imgLogo"
          th:src="@{/Images/Logo/ExamByteLogo.png}"
          src="../../static/Images/Logo/ExamByteLogo.png"
          alt="">
-    ExamByte - Aufgaben
+    ExamByte - Aufgabenstellung
 </h1>
 
-<h2> Zu korrigierende Aufgaben: </h2>
+<h2> Aufgabenstellungen der zu korrigierenden Aufgaben: </h2>
 <ul>
     <li class="list-group-item" th:each="aufgabe : ${aufgaben}">
         <form class="form-group">
@@ -28,10 +30,6 @@
     </li>
 </ul>
 </ul>
-
-<form class="form-check" th:action="@{/korrektoren/landingPage}">
-    <button type="submit" class="btnWeiterZurueck"> Zurück zur Landing Page </button>
-</form>
 
 </body>
 </html>
