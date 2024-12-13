@@ -48,13 +48,12 @@
         </form>
 
        <span th:if="${isAbgelaufen}" th:each="antwortwahl: ${antworten}">
-            <!-- Das 'disabled' Attribut blockiert die Interaktion, aber zeigt den vorherigen Zustand an -->
             <input class="btnInput" type="checkbox" th:name="checkboxWahlen" th:value="${antwortwahl}" id="checkboxId2"
                    th:checked="${gewaehlteAntworten.contains(antwortwahl)}" disabled>
-            <label class="btnLabel" for="checkboxId2" th:text="${antwortwahl}">Option 1 </label><br>
+            <label class="btnLabel" for="checkboxId2" th:text="${antwortwahl}">Option 1 </label> <br>
         </span>
-    <br>
     </span>
+    <br>
     <span class="punktzahl" th:text="${punktzahl}"> Maximale Punktzahl: 2 Punkte </span>
 
     <div class="buttonContainer">
