@@ -24,7 +24,7 @@
 <ul>
     <li class="list-group-item" th:each="aufgabe : ${aufgaben}">
         <form class="form-group">
-            <a th:href="@{/korrektoren/landingPage/zeigeAbgaben/{testname}/{aufgabe}(aufgabe=${aufgabe.replace(' ', '_')}, testname=${testname.replace(' ', '_')})}">
+            <a class="korrektorenLink" th:href="@{/korrektoren/landingPage/zeigeAbgaben/{testname}/{aufgabe}(aufgabe=${aufgabe.replace(' ', '_')}, testname=${testname.replace(' ', '_')})}">
                 <span th:text="${aufgabe}"> Test 1</span></a> <br>
         </form>
     </li>

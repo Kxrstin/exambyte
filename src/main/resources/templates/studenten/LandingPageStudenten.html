@@ -53,7 +53,7 @@
     <ul th:remove="all-but-first">
         <li class="list-group-item" th:each="test : ${bearbeitbareTests}">
             <form th:action="@{/studenten/landingPage/zeigeErgebnis/{id}(id=${test.getId()})}" class="form-group">
-                <a th:href="@{/studenten/landingPage/zeigeTest/{id}(id=${test.getId()})}">
+                <a class="korrektorenLink" th:href="@{/studenten/landingPage/zeigeTest/{id}(id=${test.getId()})}">
                     <span th:text="${test.getTitel()}"> Test 1</span></a> <br>
             </form>
         </li>
@@ -66,7 +66,7 @@
     <ul th:remove="all-but-first">
         <li class="list-group-item" th:each="test : ${abgelaufeneTests}">
             <form th:action="@{/studenten/landingPage/zeigeErgebnis/{id}(id=${test.getId()})}" class="form-group">
-                <a th:href="@{/studenten/landingPage/zeigeTest/{id}(id=${test.getId()})}">
+                <a class="korrektorenLink" th:href="@{/studenten/landingPage/zeigeTest/{id}(id=${test.getId()})}">
                     <span th:text="${test.getTitel()}"> Test 1</span></a> <br>
                 <button class="btnStudi" type="submit"> Ergebnis </button>
             </form>
