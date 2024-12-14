@@ -12,14 +12,14 @@ import java.util.Map;
 public final class StudiTest {
     private final TestForm testForm;
     private final List<TestAufgabe> testAufgaben = new ArrayList<>();
-    private final Map<TestAufgabe, StudiAntwort> aufgabeMitAntwort = new HashMap<>();
+    private final Map<TestAufgabe, List<StudiAntwort>> aufgabeMitAntwort = new HashMap<>();
 
     public StudiTest(TestForm testForm, List<TestAufgabe> testAufgaben) {
         this.testForm = testForm;
         if(testAufgaben != null) {
             this.testAufgaben.addAll(testAufgaben);
             for (TestAufgabe testAufgabe : testAufgaben) {
-                aufgabeMitAntwort.put(testAufgabe, new StudiAntwort());
+                aufgabeMitAntwort.put(testAufgabe, new ArrayList<>());
             }
         }
     }
@@ -68,32 +68,39 @@ public final class StudiTest {
 
     // Zeitpunkte
     public boolean isBearbeitbar(LocalDateTime now) {
-        if (now.isBefore(testForm.getEndzeitpunkt()) && now.isAfter(testForm.getStartzeitpunkt())) {
-            return true;
-        }
-        return false;
+        return now.isBefore(testForm.getEndzeitpunkt()) && now.isAfter(testForm.getStartzeitpunkt());
     }
 
     public boolean isAbgelaufen(LocalDateTime now) {
-        if (now.isAfter(testForm.getEndzeitpunkt()) && now.isAfter(testForm.getStartzeitpunkt())) {
-            return true;
-        }
-        return false;
+        return now.isAfter(testForm.getEndzeitpunkt()) && now.isAfter(testForm.getStartzeitpunkt());
     }
 
     // TestAntworten
-    public void addAntwort(String antwort, int aufgabe) {
-        StudiAntwort studiAntwort = aufgabeMitAntwort.get(testAufgaben.get(aufgabe));
-        if(isFreitextAufgabe(aufgabe)) {
-            studiAntwort.setFreitextAufgabe();
-        } else if(isMCAufgabe(aufgabe)) {
-            studiAntwort.setMCAufgabe();
+    public void addAntwort(String antwort, int aufgabe, int studiId) {
+        List<StudiAntwort> studiAntworten = aufgabeMitAntwort.get(testAufgaben.get(aufgabe));
+
+        // Wenn noch keine Studi-Abgabe zur Aufgabe hinzugefügt wurde, wird eine neue StudiAntwort Instanz erstellt
+        if(studiAntworten.stream().filter(abgabe -> abgabe.getStudiId() == studiId).findFirst().orElse(null) == null) {
+            StudiAntwort neueAbgabe = new StudiAntwort();
+            if(isFreitextAufgabe(aufgabe)) {
+                neueAbgabe.setFreitextAufgabe(studiId);
+            } else if(isMCAufgabe(aufgabe)) {
+                neueAbgabe.setMCAufgabe(studiId);
+            }
+            studiAntworten.add(neueAbgabe);
         }
+
+        // Neue Antwort der Antwortliste zu der zugehörigen Aufgabe hinzufügen, denn studiAntwort kann wegen der vorigen Abfrage nicht null sein
+        StudiAntwort studiAntwort = studiAntworten.stream().filter(abgabe -> abgabe.getStudiId() == studiId).findFirst().orElse(null);
         studiAntwort.addAntwort(antwort);
     }
 
-    public String getAntwort(int aufgabe) {
-        return aufgabeMitAntwort.get(testAufgaben.get(aufgabe)).getAntwort();
+    public String getAntwort(int aufgabe, int studiId) {
+        return aufgabeMitAntwort.get(testAufgaben.get(aufgabe)).stream()
+                .filter(antwort -> antwort.getStudiId() == studiId)
+                .findFirst()
+                .orElse(new StudiAntwort())
+                .getAntwort();
     }
 
 

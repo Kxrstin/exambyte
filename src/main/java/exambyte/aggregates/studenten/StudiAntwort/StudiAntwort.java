@@ -6,12 +6,15 @@ import exambyte.annotations.AggregateRoot;
 @AggregateRoot
 public class StudiAntwort {
     private TestAntwort testAntwort;
+    private int studiId;
 
-    public void setMCAufgabe() {
+    public void setMCAufgabe(int studiId) {
         testAntwort = new MCAntwort();
+        this.studiId = studiId;
     }
-    public void setFreitextAufgabe() {
+    public void setFreitextAufgabe(int studiId) {
         testAntwort = new FreitextAntwort();
+        this.studiId = studiId;
     }
 
     public void addAntwort(String antwort) {
@@ -32,5 +35,9 @@ public class StudiAntwort {
         } catch(Exception e) {
             return "";
         }
+    }
+
+    public int getStudiId() {
+        return studiId;
     }
 }

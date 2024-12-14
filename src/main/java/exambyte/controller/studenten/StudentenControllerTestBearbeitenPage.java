@@ -3,6 +3,8 @@ package exambyte.controller.studenten;
 import exambyte.service.studenten.TestFragenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,7 +34,7 @@ public class StudentenControllerTestBearbeitenPage {
 
     @GetMapping("/studenten/testBearbeitung/{id}/{aufgabe}")
     @Secured("ROLE_STUDENT")
-    public String aufgabenBearbeitung(Model model, @PathVariable("id") Integer testId, @PathVariable("aufgabe") Integer aufgabenNr) {
+    public String aufgabenBearbeitung(Model model, @PathVariable("id") Integer testId, @PathVariable("aufgabe") Integer aufgabenNr, @AuthenticationPrincipal OAuth2User user) {
         model.addAttribute("isAbgelaufen", testService.isAbgelaufen(testId));
         model.addAttribute("aufgabe", aufgabenNr);
         model.addAttribute("id", testId);
@@ -41,12 +43,12 @@ public class StudentenControllerTestBearbeitenPage {
 
         if (testService.isFreitextAufgabe(testId, aufgabenNr)) {
             model.addAttribute("freitextFrage", true);
-            model.addAttribute("studiFAntwort",  testService.getAntwort(testId, aufgabenNr));
+            model.addAttribute("studiFAntwort", testService.getAntwort(testId, aufgabenNr, user.getAttribute("id")));
         }
         if (testService.isMCAufgabe(testId, aufgabenNr)) {
             model.addAttribute("mcfrage", true);
             model.addAttribute("antworten", testService.getAntwortMoeglichkeiten(testId, aufgabenNr));
-            String gespeicherteAntwort = testService.getAntwort(testId, aufgabenNr);
+            String gespeicherteAntwort = testService.getAntwort(testId, aufgabenNr, user.getAttribute("id"));
 
             if (gespeicherteAntwort != null && !gespeicherteAntwort.isEmpty()) {
                 List<String> gewaehlteAntworten = Arrays.asList(gespeicherteAntwort.substring(1, gespeicherteAntwort.length()-1).split(", "));
@@ -71,14 +73,15 @@ public class StudentenControllerTestBearbeitenPage {
     @Secured("ROLE_STUDENT")
     public String antwortEingabe(@RequestParam(name="checkboxWahlen", required = false) List<String> wahlen,
                                  @RequestParam(name="studiFAntwort", defaultValue="") String antwortFreitext,
-                                 @PathVariable("id") Integer id, @PathVariable("aufgabe") int aufgabe)
+                                 @PathVariable("id") Integer id, @PathVariable("aufgabe") int aufgabe,
+                                 @AuthenticationPrincipal OAuth2User user)
     {
         if(antwortFreitext!= null && !antwortFreitext.equals("")) {
-            testService.addAntwort(id, aufgabe, antwortFreitext);
+            testService.addAntwort(id, aufgabe, antwortFreitext, user.getAttribute("id"));
         }
 
         if(wahlen != null && !wahlen.isEmpty()) {
-            testService.addAntwort(id, aufgabe, wahlen.toString());
+            testService.addAntwort(id, aufgabe, wahlen.toString(), user.getAttribute("id"));
         }
         return "redirect:/studenten/testBearbeitung/"+id+"/"+aufgabe;
     }

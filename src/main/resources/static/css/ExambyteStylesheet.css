@@ -103,7 +103,7 @@ li {
 .btnStudi {
     font-size: 16px;
     color: black;
-    background-color: #e5e5fc;
+    background-color: rgba(154, 155, 157, 0.42);
     border: none;
     border-radius: 5px;
     cursor: pointer;
