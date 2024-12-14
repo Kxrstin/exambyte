@@ -15,7 +15,6 @@ public class TestFormular {
 
     public TestFormular(String titel, Map<Integer, TestFrage> testFragen){
         this.testFragen = testFragen;
-        //id = Integer.parseInt(UUID.randomUUID().toString());
         id = UUID.randomUUID().hashCode();
     }
 
@@ -62,5 +61,30 @@ public class TestFormular {
 
     public void setTestTitel(String testTitel) {
         this.testTitel = testTitel;
+    }
+
+    public void setTestFragenPunkteWithId(int punkte, int id){
+        TestFrage testFrage = getTestFrageById(id);
+        testFrage.setPunkte(punkte);
+    }
+
+    public void setTestFragenTitelWithId(String titel, int id) {
+        TestFrage testFrage = getTestFrageById(id);
+        testFrage.setTitel(titel);
+    }
+
+    public void setTestFragenFragestellungWithId(String fragestellung, int id) {
+        TestFrage testFrage = getTestFrageById(id);
+        testFrage.setFragestellung(fragestellung);
+    }
+
+    public void setTestFragenBeschreibungWithId(String beschreibung, int id) {
+        TestFrage testFrage = getTestFrageById(id);
+        testFrage.setBeschreibung(beschreibung);
+    }
+
+    public void setTestFragenErklaerungWithId(String erklaerung, int id) {
+        TestFrage testFrage = getTestFrageById(id);
+        testFrage.setErklaerung(erklaerung);
     }
 }
