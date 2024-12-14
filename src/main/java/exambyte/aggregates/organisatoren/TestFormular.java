@@ -10,6 +10,8 @@ import java.util.UUID;
 @AggregateRoot
 public class TestFormular {
     private String testTitel;
+
+    //TODO: Testfragen werden nach ID automatisch sortiert und sind beim Hinzufügen nie an der richtigen Stelle
     private Map<Integer, TestFrage> testFragen;
     private int id;
 
@@ -29,7 +31,7 @@ public class TestFormular {
         return id;
     }
 
-    public void addTestfrage(TestFrage testFrage) {
+    private void addTestfrage(TestFrage testFrage) {
         testFragen.put(testFrage.getId(), testFrage);
     }
 
@@ -39,6 +41,14 @@ public class TestFormular {
 
     public void addNewFreitextFrage() {
         addTestfrage(new FreitextFrage(0, "", "", "", ""));
+    }
+
+    public void addMCFrage(int punkte, String titel, String fragestellung, String beschreibung, String erklaerung, int id){
+        testFragen.put(id, new MCFrage(punkte, titel, fragestellung, beschreibung, erklaerung, id));
+    }
+
+    public void addFreitextFrage(int punkte, String titel, String fragestellung, String beschreibung, String erklaerung, int id){
+        testFragen.put(id, new FreitextFrage(punkte, titel, fragestellung, beschreibung, erklaerung, id));
     }
 
     public List<TestFrage> getTestFragen(){
@@ -65,26 +75,47 @@ public class TestFormular {
 
     public void setTestFragenPunkteWithId(int punkte, int id){
         TestFrage testFrage = getTestFrageById(id);
-        testFrage.setPunkte(punkte);
+        if(testFrage.istMcFrage()) {
+            testFragen.put(id, new MCFrage(punkte, testFrage.getTitel(), testFrage.getFragestellung(), testFrage.getBeschreibung(), testFrage.getErklaerung()));
+        } else {
+            testFragen.put(id, new FreitextFrage(punkte, testFrage.getTitel(), testFrage.getFragestellung(), testFrage.getBeschreibung(), testFrage.getErklaerung()));
+        }
+
     }
 
     public void setTestFragenTitelWithId(String titel, int id) {
         TestFrage testFrage = getTestFrageById(id);
-        testFrage.setTitel(titel);
+        if(testFrage.istMcFrage()) {
+            testFragen.put(id, new MCFrage(testFrage.getPunkte(), titel, testFrage.getFragestellung(), testFrage.getBeschreibung(), testFrage.getErklaerung()));
+        } else {
+            testFragen.put(id, new FreitextFrage(testFrage.getPunkte(), titel, testFrage.getFragestellung(), testFrage.getBeschreibung(), testFrage.getErklaerung()));
+        }
     }
 
     public void setTestFragenFragestellungWithId(String fragestellung, int id) {
         TestFrage testFrage = getTestFrageById(id);
-        testFrage.setFragestellung(fragestellung);
+        if(testFrage.istMcFrage()) {
+            testFragen.put(id, new MCFrage(testFrage.getPunkte(), testFrage.getTitel(), fragestellung, testFrage.getBeschreibung(), testFrage.getErklaerung()));
+        } else {
+            testFragen.put(id, new FreitextFrage(testFrage.getPunkte(), testFrage.getTitel(), fragestellung, testFrage.getBeschreibung(), testFrage.getErklaerung()));
+        }
     }
 
     public void setTestFragenBeschreibungWithId(String beschreibung, int id) {
         TestFrage testFrage = getTestFrageById(id);
-        testFrage.setBeschreibung(beschreibung);
+        if(testFrage.istMcFrage()) {
+            testFragen.put(id, new MCFrage(testFrage.getPunkte(), testFrage.getTitel(), testFrage.getFragestellung(), beschreibung, testFrage.getErklaerung()));
+        } else {
+            testFragen.put(id, new FreitextFrage(testFrage.getPunkte(), testFrage.getTitel(), testFrage.getFragestellung(), beschreibung, testFrage.getErklaerung()));
+        }
     }
 
     public void setTestFragenErklaerungWithId(String erklaerung, int id) {
         TestFrage testFrage = getTestFrageById(id);
-        testFrage.setErklaerung(erklaerung);
+        if(testFrage.istMcFrage()) {
+            testFragen.put(id, new MCFrage(testFrage.getPunkte(), testFrage.getTitel(), testFrage.getFragestellung(), testFrage.getBeschreibung(), erklaerung));
+        } else {
+            testFragen.put(id, new FreitextFrage(testFrage.getPunkte(), testFrage.getTitel(), testFrage.getFragestellung(), testFrage.getBeschreibung(), erklaerung));
+        }
     }
 }

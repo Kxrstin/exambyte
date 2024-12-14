@@ -39,32 +39,34 @@
 
         <ul th:remove="all-but-first">
             <li th:each="testFrage: ${testForm.getTestFragen()}" class="list-group-item">
-                <input type="hidden" name="testfragenIds[]" th:value="${testFrage.id}">
                 <span th:if="${testFrage.istMcFrage()}">
                     <p class="fragen-überschrift">Multiple-Choice Frage</p>
                     <!--TODO: zugehörige ID zur URL hinzufügen-->
-                    <form method="post" th:action="@{/organisatoren/testErstellen/updateTestfrage/{id}(id=${id})}">
+                    <form method="post" th:action="@{/organisatoren/testErstellen/updateMCFrage/{id}/{frageID}(id=${id}, frageID=${testFrage.id})}">
+                        <input type="hidden" name="testfragenId" th:value="${testFrage.id}">
                         <label for="titelMCID"> Titel: </label>
-                        <input class="textfeld" type="text" id="titelMCID" name="fragenTitel[]" th:value="${testFrage.titel}">
+                        <input class="textfeld" type="text" id="titelMCID" name="titel" th:value="${testFrage.titel}">
                         <br>
                         <label for="multipleChoiceFrageID">Multiple-Choice Fragestellung:</label>
-                        <input class="textfeld" type="text" id="multipleChoiceFrageID" name="fragestellungen[]" th:value="${testFrage.fragestellung}">
+                        <input class="textfeld" type="text" id="multipleChoiceFrageID" name="fragestellung" th:value="${testFrage.fragestellung}">
                         <br>
                         <button class="button-abstand" type="submit" id="antwortHinzufügenMC">+ Antwort hinzufügen</button>
                         <br>
                         <label for="punktzahlMcFrageID"> Punktzahl: </label>
-                        <input class="textfeld" type="number" id="punktzahlMcFrageID" name="punkte[]" th:value="${testFrage.punkte}">
+                        <input class="textfeld" type="number" id="punktzahlMcFrageID" name="punkte" th:value="${testFrage.punkte}">
                         <br>
                         <label for="erklaerungMCFrageID"> Erklärung: </label>
-                        <textarea class="lösung-textfeld" id="erklaerungMCFrageID" name="erklaerungen[]" th:value="${testFrage.erklaerung}"></textarea>
+                        <textarea class="lösung-textfeld" id="erklaerungMCFrageID" name="erklaerung" th:text="${testFrage.erklaerung}"></textarea>
                         <br>
+                        <button type="submit">Testfrage speichern</button>
                     </form>
                 </span>
 
                 <span th:unless="${testFrage.istMcFrage()}">
                     <p class="fragen-überschrift">Freitext Frage</p>
 
-                    <form method="post" th:action="@{/organisatoren/testErstellen/updateTestfrage/{id}(id=${id})}">
+                    <form method="post" th:action="@{/organisatoren/testErstellen/updateFreitextFrage/{id}/{frageID}(id=${id}, frageID=${testFrage.id})}">
+                        <input type="hidden" name="testfragenId" th:value="${testFrage.id}">
                         <label for="titelFreitextID"> Titel: </label>
                         <input class="textfeld" type="text" id="titelFreitextID" name="titel" th:value="${testFrage.titel}">
                         <br>
@@ -75,7 +77,9 @@
                         <input class="textfeld" type="number" name="punkte" id="punktzahlFreitextID" th:value="${testFrage.punkte}">
                         <br>
                         <label for="loesungID"> Mögliche Lösung: </label>
-                        <textarea class="lösung-textfeld" id="loesungID" name="erklaerung" th:value="${testFrage.erklaerung}"></textarea>
+                        <textarea class="lösung-textfeld" id="loesungID" name="erklaerung" th:text="${testFrage.erklaerung}"></textarea>
+                        <br>
+                        <button type="submit">Testfrage speichern</button>
                     </form>
                 </span>
             </li>

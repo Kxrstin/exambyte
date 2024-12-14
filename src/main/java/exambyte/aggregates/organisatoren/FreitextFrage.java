@@ -1,14 +1,16 @@
 package exambyte.aggregates.organisatoren;
 
-import java.util.UUID;
+import exambyte.annotations.Wertobjekt;
 
+import java.util.UUID;
+@Wertobjekt
 class FreitextFrage implements TestFrage {
-    private Integer punkte;
-    private String titel;
-    private String fragestellung;
-    private String beschreibung;
-    private Integer id;
-    private String erklaerung;
+    private final Integer punkte;
+    private final String titel;
+    private final String fragestellung;
+    private final String beschreibung;
+    private final Integer id;
+    private final String erklaerung;
 
     public FreitextFrage(Integer punkte, String titel, String fragestellung, String beschreibung, String erklaerung) {
         this.punkte = punkte;
@@ -19,6 +21,15 @@ class FreitextFrage implements TestFrage {
         id = UUID.randomUUID().hashCode();
     }
 
+    public FreitextFrage(Integer punkte, String titel, String fragestellung, String beschreibung, String erklaerung, int id) {
+        this.punkte = punkte;
+        this.titel = titel;
+        this.fragestellung = fragestellung;
+        this.beschreibung = beschreibung;
+        this.erklaerung = erklaerung;
+        this.id = id;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -27,40 +38,20 @@ class FreitextFrage implements TestFrage {
         return punkte;
     }
 
-    public void setPunkte(Integer punkte) {
-        this.punkte = punkte;
-    }
-
     public String getTitel() {
         return titel;
-    }
-
-    public void setTitel(String titel) {
-        this.titel = titel;
     }
 
     public String getFragestellung() {
         return fragestellung;
     }
 
-    public void setFragestellung(String fragestellung) {
-        this.fragestellung = fragestellung;
-    }
-
     public String getBeschreibung() {
         return beschreibung;
     }
 
-    public void setBeschreibung(String beschreibung) {
-        this.beschreibung = beschreibung;
-    }
-
     public String getErklaerung() {
         return erklaerung;
-    }
-
-    public void setErklaerung(String erklaerung) {
-        this.erklaerung = erklaerung;
     }
 
     public boolean istMcFrage(){

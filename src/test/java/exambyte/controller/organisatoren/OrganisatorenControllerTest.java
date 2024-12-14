@@ -83,6 +83,7 @@ public class OrganisatorenControllerTest {
     }
 
     @Test
+    @Disabled
     @WithMockOAuth2User(login = "JoeSchmoe", roles = "ORGANISATOR")
     @DisplayName("Aufruf von /organisatoren/testErstellen/updateTestfrage leitet einen wieder auf Test Erstellen zurück")
     void test_06() throws Exception {

@@ -1,20 +1,15 @@
 package exambyte.controller.organisatoren;
 
 import exambyte.aggregates.organisatoren.TestFormular;
-import exambyte.aggregates.studenten.StudiTest.TestForm;
+import exambyte.aggregates.organisatoren.TestFrage;
 import exambyte.service.organisatoren.TestFormService;
-import exambyte.service.studenten.TestFragenService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 public class OrganisatorenController {
@@ -65,15 +60,7 @@ public class OrganisatorenController {
         return "redirect:/organisatoren/testErstellen";
     }
 
-    //TODO: Update Methode so schreiben, dass sie alles ins richtige TestFormular schreibt
-    @PostMapping("/organisatoren/testErstellen/updateTestfrage/{id}")
-    @Secured("ROLE_ORGANISATOR")
-    public String updateTestFrage(@PathVariable int id,
-                                  RedirectAttributes redirectAttributes) {
-        TestFormular testFormular = service.getTestFormById(id);
 
-        return "redirect:/organisatoren/testErstellen";
-    }
 
     @PostMapping("/organisatoren/testErstellen/addFreitextFrage/{id}")
     @Secured("ROLE_ORGANISATOR")
@@ -83,6 +70,43 @@ public class OrganisatorenController {
         testForm.addNewFreitextFrage();
         service.saveTestForm(testForm);
         redirectAttributes.addFlashAttribute("id", id);
+        redirectAttributes.addFlashAttribute("redirect", true);
+        return "redirect:/organisatoren/testErstellen";
+    }
+
+    //TODO: Update Methode so schreiben, dass sie alles ins richtige TestFormular schreibt
+    @PostMapping("/organisatoren/testErstellen/updateMCFrage/{id}/{frageID}")
+    @Secured("ROLE_ORGANISATOR")
+    public String updateMCFrage(@PathVariable("id") int formID,
+                                @PathVariable int frageID,
+                                RedirectAttributes redirectAttributes,
+                                int punkte,
+                                String titel,
+                                String fragestellung,
+                                String erklaerung) {
+        TestFormular testFormular = service.getTestFormById(formID);
+        //TODO: Beschreibung hinzufügen
+        testFormular.addMCFrage(punkte, titel, fragestellung, "", erklaerung, frageID);
+        service.saveTestForm(testFormular);
+        redirectAttributes.addFlashAttribute("id", formID);
+        redirectAttributes.addFlashAttribute("redirect", true);
+        return "redirect:/organisatoren/testErstellen";
+    }
+
+    @PostMapping("/organisatoren/testErstellen/updateFreitextFrage/{id}/{frageID}")
+    @Secured("ROLE_ORGANISATOR")
+    public String updateFreitextFrage(@PathVariable("id") int formID,
+                                      @PathVariable int frageID,
+                                      RedirectAttributes redirectAttributes,
+                                      int punkte,
+                                      String titel,
+                                      String fragestellung,
+                                      String erklaerung) {
+        TestFormular testFormular = service.getTestFormById(formID);
+        //TODO: Beschreibung hinzufügen
+        testFormular.addFreitextFrage(punkte, titel, fragestellung, "", erklaerung, frageID);
+        service.saveTestForm(testFormular);
+        redirectAttributes.addFlashAttribute("id", formID);
         redirectAttributes.addFlashAttribute("redirect", true);
         return "redirect:/organisatoren/testErstellen";
     }
@@ -106,7 +130,7 @@ public class OrganisatorenController {
             for(int i = 0; i < testfragenIds.size(); i++) {
                 // TODO: Testfragen ist kein Aggregat Root, dementsprechend darf das hier nicht stehen!
                 // TODO: Man muss mittels des Aggregat Roots den Test fertigstellen!
-                //TestFrage testFragen = testForm.getTestFrageById(testfragenIds.get(i));
+
             }
         }
 
