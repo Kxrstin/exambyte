@@ -31,14 +31,20 @@ form {
 }
 
 .buttonAnmeldung {
-    padding: 10px 20px;
-    font-size: 16px;
+    padding: 12px 22px;
+    font-size: 17px;
     color: black;
     background-color: #e5e5fc;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     margin: 0px;
+}
+
+.divAnmeldung {
+    position: absolute;
+    top: 150px;
+    left: 40px;
 }
 
 .list-group-item {
