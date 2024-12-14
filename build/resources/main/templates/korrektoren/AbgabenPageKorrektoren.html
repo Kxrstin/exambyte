@@ -1,0 +1,38 @@
+<html lang="de">
+<head>
+    <title> ExamByte | Studiabgaben </title>
+    <link rel="icon" type="image/png"
+          href="../../static/Images/Logo/ExamByteLogoOhneUnterschrift.png"
+          th:href="@{/Images/Logo/ExamByteLogoOhneUnterschrift.png}">
+    <link rel="stylesheet" href="../../static/css/ExambyteStylesheet.css"
+          th:href="@{/css/ExambyteStylesheet.css}">
+    <link rel = "stylesheet" th:href="@{/css/bootstrap.min.css}"
+          href="../../static/css/bootstrap.min.css">
+</head>
+<body>
+<h1>
+    <a class="navLink" th:href="@{/}">Zur Anmeldung</a>
+    <a class="navLink-2" th:href="@{/korrektoren/landingPage}">Zur Landing Page</a>
+    <img class="imgLogo"
+         th:src="@{/Images/Logo/ExamByteLogo.png}"
+         src="../../static/Images/Logo/ExamByteLogo.png"
+         alt="">
+    ExamByte - Studiabgaben
+</h1>
+
+<h2> Zu korrigierende Aufgaben der Studis: </h2>
+<ul>
+    <li class="list-group-item" th:each="abgabeId : ${abgaben}">
+        <form th:action="@{/korrektoren/landingPage/zeigeAbgabe/{abgabeId}(abgabeId=${abgabeId})}" class="form-group">
+            <a class="korrektorenLink" th:href="@{/korrektoren/landingPage/zeigeAbgabe/{abgabeId}(abgabeId=${abgabeId})}">
+                Test von Student mit ID: <span th:text="${abgabeId}"> 1256</span></a> <br>
+        </form>
+    </li>
+</ul>
+
+<form class="form-check" th:action="@{/korrektoren/landingPage/zeigeAufgaben/{testname}(testname=${testname.replace(' ', '_')})}">
+    <button type="submit" class="btnWeiterZurueck"> Zurück zur Aufgabenansicht </button>
+</form>
+
+</body>
+</html>

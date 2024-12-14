@@ -3,9 +3,7 @@ package exambyte.service.studenten;
 import exambyte.aggregates.studenten.StudiTest.StudiTest;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
@@ -83,14 +81,16 @@ public class TestFragenService {
 
 
     // Antworten speichern
-    public void addAntwort(int testId, int aufgabeNr, String antwort) {
+    public void addAntwort(int testId, int aufgabeNr, String antwort, int studiId) {
         StudiTest test = testRepo.loadTestWithId(testId);
-        if(test != null) { test.addAntwort(antwort, aufgabeNr);}
+        if(test != null) {
+            test.addAntwort(antwort, aufgabeNr, studiId);
+        }
         testRepo.saveTest(test);
     }
-    public String getAntwort(int testId, int aufgabe) {
+    public String getAntwort(int testId, int aufgabe, int studiId) {
         StudiTest test = testRepo.loadTestWithId(testId);
-        if(test != null) { return test.getAntwort(aufgabe);}
+        if(test != null) { return test.getAntwort(aufgabe, studiId);}
         return "";
     }
 

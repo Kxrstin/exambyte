@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="exambyte.controller.organisatoren.OrganisatorenControllerTest" tests="9" skipped="1" failures="0" errors="0" timestamp="2024-12-14T19:09:33" hostname="KERSTIN-SURFACE" time="0.152">
+  <properties/>
+  <testcase name="Die Organisatoren LandingPage ist unter /organisatoren/landingPage erreichbar" classname="exambyte.controller.organisatoren.OrganisatorenControllerTest" time="0.038"/>
+  <testcase name="Test Erstellen Seite ist unter /organisatoren/testErstellen erreichbar" classname="exambyte.controller.organisatoren.OrganisatorenControllerTest" time="0.029"/>
+  <testcase name="Korrekturstand Seite ist unter /organisatoren/korrekturstand erreichbar" classname="exambyte.controller.organisatoren.OrganisatorenControllerTest" time="0.011"/>
+  <testcase name="Post-Request auf /addMcFrage Seite redirected zu /organisatoren/testErstellen" classname="exambyte.controller.organisatoren.OrganisatorenControllerTest" time="0.011"/>
+  <testcase name="Post-Request auf /addFreitextFrage Seite redirected zu /organisatoren/testErstellen" classname="exambyte.controller.organisatoren.OrganisatorenControllerTest" time="0.009"/>
+  <testcase name="Aufruf von /organisatoren/testErstellen/updateTestfrage leitet einen wieder auf Test Erstellen zurück" classname="exambyte.controller.organisatoren.OrganisatorenControllerTest" time="0.009"/>
+  <testcase name="Testfragen lassen sich im Repo speichern und sind nach /testFertigStellen im Repo" classname="exambyte.controller.organisatoren.OrganisatorenControllerTest" time="0.002">
+    <skipped/>
+  </testcase>
+  <testcase name="TestErstellenPage hat im hidden-Field die ID des Tests" classname="exambyte.controller.organisatoren.OrganisatorenControllerTest" time="0.012"/>
+  <testcase name="Fertigstellen Button leitet einen auf Startseite weiter" classname="exambyte.controller.organisatoren.OrganisatorenControllerTest" time="0.011"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
