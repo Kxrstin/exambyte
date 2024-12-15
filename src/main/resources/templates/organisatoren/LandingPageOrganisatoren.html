@@ -19,35 +19,32 @@
              th:src="@{/Images/Logo/ExamByteLogo.png}"
              src="../../static/Images/Logo/ExamByteLogo.png"
              alt="">
-        ExamByte
+        ExamByte - Übersicht
     </h1>
 
-
-        <h2>Übersicht</h2>
-            <form action="/organisatoren/korrekturstand">
-                <button class="btnBestaetigen" type="submit">Korrekturstand</button>
-            </form>
+    <form action="/organisatoren/korrekturstand">
+        <button class="btnBestaetigen" type="submit">Korrekturstand</button>
+    </form>
 
 
-            <form action="/studenten/landingPage/zeigeErgebnis">
-                <button class="btnBestaetigen" type="submit">Ergebnisübersicht</button>
-            </form>
+    <form action="/studenten/landingPage/zeigeErgebnis">
+        <button class="btnBestaetigen" type="submit">Ergebnisübersicht</button>
+    </form>
 
         <!--TODO: th:each Schleife benutzen und alle gespeicherten Tests anzeigen lassen-->
 
+        <form action="/organisatoren/testErstellen">
+            <button class="btnBestaetigen" type="submit">+ Test erstellen</button>
+        </form>
+        <br>
+        <h2>Erstellte Tests:</h2>
         <ul th:remove="all-but-first" class="list-group list-group-flush">
             <li th:each="testForm: ${testForms}" class="list-group-item">
-                <a href=""><span th:value="${testForm.testTitel}">Fragen zur Onion Architektur</span></a>
+                <a href=""><span th:text="${testForm.getTestTitel()}">Fragen zur Onion Architektur</span></a>
             </li>
             <li class="list-group-item">
                 <a href="">MaFIn3 Übung für Blatt 09</a>
             </li>
         </ul>
-
-
-
-        <form action="/organisatoren/testErstellen">
-            <button class="btnBestaetigen" type="submit">+ Test erstellen</button>
-        </form>
     </body>
 </html>

@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
 
 import java.util.List;
 
@@ -94,20 +93,9 @@ public class OrganisatorenControllerTest {
     }
 
     @Test
-    @Disabled
-    @WithMockOAuth2User(login = "JoeSchmoe", roles = "ORGANISATOR")
-    @DisplayName("Testfragen lassen sich im Repo speichern und sind nach /testFertigStellen im Repo")
-    void test_07() throws Exception {
-        mockTestFormMethoden();
-        mockTestFormServiceMethoden();
-
-        mvc.perform(get("/organisatoren/testErstellen/"));
-    }
-
-    @Test
     @WithMockOAuth2User(login = "JoeSchmoe", roles = "ORGANISATOR")
     @DisplayName("TestErstellenPage hat im hidden-Field die ID des Tests")
-    void test_09() throws Exception {
+    void test_07() throws Exception {
         mockTestFormMethoden();
         mockTestFormServiceMethoden();
         String mvcResult = mvc.perform(get("/organisatoren/testErstellen"))
@@ -121,13 +109,24 @@ public class OrganisatorenControllerTest {
     @Test
     @WithMockOAuth2User(login = "JoeSchmoe", roles = "ORGANISATOR")
     @DisplayName("Fertigstellen Button leitet einen auf Startseite weiter")
-    void test_10() throws Exception {
+    void test_08() throws Exception {
         mockTestFormMethoden();
         mockTestFormServiceMethoden();
 
         mvc.perform(post("/organisatoren/testErstellen/testFertigstellen/123")
                         .with(csrf()))
                 .andExpect(redirectedUrl("/organisatoren/landingPage"));
+    }
+
+    @Test
+    @Disabled
+    @WithMockOAuth2User(login = "JoeSchmoe", roles = "ORGANISATOR")
+    @DisplayName("Testformulare lassen sich im Repo speichern und sind nach /testFertigStellen im Repo")
+    void test_09() throws Exception {
+        mockTestFormMethoden();
+        mockTestFormServiceMethoden();
+
+        mvc.perform(get("/organisatoren/testErstellen/"));
     }
 
     public void mockTestFormMethoden() {

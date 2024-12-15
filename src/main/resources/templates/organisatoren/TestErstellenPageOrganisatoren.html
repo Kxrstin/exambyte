@@ -24,10 +24,13 @@
             ExamByte - Test Erstellen
         </h1>
 
-        <input type="hidden" th:value="${id}">
+        <input type="hidden" name="id" th:value="${id}">
 
-        <label class="test-titel" for="testFormTitel">Test Titel:</label>
-        <input class="test-titel-textfeld" type="text" id="testFormTitel" name="testTitel" th:value="${testForm.testTitel}">
+        <form method="post" th:action="@{/organisatoren/testErstellen/saveTestTitel/{id}(id = ${id})}">
+            <label class="test-titel" for="testFormTitel">Test Titel:</label>
+            <input class="test-titel-textfeld" type="text" id="testFormTitel" name="testTitel" th:value="${testForm.testTitel}">
+            <button type="submit">Speichern</button>
+        </form>
 
         <form th:action="@{/organisatoren/testErstellen/addMcFrage/{id}(id=${id})}" method="post">
             <button class="btn-dark" type="submit" id="mcFrageButton">+ Multiple-Choice Frage hinzufügen</button>
@@ -85,7 +88,7 @@
             </li>
         </ul>
 
-    <form method="get" th:action="@{/organisatoren/landingPage/testFertigstellen/{id}(id=${id})}">
+    <form method="post" th:action="@{/organisatoren/testErstellen/testFertigstellen/{id}(id=${id})}">
         <button type="submit">Test fertigstellen</button>
     </form>
     </body>

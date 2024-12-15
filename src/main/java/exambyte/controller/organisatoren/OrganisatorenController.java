@@ -1,15 +1,12 @@
 package exambyte.controller.organisatoren;
 
 import exambyte.aggregates.organisatoren.TestFormular;
-import exambyte.aggregates.organisatoren.TestFrage;
 import exambyte.service.organisatoren.TestFormService;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import java.util.List;
 
 @Controller
 public class OrganisatorenController {
@@ -22,7 +19,7 @@ public class OrganisatorenController {
     @GetMapping("/organisatoren/landingPage")
     @Secured("ROLE_ORGANISATOR")
     public String landingPage(Model model) {
-        model.addAttribute("testForms", service.getTestForms());
+        model.addAttribute("testForms", service.getTestFormsDB());
         return "/organisatoren/LandingPageOrganisatoren";
     }
 
@@ -46,6 +43,17 @@ public class OrganisatorenController {
 
         model.addAttribute("testForm", service.getTestFormById(id));
         return "/organisatoren/TestErstellenPageOrganisatoren";
+    }
+
+    @PostMapping("/organisatoren/testErstellen/saveTestTitel/{id}")
+    @Secured("ROLE_ORGANISATOR")
+    public String saveTestTitel(@PathVariable int id, @RequestParam String testTitel, RedirectAttributes redirectAttributes) {
+        TestFormular testFormular = service.getTestFormById(id);
+        testFormular.setTestTitel(testTitel);
+        service.saveTestForm(testFormular);
+        redirectAttributes.addFlashAttribute("id", id);
+        redirectAttributes.addFlashAttribute("redirect", true);
+        return "redirect:/organisatoren/testErstellen";
     }
 
     @PostMapping("/organisatoren/testErstellen/addMcFrage/{id}")
@@ -121,21 +129,9 @@ public class OrganisatorenController {
     //TODO: Überarbeiten, nichtmehr nach allen Parametern fragen usw.
     @PostMapping("/organisatoren/testErstellen/testFertigstellen/{id}")
     @Secured("ROLE_ORGANISATOR")
-    public String testFertigStellen(@PathVariable int id,
-                                    @RequestParam(value = "testfragenIds[]", required = false) List<Integer> testfragenIds,
-                                    @RequestParam(value = "fragenTitel[]", required = false) List<String> titelListe,
-                                    @RequestParam(value = "fragestellungen[]", required = false) List<String> fragestellungen,
-                                    @RequestParam(value = "punkte[]", required = false) List<Integer> punkte,
-                                    @RequestParam(value = "erklaerungen[]", required = false) List<String> erklaerungen) {
-        if(testfragenIds != null) {
-            TestFormular testForm = service.getTestFormById(id);
-            for(int i = 0; i < testfragenIds.size(); i++) {
-                // TODO: Testfragen ist kein Aggregat Root, dementsprechend darf das hier nicht stehen!
-                // TODO: Man muss mittels des Aggregat Roots den Test fertigstellen!
-
-            }
-        }
-
+    public String testFertigStellen(@PathVariable int id) {
+        TestFormular testForm = service.getTestFormById(id);
+        service.saveTestFormDB(testForm);
         return "redirect:/organisatoren/landingPage";
     }
 }
