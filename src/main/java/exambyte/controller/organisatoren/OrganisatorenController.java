@@ -8,6 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.time.LocalDateTime;
+
 @Controller
 public class OrganisatorenController {
     private TestFormService service;
@@ -56,10 +58,28 @@ public class OrganisatorenController {
         return "redirect:/organisatoren/testErstellen";
     }
 
+    @PostMapping("/organisatoren/testErstellen/saveTestFristen/{id}")
+    @Secured("ROLE_ORGANISATOR")
+    public String saveTestFristen(@PathVariable int id,
+                                  @RequestParam LocalDateTime startzeitpunkt,
+                                  @RequestParam LocalDateTime endzeitpunkt,
+                                  @RequestParam LocalDateTime ergebniszeitpunkt,
+                                  RedirectAttributes redirectAttributes) {
+        TestFormular testFormular = service.getTestFormById(id);
+
+        testFormular.setStartzeitpunkt(startzeitpunkt);
+        testFormular.setEndzeitpunkt(endzeitpunkt);
+        testFormular.setErgebniszeitpunkt(ergebniszeitpunkt);
+
+        service.saveTestForm(testFormular);
+        redirectAttributes.addFlashAttribute("id", id);
+        redirectAttributes.addFlashAttribute("redirect", true);
+        return "redirect:/organisatoren/testErstellen";
+    }
+
     @PostMapping("/organisatoren/testErstellen/addMcFrage/{id}")
     @Secured("ROLE_ORGANISATOR")
-    public String addMcFrage(RedirectAttributes redirectAttributes,
-                             @PathVariable int id) {
+    public String addMcFrage(RedirectAttributes redirectAttributes, @PathVariable int id) {
         TestFormular testForm = service.getTestFormById(id);
         testForm.addNewMCFrage();
         service.saveTestForm(testForm);

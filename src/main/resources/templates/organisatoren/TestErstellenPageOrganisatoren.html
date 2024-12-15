@@ -26,11 +26,25 @@
 
         <input type="hidden" name="id" th:value="${id}">
 
+
         <form method="post" th:action="@{/organisatoren/testErstellen/saveTestTitel/{id}(id = ${id})}">
             <label class="test-titel" for="testFormTitel">Test Titel:</label>
             <input class="test-titel-textfeld" type="text" id="testFormTitel" name="testTitel" th:value="${testForm.testTitel}">
             <button type="submit">Speichern</button>
         </form>
+
+        <form class="form-check" method="post" th:action="@{/organisatoren/testErstellen/saveTestFristen/{id}(id = ${id})}">
+            <label class="test-titel" for="startID">Startzeitpunkt:</label>
+            <input class="test-titel-textfeld" type="datetime-local" id="startID" name="startzeitpunkt" th:value="${testForm.startzeitpunkt}">
+            <label class="test-titel" for="endID">Endzeitpunkt:</label>
+            <input class="test-titel-textfeld" type="datetime-local" id="endID" name="endzeitpunkt" th:value="${testForm.endzeitpunkt}">
+            <label class="test-titel" for="ergebnisID">Ergebniszeitpunkt:</label>
+            <input class="test-titel-textfeld" type="datetime-local" id="ergebnisID" name="ergebniszeitpunkt" th:value="${testForm.ergebniszeitpunkt}">
+            <button type="submit">Speichern</button>
+        </form>
+
+
+
 
         <form th:action="@{/organisatoren/testErstellen/addMcFrage/{id}(id=${id})}" method="post">
             <button class="btn-dark" type="submit" id="mcFrageButton">+ Multiple-Choice Frage hinzufügen</button>

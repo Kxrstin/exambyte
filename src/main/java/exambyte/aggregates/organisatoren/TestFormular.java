@@ -2,6 +2,7 @@ package exambyte.aggregates.organisatoren;
 
 import exambyte.annotations.AggregateRoot;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -14,6 +15,10 @@ public class TestFormular {
     //TODO: Testfragen werden nach ID automatisch sortiert und sind beim Hinzufügen nie an der richtigen Stelle
     private Map<Integer, TestFrage> testFragen;
     private int id;
+
+    private LocalDateTime startzeitpunkt;
+    private LocalDateTime endzeitpunkt;
+    private LocalDateTime ergebniszeitpunkt;
 
     public TestFormular(String titel, Map<Integer, TestFrage> testFragen){
         testTitel = titel;
@@ -118,5 +123,29 @@ public class TestFormular {
         } else {
             testFragen.put(id, new FreitextFrage(testFrage.getPunkte(), testFrage.getTitel(), testFrage.getFragestellung(), testFrage.getBeschreibung(), erklaerung));
         }
+    }
+
+    public LocalDateTime getStartzeitpunkt() {
+        return startzeitpunkt;
+    }
+
+    public LocalDateTime getEndzeitpunkt() {
+        return endzeitpunkt;
+    }
+
+    public LocalDateTime getErgebniszeitpunkt() {
+        return ergebniszeitpunkt;
+    }
+
+    public void setStartzeitpunkt(LocalDateTime startzeitpunkt) {
+        this.startzeitpunkt = startzeitpunkt;
+    }
+
+    public void setEndzeitpunkt(LocalDateTime endzeitpunkt) {
+        this.endzeitpunkt = endzeitpunkt;
+    }
+
+    public void setErgebniszeitpunkt(LocalDateTime ergebniszeitpunkt) {
+        this.ergebniszeitpunkt = ergebniszeitpunkt;
     }
 }

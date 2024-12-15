@@ -30,6 +30,15 @@
     <input class="test-titel-textfeld" type="text" id="testFormTitel" name="testTitel" th:value="${testForm.testTitel}" disabled>
     <br>
 
+    <div class="form-check">
+        <label class="test-titel" for="startID">Startzeitpunkt:</label>
+        <input class="test-titel-textfeld" type="datetime-local" id="startID" name="startzeitpunkt" th:value="${testForm.startzeitpunkt}" disabled>
+        <label class="test-titel" for="endID">Endzeitpunkt:</label>
+        <input class="test-titel-textfeld" type="datetime-local" id="endID" name="endzeitpunkt" th:value="${testForm.endzeitpunkt}" disabled>
+        <label class="test-titel" for="ergebnisID">Ergebniszeitpunkt:</label>
+        <input class="test-titel-textfeld" type="datetime-local" id="ergebnisID" name="ergebniszeitpunkt" th:value="${testForm.ergebniszeitpunkt}" disabled>
+    </div>
+
 
     <ul th:remove="all-but-first">
         <li th:each="testFrage: ${testForm.getTestFragen()}" class="list-group-item">
