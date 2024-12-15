@@ -16,6 +16,7 @@ public class TestFormular {
     private int id;
 
     public TestFormular(String titel, Map<Integer, TestFrage> testFragen){
+        testTitel = titel;
         this.testFragen = testFragen;
         id = UUID.randomUUID().hashCode();
     }
