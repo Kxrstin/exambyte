@@ -134,4 +134,11 @@ public class OrganisatorenController {
         service.saveTestFormDB(testForm);
         return "redirect:/organisatoren/landingPage";
     }
+
+    @GetMapping("/organisatoren/testVorschau/{id}")
+    @Secured("ROLE_ORGANISATOR")
+    public String testVorschau(@PathVariable int id, Model model) {
+        model.addAttribute("testForm", service.getTestFormByIdDB(id));
+        return "/organisatoren/TestVorschauOrganisatoren";
+    }
 }

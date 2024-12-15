@@ -40,7 +40,7 @@
         <h2>Erstellte Tests:</h2>
         <ul th:remove="all-but-first" class="list-group list-group-flush">
             <li th:each="testForm: ${testForms}" class="list-group-item">
-                <a href=""><span th:text="${testForm.getTestTitel()}">Fragen zur Onion Architektur</span></a>
+                <a th:href="@{/organisatoren/testVorschau/{id}(id = ${testForm.getId()})}"><span th:text="${testForm.getTestTitel()}">Fragen zur Onion Architektur</span></a>
             </li>
             <li class="list-group-item">
                 <a href="">MaFIn3 Übung für Blatt 09</a>
