@@ -80,7 +80,7 @@ public class OrganisatorenController {
     public String updateMCFrage(@PathVariable("id") int formID,
                                 @PathVariable int frageID,
                                 RedirectAttributes redirectAttributes,
-                                int punkte,
+                                @RequestParam(defaultValue = "0") int punkte,
                                 String titel,
                                 String fragestellung,
                                 String erklaerung) {
@@ -117,6 +117,8 @@ public class OrganisatorenController {
         return "/organisatoren/KorrekturstandOrganisatoren";
     }
 
+
+    //TODO: Überarbeiten, nichtmehr nach allen Parametern fragen usw.
     @PostMapping("/organisatoren/testErstellen/testFertigstellen/{id}")
     @Secured("ROLE_ORGANISATOR")
     public String testFertigStellen(@PathVariable int id,
