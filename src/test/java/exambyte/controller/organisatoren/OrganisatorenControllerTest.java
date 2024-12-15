@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 
 import java.util.List;
 
@@ -83,11 +84,12 @@ public class OrganisatorenControllerTest {
     }
 
     @Test
-    @Disabled
     @WithMockOAuth2User(login = "JoeSchmoe", roles = "ORGANISATOR")
-    @DisplayName("Aufruf von /organisatoren/testErstellen/updateTestfrage leitet einen wieder auf Test Erstellen zurück")
+    @DisplayName("Aufruf von /organisatoren/testErstellen/updateMcFrage/id leitet einen wieder auf Test Erstellen zurück")
     void test_06() throws Exception {
-        mvc.perform(post("/organisatoren/testErstellen/updateTestfrage/123").with(csrf()))
+        mockTestFormMethoden();
+        mockTestFormServiceMethoden();
+        mvc.perform(post("/organisatoren/testErstellen/updateMCFrage/123/456").with(csrf()))
                 .andExpect(redirectedUrl("/organisatoren/testErstellen"));
     }
 
