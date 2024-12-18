@@ -2,6 +2,7 @@ logging:
   level:
     root: error
 
+
 server:
   port: 8080
 
@@ -25,7 +26,8 @@ spring:
   datasource:
     password: iamgroot
     username: user
-    url: jdbc:postgresql://localhost:5466/exambyte
+    url: jdbc:postgresql://localhost:5435/exambyte
+
 
 exambyte:
   rollen:

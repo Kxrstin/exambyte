@@ -1,6 +1,7 @@
 package exambyte.aggregates.organisatoren;
 
 import exambyte.annotations.AggregateRoot;
+import org.springframework.data.annotation.Id;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;

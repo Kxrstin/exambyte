@@ -1,7 +1,6 @@
 package exambyte.aggregates.studenten.StudiTest;
 
 import exambyte.annotations.Wertobjekt;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Wertobjekt
