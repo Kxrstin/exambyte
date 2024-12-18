@@ -18,25 +18,38 @@ repositories {
 }
 
 dependencies {
+    // Thymeleaf
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+
+    // Validierung
     implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+    // Web
     implementation 'org.springframework.boot:spring-boot-starter-web'
-    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
-    implementation 'org.jsoup:jsoup:1.15.3'
+
+    // OAuth2
+    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+
+    // Security
     implementation 'org.springframework.boot:spring-boot-starter-security'
     testImplementation 'org.springframework.security:spring-security-test'
+
+    // Persistence
     implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
     runtimeOnly 'com.h2database:h2'
-    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    implementation 'org.flywaydb:flyway-core'
+    runtimeOnly 'org.postgresql:postgresql'
+
+    // Testing
+    implementation 'org.jsoup:jsoup:1.15.3'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
     testImplementation 'com.tngtech.archunit:archunit-junit5-engine:1.3.0'
     testImplementation 'com.tngtech.archunit:archunit:1.3.0'
-    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
-    developmentOnly 'org.springframework.boot:spring-boot-devtools'
-    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.security:spring-security-test'
 
-
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
 }
 
 tasks.named('test') {
