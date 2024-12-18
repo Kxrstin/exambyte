@@ -1,4 +1,18 @@
+logging:
+  level:
+    root: error
+
+server:
+  port: 8080
+
 spring:
+  main:
+    banner:
+      mode: off
+
+  application:
+    name: ExambyteProjekt
+
   security:
     oauth2:
       client:
