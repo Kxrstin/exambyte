@@ -1,0 +1,10 @@
+services:
+  database:
+    image: postgres:latest
+    ports:
+      - "5466:5466"
+    volumes:
+      - ./data/exambyte:/var/lib/postgresql/data
+    environment:
+      - "POSTGRES_USER=user"
+      - "POSTGRES_PASSWORD=iamgroot"
