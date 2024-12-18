@@ -22,6 +22,11 @@ spring:
             client-secret: ${CLIENT_SECRET}
             scope: read:public_repo
 
+  datasource:
+    password: iamgroot
+    username: user
+    url: jdbc:postgresql://localhost:5466/exambyte
+
 exambyte:
   rollen:
     studenten: Kxrstin, Narr1M
