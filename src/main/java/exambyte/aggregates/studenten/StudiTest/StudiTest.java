@@ -3,6 +3,9 @@ package exambyte.aggregates.studenten.StudiTest;
 import exambyte.aggregates.studenten.StudiAntwort.StudiAntwort;
 import exambyte.annotations.AggregateRoot;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
+import javax.persistence.ManyToOne;
+import javax.persistence.JoinColumn;import javax.persistence.ManyToOne;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -12,36 +15,42 @@ import java.util.Map;
 
 @AggregateRoot
 public final class StudiTest {
-    private final TestDaten testForm;
+    @ManyToOne
+    @JoinColumn(name = "test_daten", referencedColumnName = "testId")
+    private final TestDaten testDaten;
     private final List<TestAufgabe> testAufgaben = new ArrayList<>();
+
+    @Transient
     private final Map<TestAufgabe, List<StudiAntwort>> aufgabeMitAntwort = new HashMap<>();
+
     @Id
     private Integer id;
 
     public StudiTest(TestDaten testForm, List<TestAufgabe> testAufgaben) {
-        this.testForm = testForm;
+        this.testDaten = testForm;
         if(testAufgaben != null) {
             this.testAufgaben.addAll(testAufgaben);
             for (TestAufgabe testAufgabe : testAufgaben) {
                 aufgabeMitAntwort.put(testAufgabe, new ArrayList<>());
             }
         }
+        this.id = testForm.getTestId();
     }
 
 
     // TestForm Daten ausgeben
-    public String getTitel() { return testForm.getTitel(); }
+    public String getTitel() { return testDaten.getTitel(); }
     public LocalDateTime getEndzeitpunkt() {
-        return testForm.getEndzeitpunkt();
+        return testDaten.getEndzeitpunkt();
     }
     public LocalDateTime getStartzeitpunkt() {
-        return testForm.getStartzeitpunkt();
+        return testDaten.getStartzeitpunkt();
     }
     public LocalDateTime getErgebnisZeitpunkt() {
-        return testForm.getErgebniszeitpunkt();
+        return testDaten.getErgebniszeitpunkt();
     }
     public int getId() {
-        return testForm.getTestId();
+        return testDaten.getTestId();
     }
     public int getAnzahlAufgaben() {
         return testAufgaben.size();
@@ -72,11 +81,11 @@ public final class StudiTest {
 
     // Zeitpunkte
     public boolean isBearbeitbar(LocalDateTime now) {
-        return now.isBefore(testForm.getEndzeitpunkt()) && now.isAfter(testForm.getStartzeitpunkt());
+        return now.isBefore(testDaten.getEndzeitpunkt()) && now.isAfter(testDaten.getStartzeitpunkt());
     }
 
     public boolean isAbgelaufen(LocalDateTime now) {
-        return now.isAfter(testForm.getEndzeitpunkt()) && now.isAfter(testForm.getStartzeitpunkt());
+        return now.isAfter(testDaten.getEndzeitpunkt()) && now.isAfter(testDaten.getStartzeitpunkt());
     }
 
     // TestAntworten

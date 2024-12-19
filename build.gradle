@@ -40,6 +40,8 @@ dependencies {
     implementation 'org.flywaydb:flyway-core'
     runtimeOnly 'org.postgresql:postgresql'
     implementation "org.flywaydb:flyway-database-postgresql"
+    implementation 'javax.persistence:javax.persistence-api:2.2'
+
 
 
     // Testing
