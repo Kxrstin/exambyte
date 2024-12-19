@@ -10,12 +10,12 @@ import java.util.Map;
 
 @AggregateRoot
 public final class StudiTest {
-    private final TestForm testForm;
+    private final TestDaten testDaten;
     private final List<TestAufgabe> testAufgaben = new ArrayList<>();
     private final Map<TestAufgabe, List<StudiAntwort>> aufgabeMitAntwort = new HashMap<>();
 
-    public StudiTest(TestForm testForm, List<TestAufgabe> testAufgaben) {
-        this.testForm = testForm;
+    public StudiTest(TestDaten testForm, List<TestAufgabe> testAufgaben) {
+        this.testDaten = testForm;
         if(testAufgaben != null) {
             this.testAufgaben.addAll(testAufgaben);
             for (TestAufgabe testAufgabe : testAufgaben) {
@@ -26,18 +26,18 @@ public final class StudiTest {
 
 
     // TestForm Daten ausgeben
-    public String getTitel() { return testForm.getTitel(); }
+    public String getTitel() { return testDaten.getTitel(); }
     public LocalDateTime getEndzeitpunkt() {
-        return testForm.getEndzeitpunkt();
+        return testDaten.getEndzeitpunkt();
     }
     public LocalDateTime getStartzeitpunkt() {
-        return testForm.getStartzeitpunkt();
+        return testDaten.getStartzeitpunkt();
     }
     public LocalDateTime getErgebnisZeitpunkt() {
-        return testForm.getErgebniszeitpunkt();
+        return testDaten.getErgebniszeitpunkt();
     }
     public int getId() {
-        return testForm.getTestId();
+        return testDaten.getTestId();
     }
     public int getAnzahlAufgaben() {
         return testAufgaben.size();
@@ -68,11 +68,11 @@ public final class StudiTest {
 
     // Zeitpunkte
     public boolean isBearbeitbar(LocalDateTime now) {
-        return now.isBefore(testForm.getEndzeitpunkt()) && now.isAfter(testForm.getStartzeitpunkt());
+        return now.isBefore(testDaten.getEndzeitpunkt()) && now.isAfter(testDaten.getStartzeitpunkt());
     }
 
     public boolean isAbgelaufen(LocalDateTime now) {
-        return now.isAfter(testForm.getEndzeitpunkt()) && now.isAfter(testForm.getStartzeitpunkt());
+        return now.isAfter(testDaten.getEndzeitpunkt()) && now.isAfter(testDaten.getStartzeitpunkt());
     }
 
     // TestAntworten

@@ -11,7 +11,7 @@ public class StudiTestRepoImplTest {
     @Test
     @DisplayName("Der StudiTest mit ID = 1627 kann gespeichert und geladen werden")
     void test_01(){
-        StudiTestRepoImpl repoImpl = new StudiTestRepoImpl();
+        StudiTestRepoImplementation repoImpl = new StudiTestRepoImplementation();
         StudiTest studiTest = new StudiTest(new TestForm("Titel", null, null, null, 1627), null);
         repoImpl.saveTest(studiTest);
         assertThat(repoImpl.loadTestWithId(1627)).isEqualTo(studiTest);
@@ -20,7 +20,7 @@ public class StudiTestRepoImplTest {
     @Test
     @DisplayName("Der StudiTest mit ID = 1627 kann gespeichert werden und die hasTestWithId Methode funktioniert.")
     void test_02(){
-        StudiTestRepoImpl repoImpl = new StudiTestRepoImpl();
+        StudiTestRepoImplementation repoImpl = new StudiTestRepoImplementation();
         StudiTest studiTest = new StudiTest(new TestForm("Titel", null, null, null, 1627), null);
         repoImpl.saveTest(studiTest);
         assertThat(repoImpl.hasTestWithId(1627)).isTrue();
@@ -29,7 +29,7 @@ public class StudiTestRepoImplTest {
     @Test
     @DisplayName("Die loadTestList beinhaltet die gespeicherten Tests.")
     void test_03(){
-        StudiTestRepoImpl repoImpl = new StudiTestRepoImpl();
+        StudiTestRepoImplementation repoImpl = new StudiTestRepoImplementation();
         StudiTest studiTest = new StudiTest(new TestForm("Titel", null, null, null, 1627), null);
         repoImpl.saveTest(studiTest);
         assertThat(repoImpl.loadTestList()).contains(studiTest);
