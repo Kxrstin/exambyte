@@ -2,6 +2,8 @@ package exambyte.aggregates.studenten.StudiTest;
 
 import exambyte.aggregates.studenten.StudiAntwort.StudiAntwort;
 import exambyte.annotations.AggregateRoot;
+import org.springframework.data.annotation.Id;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,11 +12,13 @@ import java.util.Map;
 
 @AggregateRoot
 public final class StudiTest {
-    private final TestForm testForm;
+    private final TestDaten testForm;
     private final List<TestAufgabe> testAufgaben = new ArrayList<>();
     private final Map<TestAufgabe, List<StudiAntwort>> aufgabeMitAntwort = new HashMap<>();
+    @Id
+    private Integer id;
 
-    public StudiTest(TestForm testForm, List<TestAufgabe> testAufgaben) {
+    public StudiTest(TestDaten testForm, List<TestAufgabe> testAufgaben) {
         this.testForm = testForm;
         if(testAufgaben != null) {
             this.testAufgaben.addAll(testAufgaben);

@@ -39,6 +39,8 @@ dependencies {
     runtimeOnly 'com.h2database:h2'
     implementation 'org.flywaydb:flyway-core'
     runtimeOnly 'org.postgresql:postgresql'
+    implementation "org.flywaydb:flyway-database-postgresql"
+
 
     // Testing
     implementation 'org.jsoup:jsoup:1.15.3'

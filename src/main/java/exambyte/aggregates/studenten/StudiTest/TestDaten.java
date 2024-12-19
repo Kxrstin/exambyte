@@ -1,18 +1,20 @@
 package exambyte.aggregates.studenten.StudiTest;
 
 import exambyte.annotations.Wertobjekt;
-import java.time.LocalDate;
+import org.springframework.data.annotation.Id;
+
 import java.time.LocalDateTime;
 
 @Wertobjekt
-public class TestForm {
+public class TestDaten {
     private final String titel;
     private final LocalDateTime startzeitpunkt;
     private final LocalDateTime endzeitpunkt;
     private final LocalDateTime ergebniszeitpunkt;
+    @Id
     private final int testId;
 
-    public TestForm(String titel, LocalDateTime start, LocalDateTime ende, LocalDateTime ergebnis, int id) {
+    public TestDaten(String titel, LocalDateTime start, LocalDateTime ende, LocalDateTime ergebnis, int id) {
         this.titel = titel;
         startzeitpunkt = start;
         endzeitpunkt = ende;
