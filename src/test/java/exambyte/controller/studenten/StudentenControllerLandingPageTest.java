@@ -29,7 +29,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @Import({SecurityConfig.class, MethodSecurityConfig.class})
 public class StudentenControllerLandingPageTest {
     private TestDaten testForm = new TestDaten("Algorithmen und Datenstrukturen Test Woche 5", LocalDateTime.of(2024, 11, 21, 12, 0), LocalDateTime.of(2024, 11, 30, 12, 0), LocalDateTime.of(2024, 12, 2, 12, 0), 0);
-    private StudiTest studiTest = new StudiTest(testForm, List.of(new FreitextAufgabe("Nenne pro Argumente der Onion Architektur", 1)));
+    private StudiTest studiTest = new StudiTest(testForm, List.of(new FreitextAufgabe("Nenne pro Argumente der Onion Architektur", 1)), 0);
 
     @Autowired
     MockMvc mvc;

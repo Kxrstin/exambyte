@@ -52,8 +52,8 @@
 
     <ul th:remove="all-but-first">
         <li class="list-group-item" th:each="test : ${bearbeitbareTests}">
-            <form th:action="@{/studenten/landingPage/zeigeErgebnis/{id}(id=${test.getTestId()})}" class="form-group">
-                <a class="korrektorenLink" th:href="@{/studenten/landingPage/zeigeTest/{id}(id=${test.getTestId()})}">
+            <form th:action="@{/studenten/landingPage/zeigeErgebnis/{id}(id=${test.getId()})}" class="form-group">
+                <a class="korrektorenLink" th:href="@{/studenten/landingPage/zeigeTest/{id}(id=${test.getId()})}">
                     <span th:text="${test.getTitel()}"> Test 1</span></a> <br>
             </form>
         </li>

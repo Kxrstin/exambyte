@@ -51,7 +51,7 @@ public class TestFragenService {
 
     public String parseStart(int id) {
         try {
-            return "Startzeitpunkt: " + studiTestRepo.findById(id).getStartzeitpunkt();
+            return "Startzeitpunkt: " + parseTime(studiTestRepo.findById(id).getStartzeitpunkt());
         } catch (NullPointerException e) {
             return "Kein Studi vorhanden";
         }
@@ -59,14 +59,14 @@ public class TestFragenService {
 
     public String parseEnde(int id) {
         try {
-            return "Endzeitpunkt: " + studiTestRepo.findById(id).getEndzeitpunkt();
+            return "Endzeitpunkt: " + parseTime(studiTestRepo.findById(id).getEndzeitpunkt());
         } catch (NullPointerException e) {
             return "Kein Studi vorhanden";
         }
     }
     public String parseErgebnis(int id) {
         try {
-            return "Ergebniszeitpunkt: " + studiTestRepo.findById(id).getErgebnisZeitpunkt();
+            return "Ergebniszeitpunkt: " + parseTime(studiTestRepo.findById(id).getErgebnisZeitpunkt());
         } catch (NullPointerException e) {
             return "Kein Studi vorhanden";
         }

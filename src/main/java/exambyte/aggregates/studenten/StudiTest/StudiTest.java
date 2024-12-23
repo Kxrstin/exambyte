@@ -90,7 +90,6 @@ public final class StudiTest {
 
     // Zeitpunkte
     public boolean isBearbeitbar(LocalDateTime now) {
-        System.out.println("Ist bearbeitbar wird ausgeführt.");
         return now.isBefore(testDaten.getEndzeitpunkt()) && now.isAfter(testDaten.getStartzeitpunkt());
     }
 

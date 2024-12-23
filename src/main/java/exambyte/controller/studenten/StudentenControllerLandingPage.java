@@ -23,22 +23,23 @@ public class StudentenControllerLandingPage {
     @GetMapping("/studenten/landingPage")
     @Secured("ROLE_STUDENT")
     public String landingpage(Model model) {
+        // TODO: Zulassungsstatus
+        model.addAttribute("guterKurs", "Guter Kurs");
         if(testService.getBearbeitbareTests().isEmpty()) {
             model.addAttribute("bearbeitbareTests", new ArrayList<StudiTest>());
-            model.addAttribute("guterKurs", "Guter Kurs");
         }
-        // else {
-//            model.addAttribute("bearbeitbareTests", testService.getBearbeitbareTests());
-//        }
-//
-//        if(testService.getAbgelaufeneTests() == null) {
-//            model.addAttribute("abgelaufeneTests", new ArrayList<StudiTest>());
-//            model.addAttribute("guterKurs", "Guter Kurs");
-//        } else {
-//            String zulassungsstatus = testService.zulassungsStatus(testService.getAbgelaufeneTests());
-//            model.addAttribute("abgelaufeneTests", testService.getAbgelaufeneTests());
-//            model.addAttribute(zulassungsstatus, true);
-//        }
+         else {
+            model.addAttribute("bearbeitbareTests", testService.getBearbeitbareTests());
+        }
+
+        if(testService.getAbgelaufeneTests() == null) {
+            model.addAttribute("abgelaufeneTests", new ArrayList<StudiTest>());
+            model.addAttribute("guterKurs", "Guter Kurs");
+        } else {
+            String zulassungsstatus = testService.zulassungsStatus(testService.getAbgelaufeneTests());
+            model.addAttribute("abgelaufeneTests", testService.getAbgelaufeneTests());
+            model.addAttribute(zulassungsstatus, true);
+        }
         return "studenten/LandingPageStudenten";
     }
 

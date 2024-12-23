@@ -2,6 +2,7 @@ package exambyte.controller.studenten;
 
 import exambyte.aggregates.studenten.StudiTest.FreitextAufgabe;
 import exambyte.aggregates.studenten.StudiTest.StudiTest;
+import exambyte.aggregates.studenten.StudiTest.TestAufgabe;
 import exambyte.aggregates.studenten.StudiTest.TestDaten;
 import exambyte.helper.WithMockOAuth2User;
 import exambyte.security.MethodSecurityConfig;
@@ -17,7 +18,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
 import java.time.LocalDateTime;
-import java.util.List;
+import java.util.*;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.Mockito.when;
@@ -29,7 +30,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @Import({SecurityConfig.class, MethodSecurityConfig.class})
 public class StudentenControllerErgebnisTest {
     private TestDaten testForm = new TestDaten("Algorithmen und Datenstrukturen Test Woche 5", LocalDateTime.of(2024, 11, 21, 12, 0), LocalDateTime.of(2024, 11, 30, 12, 0), LocalDateTime.of(2024, 12, 2, 12, 0), 0);
-    private StudiTest studiTest = new StudiTest(testForm, List.of(new FreitextAufgabe("Nenne pro Argumente der Onion Architektur", 1)));
+    private StudiTest studiTest = new StudiTest(testForm, List.of(new FreitextAufgabe("Nenne pro Argumente der Onion Architektur", 1)), 1);
 
     @Autowired
     MockMvc mvc;
