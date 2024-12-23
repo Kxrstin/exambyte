@@ -3,9 +3,12 @@ package exambyte.aggregates.studenten.StudiTest;
 import exambyte.aggregates.studenten.StudiAntwort.StudiAntwort;
 import exambyte.annotations.AggregateRoot;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.PersistenceCreator;
 import org.springframework.data.annotation.Transient;
+
+import javax.persistence.Column;
 import javax.persistence.ManyToOne;
-import javax.persistence.JoinColumn;import javax.persistence.ManyToOne;
+import javax.persistence.JoinColumn;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -15,9 +18,10 @@ import java.util.Map;
 
 @AggregateRoot
 public final class StudiTest {
-    @ManyToOne
-    @JoinColumn(name = "test_daten", referencedColumnName = "testId")
+    @Column(name = "test_daten")
     private final TestDaten testDaten;
+
+    @Transient
     private final List<TestAufgabe> testAufgaben = new ArrayList<>();
 
     @Transient
@@ -26,15 +30,20 @@ public final class StudiTest {
     @Id
     private Integer id;
 
-    public StudiTest(TestDaten testForm, List<TestAufgabe> testAufgaben) {
-        this.testDaten = testForm;
+    @PersistenceCreator
+    public StudiTest(TestDaten testDaten, Integer id) {
+        this(testDaten, null, id);
+    }
+
+    public StudiTest(TestDaten testDaten, List<TestAufgabe> testAufgaben, Integer id) {
+        this.testDaten = testDaten;
         if(testAufgaben != null) {
             this.testAufgaben.addAll(testAufgaben);
             for (TestAufgabe testAufgabe : testAufgaben) {
                 aufgabeMitAntwort.put(testAufgabe, new ArrayList<>());
             }
         }
-        this.id = testForm.getTestId();
+        this.id = id;
     }
 
 
@@ -50,7 +59,7 @@ public final class StudiTest {
         return testDaten.getErgebniszeitpunkt();
     }
     public int getId() {
-        return testDaten.getTestId();
+        return id;
     }
     public int getAnzahlAufgaben() {
         return testAufgaben.size();
@@ -81,6 +90,7 @@ public final class StudiTest {
 
     // Zeitpunkte
     public boolean isBearbeitbar(LocalDateTime now) {
+        System.out.println("Ist bearbeitbar wird ausgeführt.");
         return now.isBefore(testDaten.getEndzeitpunkt()) && now.isAfter(testDaten.getStartzeitpunkt());
     }
 

@@ -2,8 +2,8 @@ logging:
   level:
     root: error
     sql: debug
-    org.springframework.web: DEBUG
-    org.springframework.jdbc: DEBUG
+    org.springframework.web: warn
+    org.springframework.jdbc: warn
 
 server:
   port: 8080

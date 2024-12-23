@@ -3,23 +3,26 @@ package exambyte.aggregates.studenten.StudiTest;
 import exambyte.annotations.Wertobjekt;
 import org.springframework.data.annotation.Id;
 
+import javax.persistence.Column;
 import java.time.LocalDateTime;
 
 @Wertobjekt
 public class TestDaten {
-    private final String titel;
-    private final LocalDateTime startzeitpunkt;
-    private final LocalDateTime endzeitpunkt;
-    private final LocalDateTime ergebniszeitpunkt;
-    @Id
-    private final int testId;
+    private String titel;
+    private LocalDateTime startzeitpunkt;
+    private LocalDateTime endzeitpunkt;
+    private LocalDateTime ergebniszeitpunkt;
 
-    public TestDaten(String titel, LocalDateTime start, LocalDateTime ende, LocalDateTime ergebnis, int id) {
+    @Id
+    @Column(name = "studi_test")
+    private Integer studiTest;
+
+    public TestDaten(String titel, LocalDateTime startzeitpunkt, LocalDateTime endzeitpunkt, LocalDateTime ergebniszeitpunkt, Integer studiTest) {
         this.titel = titel;
-        startzeitpunkt = start;
-        endzeitpunkt = ende;
-        ergebniszeitpunkt = ergebnis;
-        testId = id;
+        this.startzeitpunkt = startzeitpunkt;
+        this.endzeitpunkt = endzeitpunkt;
+        this.ergebniszeitpunkt = ergebniszeitpunkt;
+        this.studiTest = studiTest;
     }
 
     public String getTitel() {
@@ -34,7 +37,7 @@ public class TestDaten {
     public LocalDateTime getErgebniszeitpunkt() {
         return ergebniszeitpunkt;
     }
-    public int getTestId() {
-        return testId;
+    public int getStudiTest() {
+        return studiTest;
     }
 }

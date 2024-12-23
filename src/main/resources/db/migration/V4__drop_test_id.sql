@@ -1,0 +1,1 @@
+ALTER TABLE test_daten DROP COLUMN IF EXISTS test_id;

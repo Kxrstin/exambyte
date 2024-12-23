@@ -1,19 +1,13 @@
 package exambyte.persistence.studenten;
 
-import exambyte.aggregates.studenten.StudiTest.FreitextAufgabe;
-import exambyte.aggregates.studenten.StudiTest.MCAufgabe;
 import exambyte.aggregates.studenten.StudiTest.StudiTest;
-import exambyte.aggregates.studenten.StudiTest.TestDaten;
-import exambyte.service.studenten.StudiTestRepo;
-import org.springframework.stereotype.Repository;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Repository
+
 public class StudiTestRepoImpl {
     Map<Integer, StudiTest> studiTestMap = new HashMap<>();
 
@@ -39,13 +33,9 @@ public class StudiTestRepoImpl {
         }
         return null;
     }
-
-
     public boolean hasTestWithId(int id) {
         return studiTestMap.containsKey(id);
     }
-
-
     public List<StudiTest> loadTestList() {
         List<StudiTest> studiTests = new ArrayList<>();
         for(Map.Entry<Integer, StudiTest> studiTestEntry: studiTestMap.entrySet()) {
@@ -54,8 +44,6 @@ public class StudiTestRepoImpl {
         }
         return studiTests;
     }
-
-
     public void saveTest(StudiTest test) {
         studiTestMap.put(test.getId(), test);
     }
