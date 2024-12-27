@@ -1,10 +1,6 @@
 package exambyte.aggregates.studenten.StudiTest;
 
 import exambyte.annotations.Wertobjekt;
-import org.springframework.data.annotation.Id;
-
-import javax.persistence.Column;
-import javax.persistence.Embeddable;
 import java.time.LocalDateTime;
 
 @Wertobjekt
@@ -13,8 +9,6 @@ public class TestDaten {
     private final LocalDateTime startzeitpunkt;
     private final LocalDateTime endzeitpunkt;
     private final LocalDateTime ergebniszeitpunkt;
-
-    @Column(name = "studi_test")
     private Integer studiTest;
 
     public TestDaten(String titel, LocalDateTime startzeitpunkt, LocalDateTime endzeitpunkt, LocalDateTime ergebniszeitpunkt, Integer studiTest) {

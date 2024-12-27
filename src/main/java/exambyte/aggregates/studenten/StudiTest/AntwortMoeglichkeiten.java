@@ -8,32 +8,28 @@ public class AntwortMoeglichkeiten {
     @Column(name = "mc_aufgabe")
     private Integer mcAufgabe;
 
-    public AntwortMoeglichkeiten(String antwort) {
-        this(antwort, null);
-    }
-
-    public AntwortMoeglichkeiten(String antwort, Integer mcAufgabe) {
-        this.antwort = antwort;
-        this.mcAufgabe = mcAufgabe;
-    }
-
     public AntwortMoeglichkeiten() {
         this.antwort = null;
         this.mcAufgabe = null;
     }
 
-    public String getAntwortmoeglichkeit() {
-        return antwort;
+    public AntwortMoeglichkeiten(String antwort) {
+        this(antwort, null);
     }
-
-    public void setAntwort(String antwort) {
+    public AntwortMoeglichkeiten(String antwort, Integer mcAufgabe) {
         this.antwort = antwort;
-    }
-
-    public void setMcAufgabe(Integer mcAufgabe) {
         this.mcAufgabe = mcAufgabe;
     }
 
+    public String getAntwortmoeglichkeit() {
+        return antwort;
+    }
+    public void setAntwort(String antwort) {
+        this.antwort = antwort;
+    }
+    public void setMcAufgabe(Integer mcAufgabe) {
+        this.mcAufgabe = mcAufgabe;
+    }
     public Integer getMcAufgabe() {
         return mcAufgabe;
     }
