@@ -4,16 +4,16 @@ import exambyte.annotations.Wertobjekt;
 import org.springframework.data.annotation.Id;
 
 import javax.persistence.Column;
+import javax.persistence.Embeddable;
 import java.time.LocalDateTime;
 
 @Wertobjekt
 public class TestDaten {
-    private String titel;
-    private LocalDateTime startzeitpunkt;
-    private LocalDateTime endzeitpunkt;
-    private LocalDateTime ergebniszeitpunkt;
+    private final String titel;
+    private final LocalDateTime startzeitpunkt;
+    private final LocalDateTime endzeitpunkt;
+    private final LocalDateTime ergebniszeitpunkt;
 
-    @Id
     @Column(name = "studi_test")
     private Integer studiTest;
 

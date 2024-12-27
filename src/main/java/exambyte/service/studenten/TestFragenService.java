@@ -76,8 +76,9 @@ public class TestFragenService {
     // Test Infos
     public String getAufgabe(int id, int nr) {
         try {
+            System.out.println(studiTestRepo.findById(id));
             return studiTestRepo.findById(id).getAufgabe(nr);
-        } catch (NullPointerException e) {
+        } catch (Exception e) {
             return "Kein Studi vorhanden";
         }
     }

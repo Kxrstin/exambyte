@@ -1,0 +1,2 @@
+ALTER TABLE antwort_moeglichkeiten
+ADD COLUMN mc_aufgabe_key integer;

@@ -5,21 +5,26 @@ import exambyte.annotations.AggregateRoot;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.PersistenceCreator;
 import org.springframework.data.annotation.Transient;
+import org.springframework.data.relational.core.mapping.MappedCollection;
 
 import javax.persistence.Column;
-import javax.persistence.ManyToOne;
-import javax.persistence.JoinColumn;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @AggregateRoot
 public final class StudiTest {
+    @Id
+    private Integer id;
+
     @Column(name = "test_daten")
-    private final TestDaten testDaten;
+    private TestDaten testDaten;
+
+    @MappedCollection(idColumn = "studi_test")
+    private List<McAufgabe> mcAufgaben = new ArrayList<>();
+
+    @MappedCollection(idColumn = "studi_test")
+    private List<FreitextAufgabe> freitextAufgaben = new ArrayList<>();
 
     @Transient
     private final List<TestAufgabe> testAufgaben = new ArrayList<>();
@@ -27,23 +32,28 @@ public final class StudiTest {
     @Transient
     private final Map<TestAufgabe, List<StudiAntwort>> aufgabeMitAntwort = new HashMap<>();
 
-    @Id
-    private Integer id;
-
-    @PersistenceCreator
     public StudiTest(TestDaten testDaten, Integer id) {
-        this(testDaten, null, id);
+        this(id, testDaten, null, null);
     }
 
-    public StudiTest(TestDaten testDaten, List<TestAufgabe> testAufgaben, Integer id) {
+    @PersistenceCreator
+    public StudiTest(Integer id, TestDaten testDaten, List<McAufgabe> mcAufgaben, List<FreitextAufgabe> freitextAufgaben) {
+        this.id = id;
         this.testDaten = testDaten;
-        if(testAufgaben != null) {
-            this.testAufgaben.addAll(testAufgaben);
+        if(mcAufgaben != null) {
+            this.mcAufgaben = mcAufgaben;
+            this.testAufgaben.addAll(mcAufgaben);
             for (TestAufgabe testAufgabe : testAufgaben) {
                 aufgabeMitAntwort.put(testAufgabe, new ArrayList<>());
             }
         }
-        this.id = id;
+        if(freitextAufgaben != null) {
+            this.freitextAufgaben = freitextAufgaben;
+            this.testAufgaben.addAll(freitextAufgaben);
+            for (TestAufgabe testAufgabe : testAufgaben) {
+                aufgabeMitAntwort.put(testAufgabe, new ArrayList<>());
+            }
+        }
     }
 
 
@@ -62,7 +72,7 @@ public final class StudiTest {
         return id;
     }
     public int getAnzahlAufgaben() {
-        return testAufgaben.size();
+        return freitextAufgaben.size() + mcAufgaben.size();
     }
 
 
@@ -77,12 +87,12 @@ public final class StudiTest {
         return testAufgaben.get(nr).getClass().equals(FreitextAufgabe.class);
     }
     public boolean isMCAufgabe(int nr) {
-        return testAufgaben.get(nr).getClass().equals(MCAufgabe.class);
+        return testAufgaben.get(nr).getClass().equals(McAufgabe.class);
     }
 
     public List<String> getAntwortmoeglichkeiten(int nr) {
         if(isMCAufgabe(nr)) {
-            return ((MCAufgabe) testAufgaben.get(nr)).getAntwortMoeglichkeiten();
+            return ((McAufgabe) testAufgaben.get(nr)).getAntwortMoeglichkeiten();
         }
         return List.of();
     }
