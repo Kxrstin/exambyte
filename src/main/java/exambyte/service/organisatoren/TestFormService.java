@@ -38,14 +38,14 @@ public class TestFormService {
     }
 
     public TestFormular getTestFormByIdDB(Integer id) {
-        return repository.loadTestForm(id);
+        return repository.findBy(id);
     }
 
-    public int saveTestFormDB(TestFormular testForm) {
-        return repository.saveTestForm(testForm);
+    public TestFormular saveTestFormDB(TestFormular testForm) {
+        return repository.save(testForm);
     }
 
     public List<TestFormular> getTestFormsDB() {
-        return repository.getTestForms();
+        return repository.findAll();
     }
 }

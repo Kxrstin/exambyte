@@ -3,7 +3,6 @@ package exambyte.aggregates.organisatoren;
 import exambyte.annotations.AggregateRoot;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -71,15 +70,15 @@ public class TestFormular {
         this.testFragen = testFragen;
     }
 
-    public String getTestTitel() {
+    public String getTitel() {
         return testTitel;
     }
 
-    public void setTestTitel(String testTitel) {
+    public void setTitel(String testTitel) {
         this.testTitel = testTitel;
     }
 
-    public void setTestFragenPunkteWithId(int punkte, int id){
+    public void setPunkteWithId(int punkte, int id){
         TestFrage testFrage = getTestFrageById(id);
         if(testFrage.istMcFrage()) {
             testFragen.put(id, new MCFrage(punkte, testFrage.getTitel(), testFrage.getFragestellung(), testFrage.getBeschreibung(), testFrage.getErklaerung()));
@@ -89,7 +88,7 @@ public class TestFormular {
 
     }
 
-    public void setTestFragenTitelWithId(String titel, int id) {
+    public void setTitelWithId(String titel, int id) {
         TestFrage testFrage = getTestFrageById(id);
         if(testFrage.istMcFrage()) {
             testFragen.put(id, new MCFrage(testFrage.getPunkte(), titel, testFrage.getFragestellung(), testFrage.getBeschreibung(), testFrage.getErklaerung()));
@@ -98,7 +97,7 @@ public class TestFormular {
         }
     }
 
-    public void setTestFragenFragestellungWithId(String fragestellung, int id) {
+    public void setFragestellungWithId(String fragestellung, int id) {
         TestFrage testFrage = getTestFrageById(id);
         if(testFrage.istMcFrage()) {
             testFragen.put(id, new MCFrage(testFrage.getPunkte(), testFrage.getTitel(), fragestellung, testFrage.getBeschreibung(), testFrage.getErklaerung()));
@@ -107,7 +106,7 @@ public class TestFormular {
         }
     }
 
-    public void setTestFragenBeschreibungWithId(String beschreibung, int id) {
+    public void setBeschreibungWithId(String beschreibung, int id) {
         TestFrage testFrage = getTestFrageById(id);
         if(testFrage.istMcFrage()) {
             testFragen.put(id, new MCFrage(testFrage.getPunkte(), testFrage.getTitel(), testFrage.getFragestellung(), beschreibung, testFrage.getErklaerung()));
@@ -116,7 +115,7 @@ public class TestFormular {
         }
     }
 
-    public void setTestFragenErklaerungWithId(String erklaerung, int id) {
+    public void setErklaerungWithId(String erklaerung, int id) {
         TestFrage testFrage = getTestFrageById(id);
         if(testFrage.istMcFrage()) {
             testFragen.put(id, new MCFrage(testFrage.getPunkte(), testFrage.getTitel(), testFrage.getFragestellung(), testFrage.getBeschreibung(), erklaerung));

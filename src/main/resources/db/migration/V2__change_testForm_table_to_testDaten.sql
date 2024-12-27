@@ -1,0 +1,1 @@
+ALTER TABLE TestForm RENAME TO TestDaten;
