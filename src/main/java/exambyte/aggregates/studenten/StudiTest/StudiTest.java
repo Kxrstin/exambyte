@@ -5,10 +5,6 @@ import exambyte.annotations.AggregateRoot;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.PersistenceCreator;
 import org.springframework.data.annotation.Transient;
-import org.springframework.data.relational.core.mapping.MappedCollection;
-
-import javax.persistence.Column;
-
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -16,14 +12,8 @@ import java.util.*;
 public final class StudiTest {
     @Id
     private Integer id;
-
-    @Column(name = "test_daten")
     private TestDaten testDaten;
-
-    @MappedCollection(idColumn = "studi_test")
     private List<McAufgabe> mcAufgaben = new ArrayList<>();
-
-    @MappedCollection(idColumn = "studi_test")
     private List<FreitextAufgabe> freitextAufgaben = new ArrayList<>();
 
     @Transient
@@ -89,7 +79,6 @@ public final class StudiTest {
     public boolean isMCAufgabe(int nr) {
         return testAufgaben.get(nr).getClass().equals(McAufgabe.class);
     }
-
     public List<String> getAntwortmoeglichkeiten(int nr) {
         if(isMCAufgabe(nr)) {
             return ((McAufgabe) testAufgaben.get(nr)).getAntwortMoeglichkeiten();
@@ -102,7 +91,6 @@ public final class StudiTest {
     public boolean isBearbeitbar(LocalDateTime now) {
         return now.isBefore(testDaten.getEndzeitpunkt()) && now.isAfter(testDaten.getStartzeitpunkt());
     }
-
     public boolean isAbgelaufen(LocalDateTime now) {
         return now.isAfter(testDaten.getEndzeitpunkt()) && now.isAfter(testDaten.getStartzeitpunkt());
     }
@@ -126,7 +114,6 @@ public final class StudiTest {
         StudiAntwort studiAntwort = studiAntworten.stream().filter(abgabe -> abgabe.getStudiId() == studiId).findFirst().orElse(null);
         studiAntwort.addAntwort(antwort);
     }
-
     public String getAntwort(int aufgabe, int studiId) {
         return aufgabeMitAntwort.get(testAufgaben.get(aufgabe)).stream()
                 .filter(antwort -> antwort.getStudiId() == studiId)

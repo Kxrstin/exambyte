@@ -2,20 +2,16 @@ package exambyte.aggregates.studenten.StudiTest;
 
 import exambyte.annotations.Wertobjekt;
 import org.springframework.data.annotation.PersistenceCreator;
-
-import javax.persistence.Column;
 import org.springframework.data.annotation.Id;
 
 @Wertobjekt
 public class FreitextAufgabe implements TestAufgabe {
     @Id
     private final Integer id;
-
     private final String aufgabe;
     private final int punktzahl;
 
     // TODO: Kein Wertobjekt mehr
-    @Column(name = "studi_test")
     private Integer studiTest;
 
     @PersistenceCreator
@@ -33,7 +29,6 @@ public class FreitextAufgabe implements TestAufgabe {
     public void setStudiTest(Integer studiTest) {
         this.studiTest = studiTest;
     }
-
     public String getAufgabe() {
         return aufgabe;
     }
@@ -43,7 +38,6 @@ public class FreitextAufgabe implements TestAufgabe {
     public int getId() {
         return id;
     }
-
     public Integer getStudiTest() {
         return studiTest;
     }
