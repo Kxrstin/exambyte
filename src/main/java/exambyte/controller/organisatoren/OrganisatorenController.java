@@ -51,8 +51,8 @@ public class OrganisatorenController {
     @Secured("ROLE_ORGANISATOR")
     public String saveTestTitel(@PathVariable int id, @RequestParam String testTitel, RedirectAttributes redirectAttributes) {
         TestFormular testFormular = service.getTestFormById(id);
-        testFormular.setTestTitel(testTitel);
-        service.saveTestForm(testFormular);
+        testFormular.setTitel(testTitel);
+        service.save(testFormular);
         redirectAttributes.addFlashAttribute("id", id);
         redirectAttributes.addFlashAttribute("redirect", true);
         return "redirect:/organisatoren/testErstellen";
@@ -71,7 +71,7 @@ public class OrganisatorenController {
         testFormular.setEndzeitpunkt(endzeitpunkt);
         testFormular.setErgebniszeitpunkt(ergebniszeitpunkt);
 
-        service.saveTestForm(testFormular);
+        service.save(testFormular);
         redirectAttributes.addFlashAttribute("id", id);
         redirectAttributes.addFlashAttribute("redirect", true);
         return "redirect:/organisatoren/testErstellen";
@@ -82,7 +82,7 @@ public class OrganisatorenController {
     public String addMcFrage(RedirectAttributes redirectAttributes, @PathVariable int id) {
         TestFormular testForm = service.getTestFormById(id);
         testForm.addNewMCFrage();
-        service.saveTestForm(testForm);
+        service.save(testForm);
         redirectAttributes.addFlashAttribute("id", id);
         redirectAttributes.addFlashAttribute("redirect", true);
         return "redirect:/organisatoren/testErstellen";
@@ -96,13 +96,12 @@ public class OrganisatorenController {
                                    @PathVariable int id) {
         TestFormular testForm = service.getTestFormById(id);
         testForm.addNewFreitextFrage();
-        service.saveTestForm(testForm);
+        service.save(testForm);
         redirectAttributes.addFlashAttribute("id", id);
         redirectAttributes.addFlashAttribute("redirect", true);
         return "redirect:/organisatoren/testErstellen";
     }
 
-    //TODO: Update Methode so schreiben, dass sie alles ins richtige TestFormular schreibt
     @PostMapping("/organisatoren/testErstellen/updateMCFrage/{id}/{frageID}")
     @Secured("ROLE_ORGANISATOR")
     public String updateMCFrage(@PathVariable("id") int formID,
@@ -115,7 +114,7 @@ public class OrganisatorenController {
         TestFormular testFormular = service.getTestFormById(formID);
         //TODO: Beschreibung hinzufügen
         testFormular.addMCFrage(punkte, titel, fragestellung, "", erklaerung, frageID);
-        service.saveTestForm(testFormular);
+        service.save(testFormular);
         redirectAttributes.addFlashAttribute("id", formID);
         redirectAttributes.addFlashAttribute("redirect", true);
         return "redirect:/organisatoren/testErstellen";
@@ -133,7 +132,7 @@ public class OrganisatorenController {
         TestFormular testFormular = service.getTestFormById(formID);
         //TODO: Beschreibung hinzufügen
         testFormular.addFreitextFrage(punkte, titel, fragestellung, "", erklaerung, frageID);
-        service.saveTestForm(testFormular);
+        service.save(testFormular);
         redirectAttributes.addFlashAttribute("id", formID);
         redirectAttributes.addFlashAttribute("redirect", true);
         return "redirect:/organisatoren/testErstellen";
@@ -146,7 +145,6 @@ public class OrganisatorenController {
     }
 
 
-    //TODO: Überarbeiten, nichtmehr nach allen Parametern fragen usw.
     @PostMapping("/organisatoren/testErstellen/testFertigstellen/{id}")
     @Secured("ROLE_ORGANISATOR")
     public String testFertigStellen(@PathVariable int id) {
@@ -160,5 +158,24 @@ public class OrganisatorenController {
     public String testVorschau(@PathVariable int id, Model model) {
         model.addAttribute("testForm", service.getTestFormByIdDB(id));
         return "/organisatoren/TestVorschauOrganisatoren";
+    }
+
+    @PostMapping("/organisatoren/testVorschau/saveTestFristen/{id}")
+    @Secured("ROLE_ORGANISATOR")
+    public String saveTestFristenVorschau(@PathVariable int id,
+                                  @RequestParam LocalDateTime startzeitpunkt,
+                                  @RequestParam LocalDateTime endzeitpunkt,
+                                  @RequestParam LocalDateTime ergebniszeitpunkt,
+                                  RedirectAttributes redirectAttributes) {
+        TestFormular testFormular = service.getTestFormById(id);
+
+        testFormular.setStartzeitpunkt(startzeitpunkt);
+        testFormular.setEndzeitpunkt(endzeitpunkt);
+        testFormular.setErgebniszeitpunkt(ergebniszeitpunkt);
+
+        service.save(testFormular);
+        redirectAttributes.addFlashAttribute("id", id);
+        redirectAttributes.addFlashAttribute("redirect", true);
+        return "redirect:/organisatoren/testErstellen";
     }
 }
