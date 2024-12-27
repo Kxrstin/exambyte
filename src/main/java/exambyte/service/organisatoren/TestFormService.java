@@ -25,7 +25,7 @@ public class TestFormService {
         return testForm.getId();
     }
 
-    public int saveTestForm(TestFormular testForm) {
+    public int save(TestFormular testForm) {
         int id = testForm.getId();
         zwischenspeicher.put(id, testForm);
         return id;
