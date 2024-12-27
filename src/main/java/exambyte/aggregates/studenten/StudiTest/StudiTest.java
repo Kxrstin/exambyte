@@ -2,6 +2,8 @@ package exambyte.aggregates.studenten.StudiTest;
 
 import exambyte.aggregates.studenten.StudiAntwort.StudiAntwort;
 import exambyte.annotations.AggregateRoot;
+import org.springframework.data.annotation.Id;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,12 +12,14 @@ import java.util.Map;
 
 @AggregateRoot
 public final class StudiTest {
-    private final TestDaten testDaten;
+    private final TestDaten testForm;
     private final List<TestAufgabe> testAufgaben = new ArrayList<>();
     private final Map<TestAufgabe, List<StudiAntwort>> aufgabeMitAntwort = new HashMap<>();
+    @Id
+    private Integer id;
 
     public StudiTest(TestDaten testForm, List<TestAufgabe> testAufgaben) {
-        this.testDaten = testForm;
+        this.testForm = testForm;
         if(testAufgaben != null) {
             this.testAufgaben.addAll(testAufgaben);
             for (TestAufgabe testAufgabe : testAufgaben) {
@@ -26,18 +30,18 @@ public final class StudiTest {
 
 
     // TestForm Daten ausgeben
-    public String getTitel() { return testDaten.getTitel(); }
+    public String getTitel() { return testForm.getTitel(); }
     public LocalDateTime getEndzeitpunkt() {
-        return testDaten.getEndzeitpunkt();
+        return testForm.getEndzeitpunkt();
     }
     public LocalDateTime getStartzeitpunkt() {
-        return testDaten.getStartzeitpunkt();
+        return testForm.getStartzeitpunkt();
     }
     public LocalDateTime getErgebnisZeitpunkt() {
-        return testDaten.getErgebniszeitpunkt();
+        return testForm.getErgebniszeitpunkt();
     }
     public int getId() {
-        return testDaten.getTestId();
+        return testForm.getTestId();
     }
     public int getAnzahlAufgaben() {
         return testAufgaben.size();
@@ -68,11 +72,11 @@ public final class StudiTest {
 
     // Zeitpunkte
     public boolean isBearbeitbar(LocalDateTime now) {
-        return now.isBefore(testDaten.getEndzeitpunkt()) && now.isAfter(testDaten.getStartzeitpunkt());
+        return now.isBefore(testForm.getEndzeitpunkt()) && now.isAfter(testForm.getStartzeitpunkt());
     }
 
     public boolean isAbgelaufen(LocalDateTime now) {
-        return now.isAfter(testDaten.getEndzeitpunkt()) && now.isAfter(testDaten.getStartzeitpunkt());
+        return now.isAfter(testForm.getEndzeitpunkt()) && now.isAfter(testForm.getStartzeitpunkt());
     }
 
     // TestAntworten
