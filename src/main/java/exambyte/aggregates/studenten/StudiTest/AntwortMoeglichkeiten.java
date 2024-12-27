@@ -3,10 +3,10 @@ package exambyte.aggregates.studenten.StudiTest;
 import javax.persistence.Column;
 
 public class AntwortMoeglichkeiten {
-    private final String antwort;
+    private String antwort;
 
     @Column(name = "mc_aufgabe")
-    private final Integer mcAufgabe;
+    private Integer mcAufgabe;
 
     public AntwortMoeglichkeiten(String antwort) {
         this(antwort, null);
@@ -17,8 +17,21 @@ public class AntwortMoeglichkeiten {
         this.mcAufgabe = mcAufgabe;
     }
 
+    public AntwortMoeglichkeiten() {
+        this.antwort = null;
+        this.mcAufgabe = null;
+    }
+
     public String getAntwortmoeglichkeit() {
         return antwort;
+    }
+
+    public void setAntwort(String antwort) {
+        this.antwort = antwort;
+    }
+
+    public void setMcAufgabe(Integer mcAufgabe) {
+        this.mcAufgabe = mcAufgabe;
     }
 
     public Integer getMcAufgabe() {
