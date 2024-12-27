@@ -131,7 +131,7 @@ public class TestFragenService {
     }
 
     public boolean isAbgelaufen(int testId) {
-        return getAbgelaufeneTests().contains(getTest(testId));
+        return studiTestRepo.findById(testId).isAbgelaufen(LocalDateTime.now());
     }
 
 
