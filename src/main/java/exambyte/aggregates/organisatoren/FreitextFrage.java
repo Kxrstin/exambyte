@@ -2,6 +2,8 @@ package exambyte.aggregates.organisatoren;
 
 import exambyte.annotations.Wertobjekt;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 @Wertobjekt
 class FreitextFrage implements TestFrage {
@@ -28,6 +30,10 @@ class FreitextFrage implements TestFrage {
         this.beschreibung = beschreibung;
         this.erklaerung = erklaerung;
         this.id = id;
+    }
+
+    public List<McAntwort> getAntworten() {
+        return new ArrayList<>();
     }
 
     public Integer getId() {

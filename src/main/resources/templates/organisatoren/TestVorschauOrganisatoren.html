@@ -27,7 +27,7 @@
     <input type="hidden" name="id" th:value="${id}">
 
     <label class="test-titel" for="testFormTitel">Test Titel:</label>
-    <input class="test-titel-textfeld" type="text" id="testFormTitel" name="testTitel" th:value="${testForm.testTitel}" disabled>
+    <input class="test-titel-textfeld" type="text" id="testFormTitel" name="testTitel" th:value="${testForm.titel}" disabled>
     <br>
 
     <form class="form-check" method="post" th:action="@{/organisatoren/testVorschau/saveTestFristen/{id}(id = ${id})}">
@@ -53,6 +53,14 @@
                         <br>
                         <label for="multipleChoiceFrageID">Multiple-Choice Fragestellung:</label>
                         <input class="textfeld" type="text" id="multipleChoiceFrageID" name="fragestellung" th:value="${testFrage.fragestellung}" disabled>
+                        <br>
+                        <ul th:remove="all-but-first">
+                            <li th:each="mcAntwort: ${testFrage.getAntworten()}">
+                                <input type="checkbox" name="antworten" th:checked="${mcAntwort.getAntwort()}" disabled>
+                                <label for="antwortMoeglichkeitID">Antwort Möglichkeit:</label>
+                                <input class="textfeld" type="text" id="antwortMoeglichkeitID" name="antworten" th:value="${mcAntwort.getName()}" disabled>
+                            </li>
+                        </ul>
                         <br>
                         <label for="punktzahlMcFrageID"> Punktzahl: </label>
                         <input class="textfeld" type="number" id="punktzahlMcFrageID" name="punkte" th:value="${testFrage.punkte}" disabled>

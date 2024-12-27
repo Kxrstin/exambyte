@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class OrganisatorenController {
@@ -97,7 +99,22 @@ public class OrganisatorenController {
         TestFormular testForm = service.getTestFormById(id);
         testForm.addNewFreitextFrage();
         service.save(testForm);
+
         redirectAttributes.addFlashAttribute("id", id);
+        redirectAttributes.addFlashAttribute("redirect", true);
+        return "redirect:/organisatoren/testErstellen";
+    }
+
+    @PostMapping("/organisatoren/testErstellen/addMcAntwort/{id}/{frageID}")
+    @Secured("ROLE_ORGANISATOR")
+    public String addMcAntwort(@PathVariable("id") int formID,
+                               @PathVariable int frageID,
+                               RedirectAttributes redirectAttributes) {
+        TestFormular testFormular = service.getTestFormById(formID);
+        testFormular.addNewMcAntwort(frageID);
+        service.save(testFormular);
+
+        redirectAttributes.addFlashAttribute("id", formID);
         redirectAttributes.addFlashAttribute("redirect", true);
         return "redirect:/organisatoren/testErstellen";
     }
@@ -110,10 +127,29 @@ public class OrganisatorenController {
                                 @RequestParam(defaultValue = "0") int punkte,
                                 String titel,
                                 String fragestellung,
-                                String erklaerung) {
+                                String erklaerung,
+                                @RequestParam(value = "antworten", required = false) List<String> antworten) {
+        if(antworten == null) {
+            antworten = new ArrayList<>();
+        }
+
+        List<Boolean> abhakungen = new ArrayList<>();
+        List<String> antwortNamen = new ArrayList<>();
+        for(int i = 0; i < antworten.size(); i++) {
+            if(antworten.get(i).equals("on")) {
+                abhakungen.add(true);
+            } else {
+                antwortNamen.add(antworten.get(i));
+            }
+
+            if(abhakungen.size() < antwortNamen.size()) {
+                abhakungen.add(false);
+            }
+        }
         TestFormular testFormular = service.getTestFormById(formID);
-        //TODO: Beschreibung hinzufügen
+
         testFormular.addMCFrage(punkte, titel, fragestellung, "", erklaerung, frageID);
+        testFormular.addMcAntworten(abhakungen, antwortNamen, frageID);
         service.save(testFormular);
         redirectAttributes.addFlashAttribute("id", formID);
         redirectAttributes.addFlashAttribute("redirect", true);
@@ -176,6 +212,6 @@ public class OrganisatorenController {
         service.save(testFormular);
         redirectAttributes.addFlashAttribute("id", id);
         redirectAttributes.addFlashAttribute("redirect", true);
-        return "redirect:/organisatoren/testErstellen";
+        return "redirect:/organisatoren/testVorschau/" + id;
     }
 }

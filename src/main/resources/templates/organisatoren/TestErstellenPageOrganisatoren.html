@@ -29,7 +29,7 @@
 
         <form method="post" th:action="@{/organisatoren/testErstellen/saveTestTitel/{id}(id = ${id})}">
             <label class="test-titel" for="testFormTitel">Test Titel:</label>
-            <input class="test-titel-textfeld" type="text" id="testFormTitel" name="testTitel" th:value="${testForm.testTitel}">
+            <input class="test-titel-textfeld" type="text" id="testFormTitel" name="testTitel" th:value="${testForm.titel}">
             <button type="submit">Speichern</button>
         </form>
 
@@ -58,7 +58,11 @@
             <li th:each="testFrage: ${testForm.getTestFragen()}" class="list-group-item">
                 <span th:if="${testFrage.istMcFrage()}">
                     <p class="fragen-überschrift">Multiple-Choice Frage</p>
-                    <!--TODO: zugehörige ID zur URL hinzufügen-->
+                    <form th:action="@{/organisatoren/testErstellen/addMcAntwort/{id}/{frageID}(id=${id}, frageID=${testFrage.id})}" method="post">
+                        <button class="btn-dark" type="submit">
+                            + Antwortmöglichkeit hinzufügen
+                        </button>
+                    </form>
                     <form method="post" th:action="@{/organisatoren/testErstellen/updateMCFrage/{id}/{frageID}(id=${id}, frageID=${testFrage.id})}">
                         <input type="hidden" name="testfragenId" th:value="${testFrage.id}">
                         <label for="titelMCID"> Titel: </label>
@@ -67,7 +71,28 @@
                         <label for="multipleChoiceFrageID">Multiple-Choice Fragestellung:</label>
                         <input class="textfeld" type="text" id="multipleChoiceFrageID" name="fragestellung" th:value="${testFrage.fragestellung}">
                         <br>
-                        <button class="button-abstand" type="submit" id="antwortHinzufügenMC">+ Antwort hinzufügen</button>
+                        <ul th:remove="all-but-first">
+                            <li th:each="mcAntwort: ${testFrage.getAntworten()}">
+                                <input type="checkbox" name="antworten" th:checked="${mcAntwort.getAntwort()}">
+                                <label for="antwortMoeglichkeitID">Antwort Möglichkeit:</label>
+                                <input class="textfeld" type="text" id="antwortMoeglichkeitID" name="antworten" th:value="${mcAntwort.getName()}">
+                            </li>
+                            <li>
+                                <input type="checkbox">
+                                <label>Antwort Möglichkeit:</label>
+                                <input class="textfeld" type="text">
+                            </li>
+                            <li>
+                                <input type="checkbox">
+                                <label>Antwort Möglichkeit:</label>
+                                <input class="textfeld" type="text">
+                            </li>
+                            <li>
+                                <input type="checkbox">
+                                <label>Antwort Möglichkeit:</label>
+                                <input class="textfeld" type="text">
+                            </li>
+                        </ul>
                         <br>
                         <label for="punktzahlMcFrageID"> Punktzahl: </label>
                         <input class="textfeld" type="number" id="punktzahlMcFrageID" name="punkte" th:value="${testFrage.punkte}">
@@ -81,7 +106,6 @@
 
                 <span th:unless="${testFrage.istMcFrage()}">
                     <p class="fragen-überschrift">Freitext Frage</p>
-
                     <form method="post" th:action="@{/organisatoren/testErstellen/updateFreitextFrage/{id}/{frageID}(id=${id}, frageID=${testFrage.id})}">
                         <input type="hidden" name="testfragenId" th:value="${testFrage.id}">
                         <label for="titelFreitextID"> Titel: </label>
