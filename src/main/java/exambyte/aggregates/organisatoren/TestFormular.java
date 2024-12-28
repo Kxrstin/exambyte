@@ -3,6 +3,7 @@ package exambyte.aggregates.organisatoren;
 import exambyte.annotations.AggregateRoot;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -24,13 +25,6 @@ public class TestFormular {
         this.testFragen = testFragen;
         id = UUID.randomUUID().hashCode();
     }
-
-    //Ermöglicht das Ändern der Reihenfolge, falls User unzufrieden ist
-//    public void tauscheFragen(int firstPos, int secPos) {
-//        TestFrage testFrage = testFragen.get(firstPos - 1);
-//        testFragen.set(firstPos, testFragen.get(secPos - 1));
-//        testFragen.set(secPos, testFrage);
-//    }
 
     public int getId() {
         return id;
@@ -62,7 +56,7 @@ public class TestFormular {
                 .toList();
     }
 
-    public TestFrage getTestFrageById(int id) {
+    private TestFrage getTestFrageById(int id) {
         return testFragen.get(id);
     }
 
@@ -146,5 +140,29 @@ public class TestFormular {
 
     public void setErgebniszeitpunkt(LocalDateTime ergebniszeitpunkt) {
         this.ergebniszeitpunkt = ergebniszeitpunkt;
+    }
+
+    public void addNewMcAntwort(int frageID) {
+        TestFrage testFrage = testFragen.get(frageID);
+        testFrage.getAntworten().add(new McAntwort());
+    }
+
+    public void addMcAntwort(McAntwort mcAntwort, int frageID) {
+        TestFrage testFrage = testFragen.get(frageID);
+        testFrage.getAntworten().add(mcAntwort);
+    }
+
+    public void addMcAntworten(List<Boolean> antworten, List<String> antwortmoeglichkeiten, int frageID) {
+        List<McAntwort> mcAntworten = new ArrayList<McAntwort>();
+        for(int i = 0; i < antwortmoeglichkeiten.size(); i++) {
+            boolean antwort = antworten.get(i);
+            String antwortmoeglichkeit = antwortmoeglichkeiten.get(i);
+            McAntwort mcAntwort = new McAntwort(antwort, antwortmoeglichkeit);
+            mcAntworten.add(mcAntwort);
+        }
+
+        TestFrage tf = testFragen.get(frageID);
+        TestFrage mcFrage = new MCFrage(tf.getPunkte(),tf.getTitel(),tf.getFragestellung(),tf.getBeschreibung(),tf.getErklaerung(), mcAntworten, tf.getId());
+        testFragen.put(frageID, mcFrage);
     }
 }

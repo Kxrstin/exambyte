@@ -2,6 +2,8 @@ package exambyte.aggregates.organisatoren;
 
 import exambyte.annotations.Wertobjekt;
 
+import java.util.List;
+
 @Wertobjekt
 public interface TestFrage {
     Integer getId();
@@ -11,5 +13,5 @@ public interface TestFrage {
     String getBeschreibung();
     String getErklaerung();
     boolean istMcFrage();
-
+    List<McAntwort> getAntworten();
 }
