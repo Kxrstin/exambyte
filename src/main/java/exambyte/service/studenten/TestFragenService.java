@@ -20,18 +20,15 @@ public class TestFragenService {
     public StudiTest getTest(int testId) {
         return studiTestRepo.findById(testId);
     }
-
     public boolean hasTestWithId(int testId) {
        return studiTestRepo.existsById(testId);
     }
-
     public List<StudiTest> getBearbeitbareTests() {
         LocalDateTime now = LocalDateTime.now();
         return studiTestRepo.findAll().stream()
                     .filter(test -> test.isBearbeitbar(now))
                     .toList();
     }
-
     public List<StudiTest> getAbgelaufeneTests() {
         LocalDateTime now = LocalDateTime.now();
         return studiTestRepo.findAll().stream()
@@ -76,7 +73,6 @@ public class TestFragenService {
     // Test Infos
     public String getAufgabe(int id, int nr) {
         try {
-            System.out.println(studiTestRepo.findById(id));
             return studiTestRepo.findById(id).getAufgabe(nr);
         } catch (Exception e) {
             return "Kein Studi vorhanden";
@@ -96,7 +92,6 @@ public class TestFragenService {
             return false;
         }
     }
-
     public boolean isMCAufgabe(int id, int nr) {
         try {
             return studiTestRepo.findById(id).isMCAufgabe(nr);
@@ -104,7 +99,6 @@ public class TestFragenService {
             return false;
         }
     }
-
     public List<String> getAntwortMoeglichkeiten(int id, int nr) {
         try {
             return studiTestRepo.findById(id).getAntwortmoeglichkeiten(nr);
@@ -112,21 +106,11 @@ public class TestFragenService {
             return new ArrayList<>();
         }
     }
-
     public int getAnzahlAufgaben(int id) {
         try {
             return studiTestRepo.findById(id).getAnzahlAufgaben();
         } catch (NullPointerException e) {
             return 0;
-        }
-    }
-
-    // TODO sinnlos?
-    public Integer getId(int testId) {
-        try {
-            return studiTestRepo.findById(testId).getId();
-        } catch (NullPointerException e) {
-            return null;
         }
     }
 
@@ -136,18 +120,14 @@ public class TestFragenService {
 
 
     // Antworten speichern
-    public void addAntwort(int testId, int aufgabeNr, String antwort, int studiId) {
+    public void addAntwort(int testId, int aufgabeId, String antwort, int studiId) {
         StudiTest test = studiTestRepo.findById(testId);
-        try {
-            test.addAntwort(antwort, aufgabeNr, studiId);
-        } catch (NullPointerException e) {
-            return;
-        }
+        test.addAntwort(antwort, aufgabeId, studiId);
         studiTestRepo.save(test);
     }
-    public String getAntwort(int testId, int aufgabe, int studiId) {
+    public String getAntwort(int testId, int aufgabeId, int studiId) {
         try {
-            return studiTestRepo.findById(testId).getAntwort(aufgabe, studiId);
+            return studiTestRepo.findById(testId).getAntwort(aufgabeId, studiId);
         } catch (NullPointerException e) {
             return "";
         }

@@ -1,10 +1,8 @@
 package exambyte.aggregates.studenten.StudiTest;
 
-import exambyte.annotations.Wertobjekt;
 import org.springframework.data.annotation.PersistenceCreator;
 import org.springframework.data.annotation.Id;
 
-@Wertobjekt
 public class FreitextAufgabe implements TestAufgabe {
     @Id
     private final Integer id;
@@ -35,10 +33,13 @@ public class FreitextAufgabe implements TestAufgabe {
     public int getPunktzahl() {
         return punktzahl;
     }
-    public int getId() {
+    public Integer getId() {
         return id;
     }
     public Integer getStudiTest() {
         return studiTest;
+    }
+    public boolean isFreitextAufgabe() {
+        return true;
     }
 }

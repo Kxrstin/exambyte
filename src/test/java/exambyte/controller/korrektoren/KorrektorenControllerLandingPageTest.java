@@ -1,5 +1,6 @@
 package exambyte.controller.korrektoren;
 
+import exambyte.TestcontainersConfiguration;
 import exambyte.aggregates.korrektoren.Abgabe;
 import exambyte.helper.WithMockOAuth2User;
 import exambyte.security.MethodSecurityConfig;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
@@ -25,7 +27,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(KorrektorenControllerLandingPage.class)
-@Import({SecurityConfig.class, MethodSecurityConfig.class})
+@Import({SecurityConfig.class, MethodSecurityConfig.class, TestcontainersConfiguration.class})
+@ActiveProfiles("test") // Verhindert, dass die Beispieldaten der Application Klasse geladen werden
 public class KorrektorenControllerLandingPageTest {
     private final List<String> testnamen = List.of("Mathematik für Informatik 2", "Programmierpraktikum 2", "Wissenschaftliches Arbeiten");
     private final List<String> aufgaben = List.of("Mathematik für Informatik 2 Aufgabe", "Programmierpraktikum 2 Aufgabe", "Wissenschaftliches Arbeiten Aufgabe");

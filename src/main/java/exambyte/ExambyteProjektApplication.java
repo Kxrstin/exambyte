@@ -2,11 +2,11 @@ package exambyte;
 
 import exambyte.aggregates.studenten.StudiTest.*;
 import exambyte.service.studenten.StudiTestRepo;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Profile;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.time.LocalDateTime;
@@ -18,20 +18,19 @@ public class ExambyteProjektApplication {
         SpringApplication.run(ExambyteProjektApplication.class, args);
     }
 
-    @Autowired
-    JdbcTemplate jdbc;
-
+    @Profile("!test") // Soll nicht bei Tests geladen werden
     @Bean
-    public CommandLineRunner insertData(StudiTestRepo testRepo) {
+    public CommandLineRunner insertData(StudiTestRepo testRepo, JdbcTemplate jdbc) {
         return args -> {
            StudiTest studiTest1 = studiTest1();
             StudiTest studiTest2 = studiTest2();
 
-            jdbc.update("DELETE FROM test_daten");
-            jdbc.update("DELETE FROM antwort_moeglichkeiten");
-            jdbc.update("DELETE FROM freitext_aufgabe");
-            jdbc.update("DELETE FROM mc_aufgabe");
-            jdbc.update("DELETE FROM antwort_moeglichkeiten");
+            jdbc.update("BEGIN; DELETE FROM test_daten; " +
+                            "DELETE FROM antwort_moeglichkeiten; " +
+                            "DELETE FROM mc_aufgabe; " +
+                            "DELETE FROM freitext_aufgabe; " +
+                            "DELETE FROM freitext_antwort CASCADE; " +
+                            "DELETE FROM mc_antwort CASCADE; COMMIT;");
             jdbc.update("DELETE FROM studi_test");
 
             jdbc.update("INSERT INTO studi_test (test_daten, id) VALUES (?, ?)",1, studiTest1.getId());

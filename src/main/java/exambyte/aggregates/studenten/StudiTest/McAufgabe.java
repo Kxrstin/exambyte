@@ -1,16 +1,17 @@
 package exambyte.aggregates.studenten.StudiTest;
 
-import exambyte.annotations.Wertobjekt;
 import org.springframework.data.annotation.Id;
 import java.util.List;
 
-@Wertobjekt
 public class McAufgabe implements TestAufgabe {
+    // TODO Kein Wertobjekt mehr
     @Id
     private Integer id;
+
     private final String aufgabe;
     private final List<AntwortMoeglichkeiten> antwortMoeglichkeiten;
     private final int punktzahl;
+    // TODO Kein Wertobjekt mehr
     private Integer studiTest;
 
     public McAufgabe(String aufgabe, List<AntwortMoeglichkeiten> antwortMoeglichkeiten, int punktzahl, Integer id) {
@@ -38,6 +39,9 @@ public class McAufgabe implements TestAufgabe {
     }
     public Integer getId() {
         return id;
+    }
+    public boolean isFreitextAufgabe() {
+        return false;
     }
     public void setId(int id) {
         this.id = id;

@@ -9,7 +9,7 @@ public class TestDaten {
     private final LocalDateTime startzeitpunkt;
     private final LocalDateTime endzeitpunkt;
     private final LocalDateTime ergebniszeitpunkt;
-    private Integer studiTest;
+    private final Integer studiTest;
 
     public TestDaten(String titel, LocalDateTime startzeitpunkt, LocalDateTime endzeitpunkt, LocalDateTime ergebniszeitpunkt, Integer studiTest) {
         this.titel = titel;

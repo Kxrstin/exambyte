@@ -3,5 +3,8 @@ package exambyte.aggregates.studenten.StudiAntwort;
 interface TestAntwort {
     void addAntwort(String antwort);
     boolean isFreitextAufgabe();
-    String getAntwort();
+    Integer getStudiId();
+    Integer getAufgabeId();
+    String getAntworten();
+    void removeAntwort();
 }

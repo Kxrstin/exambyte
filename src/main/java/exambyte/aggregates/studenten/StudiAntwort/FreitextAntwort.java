@@ -1,20 +1,46 @@
 package exambyte.aggregates.studenten.StudiAntwort;
 
-class FreitextAntwort implements TestAntwort{
-    private String antwort;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.PersistenceCreator;
 
-    public void addAntwort(String antwort) {
-        this.antwort = antwort;
+public class FreitextAntwort implements TestAntwort{
+    @Id
+    private Integer id;
+    private String antworten;
+    private Integer studiTest;
+    private Integer aufgabeId;
+    private Integer studiId;
+
+    @PersistenceCreator
+    public FreitextAntwort(Integer id) {
+        this.id = id;
     }
 
-    @Override
+    public FreitextAntwort(Integer id, Integer studiTest, Integer aufgabeId, Integer studiId)
+    {
+        this.id = id;
+        this.studiTest = studiTest;
+        this.aufgabeId = aufgabeId;
+        this.studiId = studiId;
+    }
+
+    public void addAntwort(String antwort) {
+        this.antworten = antwort;
+    }
+    public Integer getStudiId() {
+        return studiId;
+    }
+
     public boolean isFreitextAufgabe() {
         return true;
     }
     public void removeAntwort() {
-        this.antwort = "";
+        this.antworten = "";
     }
-    public String getAntwort() {
-        return antwort;
+    public String getAntworten() {
+        return antworten;
     }
+    public Integer getAufgabeId() { return aufgabeId; }
+    public int getId() { return id; }
+    public void setAufgabeId(int aufgabeId) { this.aufgabeId = aufgabeId;}
 }

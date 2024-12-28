@@ -1,5 +1,6 @@
 package exambyte.controller.studenten;
 
+import exambyte.TestcontainersConfiguration;
 import exambyte.aggregates.studenten.StudiTest.FreitextAufgabe;
 import exambyte.aggregates.studenten.StudiTest.StudiTest;
 import exambyte.aggregates.studenten.StudiTest.TestAufgabe;
@@ -14,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
@@ -27,7 +29,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 @WebMvcTest(StudentenControllerErgebnis.class)
-@Import({SecurityConfig.class, MethodSecurityConfig.class})
+@Import({SecurityConfig.class, MethodSecurityConfig.class, TestcontainersConfiguration.class})
+@ActiveProfiles("test") // Verhindert, dass die Beispieldaten der Application Klasse geladen werden
 public class StudentenControllerErgebnisTest {
     private TestDaten testForm = new TestDaten("Algorithmen und Datenstrukturen Test Woche 5", LocalDateTime.of(2024, 11, 21, 12, 0), LocalDateTime.of(2024, 11, 30, 12, 0), LocalDateTime.of(2024, 12, 2, 12, 0), 0);
     //private StudiTest studiTest = new StudiTest(testForm, null, List.of(new FreitextAufgabe("Nenne pro Argumente der Onion Architektur", 1)));

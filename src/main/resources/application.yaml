@@ -1,7 +1,7 @@
 logging:
   level:
     root: error
-    sql: debug
+    sql: warn
     org.springframework.web: warn
     org.springframework.jdbc: warn
 
