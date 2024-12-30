@@ -15,8 +15,6 @@ public class McAntwort implements TestAntwort{
     private String antworten ="";
     private Integer aufgabeId;
     private Integer studiId;
-
-    @Column(name = "studi_test")
     private Integer studiTest;
 
     @Transient

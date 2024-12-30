@@ -56,7 +56,6 @@ public class StudentenControllerTestBearbeitenPage {
                 model.addAttribute("gewaehlteAntworten", Collections.emptyList());
             }
         }
-
         model.addAttribute("nextAufgabe", testService.getTest(testId).getNextAufgabe(aufgabenId));
         model.addAttribute("prevAufgabe", testService.getTest(testId).getPrevAufgabe(aufgabenId));
 

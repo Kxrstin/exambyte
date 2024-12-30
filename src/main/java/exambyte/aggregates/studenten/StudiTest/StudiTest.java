@@ -6,6 +6,7 @@ import exambyte.annotations.AggregateRoot;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.PersistenceCreator;
 import org.springframework.data.annotation.Transient;
+
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -14,19 +15,19 @@ public final class StudiTest {
     @Id
     private Integer id;
     private final TestDaten testDaten;
-    private List<McAufgabe> mcAufgaben = new ArrayList<>();
     private List<FreitextAufgabe> freitextAufgaben = new ArrayList<>();
+    private List<McAufgabe> mcAufgaben = new ArrayList<>();
     private List<McAntwort> mcAntworten = new ArrayList<>();
     private List<FreitextAntwort> freitextAntworten = new ArrayList<>();
 
     @Transient
     private final List<TestAufgabe> testAufgaben = new ArrayList<>();
 
-    public StudiTest(TestDaten testDaten, Integer id) {
+    @PersistenceCreator
+    public StudiTest(Integer id, TestDaten testDaten) {
         this(id, testDaten, null, null);
     }
 
-    @PersistenceCreator
     public StudiTest(Integer id, TestDaten testDaten, List<McAufgabe> mcAufgaben, List<FreitextAufgabe> freitextAufgaben) {
         this.id = id;
         this.testDaten = testDaten;
@@ -99,7 +100,10 @@ public final class StudiTest {
     public Integer getFirstAufgabe() {
         return testAufgaben.get(0).getId();
     }
-    public int getNextAufgabe(int aufgabeId) {
+    public Integer getNextAufgabe(int aufgabeId) {
+        if(testAufgaben.size() == 0) {
+            return null;
+        }
         int nextPos = getIndexOf(aufgabeId) + 1;
         if(nextPos < testAufgaben.size()) {
             return testAufgaben.get(nextPos).getId();
@@ -108,6 +112,9 @@ public final class StudiTest {
         }
     }
     public Integer getPrevAufgabe(int aufgabeId) {
+        if(testAufgaben.size() == 0) {
+            return null;
+        }
         int prevPos = getIndexOf(aufgabeId) - 1;
         if(prevPos >= 0) {
             return testAufgaben.get(prevPos).getId();
@@ -195,6 +202,13 @@ public final class StudiTest {
     }
     public void setFreitextAntworten(List<FreitextAntwort> antworten) {
         this.freitextAntworten = antworten;
+    }
+
+    public void setMcAufgaben(List<McAufgabe> mcAufgaben) {
+        this.mcAufgaben = mcAufgaben;
+    }
+    public void setFreitextAufgaben(List<FreitextAufgabe> freitextAufgaben) {
+        this.freitextAufgaben = freitextAufgaben;
     }
 
     // TODO: Das gehört in einen anderen Service aber nicht hier hin

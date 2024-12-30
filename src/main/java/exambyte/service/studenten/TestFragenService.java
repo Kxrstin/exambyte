@@ -1,6 +1,7 @@
 package exambyte.service.studenten;
 
 import exambyte.aggregates.studenten.StudiTest.StudiTest;
+import exambyte.aggregates.studenten.StudiTest.TestDaten;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -17,6 +18,10 @@ public class TestFragenService {
     }
 
     // StudiTest
+//    public StudiTest save(StudiTest studiTest) {
+//        // Braucht man, da StudiTest zuerst gespeichert werden muss, da es sonst Probleme mit den Referenzen zu StudiTest gibt
+//        studiTestRepo.save(new StudiTest(studiTest.getId(), new TestDaten(studiTest.getTitel(), studiTest.getStartzeitpunkt(), studiTest.getEndzeitpunkt(), studiTest.getErgebnisZeitpunkt(), studiTest.getId())));
+//    }
     public StudiTest getTest(int testId) {
         return studiTestRepo.findById(testId);
     }
