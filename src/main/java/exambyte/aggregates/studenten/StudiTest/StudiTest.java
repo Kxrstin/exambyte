@@ -7,6 +7,8 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.PersistenceCreator;
 import org.springframework.data.annotation.Transient;
 
+import javax.persistence.CascadeType;
+import javax.persistence.OneToMany;
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -23,11 +25,11 @@ public final class StudiTest {
     @Transient
     private final List<TestAufgabe> testAufgaben = new ArrayList<>();
 
-    @PersistenceCreator
     public StudiTest(Integer id, TestDaten testDaten) {
         this(id, testDaten, null, null);
     }
 
+    @PersistenceCreator
     public StudiTest(Integer id, TestDaten testDaten, List<McAufgabe> mcAufgaben, List<FreitextAufgabe> freitextAufgaben) {
         this.id = id;
         this.testDaten = testDaten;
@@ -214,5 +216,9 @@ public final class StudiTest {
     // TODO: Das gehört in einen anderen Service aber nicht hier hin
     public boolean testBestanden() {
         return true;
+    }
+
+    public TestDaten getTestDaten() {
+        return testDaten;
     }
 }

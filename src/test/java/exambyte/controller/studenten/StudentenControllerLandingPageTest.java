@@ -1,6 +1,5 @@
 package exambyte.controller.studenten;
 
-import exambyte.TestcontainersConfiguration;
 import exambyte.aggregates.studenten.StudiTest.FreitextAufgabe;
 import exambyte.aggregates.studenten.StudiTest.StudiTest;
 import exambyte.aggregates.studenten.StudiTest.TestDaten;
@@ -8,7 +7,6 @@ import exambyte.security.MethodSecurityConfig;
 import exambyte.security.SecurityConfig;
 import exambyte.helper.WithMockOAuth2User;
 import exambyte.service.studenten.TestFragenService;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +27,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(StudentenControllerLandingPage.class)
-@Import({SecurityConfig.class, MethodSecurityConfig.class, TestcontainersConfiguration.class})
+@Import({SecurityConfig.class, MethodSecurityConfig.class})
 @ActiveProfiles("test") // Verhindert, dass die Beispieldaten der Application Klasse geladen werden
 public class StudentenControllerLandingPageTest {
     private TestDaten testForm = new TestDaten("Algorithmen und Datenstrukturen Test Woche 5", LocalDateTime.of(2024, 11, 21, 12, 0), LocalDateTime.of(2024, 11, 30, 12, 0), LocalDateTime.of(2024, 12, 2, 12, 0), 0);

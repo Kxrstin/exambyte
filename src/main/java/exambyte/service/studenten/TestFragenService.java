@@ -1,9 +1,9 @@
 package exambyte.service.studenten;
 
 import exambyte.aggregates.studenten.StudiTest.StudiTest;
-import exambyte.aggregates.studenten.StudiTest.TestDaten;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import org.springframework.jdbc.core.JdbcTemplate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -12,16 +12,20 @@ import java.util.List;
 @Service
 public class TestFragenService {
     private final StudiTestRepo studiTestRepo;
+    private final JdbcTemplate jdbc;
 
-    public TestFragenService(StudiTestRepo testRepo) {
+    @Autowired
+    public TestFragenService(StudiTestRepo testRepo, JdbcTemplate jdbc) {
         this.studiTestRepo = testRepo;
+        this.jdbc = jdbc;
     }
 
-    // StudiTest
-//    public StudiTest save(StudiTest studiTest) {
-//        // Braucht man, da StudiTest zuerst gespeichert werden muss, da es sonst Probleme mit den Referenzen zu StudiTest gibt
-//        studiTestRepo.save(new StudiTest(studiTest.getId(), new TestDaten(studiTest.getTitel(), studiTest.getStartzeitpunkt(), studiTest.getEndzeitpunkt(), studiTest.getErgebnisZeitpunkt(), studiTest.getId())));
-//    }
+    public StudiTest save(StudiTest studiTest) {
+        // Ohne die nächste Zeile, kommen immer Fehlermeldungen, da Spring Data die ID zu spät speichert
+        jdbc.update("INSERT INTO studi_test (test_daten, id) VALUES (?, ?)",studiTest.getId(), studiTest.getId());
+        return studiTestRepo.save(studiTest);
+    }
+
     public StudiTest getTest(int testId) {
         return studiTestRepo.findById(testId);
     }
@@ -50,7 +54,6 @@ public class TestFragenService {
             return "Kein Studi vorhanden";
         }
     }
-
     public String parseStart(int id) {
         try {
             return "Startzeitpunkt: " + parseTime(studiTestRepo.findById(id).getStartzeitpunkt());
@@ -58,7 +61,6 @@ public class TestFragenService {
             return "Kein Studi vorhanden";
         }
     }
-
     public String parseEnde(int id) {
         try {
             return "Endzeitpunkt: " + parseTime(studiTestRepo.findById(id).getEndzeitpunkt());
@@ -118,7 +120,6 @@ public class TestFragenService {
             return 0;
         }
     }
-
     public boolean isAbgelaufen(int testId) {
         return studiTestRepo.findById(testId).isAbgelaufen(LocalDateTime.now());
     }
@@ -160,7 +161,6 @@ public class TestFragenService {
         }
         return "fail";
     }
-
     public String parseTime(LocalDateTime time) {
         String uhrzeit = time.format(DateTimeFormatter.ofPattern("HH:mm"));
         String datum = time.format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));

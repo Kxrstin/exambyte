@@ -21,18 +21,13 @@ public class ExambyteProjektApplication {
 
     @Profile("!test") // Soll nicht bei Tests geladen werden
     @Bean
-    public CommandLineRunner insertData(StudiTestRepo repo, TestFragenService service, JdbcTemplate jdbc) {
+    public CommandLineRunner insertData(TestFragenService service, JdbcTemplate jdbc) {
         return args -> {
-           StudiTest studiTest1 = studiTest1();
-           StudiTest studiTest2 = studiTest2();
-
-           clearAllTables(jdbc);
-
-            jdbc.update("INSERT INTO studi_test (test_daten, id) VALUES (?, ?)",1, studiTest1.getId());
-            jdbc.update("INSERT INTO studi_test (test_daten, id) VALUES (?, ?)",2,studiTest2.getId());
-
-            repo.save(studiTest1);
-            repo.save(studiTest2);
+               StudiTest studiTest1 = studiTest1();
+               StudiTest studiTest2 = studiTest2();
+               clearAllTables(jdbc);
+               service.save(studiTest1);
+               service.save(studiTest2);
         };
     }
 

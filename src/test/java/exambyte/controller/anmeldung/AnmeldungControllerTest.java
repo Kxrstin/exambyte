@@ -1,6 +1,5 @@
 package exambyte.controller.anmeldung;
 
-import exambyte.TestcontainersConfiguration;
 import exambyte.security.MethodSecurityConfig;
 import exambyte.security.SecurityConfig;
 import exambyte.helper.WithMockOAuth2User;
@@ -18,7 +17,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(AnmeldungController.class)
-@Import({SecurityConfig.class, MethodSecurityConfig.class, TestcontainersConfiguration.class})
+@Import({SecurityConfig.class, MethodSecurityConfig.class})
 @ActiveProfiles("test") // Verhindert, dass die Beispieldaten der Application Klasse geladen werden
 public class AnmeldungControllerTest {
     @Autowired

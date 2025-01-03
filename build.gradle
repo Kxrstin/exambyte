@@ -38,9 +38,10 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
     runtimeOnly 'com.h2database:h2'
     implementation 'org.flywaydb:flyway-core'
+    implementation 'javax.persistence:javax.persistence-api:2.2'
     runtimeOnly 'org.postgresql:postgresql'
     implementation "org.flywaydb:flyway-database-postgresql"
-    implementation 'javax.persistence:javax.persistence-api:2.2'
+
 
 
 

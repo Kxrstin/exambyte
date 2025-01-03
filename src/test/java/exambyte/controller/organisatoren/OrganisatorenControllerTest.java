@@ -1,6 +1,5 @@
 package exambyte.controller.organisatoren;
 
-import exambyte.TestcontainersConfiguration;
 import exambyte.aggregates.organisatoren.TestFormular;
 import exambyte.helper.WithMockOAuth2User;
 import exambyte.security.MethodSecurityConfig;
@@ -29,7 +28,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(OrganisatorenController.class)
-@Import({SecurityConfig.class, MethodSecurityConfig.class, TestcontainersConfiguration.class})
+@Import({SecurityConfig.class, MethodSecurityConfig.class})
 @ActiveProfiles("test") // Verhindert, dass die Beispieldaten der Application Klasse geladen werden
 public class OrganisatorenControllerTest {
     @Autowired

@@ -1,11 +1,9 @@
 package exambyte.controller.studenten;
 
-import exambyte.TestcontainersConfiguration;
 import exambyte.security.MethodSecurityConfig;
 import exambyte.security.SecurityConfig;
 import exambyte.helper.WithMockOAuth2User;
 import exambyte.service.studenten.TestFragenService;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +24,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 @WebMvcTest(StudentenControllerTestBearbeitenPage.class)
-@Import({SecurityConfig.class, MethodSecurityConfig.class, TestcontainersConfiguration.class})
+@Import({SecurityConfig.class, MethodSecurityConfig.class})
 @ActiveProfiles("test") // Verhindert, dass die Beispieldaten der Application Klasse geladen werden
 public class StudentenControllerTestBearbeitenPageTest {
     @Autowired

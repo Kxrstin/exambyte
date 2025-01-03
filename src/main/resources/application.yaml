@@ -4,6 +4,7 @@ logging:
     sql: warn
     org.springframework.web: warn
     org.springframework.jdbc: warn
+    org.flywaydb: warn
 
 server:
   port: 8080
@@ -15,7 +16,6 @@ spring:
     baseline:
       on:
         migrate: true
-
 
   main:
     banner:

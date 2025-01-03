@@ -1,10 +1,5 @@
 package exambyte.controller.studenten;
 
-import exambyte.TestcontainersConfiguration;
-import exambyte.aggregates.studenten.StudiTest.FreitextAufgabe;
-import exambyte.aggregates.studenten.StudiTest.StudiTest;
-import exambyte.aggregates.studenten.StudiTest.TestAufgabe;
-import exambyte.aggregates.studenten.StudiTest.TestDaten;
 import exambyte.helper.WithMockOAuth2User;
 import exambyte.security.MethodSecurityConfig;
 import exambyte.security.SecurityConfig;
@@ -12,18 +7,12 @@ import exambyte.service.studenten.TestFragenService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.jdbc.JdbcTest;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
-import org.thymeleaf.spring6.expression.Mvc;
-
-import java.time.LocalDateTime;
-import java.util.*;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.Mockito.when;
@@ -32,7 +21,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 @WebMvcTest(StudentenControllerErgebnis.class)
-@Import({SecurityConfig.class, MethodSecurityConfig.class, TestcontainersConfiguration.class})
+@Import({SecurityConfig.class, MethodSecurityConfig.class})
 @ActiveProfiles("test") // Verhindert, dass die Beispieldaten der Application Klasse geladen werden
 public class StudentenControllerErgebnisTest {
     @Autowired
