@@ -45,7 +45,6 @@
         <li th:each="testFrage: ${testForm.getTestFragen()}" class="list-group-item">
                 <span th:if="${testFrage.istMcFrage()}">
                     <p class="fragen-überschrift">Multiple-Choice Frage</p>
-                    <!--TODO: zugehörige ID zur URL hinzufügen-->
                     <form method="post" th:action="@{/organisatoren/testErstellen/updateMCFrage/{id}/{frageID}(id=${id}, frageID=${testFrage.id})}">
                         <input type="hidden" name="testfragenId" th:value="${testFrage.id}">
                         <label for="titelMCID"> Titel: </label>

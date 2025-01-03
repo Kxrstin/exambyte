@@ -26,6 +26,17 @@
 
         <input type="hidden" name="id" th:value="${id}">
 
+        <ul class="fehler-meldung" th:if="${fehlermeldung}">
+            <li th:if="${leeresFeld}">
+                <p class="fehler-meldung-schrift">Die Felder dürfen nicht leer sein!</p>
+            </li>
+            <li th:if="${fristError}">
+                <p class="fehler-meldung-schrift">Bitte gültige Fristen eingeben!</p>
+            </li>
+            <li th:if="${keineMcAntwort}">
+                <p class="fehler-meldung-schrift">Bitte Antwortmöglichkeiten für Multiple-Choice-Fragen angeben!</p>
+            </li>
+        </ul>
 
         <form method="post" th:action="@{/organisatoren/testErstellen/saveTestTitel/{id}(id = ${id})}">
             <label class="test-titel" for="testFormTitel">Test Titel:</label>
@@ -76,6 +87,7 @@
                                 <input type="checkbox" name="antworten" th:checked="${mcAntwort.getAntwort()}">
                                 <label for="antwortMoeglichkeitID">Antwort Möglichkeit:</label>
                                 <input class="textfeld" type="text" id="antwortMoeglichkeitID" name="antworten" th:value="${mcAntwort.getName()}">
+                                <input type="hidden" name="antworten" value="space">
                             </li>
                             <li>
                                 <input type="checkbox">
@@ -95,7 +107,7 @@
                         </ul>
                         <br>
                         <label for="punktzahlMcFrageID"> Punktzahl: </label>
-                        <input class="textfeld" type="number" id="punktzahlMcFrageID" name="punkte" th:value="${testFrage.punkte}">
+                        <input class="textfeld" min="1" type="number" id="punktzahlMcFrageID" name="punkte" th:value="${testFrage.punkte}">
                         <br>
                         <label for="erklaerungMCFrageID"> Erklärung: </label>
                         <textarea class="lösung-textfeld" id="erklaerungMCFrageID" name="erklaerung" th:text="${testFrage.erklaerung}"></textarea>

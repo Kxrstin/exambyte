@@ -1,6 +1,7 @@
 package exambyte.aggregates.organisatoren;
 
 import exambyte.annotations.AggregateRoot;
+import jakarta.validation.constraints.NotBlank;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -10,15 +11,13 @@ import java.util.UUID;
 
 @AggregateRoot
 public class TestFormular {
-    private String testTitel;
-
     //TODO: Testfragen werden nach ID automatisch sortiert und sind beim Hinzufügen nie an der richtigen Stelle
     private Map<Integer, TestFrage> testFragen;
     private int id;
-
-    private LocalDateTime startzeitpunkt;
-    private LocalDateTime endzeitpunkt;
-    private LocalDateTime ergebniszeitpunkt;
+    @NotBlank(message = "Darf nicht leer sein") private String testTitel;
+    @NotBlank(message = "Darf nicht leer sein") private LocalDateTime startzeitpunkt;
+    @NotBlank(message = "Darf nicht leer sein") private LocalDateTime endzeitpunkt;
+    @NotBlank(message = "Darf nicht leer sein") private LocalDateTime ergebniszeitpunkt;
 
     public TestFormular(String titel, Map<Integer, TestFrage> testFragen){
         testTitel = titel;

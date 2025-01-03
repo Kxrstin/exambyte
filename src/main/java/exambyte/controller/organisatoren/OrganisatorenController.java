@@ -32,15 +32,30 @@ public class OrganisatorenController {
     @Secured("ROLE_ORGANISATOR")
     public String testErstellen(Model model) {
         boolean redirect = false;
-        int id = 0;
 
+        //Ohne die if-Abfrage kann es schnell zu Null-Pointer-Exception kommen
         if(model.getAttribute("redirect") != null) {
             redirect = (boolean) model.getAttribute("redirect");
         }
 
+        //Die Error Attribute befinden sich nur im Model, falls sie aufgetreten sind.
+        //Um einen Templating-Error zu vermeiden, müssen sie hier rein.
+        if(model.getAttribute("fristError") == null) {
+            model.addAttribute("fristError", false);
+        }
+        if(model.getAttribute("leeresFeld") == null) {
+            model.addAttribute("leeresFeld", false);
+        }
+        if(model.getAttribute("keineMcAntwort") == null) {
+            model.addAttribute("keineMcAntwort", false);
+        }
+
+        //Alles, was ins Model gehört, kommt sofort rein, damit kein Templating-Error entsteht
+        int id = 0;
         if(redirect == false) {
             id = service.addNewTestForm();
             model.addAttribute("id", id);
+            model.addAttribute("fehlermeldung", false);
         } else {
             id = (int) model.getAttribute("id");
         }
@@ -52,6 +67,13 @@ public class OrganisatorenController {
     @PostMapping("/organisatoren/testErstellen/saveTestTitel/{id}")
     @Secured("ROLE_ORGANISATOR")
     public String saveTestTitel(@PathVariable int id, @RequestParam String testTitel, RedirectAttributes redirectAttributes) {
+        if(testTitel.equals("") || testTitel == null) {
+            redirectAttributes.addFlashAttribute("fehlermeldung", true);
+            redirectAttributes.addFlashAttribute("leeresFeld", true);
+            redirectAttributes.addFlashAttribute("id", id);
+            redirectAttributes.addFlashAttribute("redirect", true);
+            return "redirect:/organisatoren/testErstellen";
+        }
         TestFormular testFormular = service.getTestFormById(id);
         testFormular.setTitel(testTitel);
         service.save(testFormular);
@@ -67,6 +89,21 @@ public class OrganisatorenController {
                                   @RequestParam LocalDateTime endzeitpunkt,
                                   @RequestParam LocalDateTime ergebniszeitpunkt,
                                   RedirectAttributes redirectAttributes) {
+        if(startzeitpunkt == null || endzeitpunkt == null || ergebniszeitpunkt == null) {
+            redirectAttributes.addFlashAttribute("fehlermeldung", true);
+            redirectAttributes.addFlashAttribute("leeresFeld", true);
+            redirectAttributes.addFlashAttribute("id", id);
+            redirectAttributes.addFlashAttribute("redirect", true);
+            return "redirect:/organisatoren/testErstellen";
+        }
+        if(startzeitpunkt.isAfter(endzeitpunkt) || endzeitpunkt.isAfter(ergebniszeitpunkt) || ergebniszeitpunkt.isBefore(startzeitpunkt)) {
+            redirectAttributes.addFlashAttribute("fehlermeldung", true);
+            redirectAttributes.addFlashAttribute("fristError", true);
+            redirectAttributes.addFlashAttribute("id", id);
+            redirectAttributes.addFlashAttribute("redirect", true);
+            return "redirect:/organisatoren/testErstellen";
+        }
+
         TestFormular testFormular = service.getTestFormById(id);
 
         testFormular.setStartzeitpunkt(startzeitpunkt);
@@ -129,25 +166,71 @@ public class OrganisatorenController {
                                 String fragestellung,
                                 String erklaerung,
                                 @RequestParam(value = "antworten", required = false) List<String> antworten) {
+        // TODO: Es kann passieren, dass eine Antwort als richtig angekreuzt wird, das Feld aber leer ist und
+        //       das nächste Feld nicht angekreuzt wurde aber keine Antwort hat
+
+        //Fehlerbehandlung
+        if(titel == null || titel.equals("") || fragestellung == null || fragestellung.equals("") || erklaerung == null || erklaerung.equals("")) {
+            redirectAttributes.addFlashAttribute("fehlermeldung", true);
+            redirectAttributes.addFlashAttribute("leeresFeld", true);
+            redirectAttributes.addFlashAttribute("id", formID);
+            redirectAttributes.addFlashAttribute("redirect", true);
+            return "redirect:/organisatoren/testErstellen";
+        }
         if(antworten == null) {
-            antworten = new ArrayList<>();
+            redirectAttributes.addFlashAttribute("fehlermeldung", true);
+            redirectAttributes.addFlashAttribute("keineMcAntwort", true);
+            redirectAttributes.addFlashAttribute("id", formID);
+            redirectAttributes.addFlashAttribute("redirect", true);
+            return "redirect:/organisatoren/testErstellen";
+        }
+        if(!antworten.contains("on")) {
+            redirectAttributes.addFlashAttribute("fehlermeldung", true);
+            redirectAttributes.addFlashAttribute("keineMcAntwortRichtig", true);
+            redirectAttributes.addFlashAttribute("id", formID);
+            redirectAttributes.addFlashAttribute("redirect", true);
+            return "redirect:/organisatoren/testErstellen";
         }
 
+        /*
+        * Die Liste an Antwortmöglichkeiten einer MC-Frage werden hier richtig zugeordnet, weil Checkboxen,
+        * die nicht abgehakt wurden auch nicht abgesendet werden. Checkboxen die abgehakt werden, werden als "on"
+        * abgesendet, wenn man sie auch als String abfragt. Somit kann man dann nach folgendem Prinzip arbeiten:
+        * Es wird eine Liste entgegengenommen, welche die Antwortmöglichkeiten und "on"-Strings beinhält. Gibt es
+        * vor einem String ein "on", dann ist die Antwortmöglichkeit richtig, gibt es vor einem String einen anderen
+        * beliebigen String, ist die Antwortmöglichkeit falsch.
+        */
         List<Boolean> abhakungen = new ArrayList<>();
         List<String> antwortNamen = new ArrayList<>();
         for(int i = 0; i < antworten.size(); i++) {
             if(antworten.get(i).equals("on")) {
                 abhakungen.add(true);
-            } else {
-                antwortNamen.add(antworten.get(i));
-            }
-
-            if(abhakungen.size() < antwortNamen.size()) {
+                if(antworten.get(i+2).equals("space")) {
+                    i+=3;
+                }
+            } else if(!antworten.get(i).equals("space")){
                 abhakungen.add(false);
+                antwortNamen.add(antworten.get(i));
+                if(antworten.get(i+1).equals("space")) {
+                    i += 2;
+                }
             }
-        }
-        TestFormular testFormular = service.getTestFormById(formID);
 
+            if(antworten.get(i+1).equals("space")) {
+                i += 2;
+            }
+//            if(antworten.get(i).equals("on")) {
+//                abhakungen.add(true);
+//            } else {
+//                antwortNamen.add(antworten.get(i));
+//            }
+//
+//            if(abhakungen.size() < antwortNamen.size()) {
+//                abhakungen.add(false);
+//            }
+        }
+
+        TestFormular testFormular = service.getTestFormById(formID);
         testFormular.addMCFrage(punkte, titel, fragestellung, "", erklaerung, frageID);
         testFormular.addMcAntworten(abhakungen, antwortNamen, frageID);
         service.save(testFormular);

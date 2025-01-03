@@ -34,3 +34,32 @@ h1 {
     font-size: 20px;
     margin-bottom: 10px;
 }
+
+.großer-abstand {
+    margin-left: 150px;
+}
+
+.fehler-meldung {
+    margin-left: 12px;
+    margin-right: 12px;
+    background-color: rgba(255, 38, 0, 0.22) !important;
+    position:relative;
+    display:block;
+    padding:.5rem 1rem;
+    color: #ff0000;
+    text-decoration:none;
+    border:2px solid rgba(255, 0, 0, 0.58);
+}
+
+ul {
+    list-style-type: none;
+}
+
+.fehler-meldung-schrift {
+    color: #ff0000;
+    font-size: 20px;
+}
+
+p {
+    margin: 5px;
+}
