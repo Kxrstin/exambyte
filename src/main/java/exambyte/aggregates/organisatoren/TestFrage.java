@@ -10,7 +10,6 @@ public interface TestFrage {
     Integer getPunkte();
     String getTitel();
     String getFragestellung();
-    String getBeschreibung();
     String getErklaerung();
     boolean istMcFrage();
     List<McAntwort> getAntworten();

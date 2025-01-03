@@ -217,7 +217,7 @@ public class OrganisatorenController {
         }
 
         TestFormular testFormular = service.getTestFormById(formID);
-        testFormular.addMCFrage(punkte, titel, fragestellung, "", erklaerung, frageID);
+        testFormular.addMCFrage(punkte, titel, fragestellung, erklaerung, frageID);
         testFormular.addMcAntworten(abhakungen, antwortNamen, frageID);
         service.save(testFormular);
         redirectAttributes.addFlashAttribute("id", formID);
@@ -236,7 +236,7 @@ public class OrganisatorenController {
                                       String erklaerung) {
         TestFormular testFormular = service.getTestFormById(formID);
         //TODO: Beschreibung hinzufügen
-        testFormular.addFreitextFrage(punkte, titel, fragestellung, "", erklaerung, frageID);
+        testFormular.addFreitextFrage(punkte, titel, fragestellung, erklaerung, frageID);
         service.save(testFormular);
         redirectAttributes.addFlashAttribute("id", formID);
         redirectAttributes.addFlashAttribute("redirect", true);

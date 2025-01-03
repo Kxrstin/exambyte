@@ -2,7 +2,10 @@ package exambyte.aggregates.organisatoren;
 
 import exambyte.annotations.AggregateRoot;
 import jakarta.validation.constraints.NotBlank;
+import org.springframework.data.annotation.PersistenceCreator;
 
+import javax.persistence.Id;
+import javax.persistence.Transient;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,18 +14,25 @@ import java.util.UUID;
 
 @AggregateRoot
 public class TestFormular {
-    //TODO: Testfragen werden nach ID automatisch sortiert und sind beim Hinzufügen nie an der richtigen Stelle
+    private List<TestFrage> testFragenList;
+    @Transient
     private Map<Integer, TestFrage> testFragen;
-    private int id;
-    @NotBlank(message = "Darf nicht leer sein") private String testTitel;
-    @NotBlank(message = "Darf nicht leer sein") private LocalDateTime startzeitpunkt;
-    @NotBlank(message = "Darf nicht leer sein") private LocalDateTime endzeitpunkt;
-    @NotBlank(message = "Darf nicht leer sein") private LocalDateTime ergebniszeitpunkt;
+    @Id
+    private Integer id;
+    private String testTitel;
+    private LocalDateTime startzeitpunkt;
+    private LocalDateTime endzeitpunkt;
+    private LocalDateTime ergebniszeitpunkt;
 
-    public TestFormular(String titel, Map<Integer, TestFrage> testFragen){
+    @PersistenceCreator
+    public TestFormular(Integer id, String titel, Map<Integer, TestFrage> testFragen){
         testTitel = titel;
         this.testFragen = testFragen;
-        id = UUID.randomUUID().hashCode();
+        this.id = id;
+    }
+
+    public TestFormular(String titel, Map<Integer, TestFrage> testFragen) {
+        this(null, titel, testFragen);
     }
 
     public int getId() {
@@ -34,19 +44,19 @@ public class TestFormular {
     }
 
     public void addNewMCFrage() {
-        addTestfrage(new MCFrage(0, "", "", "", ""));
+        addTestfrage(new McFrage(0, "", "", "", null));
     }
 
     public void addNewFreitextFrage() {
-        addTestfrage(new FreitextFrage(0, "", "", "", ""));
+        addTestfrage(new FreitextFrage(0, "", "", "", null));
     }
 
-    public void addMCFrage(int punkte, String titel, String fragestellung, String beschreibung, String erklaerung, int id){
-        testFragen.put(id, new MCFrage(punkte, titel, fragestellung, beschreibung, erklaerung, id));
+    public void addMCFrage(int punkte, String titel, String fragestellung, String erklaerung, int id){
+        testFragen.put(id, new McFrage(punkte, titel, fragestellung, erklaerung, id));
     }
 
-    public void addFreitextFrage(int punkte, String titel, String fragestellung, String beschreibung, String erklaerung, int id){
-        testFragen.put(id, new FreitextFrage(punkte, titel, fragestellung, beschreibung, erklaerung, id));
+    public void addFreitextFrage(int punkte, String titel, String fragestellung, String erklaerung, int id){
+        testFragen.put(id, new FreitextFrage(punkte, titel, fragestellung, erklaerung, id));
     }
 
     public List<TestFrage> getTestFragen(){
@@ -74,9 +84,9 @@ public class TestFormular {
     public void setPunkteWithId(int punkte, int id){
         TestFrage testFrage = getTestFrageById(id);
         if(testFrage.istMcFrage()) {
-            testFragen.put(id, new MCFrage(punkte, testFrage.getTitel(), testFrage.getFragestellung(), testFrage.getBeschreibung(), testFrage.getErklaerung()));
+            testFragen.put(id, new McFrage(punkte, testFrage.getTitel(), testFrage.getFragestellung(), testFrage.getErklaerung()));
         } else {
-            testFragen.put(id, new FreitextFrage(punkte, testFrage.getTitel(), testFrage.getFragestellung(), testFrage.getBeschreibung(), testFrage.getErklaerung()));
+            testFragen.put(id, new FreitextFrage(punkte, testFrage.getTitel(), testFrage.getFragestellung(), testFrage.getErklaerung()));
         }
 
     }
@@ -84,36 +94,27 @@ public class TestFormular {
     public void setTitelWithId(String titel, int id) {
         TestFrage testFrage = getTestFrageById(id);
         if(testFrage.istMcFrage()) {
-            testFragen.put(id, new MCFrage(testFrage.getPunkte(), titel, testFrage.getFragestellung(), testFrage.getBeschreibung(), testFrage.getErklaerung()));
+            testFragen.put(id, new McFrage(testFrage.getPunkte(), titel, testFrage.getFragestellung(), testFrage.getErklaerung()));
         } else {
-            testFragen.put(id, new FreitextFrage(testFrage.getPunkte(), titel, testFrage.getFragestellung(), testFrage.getBeschreibung(), testFrage.getErklaerung()));
+            testFragen.put(id, new FreitextFrage(testFrage.getPunkte(), titel, testFrage.getFragestellung(), testFrage.getErklaerung()));
         }
     }
 
     public void setFragestellungWithId(String fragestellung, int id) {
         TestFrage testFrage = getTestFrageById(id);
         if(testFrage.istMcFrage()) {
-            testFragen.put(id, new MCFrage(testFrage.getPunkte(), testFrage.getTitel(), fragestellung, testFrage.getBeschreibung(), testFrage.getErklaerung()));
+            testFragen.put(id, new McFrage(testFrage.getPunkte(), testFrage.getTitel(), fragestellung, testFrage.getErklaerung()));
         } else {
-            testFragen.put(id, new FreitextFrage(testFrage.getPunkte(), testFrage.getTitel(), fragestellung, testFrage.getBeschreibung(), testFrage.getErklaerung()));
-        }
-    }
-
-    public void setBeschreibungWithId(String beschreibung, int id) {
-        TestFrage testFrage = getTestFrageById(id);
-        if(testFrage.istMcFrage()) {
-            testFragen.put(id, new MCFrage(testFrage.getPunkte(), testFrage.getTitel(), testFrage.getFragestellung(), beschreibung, testFrage.getErklaerung()));
-        } else {
-            testFragen.put(id, new FreitextFrage(testFrage.getPunkte(), testFrage.getTitel(), testFrage.getFragestellung(), beschreibung, testFrage.getErklaerung()));
+            testFragen.put(id, new FreitextFrage(testFrage.getPunkte(), testFrage.getTitel(), fragestellung, testFrage.getErklaerung()));
         }
     }
 
     public void setErklaerungWithId(String erklaerung, int id) {
         TestFrage testFrage = getTestFrageById(id);
         if(testFrage.istMcFrage()) {
-            testFragen.put(id, new MCFrage(testFrage.getPunkte(), testFrage.getTitel(), testFrage.getFragestellung(), testFrage.getBeschreibung(), erklaerung));
+            testFragen.put(id, new McFrage(testFrage.getPunkte(), testFrage.getTitel(), testFrage.getFragestellung(), erklaerung));
         } else {
-            testFragen.put(id, new FreitextFrage(testFrage.getPunkte(), testFrage.getTitel(), testFrage.getFragestellung(), testFrage.getBeschreibung(), erklaerung));
+            testFragen.put(id, new FreitextFrage(testFrage.getPunkte(), testFrage.getTitel(), testFrage.getFragestellung(), erklaerung));
         }
     }
 
@@ -161,7 +162,7 @@ public class TestFormular {
         }
 
         TestFrage tf = testFragen.get(frageID);
-        TestFrage mcFrage = new MCFrage(tf.getPunkte(),tf.getTitel(),tf.getFragestellung(),tf.getBeschreibung(),tf.getErklaerung(), mcAntworten, tf.getId());
+        TestFrage mcFrage = new McFrage(tf.getPunkte(),tf.getTitel(),tf.getFragestellung(),tf.getErklaerung(), mcAntworten, tf.getId());
         testFragen.put(frageID, mcFrage);
     }
 }
