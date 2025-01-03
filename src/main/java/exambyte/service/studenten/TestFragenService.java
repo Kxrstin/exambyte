@@ -1,5 +1,6 @@
 package exambyte.service.studenten;
 
+import exambyte.aggregates.korrektoren.Abgabe;
 import exambyte.aggregates.studenten.StudiTest.StudiTest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,11 +14,13 @@ import java.util.List;
 public class TestFragenService {
     private final StudiTestRepo studiTestRepo;
     private final JdbcTemplate jdbc;
+    private final KorrekturenLoader korrekturenLoader;
 
     @Autowired
-    public TestFragenService(StudiTestRepo testRepo, JdbcTemplate jdbc) {
+    public TestFragenService(StudiTestRepo testRepo, JdbcTemplate jdbc, KorrekturenLoader korrekturenLoader) {
         this.studiTestRepo = testRepo;
         this.jdbc = jdbc;
+        this.korrekturenLoader = korrekturenLoader;
     }
 
     public StudiTest save(StudiTest studiTest) {
@@ -139,28 +142,81 @@ public class TestFragenService {
         }
     }
 
-    // TODO: Gehört nicht hier hin
-    public String zulassungsStatus(List<StudiTest> tests) {
+    // Zulassungsstatus und Ergebnis
+    public String zulassungsStatus(Integer studiId) {
         int countBestanden = 0;
-        for (StudiTest test : tests) {
-            if (test.testBestanden()) {
+        List<Abgabe> alleAbgabenVonStudi = korrekturenLoader.getAllKorrekturenFürStudi(studiId);
+        List<Integer> idsAllerTests = new ArrayList<>();
+
+        for(Abgabe abgabe: alleAbgabenVonStudi) {
+            if(!idsAllerTests.contains(abgabe.getStudiTest())) {
+                idsAllerTests.add(abgabe.getStudiTest());
+            }
+        }
+        for (Integer studiTest : idsAllerTests) {
+            int sumBewerteteAufgaben = 0;
+            int sumMaxPunktzahl = 0;
+            for(Abgabe abgabe: alleAbgabenVonStudi) {
+                if (abgabe.getStudiTest().equals(studiTest)) {
+                    sumBewerteteAufgaben += abgabe.getPunktzahl();
+                    sumMaxPunktzahl += abgabe.getMaxPunktzahl();
+                }
+            }
+            if(sumBewerteteAufgaben >= sumMaxPunktzahl / 2) {
                 countBestanden++;
             }
         }
-        if(tests.size() == 14 && countBestanden < 14) {
+        if(idsAllerTests.size() == 14 && countBestanden < 14) {
             return "zulassungNichtErreicht";
-        } else if(tests.size() == 14 && countBestanden == 14){
+        } else if(idsAllerTests.size() == 14 && countBestanden == 14){
             return "zulassungErreicht";
         }
-        if (countBestanden == tests.size()) {
+        if (countBestanden == idsAllerTests.size()) {
             return "guterKurs";
-        } else if (countBestanden == tests.size() - 1) {
+        } else if (countBestanden == idsAllerTests.size() - 1) {
             return "vorsicht";
-        } else if (countBestanden == tests.size() - 2) {
+        } else if (countBestanden == idsAllerTests.size() - 2) {
             return "vorsichtiger";
         }
         return "fail";
     }
+    public double getErgebnisInProzent(Integer studiId, Integer studiTest) {
+        double sumErreichtePunkte = getErreichtePunkte(studiId, studiTest);
+        double sumMaxPunkte = getMaxErreichbarePunkte(studiId, studiTest);
+        if(sumMaxPunkte > 0) {
+            return Math.round((sumErreichtePunkte / sumMaxPunkte) * 10000.0) / 100.0;
+        }
+        return 0.0;
+    }
+    public String parsePunktzahlFuerErgebnis(Integer studiId, Integer studiTest) {
+        int sumErreichtePunkte = (int) getErreichtePunkte(studiId, studiTest);
+        int sumMaxPunkte = (int) getMaxErreichbarePunkte(studiId, studiTest);
+        return sumErreichtePunkte + " / " + sumMaxPunkte + " Punkte";
+    }
+    public String testBestanden(Integer studiId, Integer studiTest) {
+        if(getErgebnisInProzent(studiId, studiTest) >= 0.5) {
+            return "Super, Sie haben den Test bestanden!";
+        }
+        return "Sie haben den Test leider nicht bestanden.";
+    }
+    private double getMaxErreichbarePunkte(Integer studiId, Integer studiTest) {
+        List<Abgabe> alleAbgabenFuerTest = korrekturenLoader.getKorrekturenFürTestVonStudi(studiId, studiTest);
+        double sumMaxPunkte = 0;
+        for(Abgabe abgabe: alleAbgabenFuerTest) {
+            sumMaxPunkte += abgabe.getMaxPunktzahl();
+        }
+        return sumMaxPunkte;
+    }
+    private double getErreichtePunkte(Integer studiId, Integer studiTest) {
+        List<Abgabe> alleAbgabenFuerTest = korrekturenLoader.getKorrekturenFürTestVonStudi(studiId, studiTest);
+        double sumErreichtePunkte = 0;
+        for (Abgabe abgabe : alleAbgabenFuerTest) {
+            sumErreichtePunkte += abgabe.getPunktzahl();
+        }
+        return sumErreichtePunkte;
+    }
+
+    // Zeitdarstellung
     public String parseTime(LocalDateTime time) {
         String uhrzeit = time.format(DateTimeFormatter.ofPattern("HH:mm"));
         String datum = time.format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));

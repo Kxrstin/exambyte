@@ -38,9 +38,9 @@ public class StudiTestRepoTest {
     void test_addAntwortZuFreitextAufgabe() {
         StudiTest testAusDb = repo.findById(0);
         List<Integer> aufgabenIds = testAusDb.getAufgabenIds();
-        testAusDb.addAntwort("Dies ist eine Beispielantwort", aufgabenIds.get(0), 1234);
+        testAusDb.addAntwort("Dies ist eine Beispielantwort", aufgabenIds.getFirst(), 1234);
 
-        assertThat(testAusDb.getAntwort(aufgabenIds.get(0), 1234)).isEqualTo("Dies ist eine Beispielantwort");
+        assertThat(testAusDb.getAntwort(aufgabenIds.getFirst(), 1234)).isEqualTo("Dies ist eine Beispielantwort");
     }
 
     @Test
@@ -49,8 +49,8 @@ public class StudiTestRepoTest {
     void test_addAntwortZuMcAufgabe() {
         StudiTest testAusDb = repo.findById(0);
         List<Integer> aufgabenIds = testAusDb.getAufgabenIds();
-        testAusDb.addAntwort("[Dies ist eine Beispielantwort]", aufgabenIds.get(0), 1234);
+        testAusDb.addAntwort("[Dies ist eine Beispielantwort]", aufgabenIds.getFirst(), 1234);
 
-        assertThat(testAusDb.getAntwort(aufgabenIds.get(0), 1234)).isEqualTo("[Dies ist eine Beispielantwort]");
+        assertThat(testAusDb.getAntwort(aufgabenIds.getFirst(), 1234)).isEqualTo("[Dies ist eine Beispielantwort]");
     }
 }

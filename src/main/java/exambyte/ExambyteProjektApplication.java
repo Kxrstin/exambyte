@@ -35,9 +35,9 @@ public class ExambyteProjektApplication {
                List<Integer> alleAufgabenIdsVonTest2 = studiTest2.getAufgabenIds();
                for(Integer aufgabenId: alleAufgabenIdsVonTest2) {
                    if(!studiTest2.isFreitextAufgabe(aufgabenId)) {
-                       service.addAntwort(2, aufgabenId, "[A]", 1234);
+                       service.addAntwort(2, aufgabenId, "[A]", 147599239);
                    } else {
-                       service.addAntwort(2, aufgabenId,"Beliebige Antwort", 1234);
+                       service.addAntwort(2, aufgabenId,"Beliebige Antwort", 147599239);
                    }
                }
 

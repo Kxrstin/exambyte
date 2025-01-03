@@ -4,6 +4,8 @@ import exambyte.service.studenten.TestFragenService;
 import exambyte.aggregates.studenten.StudiTest.StudiTest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,9 +24,7 @@ public class StudentenControllerLandingPage {
 
     @GetMapping("/studenten/landingPage")
     @Secured("ROLE_STUDENT")
-    public String landingpage(Model model) {
-        // TODO: Zulassungsstatus
-        model.addAttribute("guterKurs", "Guter Kurs");
+    public String landingpage(Model model, @AuthenticationPrincipal OAuth2User user) {
         if(testService.getBearbeitbareTests().isEmpty()) {
             model.addAttribute("bearbeitbareTests", new ArrayList<StudiTest>());
         }
@@ -36,7 +36,7 @@ public class StudentenControllerLandingPage {
             model.addAttribute("abgelaufeneTests", new ArrayList<StudiTest>());
             model.addAttribute("guterKurs", "Guter Kurs");
         } else {
-            String zulassungsstatus = testService.zulassungsStatus(testService.getAbgelaufeneTests());
+            String zulassungsstatus = testService.zulassungsStatus(user.getAttribute("id"));
             model.addAttribute("abgelaufeneTests", testService.getAbgelaufeneTests());
             model.addAttribute(zulassungsstatus, true);
         }
