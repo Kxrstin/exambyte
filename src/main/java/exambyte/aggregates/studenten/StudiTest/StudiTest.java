@@ -212,6 +212,19 @@ public final class StudiTest {
     public void setFreitextAufgaben(List<FreitextAufgabe> freitextAufgaben) {
         this.freitextAufgaben = freitextAufgaben;
     }
+    public List<Integer> getAufgabenIds() {
+        List<Integer> freitextAufgabenIds = freitextAufgaben.stream()
+                .map(FreitextAufgabe::getId)
+                .toList();
+        List<Integer> mcAufgabenIds = mcAufgaben.stream()
+                .map(McAufgabe::getId)
+                .toList();
+        List<Integer> alleIds = new ArrayList<>();
+        alleIds.addAll(freitextAufgabenIds);
+        alleIds.addAll(mcAufgabenIds);
+
+        return alleIds;
+    }
 
     // TODO: Das gehört in einen anderen Service aber nicht hier hin
     public boolean testBestanden() {
