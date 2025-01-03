@@ -2,6 +2,8 @@ package exambyte.controller.organisatoren;
 
 import exambyte.aggregates.organisatoren.TestFormular;
 import exambyte.helper.WithMockOAuth2User;
+import exambyte.security.MethodSecurityConfig;
+import exambyte.security.SecurityConfig;
 import exambyte.service.organisatoren.TestFormService;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
@@ -9,6 +11,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Import;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.List;
@@ -24,6 +28,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(OrganisatorenController.class)
+@Import({SecurityConfig.class, MethodSecurityConfig.class})
+@ActiveProfiles("test") // Verhindert, dass die Beispieldaten der Application Klasse geladen werden
 public class OrganisatorenControllerTest {
     @Autowired
     MockMvc mvc;

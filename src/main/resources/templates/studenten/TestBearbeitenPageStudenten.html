@@ -60,16 +60,15 @@
 
     <div class="buttonContainer">
 
-    <span th:if="${zurueck}">
-        <form th:action="@{/studenten/testBearbeitung/{id}/{aufgabe}(id=${id}, aufgabe=${prevAufgabe})}">
-            <button class="btnWeiterZurueck" type="submit"> Zurück </button>
-        </form>
-    </span>
-    <span th:if="${weiter}">
-         <form th:action="@{/studenten/testBearbeitung/{id}/{aufgabe}(id=${id}, aufgabe=${nextAufgabe})}">
-            <button class="btnWeiterZurueck" type="submit"> Weiter </button>
-        </form>
-    </span>
+
+    <form th:action="@{/studenten/testBearbeitung/{id}/{aufgabe}(id=${id}, aufgabe=${prevAufgabe})}">
+        <button class="btnWeiterZurueck" type="submit"> Zurück </button>
+    </form>
+
+     <form th:action="@{/studenten/testBearbeitung/{id}/{aufgabe}(id=${id}, aufgabe=${nextAufgabe})}">
+        <button class="btnWeiterZurueck" type="submit"> Weiter </button>
+    </form>
+
     </div>
     </body>
 </html>

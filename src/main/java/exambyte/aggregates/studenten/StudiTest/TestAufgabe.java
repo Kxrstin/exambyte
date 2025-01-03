@@ -6,4 +6,6 @@ import exambyte.annotations.Wertobjekt;
 public interface TestAufgabe {
     String getAufgabe();
     int getPunktzahl();
+    Integer getId();
+    boolean isFreitextAufgabe();
 }

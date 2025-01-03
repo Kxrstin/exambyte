@@ -46,7 +46,6 @@ public class StudentenControllerLandingPage {
     @GetMapping("/studenten/landingPage/zeigeTest/{id}")
     @Secured("ROLE_STUDENT")
     public String zeigeTest(@PathVariable("id") int testId, Model model) {
-        // TODO Fehlermeldung und Verbessern
         if(!testService.hasTestWithId(testId)) {
             return "redirect:/studenten/landingPage";
         }
@@ -54,7 +53,7 @@ public class StudentenControllerLandingPage {
         model.addAttribute("startzeitpunkt", testService.parseStart(testId));
         model.addAttribute("endzeitpunkt", testService.parseEnde(testId));
         model.addAttribute("ergebniszeitpunkt", testService.parseErgebnis(testId));
-        model.addAttribute("id", testService.getId(testId));
+        model.addAttribute("id", testId);
         model.addAttribute("isAbgelaufen", testService.isAbgelaufen(testId));
 
         return "studenten/TestPageStudenten";

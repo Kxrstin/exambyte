@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -29,26 +28,26 @@ public class StudentenControllerTestBearbeitenPage {
     @GetMapping("/studenten/testBearbeitung/{id}")
     @Secured("ROLE_STUDENT")
     public String testBearbeitung(@PathVariable("id") Integer testId) {
-        return "redirect:/studenten/testBearbeitung/" + testId + "/0"; // Man soll immer zur 1. Aufgabe des Tests geleitet werden.
+        return "redirect:/studenten/testBearbeitung/" + testId + "/" + testService.getTest(testId).getFirstAufgabe();
     }
 
     @GetMapping("/studenten/testBearbeitung/{id}/{aufgabe}")
     @Secured("ROLE_STUDENT")
-    public String aufgabenBearbeitung(Model model, @PathVariable("id") Integer testId, @PathVariable("aufgabe") Integer aufgabenNr, @AuthenticationPrincipal OAuth2User user) {
+    public String aufgabenBearbeitung(Model model, @PathVariable("id") Integer testId, @PathVariable("aufgabe") Integer aufgabenId, @AuthenticationPrincipal OAuth2User user) {
         model.addAttribute("isAbgelaufen", testService.isAbgelaufen(testId));
-        model.addAttribute("aufgabe", aufgabenNr);
+        model.addAttribute("aufgabe", aufgabenId);
         model.addAttribute("id", testId);
-        model.addAttribute("aufgabenstellung", "Aufgabe: " + testService.getAufgabe(testId, aufgabenNr));
-        model.addAttribute("punktzahl", "Maximale Punktzahl: " + testService.getPunktzahl(testId, aufgabenNr));
+        model.addAttribute("aufgabenstellung", "Aufgabe: " + testService.getAufgabe(testId, aufgabenId));
+        model.addAttribute("punktzahl", "Maximale Punktzahl: " + testService.getPunktzahl(testId, aufgabenId));
 
-        if (testService.isFreitextAufgabe(testId, aufgabenNr)) {
+        if (testService.isFreitextAufgabe(testId, aufgabenId)) {
             model.addAttribute("freitextFrage", true);
-            model.addAttribute("studiFAntwort", testService.getAntwort(testId, aufgabenNr, user.getAttribute("id")));
+            model.addAttribute("studiFAntwort", testService.getAntwort(testId, aufgabenId, user.getAttribute("id")));
         }
-        if (testService.isMCAufgabe(testId, aufgabenNr)) {
+        if (testService.isMCAufgabe(testId, aufgabenId)) {
             model.addAttribute("mcfrage", true);
-            model.addAttribute("antworten", testService.getAntwortMoeglichkeiten(testId, aufgabenNr));
-            String gespeicherteAntwort = testService.getAntwort(testId, aufgabenNr, user.getAttribute("id"));
+            model.addAttribute("antworten", testService.getAntwortMoeglichkeiten(testId, aufgabenId));
+            String gespeicherteAntwort = testService.getAntwort(testId, aufgabenId, user.getAttribute("id"));
 
             if (gespeicherteAntwort != null && !gespeicherteAntwort.isEmpty()) {
                 List<String> gewaehlteAntworten = Arrays.asList(gespeicherteAntwort.substring(1, gespeicherteAntwort.length()-1).split(", "));
@@ -57,15 +56,9 @@ public class StudentenControllerTestBearbeitenPage {
                 model.addAttribute("gewaehlteAntworten", Collections.emptyList());
             }
         }
+        model.addAttribute("nextAufgabe", testService.getTest(testId).getNextAufgabe(aufgabenId));
+        model.addAttribute("prevAufgabe", testService.getTest(testId).getPrevAufgabe(aufgabenId));
 
-        if (aufgabenNr + 1 >= 0 && aufgabenNr + 1 < testService.getAnzahlAufgaben(testId)) {
-            model.addAttribute("weiter", true);
-            model.addAttribute("nextAufgabe", aufgabenNr + 1);
-        }
-        if (aufgabenNr - 1 >= 0 && aufgabenNr - 1 < testService.getAnzahlAufgaben(testId)) {
-            model.addAttribute("zurueck", true);
-            model.addAttribute("prevAufgabe", aufgabenNr - 1);
-        }
         return "/studenten/TestBearbeitenPageStudenten";
     }
 
@@ -73,16 +66,16 @@ public class StudentenControllerTestBearbeitenPage {
     @Secured("ROLE_STUDENT")
     public String antwortEingabe(@RequestParam(name="checkboxWahlen", required = false) List<String> wahlen,
                                  @RequestParam(name="studiFAntwort", defaultValue="") String antwortFreitext,
-                                 @PathVariable("id") Integer id, @PathVariable("aufgabe") int aufgabe,
+                                 @PathVariable("id") Integer id, @PathVariable("aufgabe") int aufgabenId,
                                  @AuthenticationPrincipal OAuth2User user)
     {
-        if(antwortFreitext!= null && !antwortFreitext.equals("")) {
-            testService.addAntwort(id, aufgabe, antwortFreitext, user.getAttribute("id"));
+        if(antwortFreitext != null && !antwortFreitext.equals("")) {
+            testService.addAntwort(id, aufgabenId, antwortFreitext, user.getAttribute("id"));
         }
 
         if(wahlen != null && !wahlen.isEmpty()) {
-            testService.addAntwort(id, aufgabe, wahlen.toString(), user.getAttribute("id"));
+            testService.addAntwort(id, aufgabenId, wahlen.toString(), user.getAttribute("id"));
         }
-        return "redirect:/studenten/testBearbeitung/"+id+"/"+aufgabe;
+        return "redirect:/studenten/testBearbeitung/"+id+"/"+aufgabenId;
     }
 }

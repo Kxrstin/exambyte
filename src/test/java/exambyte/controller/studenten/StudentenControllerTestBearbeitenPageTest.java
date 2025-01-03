@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
@@ -24,6 +25,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @WebMvcTest(StudentenControllerTestBearbeitenPage.class)
 @Import({SecurityConfig.class, MethodSecurityConfig.class})
+@ActiveProfiles("test") // Verhindert, dass die Beispieldaten der Application Klasse geladen werden
 public class StudentenControllerTestBearbeitenPageTest {
     @Autowired
     MockMvc mvc;
@@ -40,7 +42,9 @@ public class StudentenControllerTestBearbeitenPageTest {
                 .withAufgabe("Aufgabe Bla Bla")
                 .isFreitext(false)
                 .isMCAufgabe(false)
-                .withAnzahlAufgaben(0);
+                .withAnzahlAufgaben(0)
+                .withNextAndPrevAufgabe();
+
 
         mvc.perform(get("/studenten/testBearbeitung/0/0"))
                 .andExpect(status().isOk())
@@ -56,7 +60,8 @@ public class StudentenControllerTestBearbeitenPageTest {
                 .withAnzahlAufgaben(1)
                 .isFreitext(true)
                 .isMCAufgabe(false)
-                .withAufgabe("Aufgabe Bla Bla");
+                .withAufgabe("Aufgabe Bla Bla")
+                .withNextAndPrevAufgabe();
 
 
         MvcResult result = mvc.perform(get("/studenten/testBearbeitung/0/0"))
@@ -77,7 +82,8 @@ public class StudentenControllerTestBearbeitenPageTest {
                 .withAntwortMoeglichkeiten(List.of("Antwort A", "Antwort B", "Antwort C"))
                 .isMCAufgabe(true)
                 .isFreitext(false)
-                .withAufgabe("Aufgabe Bla Bla");
+                .withAufgabe("Aufgabe Bla Bla")
+                .withNextAndPrevAufgabe();
 
         MvcResult result = mvc.perform(get("/studenten/testBearbeitung/0/0"))
                 .andExpect(status().isOk())
@@ -107,7 +113,8 @@ public class StudentenControllerTestBearbeitenPageTest {
                 .withPunktzahl(2)
                 .isFreitext(false)
                 .isMCAufgabe(false)
-                .withAnzahlAufgaben(3);
+                .withAnzahlAufgaben(3)
+                .withNextAndPrevAufgabe();
 
         MvcResult result = mvc.perform(get("/studenten/testBearbeitung/0/1"))
                 .andExpect(status().isOk())
@@ -116,25 +123,6 @@ public class StudentenControllerTestBearbeitenPageTest {
 
         assertThat(result.getResponse().getContentAsString()).contains(
                 " Weiter ", " Zurück ");
-    }
-
-    @Test
-    @DisplayName("Der Pfad /studenten/testBearbeitung/0/0 führt zur TestBearbeitenPage zeigt nicht die Weiter und Zurück Buttons.")
-    @WithMockOAuth2User(roles = "STUDENT")
-    void test_buttonsWerdenNichtAngezeigt() throws Exception {
-        new TestServiceBuilder(testService)
-                .withPunktzahl(2)
-                .isMCAufgabe(false)
-                .isFreitext(false)
-                .withAnzahlAufgaben(1);
-
-        MvcResult result = mvc.perform(get("/studenten/testBearbeitung/0/0"))
-                .andExpect(status().isOk())
-                .andExpect(view().name("/studenten/TestBearbeitenPageStudenten"))
-                .andReturn();
-
-        assertThat(result.getResponse().getContentAsString()).doesNotContain(
-                "> Weiter <", "> Zurück <");
     }
 
     @Test

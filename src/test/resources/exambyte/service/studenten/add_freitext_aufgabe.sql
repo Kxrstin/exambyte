@@ -1,0 +1,1 @@
+insert into freitext_aufgabe (aufgabe, punktzahl, studi_test) values('Dies ist eine Beispielfreitextaufgabe', 2, 0);

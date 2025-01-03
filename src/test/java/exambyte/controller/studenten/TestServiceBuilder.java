@@ -1,5 +1,7 @@
 package exambyte.controller.studenten;
 
+import exambyte.aggregates.studenten.StudiTest.StudiTest;
+import exambyte.aggregates.studenten.StudiTest.TestDaten;
 import exambyte.service.studenten.TestFragenService;
 
 import java.util.List;
@@ -13,8 +15,9 @@ public class TestServiceBuilder {
         this.testService = testService;
     }
 
-    public TestFragenService build() {
-        return testService;
+    public TestServiceBuilder withNextAndPrevAufgabe() {
+        when(testService.getTest(anyInt())).thenReturn(new StudiTest(0, new TestDaten(null, null, null, null, 0)));
+        return this;
     }
 
     public TestServiceBuilder withPunktzahl(int punkte) {

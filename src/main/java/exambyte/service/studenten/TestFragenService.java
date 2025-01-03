@@ -1,8 +1,9 @@
 package exambyte.service.studenten;
 
 import exambyte.aggregates.studenten.StudiTest.StudiTest;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import org.springframework.jdbc.core.JdbcTemplate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -11,27 +12,32 @@ import java.util.List;
 @Service
 public class TestFragenService {
     private final StudiTestRepo studiTestRepo;
+    private final JdbcTemplate jdbc;
 
-    public TestFragenService(StudiTestRepo testRepo) {
+    @Autowired
+    public TestFragenService(StudiTestRepo testRepo, JdbcTemplate jdbc) {
         this.studiTestRepo = testRepo;
+        this.jdbc = jdbc;
     }
 
-    // StudiTest
+    public StudiTest save(StudiTest studiTest) {
+        // Ohne die nächste Zeile, kommen immer Fehlermeldungen, da Spring Data die ID zu spät speichert
+        jdbc.update("INSERT INTO studi_test (test_daten, id) VALUES (?, ?)",studiTest.getId(), studiTest.getId());
+        return studiTestRepo.save(studiTest);
+    }
+
     public StudiTest getTest(int testId) {
         return studiTestRepo.findById(testId);
     }
-
     public boolean hasTestWithId(int testId) {
        return studiTestRepo.existsById(testId);
     }
-
     public List<StudiTest> getBearbeitbareTests() {
         LocalDateTime now = LocalDateTime.now();
         return studiTestRepo.findAll().stream()
                     .filter(test -> test.isBearbeitbar(now))
                     .toList();
     }
-
     public List<StudiTest> getAbgelaufeneTests() {
         LocalDateTime now = LocalDateTime.now();
         return studiTestRepo.findAll().stream()
@@ -48,7 +54,6 @@ public class TestFragenService {
             return "Kein Studi vorhanden";
         }
     }
-
     public String parseStart(int id) {
         try {
             return "Startzeitpunkt: " + parseTime(studiTestRepo.findById(id).getStartzeitpunkt());
@@ -56,7 +61,6 @@ public class TestFragenService {
             return "Kein Studi vorhanden";
         }
     }
-
     public String parseEnde(int id) {
         try {
             return "Endzeitpunkt: " + parseTime(studiTestRepo.findById(id).getEndzeitpunkt());
@@ -76,7 +80,6 @@ public class TestFragenService {
     // Test Infos
     public String getAufgabe(int id, int nr) {
         try {
-            System.out.println(studiTestRepo.findById(id));
             return studiTestRepo.findById(id).getAufgabe(nr);
         } catch (Exception e) {
             return "Kein Studi vorhanden";
@@ -96,7 +99,6 @@ public class TestFragenService {
             return false;
         }
     }
-
     public boolean isMCAufgabe(int id, int nr) {
         try {
             return studiTestRepo.findById(id).isMCAufgabe(nr);
@@ -104,7 +106,6 @@ public class TestFragenService {
             return false;
         }
     }
-
     public List<String> getAntwortMoeglichkeiten(int id, int nr) {
         try {
             return studiTestRepo.findById(id).getAntwortmoeglichkeiten(nr);
@@ -112,7 +113,6 @@ public class TestFragenService {
             return new ArrayList<>();
         }
     }
-
     public int getAnzahlAufgaben(int id) {
         try {
             return studiTestRepo.findById(id).getAnzahlAufgaben();
@@ -120,34 +120,20 @@ public class TestFragenService {
             return 0;
         }
     }
-
-    // TODO sinnlos?
-    public Integer getId(int testId) {
-        try {
-            return studiTestRepo.findById(testId).getId();
-        } catch (NullPointerException e) {
-            return null;
-        }
-    }
-
     public boolean isAbgelaufen(int testId) {
         return studiTestRepo.findById(testId).isAbgelaufen(LocalDateTime.now());
     }
 
 
     // Antworten speichern
-    public void addAntwort(int testId, int aufgabeNr, String antwort, int studiId) {
+    public void addAntwort(int testId, int aufgabeId, String antwort, int studiId) {
         StudiTest test = studiTestRepo.findById(testId);
-        try {
-            test.addAntwort(antwort, aufgabeNr, studiId);
-        } catch (NullPointerException e) {
-            return;
-        }
+        test.addAntwort(antwort, aufgabeId, studiId);
         studiTestRepo.save(test);
     }
-    public String getAntwort(int testId, int aufgabe, int studiId) {
+    public String getAntwort(int testId, int aufgabeId, int studiId) {
         try {
-            return studiTestRepo.findById(testId).getAntwort(aufgabe, studiId);
+            return studiTestRepo.findById(testId).getAntwort(aufgabeId, studiId);
         } catch (NullPointerException e) {
             return "";
         }
@@ -175,7 +161,6 @@ public class TestFragenService {
         }
         return "fail";
     }
-
     public String parseTime(LocalDateTime time) {
         String uhrzeit = time.format(DateTimeFormatter.ofPattern("HH:mm"));
         String datum = time.format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
