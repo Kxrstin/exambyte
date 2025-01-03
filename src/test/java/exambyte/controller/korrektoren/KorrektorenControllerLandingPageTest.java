@@ -32,8 +32,8 @@ public class KorrektorenControllerLandingPageTest {
     private final List<String> testnamen = List.of("Mathematik für Informatik 2", "Programmierpraktikum 2", "Wissenschaftliches Arbeiten");
     private final List<String> aufgaben = List.of("Mathematik für Informatik 2 Aufgabe", "Programmierpraktikum 2 Aufgabe", "Wissenschaftliches Arbeiten Aufgabe");
     private final List<Integer> id = List.of(1, 2, 3, 4, 5, 6, 7, 8, 9);
-    private final Abgabe abgabe = new Abgabe(122, "Propra 2 Test 7", "Was ist Onion Architektur?", "Onion Architektur ist...", 3);
-    private final Abgabe abgabeOhneStudiAntwort = new Abgabe(122, "Propra 2 Test 7", "Was ist Onion Architektur?", "", 3);
+    private final Abgabe abgabe = new Abgabe(122, "Propra 2 Test 7", "Was ist Onion Architektur?", 1234, 2, "Onion Architektur ist...", 2, 3, 1);
+    private final Abgabe abgabeOhneStudiAntwort = new Abgabe(122, "Propra 2 Test 7", "Was ist Onion Architektur?", 1234, 2, "", 2, 3, 1);
 
 
     @Autowired
@@ -122,7 +122,7 @@ public class KorrektorenControllerLandingPageTest {
                         .param("punkteVergabe", "1")
                         .param("feedbackText", "Die Antwort ist korrekt"))
                 .andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrl("/korrektoren/landingPage/zeigeAbgaben/Propra_2_Test_7/Was_ist_Onion_Architektur"));
+                .andExpect(redirectedUrl("/korrektoren/landingPage/zeigeAufgaben/Propra_2_Test_7"));
         verify(abgabenService).addKorrektur(1, "Die Antwort ist korrekt", 122);
     }
 
@@ -139,7 +139,7 @@ public class KorrektorenControllerLandingPageTest {
                         .param("punkteVergabe", "3")
                         .param("feedbackText", ""))
                 .andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrl("/korrektoren/landingPage/zeigeAbgaben/Propra_2_Test_7/Was_ist_Onion_Architektur"));
+                .andExpect(redirectedUrl("/korrektoren/landingPage/zeigeAufgaben/Propra_2_Test_7"));
         verify(abgabenService).addKorrektur(3, "", 122);
     }
 
@@ -156,7 +156,7 @@ public class KorrektorenControllerLandingPageTest {
                         .param("punkteVergabe", "0")
                         .param("feedbackText", ""))
                 .andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrl("/korrektoren/landingPage/zeigeAbgaben/Propra_2_Test_7/Was_ist_Onion_Architektur"));
+                .andExpect(redirectedUrl("/korrektoren/landingPage/zeigeAufgaben/Propra_2_Test_7"));
         verify(abgabenService).addKorrektur(0, "", 122);
     }
 }
