@@ -222,4 +222,26 @@ public class TestFragenService {
         String datum = time.format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
         return uhrzeit+ ", " + datum;
     }
+
+    // Feedback und erreichte Punktzahl
+    private Abgabe getAbgabeZuAufgabe(Integer testId, Integer aufgabenId, Integer studiId) {
+        List<Abgabe> alleAbgabenVonTest = korrekturenLoader.getKorrekturenFürTestVonStudi(studiId, testId);
+        Abgabe abgabeZuAufgabe = alleAbgabenVonTest.stream()
+                .filter(abgabe -> abgabe.getAufgabenId().equals(aufgabenId))
+                .findFirst()
+                .orElse(null);
+        return abgabeZuAufgabe;
+    }
+    public Integer getErreichtePunktzahl(Integer testId, Integer aufgabenId, Integer studiId) {
+        if(getAbgabeZuAufgabe(testId, aufgabenId, studiId) == null) {
+            return null;
+        }
+        return getAbgabeZuAufgabe(testId, aufgabenId, studiId).getPunktzahl();
+    }
+    public String getFeedback(Integer testId, Integer aufgabenId, Integer studiId) {
+        if(getAbgabeZuAufgabe(testId, aufgabenId, studiId) == null) {
+            return null;
+        }
+        return getAbgabeZuAufgabe(testId, aufgabenId, studiId).getFeedback();
+    }
 }

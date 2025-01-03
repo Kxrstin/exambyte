@@ -34,6 +34,10 @@ public class Abgabe {
         return studiTest;
     }
 
+    public Integer getAufgabenId() {
+        return aufgabenId;
+    }
+
     public Integer getAntwort() {
         return antwort;
     }

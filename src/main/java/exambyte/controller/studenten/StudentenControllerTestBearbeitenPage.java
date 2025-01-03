@@ -43,6 +43,12 @@ public class StudentenControllerTestBearbeitenPage {
         if (testService.isFreitextAufgabe(testId, aufgabenId)) {
             model.addAttribute("freitextFrage", true);
             model.addAttribute("studiFAntwort", testService.getAntwort(testId, aufgabenId, user.getAttribute("id")));
+            if(testService.isAbgelaufen(testId)) {
+                if(testService.getErreichtePunktzahl(testId, aufgabenId, user.getAttribute("id")) != null) {
+                    model.addAttribute("erreichtePunkte", "Erreichte Punktzahl: " + testService.getErreichtePunktzahl(testId, aufgabenId, user.getAttribute("id")) + " Punkte");
+                    model.addAttribute("feedback", "Feedback: " + testService.getFeedback(testId, aufgabenId, user.getAttribute("id")));
+                }
+            }
         }
         if (testService.isMCAufgabe(testId, aufgabenId)) {
             model.addAttribute("mcfrage", true);

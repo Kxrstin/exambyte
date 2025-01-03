@@ -209,3 +209,20 @@ li {
 .korrektorenLink {
     text-decoration: none;
 }
+
+.feedback {
+    font-style: italic;
+    color: #335d94;
+    margin-left: 65px;
+    margin-top: 5px;
+    margin-bottom: 0px;
+}
+
+.antwort {
+    font-style: italic;
+    color: #404244;
+    margin-left: 60px;
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+

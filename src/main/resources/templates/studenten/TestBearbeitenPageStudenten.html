@@ -33,7 +33,9 @@
             </form>
 
         <span th:if="${isAbgelaufen}">
-            <p class="" th:text="${studiFAntwort}"> Die Studi Antwort. </p>
+            <p class="antwort" th:text="${studiFAntwort}"> Die Studi Antwort. </p>
+            <p class="feedback" th:text="${feedback}"> Das Feedback vom Korrektor</p>
+            <p class="feedback" th:text="${erreichtePunkte}"> Die erreichten Punkte</p>
         </span>
     </span>
 
