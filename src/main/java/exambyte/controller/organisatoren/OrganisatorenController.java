@@ -195,39 +195,25 @@ public class OrganisatorenController {
         /*
         * Die Liste an Antwortmöglichkeiten einer MC-Frage werden hier richtig zugeordnet, weil Checkboxen,
         * die nicht abgehakt wurden auch nicht abgesendet werden. Checkboxen die abgehakt werden, werden als "on"
-        * abgesendet, wenn man sie auch als String abfragt. Somit kann man dann nach folgendem Prinzip arbeiten:
+        * abgesendet, wenn man sie als String abfragt. Somit kann man dann nach folgendem Prinzip arbeiten:
         * Es wird eine Liste entgegengenommen, welche die Antwortmöglichkeiten und "on"-Strings beinhält. Gibt es
         * vor einem String ein "on", dann ist die Antwortmöglichkeit richtig, gibt es vor einem String einen anderen
         * beliebigen String, ist die Antwortmöglichkeit falsch.
+        * Nun wird auch immer in der Liste an Strings, zwischen den Antwortmöglichkeiten ein String namens "space" mit-
+        * gesendet, um Bugs zu verhindern. Sollte sich die Schleife bei space befinden, dann ist ein Feld leer.
         */
         List<Boolean> abhakungen = new ArrayList<>();
         List<String> antwortNamen = new ArrayList<>();
         for(int i = 0; i < antworten.size(); i++) {
             if(antworten.get(i).equals("on")) {
                 abhakungen.add(true);
-                if(antworten.get(i+2).equals("space")) {
-                    i+=3;
-                }
-            } else if(!antworten.get(i).equals("space")){
-                abhakungen.add(false);
+            } else {
                 antwortNamen.add(antworten.get(i));
-                if(antworten.get(i+1).equals("space")) {
-                    i += 2;
-                }
             }
 
-            if(antworten.get(i+1).equals("space")) {
-                i += 2;
+            if(abhakungen.size() < antwortNamen.size()) {
+                abhakungen.add(false);
             }
-//            if(antworten.get(i).equals("on")) {
-//                abhakungen.add(true);
-//            } else {
-//                antwortNamen.add(antworten.get(i));
-//            }
-//
-//            if(abhakungen.size() < antwortNamen.size()) {
-//                abhakungen.add(false);
-//            }
         }
 
         TestFormular testFormular = service.getTestFormById(formID);
@@ -275,7 +261,11 @@ public class OrganisatorenController {
     @GetMapping("/organisatoren/testVorschau/{id}")
     @Secured("ROLE_ORGANISATOR")
     public String testVorschau(@PathVariable int id, Model model) {
-        model.addAttribute("testForm", service.getTestFormByIdDB(id));
+        TestFormular testForm = service.getTestFormByIdDB(id);
+        if(testForm.getStartzeitpunkt().isBefore(LocalDateTime.now())) {
+            return "redirect:/organisatoren/landingPage";
+        }
+        model.addAttribute("testForm", testForm);
         return "/organisatoren/TestVorschauOrganisatoren";
     }
 
