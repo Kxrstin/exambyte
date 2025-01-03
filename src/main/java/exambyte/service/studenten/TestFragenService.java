@@ -142,6 +142,7 @@ public class TestFragenService {
         }
     }
 
+    // Zulassungsstatus und Ergebnis
     public String zulassungsStatus(Integer studiId) {
         int countBestanden = 0;
         List<Abgabe> alleAbgabenVonStudi = korrekturenLoader.getAllKorrekturenFürStudi(studiId);
@@ -179,6 +180,43 @@ public class TestFragenService {
         }
         return "fail";
     }
+    public double getErgebnisInProzent(Integer studiId, Integer studiTest) {
+        double sumErreichtePunkte = getErreichtePunkte(studiId, studiTest);
+        double sumMaxPunkte = getMaxErreichbarePunkte(studiId, studiTest);
+        if(sumMaxPunkte > 0) {
+            return Math.round((sumErreichtePunkte / sumMaxPunkte) * 10000.0) / 100.0;
+        }
+        return 0.0;
+    }
+    public String parsePunktzahlFuerErgebnis(Integer studiId, Integer studiTest) {
+        int sumErreichtePunkte = (int) getErreichtePunkte(studiId, studiTest);
+        int sumMaxPunkte = (int) getMaxErreichbarePunkte(studiId, studiTest);
+        return sumErreichtePunkte + " / " + sumMaxPunkte + " Punkte";
+    }
+    public String testBestanden(Integer studiId, Integer studiTest) {
+        if(getErgebnisInProzent(studiId, studiTest) >= 0.5) {
+            return "Super, Sie haben den Test bestanden!";
+        }
+        return "Sie haben den Test leider nicht bestanden.";
+    }
+    private double getMaxErreichbarePunkte(Integer studiId, Integer studiTest) {
+        List<Abgabe> alleAbgabenFuerTest = korrekturenLoader.getKorrekturenFürTestVonStudi(studiId, studiTest);
+        double sumMaxPunkte = 0;
+        for(Abgabe abgabe: alleAbgabenFuerTest) {
+            sumMaxPunkte += abgabe.getMaxPunktzahl();
+        }
+        return sumMaxPunkte;
+    }
+    private double getErreichtePunkte(Integer studiId, Integer studiTest) {
+        List<Abgabe> alleAbgabenFuerTest = korrekturenLoader.getKorrekturenFürTestVonStudi(studiId, studiTest);
+        double sumErreichtePunkte = 0;
+        for (Abgabe abgabe : alleAbgabenFuerTest) {
+            sumErreichtePunkte += abgabe.getPunktzahl();
+        }
+        return sumErreichtePunkte;
+    }
+
+    // Zeitdarstellung
     public String parseTime(LocalDateTime time) {
         String uhrzeit = time.format(DateTimeFormatter.ofPattern("HH:mm"));
         String datum = time.format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));

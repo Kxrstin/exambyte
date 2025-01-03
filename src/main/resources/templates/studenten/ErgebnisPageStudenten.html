@@ -25,10 +25,9 @@
     </h1>
             <ul>
                 <li class="list-group-item" > <span th:text="${ergebnisZeitpunkt}">Ergebnisveröffentlichung: 14.12.2024</span> </li>
-                <!-- TODO -->
-                <li class="list-group-item" > Ergebnis: In Bearbeitung<br> </li>
-                <li class="list-group-item" > Punkte: In Bearbeitung </li>
-                <li class="list-group-item" > Test bestanden? In Bearbeitung </li>
+                <li class="list-group-item" > Ergebnis: <span th:text="${ergebnisInProzent}">Ergebnis: 71,23% korrekt</span> <br> </li>
+                <li class="list-group-item" > Punkte: <span th:text="${punktzahl}">Punkte: 5 / 7 </span> </li>
+                <li class="list-group-item" > <span th:text="${testBestanden}">Sie haben den Test bestanden!</span> </li>
             </ul>
 
     </body>
