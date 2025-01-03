@@ -9,11 +9,13 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Profile;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 @SpringBootApplication
+@EnableScheduling
 public class ExambyteProjektApplication {
     public static void main(String[] args) {
         SpringApplication.run(ExambyteProjektApplication.class, args);
@@ -28,6 +30,17 @@ public class ExambyteProjektApplication {
                clearAllTables(jdbc);
                service.save(studiTest1);
                service.save(studiTest2);
+
+               studiTest2 = service.getTest(2);
+               List<Integer> alleAufgabenIdsVonTest2 = studiTest2.getAufgabenIds();
+               for(Integer aufgabenId: alleAufgabenIdsVonTest2) {
+                   if(!studiTest2.isFreitextAufgabe(aufgabenId)) {
+                       service.addAntwort(2, aufgabenId, "[A]", 1234);
+                   } else {
+                       service.addAntwort(2, aufgabenId,"Beliebige Antwort", 1234);
+                   }
+               }
+
         };
     }
 
@@ -37,7 +50,8 @@ public class ExambyteProjektApplication {
                 "DELETE FROM mc_aufgabe; " +
                 "DELETE FROM freitext_aufgabe; " +
                 "DELETE FROM freitext_antwort CASCADE; " +
-                "DELETE FROM mc_antwort CASCADE; COMMIT;");
+                "DELETE FROM mc_antwort CASCADE; " +
+                "DELETE FROM abgabe; COMMIT;");
         jdbc.update("DELETE FROM studi_test");
     }
     public static StudiTest studiTest1() {

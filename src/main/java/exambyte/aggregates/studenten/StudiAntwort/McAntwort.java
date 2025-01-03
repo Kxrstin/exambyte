@@ -39,6 +39,10 @@ public class McAntwort implements TestAntwort{
         this.antworten = antwortWahl.toString();
     }
 
+    public Integer getId(){
+        return id;
+    }
+
     public boolean isFreitextAufgabe() {
         return false;
     }

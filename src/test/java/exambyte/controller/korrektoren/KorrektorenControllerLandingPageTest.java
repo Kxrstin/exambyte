@@ -88,7 +88,7 @@ public class KorrektorenControllerLandingPageTest {
     @WithMockOAuth2User(roles = "KORREKTOR")
     @DisplayName("Die Seite /korrektoren/landingPage/zeigeAbgaben/BeispielTestName/Aufgabe zeigt die richtigen Studi IDs an.")
     void test_05() throws Exception {
-        when(abgabenService.getAbgabenMitTestnameAufgabe("BeispielTestName", "Aufgabe")).thenReturn(id);
+        when(abgabenService.getAbgabenIds("BeispielTestName", "Aufgabe")).thenReturn(id);
         MvcResult result = mvc.perform(get("/korrektoren/landingPage/zeigeAbgaben/BeispielTestName/Aufgabe"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("korrektoren/AbgabenPageKorrektoren"))

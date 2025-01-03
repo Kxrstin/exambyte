@@ -50,10 +50,10 @@ public class KorrektorenControllerLandingPage {
     public String abgaben(Model model, @PathVariable("aufgabe") String aufgabe, @PathVariable("testname") String testname) {
         String aufgabeKorrekt = aufgabe.replace('_',' ');
         String testnameKorrekt = testname.replace('_',' ');
-        if(abgabenService.getAbgabenMitTestnameAufgabe(testnameKorrekt, aufgabeKorrekt) == null){
+        if(abgabenService.getAbgabenIds(testnameKorrekt, aufgabeKorrekt) == null){
             model.addAttribute("abgaben", new ArrayList<>());
         } else {
-            model.addAttribute("abgaben", abgabenService.getAbgabenMitTestnameAufgabe(testnameKorrekt, aufgabeKorrekt));
+            model.addAttribute("abgaben", abgabenService.getAbgabenIds(testnameKorrekt, aufgabeKorrekt));
         }
         return "korrektoren/AbgabenPageKorrektoren";
     }
@@ -77,7 +77,7 @@ public class KorrektorenControllerLandingPage {
         String fehler = "";
         int maxPunkte =abgabenService.getAbgabe(abgabeId).getMaxPunktzahl();
 
-        if(feedback.equals("") && !abgabenService.getAbgabe(abgabeId).getStudiAntwort().equals("")){
+        if(feedback.equals("") && !abgabenService.getAbgabe(abgabeId).getStudiantwort().equals("")){
             if(punkteVergabe != maxPunkte) {
                 fehler += "Das Feedback darf nicht leer sein! ";
             }
@@ -88,7 +88,7 @@ public class KorrektorenControllerLandingPage {
         }
         if(fehler.equals("")) {
             abgabenService.addKorrektur(punkteVergabe, feedback, abgabeId);
-            return "redirect:/korrektoren/landingPage/zeigeAbgaben/" + abgabenService.getTestname(abgabeId).replace(" ", "_") + "/" + abgabenService.getAufgabe(abgabeId).replace(" ", "_");
+            return "redirect:/korrektoren/landingPage/zeigeAufgaben/" + abgabenService.getTestname(abgabeId).replace(" ", "_");
         }
         redirectAttributes.addFlashAttribute("falscheEingabe", fehler);
         return "redirect:/korrektoren/landingPage/zeigeAbgabe/{abgabeId}";

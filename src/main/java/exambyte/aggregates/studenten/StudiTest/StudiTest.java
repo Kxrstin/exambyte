@@ -212,6 +212,21 @@ public final class StudiTest {
     public void setFreitextAufgaben(List<FreitextAufgabe> freitextAufgaben) {
         this.freitextAufgaben = freitextAufgaben;
     }
+    public List<Integer> getStudiIdsVonAntworten(Integer aufgabenId) {
+        List<Integer> studiIdFallsFreitextAufgabe = freitextAntworten.stream()
+                .filter(antwort -> antwort.getAufgabeId().equals(aufgabenId))
+                .map(FreitextAntwort::getStudiId)
+                .toList();
+        List<Integer> studiIdFallsMcAufgabe = mcAntworten.stream()
+                .filter(antwort -> antwort.getAufgabeId().equals(aufgabenId))
+                .map(McAntwort::getStudiId)
+                .toList();
+
+        if(studiIdFallsFreitextAufgabe.isEmpty()) {
+            return studiIdFallsMcAufgabe;
+        }
+        return studiIdFallsFreitextAufgabe;
+    }
     public List<Integer> getAufgabenIds() {
         List<Integer> freitextAufgabenIds = freitextAufgaben.stream()
                 .map(FreitextAufgabe::getId)
@@ -224,6 +239,21 @@ public final class StudiTest {
         alleIds.addAll(mcAufgabenIds);
 
         return alleIds;
+    }
+    public Integer getAntwortId(Integer studiId, Integer aufgabenId) {
+        if(testAufgaben.get(getIndexOf(aufgabenId)).isFreitextAufgabe()) {
+            return freitextAntworten.stream()
+                    .filter(antwort -> antwort.getStudiId().equals(studiId) && antwort.getAufgabeId().equals(aufgabenId))
+                    .map(FreitextAntwort::getId)
+                    .findFirst()
+                    .orElse(null);
+        }
+
+        return mcAntworten.stream()
+                .filter(antwort -> antwort.getStudiId().equals(studiId) && antwort.getAufgabeId().equals(aufgabenId))
+                .map(McAntwort::getId)
+                .findFirst()
+                .orElse(null);
     }
 
     // TODO: Das gehört in einen anderen Service aber nicht hier hin

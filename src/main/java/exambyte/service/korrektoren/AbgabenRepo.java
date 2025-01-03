@@ -1,12 +1,11 @@
 package exambyte.service.korrektoren;
 
 import exambyte.aggregates.korrektoren.Abgabe;
+import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 
-public interface AbgabenRepo {
-    Abgabe loadAbgabeWithId(int id);
-    void saveAbgabe(Abgabe a);
-    boolean hasAbgabeWithId(int id);
-    List<Abgabe> loadAbgaben();
+public interface AbgabenRepo extends CrudRepository<Abgabe, Integer> {
+    List<Abgabe> findAll();
+    Abgabe findById(int id);
 }

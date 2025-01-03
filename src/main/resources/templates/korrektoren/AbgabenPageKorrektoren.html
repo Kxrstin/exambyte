@@ -25,7 +25,7 @@
     <li class="list-group-item" th:each="abgabeId : ${abgaben}">
         <form th:action="@{/korrektoren/landingPage/zeigeAbgabe/{abgabeId}(abgabeId=${abgabeId})}" class="form-group">
             <a class="korrektorenLink" th:href="@{/korrektoren/landingPage/zeigeAbgabe/{abgabeId}(abgabeId=${abgabeId})}">
-                Test von Student mit ID: <span th:text="${abgabeId}"> 1256</span></a> <br>
+                Test von Student mit AbgabeID: <span th:text="${abgabeId}"> 1256</span></a> <br>
         </form>
     </li>
 </ul>

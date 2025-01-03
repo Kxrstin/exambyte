@@ -1,23 +1,45 @@
 package exambyte.aggregates.korrektoren;
 
 import exambyte.annotations.AggregateRoot;
+import org.springframework.data.annotation.Id;
 
 @AggregateRoot
 public class Abgabe {
-    private final int id;
-    private final String studiAntwort;
+    @Id
+    private final Integer id;
+    private final String studiantwort;
     private final String aufgabe;
-    private final String testname;
+    private final Integer aufgabenId;
+    private final Integer studiId;
+    private final String studiTestTitel;
     private String feedback;
     private Integer punktzahl;
-    private final int maxPunktzahl;
+    private final Integer maxPunktzahl;
+    private final Integer studiTest;
+    private final Integer antwort;
 
-    public Abgabe(int id, String testname, String aufgabe, String studiAntwort, int maxPunktzahl) {
+    public Abgabe(Integer id, String studiTestTitel, String aufgabe, Integer studiId, Integer aufgabenId, String studiantwort, Integer antwort, int maxPunktzahl, Integer studiTest) {
         this.id = id;
         this.aufgabe = aufgabe;
-        this.studiAntwort = studiAntwort;
-        this.testname = testname;
+        this.studiId = studiId;
+        this.studiantwort = studiantwort;
+        this.studiTestTitel = studiTestTitel;
         this.maxPunktzahl = maxPunktzahl;
+        this.studiTest = studiTest;
+        this.antwort = antwort;
+        this.aufgabenId = aufgabenId;
+    }
+
+    public Integer getStudiTest() {
+        return studiTest;
+    }
+
+    public Integer getAntwort() {
+        return antwort;
+    }
+
+    public Integer getStudiId() {
+        return studiId;
     }
 
     public int getId() {
@@ -32,16 +54,16 @@ public class Abgabe {
         return aufgabe;
     }
 
-    public String getStudiAntwort() {
-        return studiAntwort;
+    public String getStudiantwort() {
+        return studiantwort;
     }
 
     public void setFeedback(String feedback) {
         this.feedback = feedback;
     }
 
-    public String getTestname() {
-        return testname;
+    public String getStudiTestTitel() {
+        return studiTestTitel;
     }
 
     public int getMaxPunktzahl() {
