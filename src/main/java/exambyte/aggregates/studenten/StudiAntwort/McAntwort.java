@@ -4,7 +4,6 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.PersistenceCreator;
 import org.springframework.data.annotation.Transient;
 
-import javax.persistence.Column;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
