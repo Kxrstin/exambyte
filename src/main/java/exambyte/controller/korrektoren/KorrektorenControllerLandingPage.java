@@ -29,6 +29,9 @@ public class KorrektorenControllerLandingPage {
             model.addAttribute("testnamen", new ArrayList<>());
         } else {
             model.addAttribute("testnamen", abgabenService.getTestnamen());
+            if(abgabenService.getTestnamen().size() == 0){
+                model.addAttribute("nichtsZuKorrigieren", true);
+            }
         }
         return "korrektoren/LandingPageKorrektoren";
     }

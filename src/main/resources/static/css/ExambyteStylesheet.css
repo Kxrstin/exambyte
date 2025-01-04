@@ -236,3 +236,9 @@ li {
     padding-bottom: 10px;
 }
 
+.nichtsZuKorrigieren {
+    padding-left: 40px;
+    font-style: italic;
+    color: #709870;
+}
+
