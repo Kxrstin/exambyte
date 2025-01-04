@@ -32,11 +32,15 @@
                 </span>
             </form>
 
-        <span th:if="${isAbgelaufen}">
-            <p class="antwort" th:text="${studiFAntwort}"> Die Studi Antwort. </p>
-            <p class="feedback" th:text="${feedback}"> Das Feedback vom Korrektor</p>
-            <p class="feedback" th:text="${erreichtePunkte}"> Die erreichten Punkte</p>
-        </span>
+
+            <span th:if="${isAbgelaufen}">
+                <p class="antwort" th:text="${studiFAntwort}"> Die Studi Antwort. </p>
+                <div class="studiAntwortUndFeedback">
+                    <p class="feedback" th:text="${feedback}"> Das Feedback vom Korrektor</p>
+                    <p class="feedback" th:text="${erreichtePunkte}"> Die erreichten Punkte</p>
+                </div>
+            </span>
+
     </span>
 
     <span th:if="${mcfrage}">
