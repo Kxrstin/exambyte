@@ -194,7 +194,7 @@ public class TestFragenService {
         return sumErreichtePunkte + " / " + sumMaxPunkte + " Punkte";
     }
     public String testBestanden(Integer studiId, Integer studiTest) {
-        if(getErgebnisInProzent(studiId, studiTest) >= 0.5) {
+        if(getErgebnisInProzent(studiId, studiTest) >= 50.00) {
             return "Super, Sie haben den Test bestanden!";
         }
         return "Sie haben den Test leider nicht bestanden.";

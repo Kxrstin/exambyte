@@ -26,7 +26,6 @@ public class StudentenControllerErgebnis {
     public String zeigeErgebnis(@PathVariable("id") Integer testId, Model model, @AuthenticationPrincipal OAuth2User user) {
         if(testService.hasTestWithId(testId)) {
             model.addAttribute("ergebnisZeitpunkt", testService.parseErgebnis(testId));
-            System.out.println(testService.getTest(testId).getErgebnisZeitpunkt() + " " + testService.getTest(testId).getErgebnisZeitpunkt().isAfter(LocalDateTime.now()));
             if(testService.getTest(testId).getErgebnisZeitpunkt().isBefore(LocalDateTime.now())) {
                 model.addAttribute("ergebnisInProzent", testService.getErgebnisInProzent(user.getAttribute("id"), testId) + " %");
                 model.addAttribute("punktzahl", testService.parsePunktzahlFuerErgebnis(user.getAttribute("id"), testId));
