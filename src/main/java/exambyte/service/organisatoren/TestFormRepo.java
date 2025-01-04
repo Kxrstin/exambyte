@@ -5,9 +5,8 @@ import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 
-//TODO: CrudRepo extenden
-public interface TestFormRepo {
+public interface TestFormRepo extends CrudRepository<TestFormular, Integer> {
     TestFormular save(TestFormular testForm);
-    TestFormular findBy(int id);
+    TestFormular findById(int id);
     List<TestFormular> findAll();
 }

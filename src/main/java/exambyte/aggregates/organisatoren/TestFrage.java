@@ -7,10 +7,12 @@ import java.util.List;
 @Wertobjekt
 public interface TestFrage {
     Integer getId();
+    void setId(Integer id);
+    void setTestFormular(Integer testFormular);
     Integer getPunkte();
     String getTitel();
     String getFragestellung();
     String getErklaerung();
     boolean istMcFrage();
-    List<McAntwort> getAntworten();
+    List<McAntwortOrga> getMcAntwortOrga();
 }

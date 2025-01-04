@@ -136,7 +136,7 @@ public class OrganisatorenControllerTest {
     }
 
     public void mockTestFormMethoden() {
-        when(mockTestForm.getTestFragen()).thenReturn(List.of());
+        when(mockTestForm.getTestFragenAsList()).thenReturn(List.of());
         when(mockTestForm.getId()).thenReturn(testId);
     }
 

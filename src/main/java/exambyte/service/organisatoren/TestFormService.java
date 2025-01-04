@@ -1,18 +1,22 @@
 package exambyte.service.organisatoren;
 
 import exambyte.aggregates.organisatoren.TestFormular;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class TestFormService {
     private TestFormRepo repository;
+    private JdbcTemplate jdbc;
     private Map<Integer, TestFormular> zwischenspeicher = new HashMap<>();
-    public TestFormService(TestFormRepo repository) {
+
+    @Autowired
+    public TestFormService(TestFormRepo repository, JdbcTemplate jdbc) {
         this.repository = repository;
+        this.jdbc = jdbc;
     }
 
     public TestFormular getTestFormById(Integer id) {
@@ -20,8 +24,9 @@ public class TestFormService {
     }
 
     public int addNewTestForm() {
-        TestFormular testForm = new TestFormular("", new HashMap<>());
-        zwischenspeicher.put(testForm.getId(), testForm);
+        Integer id = UUID.randomUUID().hashCode();
+        TestFormular testForm = new TestFormular(id,"", new ArrayList<>(), new ArrayList<>());
+        zwischenspeicher.put(id, testForm);
         return testForm.getId();
     }
 
@@ -37,8 +42,8 @@ public class TestFormService {
                 .toList();
     }
 
-    public TestFormular getTestFormByIdDB(Integer id) {
-        return repository.findBy(id);
+    public TestFormular getTestFormByIdDB(int id) {
+        return repository.findById(id);
     }
 
     public TestFormular saveTestFormDB(TestFormular testForm) {

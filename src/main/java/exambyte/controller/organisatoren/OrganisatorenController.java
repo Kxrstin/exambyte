@@ -75,7 +75,7 @@ public class OrganisatorenController {
             return "redirect:/organisatoren/testErstellen";
         }
         TestFormular testFormular = service.getTestFormById(id);
-        testFormular.setTitel(testTitel);
+        testFormular.setTestTitel(testTitel);
         service.save(testFormular);
         redirectAttributes.addFlashAttribute("id", id);
         redirectAttributes.addFlashAttribute("redirect", true);
@@ -166,9 +166,6 @@ public class OrganisatorenController {
                                 String fragestellung,
                                 String erklaerung,
                                 @RequestParam(value = "antworten", required = false) List<String> antworten) {
-        // TODO: Es kann passieren, dass eine Antwort als richtig angekreuzt wird, das Feld aber leer ist und
-        //       das nächste Feld nicht angekreuzt wurde aber keine Antwort hat
-
         //Fehlerbehandlung
         if(titel == null || titel.equals("") || fragestellung == null || fragestellung.equals("") || erklaerung == null || erklaerung.equals("")) {
             redirectAttributes.addFlashAttribute("fehlermeldung", true);
@@ -254,6 +251,8 @@ public class OrganisatorenController {
     @Secured("ROLE_ORGANISATOR")
     public String testFertigStellen(@PathVariable int id) {
         TestFormular testForm = service.getTestFormById(id);
+        //Weil die DB immer automatisch eine ID mitgibt:
+        testForm.setAllTestFormIdsToNull();
         service.saveTestFormDB(testForm);
         return "redirect:/organisatoren/landingPage";
     }
@@ -276,13 +275,13 @@ public class OrganisatorenController {
                                   @RequestParam LocalDateTime endzeitpunkt,
                                   @RequestParam LocalDateTime ergebniszeitpunkt,
                                   RedirectAttributes redirectAttributes) {
-        TestFormular testFormular = service.getTestFormById(id);
+        TestFormular testFormular = service.getTestFormByIdDB(id);
 
         testFormular.setStartzeitpunkt(startzeitpunkt);
         testFormular.setEndzeitpunkt(endzeitpunkt);
         testFormular.setErgebniszeitpunkt(ergebniszeitpunkt);
 
-        service.save(testFormular);
+        service.saveTestFormDB(testFormular);
         redirectAttributes.addFlashAttribute("id", id);
         redirectAttributes.addFlashAttribute("redirect", true);
         return "redirect:/organisatoren/testVorschau/" + id;
