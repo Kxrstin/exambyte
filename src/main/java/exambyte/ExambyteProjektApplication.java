@@ -57,8 +57,8 @@ public class ExambyteProjektApplication {
     public static StudiTest studiTest1() {
         TestDaten testDaten = new TestDaten("Mathematik für Informatik 3 Test 1",
                 LocalDateTime.of(2024, 12, 14, 14, 0),
-                LocalDateTime.of(2025, 1, 20, 14, 0),
-                LocalDateTime.of(2025, 1, 30, 14, 0),
+                LocalDateTime.of(2025, 2, 20, 14, 0),
+                LocalDateTime.of(2025, 2, 28, 14, 0),
                 null);
 
         FreitextAufgabe freitextAufgabe1 = new FreitextAufgabe("Was ist das Ergebnis von 1 + 1?", 2, null, null);
@@ -71,7 +71,7 @@ public class ExambyteProjektApplication {
         TestDaten testDaten2 = new TestDaten("Wissenschaftliches Arbeiten",
                 LocalDateTime.of(2024, 10, 16, 14, 0),
                 LocalDateTime.of(2024, 12, 23, 14, 0),
-                LocalDateTime.of(2025, 2, 26, 14, 0),
+                LocalDateTime.of(2025, 1, 3, 14, 0),
                 null);
 
         FreitextAufgabe freitextAufgabe3 = new FreitextAufgabe("Wofür nutzt man Latex?", 2, null, null);

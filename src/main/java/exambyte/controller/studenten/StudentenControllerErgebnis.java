@@ -26,15 +26,22 @@ public class StudentenControllerErgebnis {
     public String zeigeErgebnis(@PathVariable("id") Integer testId, Model model, @AuthenticationPrincipal OAuth2User user) {
         if(testService.hasTestWithId(testId)) {
             model.addAttribute("ergebnisZeitpunkt", testService.parseErgebnis(testId));
-            if(testService.getTest(testId).getErgebnisZeitpunkt().isAfter(LocalDateTime.now())) {
+            System.out.println(testService.getTest(testId).getErgebnisZeitpunkt() + " " + testService.getTest(testId).getErgebnisZeitpunkt().isAfter(LocalDateTime.now()));
+            if(testService.getTest(testId).getErgebnisZeitpunkt().isBefore(LocalDateTime.now())) {
                 model.addAttribute("ergebnisInProzent", testService.getErgebnisInProzent(user.getAttribute("id"), testId) + " %");
                 model.addAttribute("punktzahl", testService.parsePunktzahlFuerErgebnis(user.getAttribute("id"), testId));
                 model.addAttribute("testBestanden", testService.testBestanden(user.getAttribute("id"), testId));
+            } else  {
+                model.addAttribute("ergebnisInProzent", "In Bearbeitung.");
+                model.addAttribute("punktzahl", "In Bearbeitung");
+                model.addAttribute("testBestanden", "In Bearbeitung.");
             }
         } else {
-            model.addAttribute("ergebnisZeitpunkt", "Keine Angaben!");
+            model.addAttribute("ergebnisZeitpunkt", "Ergebniszeitpunkt: Keine Angaben!");
+            model.addAttribute("ergebnisInProzent", "Keine Angaben!");
+            model.addAttribute("punktzahl", "Keine Angaben!");
+            model.addAttribute("testBestanden", "Bestanden?: Keine Angaben!");
         }
-        // TODO Implementierung
         return "studenten/ErgebnisPageStudenten";
     }
 }
