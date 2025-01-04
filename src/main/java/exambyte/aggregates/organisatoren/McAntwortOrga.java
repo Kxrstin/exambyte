@@ -3,19 +3,27 @@ package exambyte.aggregates.organisatoren;
 import exambyte.annotations.Wertobjekt;
 
 @Wertobjekt
-class McAntwort {
+class McAntwortOrga {
     private String name;
     private boolean antwort;
 
-    public McAntwort(boolean antwort, String name) {
+    private Integer mcFrage;
+    private Integer testFormular;
+    public McAntwortOrga(boolean antwort, String name) {
         this.name = name;
         this.antwort = antwort;
     }
 
-    public McAntwort() {
+    public McAntwortOrga() {
         this(false, "");
     }
 
+    public Integer getMcFrage() {
+        return mcFrage;
+    }
+    public void setMcFrage(Integer mcFrage) {
+        this.mcFrage = mcFrage;
+    }
     public String getName() {
         return name;
     }
@@ -30,5 +38,13 @@ class McAntwort {
 
     public void setAntwort(boolean antwort) {
         this.antwort = antwort;
+    }
+
+    public void setTestFormular(Integer testFormular) {
+        this.testFormular = testFormular;
+    }
+
+    public Integer getTestFormular() {
+        return testFormular;
     }
 }

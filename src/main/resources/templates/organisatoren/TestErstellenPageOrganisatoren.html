@@ -40,7 +40,7 @@
 
         <form method="post" th:action="@{/organisatoren/testErstellen/saveTestTitel/{id}(id = ${id})}">
             <label class="test-titel" for="testFormTitel">Test Titel:</label>
-            <input class="test-titel-textfeld" type="text" id="testFormTitel" name="testTitel" th:value="${testForm.titel}">
+            <input class="test-titel-textfeld" type="text" id="testFormTitel" name="testTitel" th:value="${testForm.testTitel}">
             <button type="submit">Speichern</button>
         </form>
 
@@ -66,7 +66,7 @@
         </form>
 
         <ul th:remove="all-but-first">
-            <li th:each="testFrage: ${testForm.getTestFragen()}" class="list-group-item">
+            <li th:each="testFrage: ${testForm.getTestFragenAsList()}" class="list-group-item">
                 <span th:if="${testFrage.istMcFrage()}">
                     <p class="fragen-überschrift">Multiple-Choice Frage</p>
                     <form th:action="@{/organisatoren/testErstellen/addMcAntwort/{id}/{frageID}(id=${id}, frageID=${testFrage.id})}" method="post">
@@ -83,7 +83,7 @@
                         <input class="textfeld" type="text" id="multipleChoiceFrageID" name="fragestellung" th:value="${testFrage.fragestellung}">
                         <br>
                         <ul th:remove="all-but-first">
-                            <li th:each="mcAntwort: ${testFrage.getAntworten()}">
+                            <li th:each="mcAntwort: ${testFrage.getMcAntwortOrga()}">
                                 <input type="checkbox" name="antworten" th:checked="${mcAntwort.getAntwort()}">
                                 <label for="antwortMoeglichkeitID">Antwort Möglichkeit:</label>
                                 <input class="textfeld" type="text" id="antwortMoeglichkeitID" name="antworten" th:value="${mcAntwort.getName()}">

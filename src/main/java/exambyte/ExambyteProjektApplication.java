@@ -51,7 +51,12 @@ public class ExambyteProjektApplication {
                 "DELETE FROM freitext_aufgabe; " +
                 "DELETE FROM freitext_antwort CASCADE; " +
                 "DELETE FROM mc_antwort CASCADE; " +
-                "DELETE FROM abgabe; COMMIT;");
+                "DELETE FROM abgabe;" +
+                "DELETE FROM mc_antwort_orga;" +
+                "DELETE FROM mc_frage;" +
+                "DELETE FROM freitext_frage;" +
+                "DELETE FROM test_formular;" +
+                "COMMIT;");
         jdbc.update("DELETE FROM studi_test");
     }
     public static StudiTest studiTest1() {

@@ -1,11 +1,9 @@
 package exambyte.aggregates.organisatoren;
 
 import exambyte.annotations.Wertobjekt;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
+import org.springframework.data.annotation.PersistenceCreator;
 
 import javax.persistence.Id;
-import javax.persistence.Transient;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -16,8 +14,9 @@ class FreitextFrage implements TestFrage {
     private final String fragestellung;
 
     @Id
-    private final Integer id;
+    private Integer id;
     private final String erklaerung;
+    private Integer testFormular;
 
     public FreitextFrage(Integer punkte, String titel, String fragestellung, String erklaerung) {
         this.punkte = punkte;
@@ -27,6 +26,7 @@ class FreitextFrage implements TestFrage {
         id = UUID.randomUUID().hashCode();
     }
 
+    @PersistenceCreator
     public FreitextFrage(Integer punkte, String titel, String fragestellung, String erklaerung, Integer id) {
         this.punkte = punkte;
         this.titel = titel;
@@ -35,12 +35,22 @@ class FreitextFrage implements TestFrage {
         this.id = id;
     }
 
-    public List<McAntwort> getAntworten() {
+    public List<McAntwortOrga> getMcAntwortOrga() {
         return new ArrayList<>();
     }
 
     public Integer getId() {
         return id;
+    }
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Integer getTestFormular() {
+        return testFormular;
+    }
+    public void setTestFormular(Integer testFormular) {
+        this.testFormular = testFormular;
     }
 
     public Integer getPunkte() {
