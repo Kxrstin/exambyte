@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.*;
 
 @Service
@@ -61,5 +62,11 @@ public class TestFormService {
 
     public List<TestFormular> getTestFormsDB() {
         return repository.findAll();
+    }
+
+    public List<TestFormular> getTestFormsDBFuerStudis() {
+        return repository.findAll().stream()
+                .filter(formular -> LocalDateTime.now().isAfter(formular.getStartzeitpunkt()))
+                .toList();
     }
 }

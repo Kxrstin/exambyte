@@ -2,9 +2,12 @@ package exambyte.service.studenten;
 
 import exambyte.aggregates.korrektoren.Abgabe;
 import exambyte.aggregates.studenten.StudiTest.StudiTest;
+import exambyte.service.organisatoren.TestFormRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.jdbc.core.JdbcTemplate;
+
+import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -15,12 +18,14 @@ public class TestFragenService {
     private final StudiTestRepo studiTestRepo;
     private final JdbcTemplate jdbc;
     private final KorrekturenLoader korrekturenLoader;
+    private final TestFormRepo testFormRepo;
 
     @Autowired
-    public TestFragenService(StudiTestRepo testRepo, JdbcTemplate jdbc, KorrekturenLoader korrekturenLoader) {
+    public TestFragenService(StudiTestRepo testRepo, JdbcTemplate jdbc, KorrekturenLoader korrekturenLoader, TestFormRepo testFormRepo) {
         this.studiTestRepo = testRepo;
         this.jdbc = jdbc;
         this.korrekturenLoader = korrekturenLoader;
+        this.testFormRepo = testFormRepo;
     }
 
     public StudiTest save(StudiTest studiTest) {
@@ -245,5 +250,9 @@ public class TestFragenService {
             return null;
         }
         return getAbgabeZuAufgabe(testId, aufgabenId, studiId).getFeedback();
+    }
+
+    public LocalDateTime getErgebnisZeitpunkt(int testId) {
+        return studiTestRepo.findById(testId).getErgebnisZeitpunkt();
     }
 }

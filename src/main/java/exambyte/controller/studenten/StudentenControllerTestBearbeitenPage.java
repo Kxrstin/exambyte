@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -43,7 +44,7 @@ public class StudentenControllerTestBearbeitenPage {
         if (testService.isFreitextAufgabe(testId, aufgabenId)) {
             model.addAttribute("freitextFrage", true);
             model.addAttribute("studiFAntwort", testService.getAntwort(testId, aufgabenId, user.getAttribute("id")));
-            if(testService.isAbgelaufen(testId)) {
+            if(testService.getErgebnisZeitpunkt(testId).isBefore(LocalDateTime.now())) {
                 if(testService.getErreichtePunktzahl(testId, aufgabenId, user.getAttribute("id")) != null) {
                     model.addAttribute("erreichtePunkte", "Erreichte Punktzahl: " + testService.getErreichtePunktzahl(testId, aufgabenId, user.getAttribute("id")) + " Punkte");
                     model.addAttribute("feedback", "Feedback: " + testService.getFeedback(testId, aufgabenId, user.getAttribute("id")));

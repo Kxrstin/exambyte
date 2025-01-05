@@ -14,6 +14,7 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
@@ -61,8 +62,8 @@ public class StudentenControllerTestBearbeitenPageTest {
                 .isFreitext(true)
                 .isMCAufgabe(false)
                 .withAufgabe("Aufgabe Bla Bla")
+                .withErgebnisZeitpunkt(LocalDateTime.of(2030, 1,1,10,10))
                 .withNextAndPrevAufgabe();
-
 
         MvcResult result = mvc.perform(get("/studenten/testBearbeitung/0/0"))
                 .andExpect(status().isOk())

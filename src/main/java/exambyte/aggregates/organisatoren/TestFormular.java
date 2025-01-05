@@ -226,4 +226,21 @@ public class TestFormular {
             freitextFrage.setTestFormular(null);
         }
     }
+
+    public List<McFrage> getMcFragen() {
+        return mcFragen;
+    }
+
+    public List<FreitextFrage> getFreitextFragen() {
+        return freitextFragen;
+    }
+
+    public List<String> getAntwortMoeglickeiten(TestFrage mcFrage) {
+        if(mcFrage.istMcFrage()) {
+            return mcFrage.getMcAntwortOrga().stream()
+                    .map(aufgabe -> aufgabe.getName())
+                    .toList();
+        }
+        return List.of();
+    }
 }

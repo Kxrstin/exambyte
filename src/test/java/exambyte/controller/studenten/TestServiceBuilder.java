@@ -4,7 +4,10 @@ import exambyte.aggregates.studenten.StudiTest.StudiTest;
 import exambyte.aggregates.studenten.StudiTest.TestDaten;
 import exambyte.service.studenten.TestFragenService;
 
+import java.time.LocalDateTime;
 import java.util.List;
+
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.when;
 
@@ -47,6 +50,11 @@ public class TestServiceBuilder {
 
     public <T> TestServiceBuilder withAntwortMoeglichkeiten(List<String> antworten) {
         when(testService.getAntwortMoeglichkeiten(anyInt(), anyInt())).thenReturn(antworten);
+        return this;
+    }
+
+    public TestServiceBuilder withErgebnisZeitpunkt(LocalDateTime time) {
+        when(testService.getErgebnisZeitpunkt(anyInt())).thenReturn(time);
         return this;
     }
 }
