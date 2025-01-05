@@ -18,22 +18,20 @@ class McFrage implements TestFrage {
     private List<McAntwortOrga> mcAntwortOrga;
     private Integer testFormular;
 
-    public McFrage(Integer punkte, String titel, String fragestellung, String erklaerung, Integer id){
+    public McFrage(Integer punkte, String titel, String fragestellung, String erklaerung){
         this.punkte = punkte;
         this.titel = titel;
         this.fragestellung = fragestellung;
         this.erklaerung = erklaerung;
-        this.id = id;
         mcAntwortOrga = new ArrayList<>();
     }
 
     @PersistenceCreator
-    public McFrage(Integer punkte, String titel, String fragestellung, String erklaerung, List<McAntwortOrga> mcAntwortOrga, Integer id){
+    public McFrage(Integer punkte, String titel, String fragestellung, String erklaerung, List<McAntwortOrga> mcAntwortOrga){
         this.punkte = punkte;
         this.titel = titel;
         this.fragestellung = fragestellung;
         this.erklaerung = erklaerung;
-        this.id = id;
         this.mcAntwortOrga = mcAntwortOrga;
     }
 

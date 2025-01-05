@@ -1,10 +1,10 @@
 logging:
   level:
     root: error
-    sql: warn
-    org.springframework.web: warn
-    org.springframework.jdbc: warn
-    org.flywaydb: warn
+    sql: error
+    org.springframework.web: error
+    org.springframework.jdbc: error
+    org.flywaydb: error
 
 server:
   port: 8080
@@ -18,8 +18,7 @@ spring:
         migrate: true
 
   main:
-    banner:
-      mode: off
+    banner-mode: off
 
   application:
     name: ExambyteProjekt

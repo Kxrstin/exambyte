@@ -1,12 +1,15 @@
 package exambyte.aggregates.organisatoren;
 
 import exambyte.annotations.Wertobjekt;
+import org.springframework.data.annotation.Id;
 
 @Wertobjekt
 class McAntwortOrga {
     private String name;
     private boolean antwort;
 
+    @Id
+    private Integer id;
     private Integer mcFrage;
     private Integer testFormular;
     public McAntwortOrga(boolean antwort, String name) {
@@ -46,5 +49,8 @@ class McAntwortOrga {
 
     public Integer getTestFormular() {
         return testFormular;
+    }
+    public void setId(Integer id){
+        this.id = id;
     }
 }

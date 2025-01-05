@@ -30,6 +30,10 @@ public class TestFormService {
         return testForm.getId();
     }
 
+    public void deleteTestDB(Integer id) {
+        repository.deleteById(id);
+    }
+
     public int save(TestFormular testForm) {
         int id = testForm.getId();
         zwischenspeicher.put(id, testForm);
@@ -44,6 +48,11 @@ public class TestFormService {
 
     public TestFormular getTestFormByIdDB(int id) {
         return repository.findById(id);
+    }
+
+    public void saveTestFormDBWithNewZeitpunkten(TestFormular testForm) {
+        // Ohne JDBC kam es immer unerwartet dazu, dass die Einfügereihenfolge aller Daten automatisch falsch gemacht wurde, was ich anders nicht lösen konnte
+        jdbc.update("UPDATE test_formular SET startzeitpunkt = ?, endzeitpunkt = ?, ergebniszeitpunkt = ? WHERE test_formular.id = ?", new Object[] {testForm.getStartzeitpunkt(), testForm.getEndzeitpunkt(), testForm.getErgebniszeitpunkt(), testForm.getId()});
     }
 
     public TestFormular saveTestFormDB(TestFormular testForm) {

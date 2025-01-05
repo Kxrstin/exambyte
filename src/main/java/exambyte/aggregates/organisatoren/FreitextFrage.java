@@ -23,7 +23,6 @@ class FreitextFrage implements TestFrage {
         this.titel = titel;
         this.fragestellung = fragestellung;
         this.erklaerung = erklaerung;
-        id = UUID.randomUUID().hashCode();
     }
 
     @PersistenceCreator

@@ -20,8 +20,8 @@ public class TestFormular {
     private LocalDateTime startzeitpunkt;
     private LocalDateTime endzeitpunkt;
     private LocalDateTime ergebniszeitpunkt;
-    private List<McFrage> mcFragen;
-    private List<FreitextFrage> freitextFragen;
+    private final List<McFrage> mcFragen;
+    private final List<FreitextFrage> freitextFragen;
     private List<McAntwortOrga> mcAntwortOrga;
 
     @PersistenceCreator
@@ -65,17 +65,23 @@ public class TestFormular {
     }
 
     public void addNewMCFrage() {
-        addTestfrage(new McFrage(0, "", "", "", UUID.randomUUID().hashCode()));
+        McFrage mcFrage = new McFrage(0, "", "", "");
+        mcFrage.setId(UUID.randomUUID().hashCode());
+        addTestfrage(mcFrage);
     }
 
     public void addNewFreitextFrage() {
-        addTestfrage(new FreitextFrage(0, "", "", ""));
+        FreitextFrage frage = new FreitextFrage(0, "", "", "");
+        frage.setId(UUID.randomUUID().hashCode());
+        addTestfrage(frage);
     }
 
     public void addMCFrage(int punkte, String titel, String fragestellung, String erklaerung, int id){
-        testFragenMap.put(id, new McFrage(punkte, titel, fragestellung, erklaerung, id));
+        McFrage mcFrage = new McFrage(punkte, titel, fragestellung, erklaerung);
+        mcFrage.setId(id);
+        testFragenMap.put(id, mcFrage);
         testFragen = getTestFragenAsList();
-        mcFragen.add(new McFrage(punkte, titel, fragestellung, erklaerung, id));
+        mcFragen.add(mcFrage);
     }
 
     public void addFreitextFrage(int punkte, String titel, String fragestellung, String erklaerung, int id){
@@ -114,7 +120,9 @@ public class TestFormular {
     public void setPunkteWithId(int punkte, int id){
         TestFrage testFrage = getTestFrageById(id);
         if(testFrage.istMcFrage()) {
-            testFragenMap.put(id, new McFrage(punkte, testFrage.getTitel(), testFrage.getFragestellung(), testFrage.getErklaerung(), UUID.randomUUID().hashCode()));
+            McFrage mcFrage = new McFrage(punkte, testFrage.getTitel(), testFrage.getFragestellung(), testFrage.getErklaerung());
+            mcFrage.setId(UUID.randomUUID().hashCode());
+            testFragenMap.put(id, mcFrage);
         } else {
             testFragenMap.put(id, new FreitextFrage(punkte, testFrage.getTitel(), testFrage.getFragestellung(), testFrage.getErklaerung()));
         }
@@ -123,7 +131,9 @@ public class TestFormular {
     public void setTitelWithId(String titel, int id) {
         TestFrage testFrage = getTestFrageById(id);
         if(testFrage.istMcFrage()) {
-            testFragenMap.put(id, new McFrage(testFrage.getPunkte(), titel, testFrage.getFragestellung(), testFrage.getErklaerung(), UUID.randomUUID().hashCode()));
+            McFrage mcFrage = new McFrage(testFrage.getPunkte(), titel, testFrage.getFragestellung(), testFrage.getErklaerung());
+            mcFrage.setId(UUID.randomUUID().hashCode());
+            testFragenMap.put(id, mcFrage);
         } else {
             testFragenMap.put(id, new FreitextFrage(testFrage.getPunkte(), titel, testFrage.getFragestellung(), testFrage.getErklaerung()));
         }
@@ -132,7 +142,9 @@ public class TestFormular {
     public void setFragestellungWithId(String fragestellung, int id) {
         TestFrage testFrage = getTestFrageById(id);
         if(testFrage.istMcFrage()) {
-            testFragenMap.put(id, new McFrage(testFrage.getPunkte(), testFrage.getTitel(), fragestellung, testFrage.getErklaerung(), UUID.randomUUID().hashCode()));
+            McFrage mcFrage = new McFrage(testFrage.getPunkte(), testFrage.getTitel(), fragestellung, testFrage.getErklaerung());
+            mcFrage.setId(UUID.randomUUID().hashCode());
+            testFragenMap.put(id, mcFrage);
         } else {
             testFragenMap.put(id, new FreitextFrage(testFrage.getPunkte(), testFrage.getTitel(), fragestellung, testFrage.getErklaerung()));
         }
@@ -141,7 +153,9 @@ public class TestFormular {
     public void setErklaerungWithId(String erklaerung, int id) {
         TestFrage testFrage = getTestFrageById(id);
         if(testFrage.istMcFrage()) {
-            testFragenMap.put(id, new McFrage(testFrage.getPunkte(), testFrage.getTitel(), testFrage.getFragestellung(), erklaerung, UUID.randomUUID().hashCode()));
+            McFrage mcFrage = new McFrage(testFrage.getPunkte(), testFrage.getTitel(), testFrage.getFragestellung(), erklaerung);
+            mcFrage.setId(UUID.randomUUID().hashCode());
+            testFragenMap.put(id, mcFrage);
         } else {
             testFragenMap.put(id, new FreitextFrage(testFrage.getPunkte(), testFrage.getTitel(), testFrage.getFragestellung(), erklaerung));
         }
@@ -179,6 +193,7 @@ public class TestFormular {
     public void addMcAntwort(McAntwortOrga mcAntwort, int frageID) {
         TestFrage testFrage = testFragenMap.get(frageID);
         testFrage.getMcAntwortOrga().add(mcAntwort);
+        mcAntwortOrga.add(mcAntwort);
     }
 
     public void addMcAntworten(List<Boolean> antworten, List<String> antwortmoeglichkeiten, int frageID) {
@@ -191,7 +206,8 @@ public class TestFormular {
         }
 
         TestFrage tf = testFragenMap.get(frageID);
-        McFrage mcFrage = new McFrage(tf.getPunkte(),tf.getTitel(),tf.getFragestellung(),tf.getErklaerung(), mcAntworten, tf.getId());
+        McFrage mcFrage = new McFrage(tf.getPunkte(),tf.getTitel(),tf.getFragestellung(),tf.getErklaerung(), mcAntworten);
+        mcFrage.setId(tf.getId());
         testFragenMap.put(frageID, mcFrage);
         McFrage mcFrage2 = mcFragen.stream().filter(frage -> frage.getId().equals(frageID) == true).findFirst().orElse(null);
         mcFrage2.setMcAntwortOrga(mcAntworten);
@@ -201,14 +217,13 @@ public class TestFormular {
         this.id = null;
         for(TestFrage mcFrage: mcFragen) {
             mcFrage.setTestFormular(null);
-            //mcFrage.setId(null);
             for(McAntwortOrga mcAntwort: mcFrage.getMcAntwortOrga()) {
-                //mcAntwort.setMcFrage(null);
+                mcAntwort.setMcFrage(mcFrage.getId());
+                mcAntwort.setId(null);
             }
         }
         for(TestFrage freitextFrage: freitextFragen) {
             freitextFrage.setTestFormular(null);
-            //freitextFrage.setId(null);
         }
     }
 }

@@ -281,8 +281,8 @@ public class OrganisatorenController {
         testFormular.setEndzeitpunkt(endzeitpunkt);
         testFormular.setErgebniszeitpunkt(ergebniszeitpunkt);
 
-        service.saveTestFormDB(testFormular);
-        redirectAttributes.addFlashAttribute("id", id);
+        service.saveTestFormDBWithNewZeitpunkten(testFormular);
+        redirectAttributes.addFlashAttribute("id",id);
         redirectAttributes.addFlashAttribute("redirect", true);
         return "redirect:/organisatoren/testVorschau/" + id;
     }
