@@ -15,6 +15,8 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.security.test.context.support.WithSecurityContextFactory;
 import org.springframework.util.Assert;
 
+/** **/
+
 public class WithOAuth2UserSecurityContextFactory
         implements WithSecurityContextFactory<WithMockOAuth2User> {
 
@@ -26,14 +28,16 @@ public class WithOAuth2UserSecurityContextFactory
         }
         if (grantedAuthorities.isEmpty()) {
             for (String role : withUser.roles()) {
-                Assert.isTrue(!role.startsWith("ROLE_"), () -> "roles cannot start with ROLE_ Got " + role);
+                Assert.isTrue(!role.startsWith("ROLE_"), () ->
+                        "roles cannot start with ROLE_ Got " + role);
                 grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_" + role));
             }
         }
         else if (!(withUser.roles().length == 1 && "USER".equals(withUser.roles()[0]))) {
             throw new IllegalStateException(
                     "You cannot define roles attribute " + Arrays.asList(withUser.roles())
-                            + " with authorities attribute " + Arrays.asList(withUser.authorities()));
+                            + " with authorities attribute " + Arrays.asList(withUser
+                            .authorities()));
         }
 
         OAuth2User principal = new DefaultOAuth2User(grantedAuthorities,

@@ -4,8 +4,8 @@ import exambyte.aggregates.studenten.StudiTest.FreitextAufgabe;
 import exambyte.aggregates.studenten.StudiTest.StudiTest;
 import exambyte.aggregates.studenten.StudiTest.TestDaten;
 import exambyte.security.MethodSecurityConfig;
-import exambyte.security.SecurityConfig;
 import exambyte.helper.WithMockOAuth2User;
+import exambyte.security.SecurityConfig;
 import exambyte.service.studenten.TestFragenService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -15,23 +15,32 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
-
 import java.time.LocalDateTime;
 import java.util.List;
+import org.springframework.test.web.servlet.MvcResult;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
+
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
+
+/** **/
 
 @WebMvcTest(StudentenControllerLandingPage.class)
 @Import({SecurityConfig.class, MethodSecurityConfig.class})
 @ActiveProfiles("test") // Verhindert, dass die Beispieldaten der Application Klasse geladen werden
 public class StudentenControllerLandingPageTest {
-    private TestDaten testForm = new TestDaten("Algorithmen und Datenstrukturen Test Woche 5", LocalDateTime.of(2024, 11, 21, 12, 0), LocalDateTime.of(2024, 11, 30, 12, 0), LocalDateTime.of(2024, 12, 2, 12, 0), 0);
-    private StudiTest studiTest = new StudiTest(0, testForm, null, List.of(new FreitextAufgabe("Nenne pro Argumente der Onion Architektur", 1)));
+    private TestDaten testForm = new TestDaten("Algorithmen und Datenstrukturen Test Woche 5",
+            LocalDateTime.of(2024, 11, 21, 12, 0),
+            LocalDateTime.of(2024, 11, 30, 12, 0),
+            LocalDateTime.of(2024, 12, 2, 12, 0),
+            0);
+    private StudiTest studiTest = new StudiTest(0, testForm, null,
+            List.of(new FreitextAufgabe("Nenne pro Argumente der Onion Architektur", 1)));
 
     @Autowired
     MockMvc mvc;
@@ -40,7 +49,8 @@ public class StudentenControllerLandingPageTest {
     TestFragenService testService;
 
     @Test
-    @DisplayName("Die Route /landingPage führt zum Öffnen der LandingPageStudenten.html Seite und es gibt einen 200 Status, wenn man Student ist.")
+    @DisplayName("Die Route /landingPage führt zum Öffnen der LandingPageStudenten.html Seite " +
+            "und es gibt einen 200 Status, wenn man Student ist.")
     @WithMockOAuth2User(roles = "STUDENT")
     void test_landingPageStudent() throws Exception {
         when(testService.getBearbeitbareTests()).thenReturn(List.of());
@@ -51,7 +61,8 @@ public class StudentenControllerLandingPageTest {
     }
 
     @Test
-    @DisplayName("Die Route /landingPage führt zur GitHub Anmeldung und es gibt einen 3XX Status, wenn man kein Student ist.")
+    @DisplayName("Die Route /landingPage führt zur GitHub Anmeldung und es gibt einen 3XX Status, " +
+            "wenn man kein Student ist.")
     void test_landingPageKeinStudent() throws Exception {
         MvcResult result = mvc.perform(get("/studenten/landingPage"))
                 .andExpect(status().is3xxRedirection())
@@ -61,7 +72,8 @@ public class StudentenControllerLandingPageTest {
     }
 
     @Test
-    @DisplayName("Wenn ein nicht-Student auf die URL /studenten/landingPage/zeigeErgebnis zugreifen will, wird er zu GitHub Anmeldung redirected.")
+    @DisplayName("Wenn ein nicht-Student auf die URL /studenten/landingPage/zeigeErgebnis zugreifen will, " +
+            "wird er zu GitHub Anmeldung redirected.")
     void test_ergebnisPageAnzeigenNichtStudent() throws Exception {
         MvcResult result = mvc.perform(get("/studenten/landingPage/zeigeErgebnis/1"))
                 .andExpect(status().is3xxRedirection())
@@ -110,7 +122,8 @@ public class StudentenControllerLandingPageTest {
     }
 
     @Test
-    @DisplayName("Wenn man 3 Tests nicht bestanden hat, soll ... mehr als 2 Tests nicht bestanden ... ausgegeben werden.")
+    @DisplayName("Wenn man 3 Tests nicht bestanden hat, soll ... mehr als 2 Tests nicht bestanden " +
+            "... ausgegeben werden.")
     @WithMockOAuth2User(roles = "STUDENT")
     void test_dreiTestsNichtBestanden() throws Exception {
         when(testService.getBearbeitbareTests()).thenReturn(List.of(studiTest));

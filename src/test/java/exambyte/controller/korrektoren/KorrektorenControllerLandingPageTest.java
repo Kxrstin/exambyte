@@ -14,16 +14,20 @@ import org.springframework.context.annotation.Import;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
-
 import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
+/** **/
 
 @WebMvcTest(KorrektorenControllerLandingPage.class)
 @Import({SecurityConfig.class, MethodSecurityConfig.class})
@@ -66,18 +70,21 @@ public class KorrektorenControllerLandingPageTest {
         when(abgabenService.getTestnamen()).thenReturn(testnamen);
         MvcResult result = mvc.perform(get("/korrektoren/landingPage"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("korrektoren/LandingPageKorrektoren"))
+                .andExpect(view().
+                        name("korrektoren/LandingPageKorrektoren"))
                 .andReturn();
         assertThat(result.getResponse().getContentAsString()).contains(testnamen);
     }
 
     @Test
     @WithMockOAuth2User(roles = "KORREKTOR")
-    @DisplayName("Die Seite /korrektoren/landingPage/zeigeAufgaben/BeispielTestName zeigt die richtigen Aufgaben an.")
+    @DisplayName("Die Seite /korrektoren/landingPage/zeigeAufgaben/BeispielTestName " +
+            "zeigt die richtigen Aufgaben an.")
     void test_04() throws Exception {
         when(abgabenService.getTestnamen()).thenReturn(testnamen);
         when(abgabenService.getAufgabenVonTest(any())).thenReturn(aufgaben);
-        MvcResult result = mvc.perform(get("/korrektoren/landingPage/zeigeAufgaben/BeispielTestName"))
+        MvcResult result = mvc.perform(
+                get("/korrektoren/landingPage/zeigeAufgaben/BeispielTestName"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("korrektoren/AufgabenPageKorrektoren"))
                 .andReturn();
@@ -86,14 +93,17 @@ public class KorrektorenControllerLandingPageTest {
 
     @Test
     @WithMockOAuth2User(roles = "KORREKTOR")
-    @DisplayName("Die Seite /korrektoren/landingPage/zeigeAbgaben/BeispielTestName/Aufgabe zeigt die richtigen Studi IDs an.")
+    @DisplayName("Die Seite /korrektoren/landingPage/zeigeAbgaben/BeispielTestName/Aufgabe " +
+            "zeigt die richtigen Studi IDs an.")
     void test_05() throws Exception {
-        when(abgabenService.getAbgabenIds("BeispielTestName", "Aufgabe")).thenReturn(id);
+        when(abgabenService.getAbgabenIds("BeispielTestName", "Aufgabe"))
+                .thenReturn(id);
         MvcResult result = mvc.perform(get("/korrektoren/landingPage/zeigeAbgaben/BeispielTestName/Aufgabe"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("korrektoren/AbgabenPageKorrektoren"))
                 .andReturn();
-        assertThat(result.getResponse().getContentAsString()).contains(List.of("1", "2", "3","4", "5", "6", "7", "8", "9"));
+        assertThat(result.getResponse().getContentAsString())
+                .contains(List.of("1", "2", "3", "4", "5", "6", "7", "8", "9"));
     }
 
     @Test
@@ -106,7 +116,10 @@ public class KorrektorenControllerLandingPageTest {
                 .andExpect(status().isOk())
                 .andExpect(view().name("korrektoren/AbgabeVonStudiPageKorrektoren"))
                 .andReturn();
-        assertThat(result.getResponse().getContentAsString()).contains("Was ist Onion Architektur?", "Onion Architektur ist...", "Maximale Punktzahl: ", "3");
+        assertThat(result.getResponse().getContentAsString())
+                .contains("Was ist Onion Architektur?",
+                        "Onion Architektur ist...",
+                        "Maximale Punktzahl: ", "3");
     }
 
     @Test

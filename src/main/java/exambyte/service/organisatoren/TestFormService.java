@@ -52,8 +52,7 @@ public class TestFormService {
     }
 
     public void saveTestFormDBWithNewZeitpunkten(TestFormular testForm) {
-        // Ohne JDBC kam es immer unerwartet dazu, dass die Einfügereihenfolge aller Daten automatisch falsch gemacht wurde, was ich anders nicht lösen konnte
-        jdbc.update("UPDATE test_formular SET startzeitpunkt = ?, endzeitpunkt = ?, ergebniszeitpunkt = ? WHERE test_formular.id = ?", new Object[] {testForm.getStartzeitpunkt(), testForm.getEndzeitpunkt(), testForm.getErgebniszeitpunkt(), testForm.getId()});
+        repository.updateZeitpunkte(testForm.getStartzeitpunkt(), testForm.getEndzeitpunkt(), testForm.getErgebniszeitpunkt(), testForm.getId());
     }
 
     public TestFormular saveTestFormDB(TestFormular testForm) {

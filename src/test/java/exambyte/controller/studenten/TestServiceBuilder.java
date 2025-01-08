@@ -3,13 +3,14 @@ package exambyte.controller.studenten;
 import exambyte.aggregates.studenten.StudiTest.StudiTest;
 import exambyte.aggregates.studenten.StudiTest.TestDaten;
 import exambyte.service.studenten.TestFragenService;
-
 import java.time.LocalDateTime;
 import java.util.List;
 
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
+
 import static org.mockito.Mockito.when;
+
+/** **/
 
 public class TestServiceBuilder {
     private final TestFragenService testService;
@@ -19,7 +20,8 @@ public class TestServiceBuilder {
     }
 
     public TestServiceBuilder withNextAndPrevAufgabe() {
-        when(testService.getTest(anyInt())).thenReturn(new StudiTest(0, new TestDaten(null, null, null, null, 0)));
+        when(testService.getTest(anyInt())).thenReturn(new StudiTest(0,
+                new TestDaten(null, null, null, null, 0)));
         return this;
     }
 
@@ -38,7 +40,7 @@ public class TestServiceBuilder {
         return this;
     }
 
-    public TestServiceBuilder isMCAufgabe(boolean mcAufgabe) {
+    public TestServiceBuilder isMcAufgabe(boolean mcAufgabe) {
         when(testService.isMCAufgabe(anyInt(), anyInt())).thenReturn(mcAufgabe);
         return this;
     }

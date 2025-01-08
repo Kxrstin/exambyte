@@ -13,19 +13,22 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.ActiveProfiles;
+import java.util.List;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.util.List;
-
 import static org.assertj.core.api.Assertions.assertThat;
+
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+/** **/
 
 @WebMvcTest(OrganisatorenController.class)
 @Import({SecurityConfig.class, MethodSecurityConfig.class})
@@ -42,7 +45,7 @@ public class OrganisatorenControllerTest {
 
     @Test
     @WithMockOAuth2User(login = "JoeSchmoe", roles = "ORGANISATOR")
-    @DisplayName("Die Organisatoren LandingPage ist unter /organisatoren/landingPage erreichbar")
+    @DisplayName("Organisatoren LandingPage ist unter /organisatoren/landingPage erreichbar")
     void test_01() throws Exception {
         mvc.perform(get("/organisatoren/landingPage"))
                 .andExpect(status().isOk());
@@ -79,7 +82,8 @@ public class OrganisatorenControllerTest {
 
     @Test
     @WithMockOAuth2User(login = "JoeSchmoe", roles = "ORGANISATOR")
-    @DisplayName("Post-Request auf /addFreitextFrage Seite redirected zu /organisatoren/testErstellen")
+    @DisplayName("Post-Request auf /addFreitextFrage Seite redirected zu " +
+            "/organisatoren/testErstellen")
     void test_05() throws Exception {
         mockTestFormMethoden();
         mockTestFormServiceMethoden();
@@ -90,7 +94,8 @@ public class OrganisatorenControllerTest {
 
     @Test
     @WithMockOAuth2User(login = "JoeSchmoe", roles = "ORGANISATOR")
-    @DisplayName("Aufruf von /organisatoren/testErstellen/updateMcFrage/id leitet einen wieder auf Test Erstellen zurück")
+    @DisplayName("Aufruf von /organisatoren/testErstellen/updateMcFrage/id leitet einen " +
+            "wieder auf Test Erstellen zurück")
     void test_06() throws Exception {
         mockTestFormMethoden();
         mockTestFormServiceMethoden();

@@ -1,4 +1,4 @@
-package exambyte.service.studenten;
+package exambyte.service.studenten.repository;
 
 import exambyte.aggregates.studenten.StudiTest.StudiTest;
 import org.springframework.data.repository.CrudRepository;
