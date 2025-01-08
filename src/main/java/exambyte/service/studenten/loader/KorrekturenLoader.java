@@ -1,4 +1,4 @@
-package exambyte.service.studenten;
+package exambyte.service.studenten.loader;
 
 import exambyte.aggregates.korrektoren.Abgabe;
 import exambyte.service.korrektoren.AbgabenRepo;

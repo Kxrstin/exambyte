@@ -1,7 +1,7 @@
 package exambyte.service.studenten;
 
 import exambyte.aggregates.studenten.StudiTest.StudiTest;
-import exambyte.service.studenten.repository.StudiTestRepo;
+import exambyte.persistence.studenten.StudiTestRepo;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

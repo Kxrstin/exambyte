@@ -2,8 +2,8 @@ package exambyte.service.studenten;
 
 import exambyte.aggregates.korrektoren.Abgabe;
 import exambyte.aggregates.studenten.StudiTest.StudiTest;
-import exambyte.service.organisatoren.TestFormRepo;
-import exambyte.service.studenten.repository.StudiTestRepo;
+import exambyte.service.studenten.loader.KorrekturenLoader;
+import exambyte.service.studenten.repository.StudiTestRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -15,40 +15,34 @@ import java.util.List;
 
 @Service
 public class TestFragenService {
-    private final StudiTestRepo studiTestRepo;
-    private final JdbcTemplate jdbc;
+    private final StudiTestRepository studiTestRepository;
     private final KorrekturenLoader korrekturenLoader;
-    private final TestFormRepo testFormRepo;
 
     @Autowired
-    public TestFragenService(StudiTestRepo testRepo, JdbcTemplate jdbc, KorrekturenLoader korrekturenLoader, TestFormRepo testFormRepo) {
-        this.studiTestRepo = testRepo;
-        this.jdbc = jdbc;
+    public TestFragenService(StudiTestRepository testRepository, JdbcTemplate jdbc, KorrekturenLoader korrekturenLoader) {
+        this.studiTestRepository = testRepository;
         this.korrekturenLoader = korrekturenLoader;
-        this.testFormRepo = testFormRepo;
     }
 
     public StudiTest save(StudiTest studiTest) {
-        // Ohne die nächste Zeile, kommen immer Fehlermeldungen, da Spring Data die ID zu spät speichert
-        jdbc.update("INSERT INTO studi_test (test_daten, id) VALUES (?, ?)",studiTest.getId(), studiTest.getId());
-        return studiTestRepo.save(studiTest);
+        return studiTestRepository.saveNewTest(studiTest);
     }
 
     public StudiTest getTest(int testId) {
-        return studiTestRepo.findById(testId);
+        return studiTestRepository.findById(testId);
     }
     public boolean hasTestWithId(int testId) {
-       return studiTestRepo.existsById(testId);
+       return studiTestRepository.existsById(testId);
     }
     public List<StudiTest> getBearbeitbareTests() {
         LocalDateTime now = LocalDateTime.now();
-        return studiTestRepo.findAll().stream()
+        return studiTestRepository.findAll().stream()
                     .filter(test -> test.isBearbeitbar(now))
                     .toList();
     }
     public List<StudiTest> getAbgelaufeneTests() {
         LocalDateTime now = LocalDateTime.now();
-        return studiTestRepo.findAll().stream()
+        return studiTestRepository.findAll().stream()
                 .filter(test -> test.isAbgelaufen(now))
                 .toList();
     }
@@ -57,28 +51,28 @@ public class TestFragenService {
     // Testinformationen parsen
     public String parseTitel(int id) {
         try {
-            return "Titel: " + studiTestRepo.findById(id).getTitel();
+            return "Titel: " + studiTestRepository.findById(id).getTitel();
         } catch (NullPointerException e) {
             return "Kein Studi vorhanden";
         }
     }
     public String parseStart(int id) {
         try {
-            return "Startzeitpunkt: " + parseTime(studiTestRepo.findById(id).getStartzeitpunkt());
+            return "Startzeitpunkt: " + parseTime(studiTestRepository.findById(id).getStartzeitpunkt());
         } catch (NullPointerException e) {
             return "Kein Studi vorhanden";
         }
     }
     public String parseEnde(int id) {
         try {
-            return "Endzeitpunkt: " + parseTime(studiTestRepo.findById(id).getEndzeitpunkt());
+            return "Endzeitpunkt: " + parseTime(studiTestRepository.findById(id).getEndzeitpunkt());
         } catch (NullPointerException e) {
             return "Kein Studi vorhanden";
         }
     }
     public String parseErgebnis(int id) {
         try {
-            return "Ergebniszeitpunkt: " + parseTime(studiTestRepo.findById(id).getErgebnisZeitpunkt());
+            return "Ergebniszeitpunkt: " + parseTime(studiTestRepository.findById(id).getErgebnisZeitpunkt());
         } catch (NullPointerException e) {
             return "Kein Studi vorhanden";
         }
@@ -88,60 +82,60 @@ public class TestFragenService {
     // Test Infos
     public String getAufgabe(int id, int nr) {
         try {
-            return studiTestRepo.findById(id).getAufgabe(nr);
+            return studiTestRepository.findById(id).getAufgabe(nr);
         } catch (Exception e) {
             return "Kein Studi vorhanden";
         }
     }
     public int getPunktzahl(int id, int nr) {
         try {
-            return studiTestRepo.findById(id).getPunktzahl(nr);
+            return studiTestRepository.findById(id).getPunktzahl(nr);
         } catch (NullPointerException e) {
             return 0;
         }
     }
     public boolean isFreitextAufgabe(int id, int nr) {
         try {
-            return studiTestRepo.findById(id).isFreitextAufgabe(nr);
+            return studiTestRepository.findById(id).isFreitextAufgabe(nr);
         } catch (NullPointerException e) {
             return false;
         }
     }
     public boolean isMCAufgabe(int id, int nr) {
         try {
-            return studiTestRepo.findById(id).isMCAufgabe(nr);
+            return studiTestRepository.findById(id).isMCAufgabe(nr);
         } catch (NullPointerException e) {
             return false;
         }
     }
     public List<String> getAntwortMoeglichkeiten(int id, int nr) {
         try {
-            return studiTestRepo.findById(id).getAntwortmoeglichkeiten(nr);
+            return studiTestRepository.findById(id).getAntwortmoeglichkeiten(nr);
         } catch (NullPointerException e) {
             return new ArrayList<>();
         }
     }
     public int getAnzahlAufgaben(int id) {
         try {
-            return studiTestRepo.findById(id).getAnzahlAufgaben();
+            return studiTestRepository.findById(id).getAnzahlAufgaben();
         } catch (NullPointerException e) {
             return 0;
         }
     }
     public boolean isAbgelaufen(int testId) {
-        return studiTestRepo.findById(testId).isAbgelaufen(LocalDateTime.now());
+        return studiTestRepository.findById(testId).isAbgelaufen(LocalDateTime.now());
     }
 
 
     // Antworten speichern
     public void addAntwort(int testId, int aufgabeId, String antwort, int studiId) {
-        StudiTest test = studiTestRepo.findById(testId);
+        StudiTest test = studiTestRepository.findById(testId);
         test.addAntwort(antwort, aufgabeId, studiId);
-        studiTestRepo.save(test);
+        studiTestRepository.save(test);
     }
     public String getAntwort(int testId, int aufgabeId, int studiId) {
         try {
-            return studiTestRepo.findById(testId).getAntwort(aufgabeId, studiId);
+            return studiTestRepository.findById(testId).getAntwort(aufgabeId, studiId);
         } catch (NullPointerException e) {
             return "";
         }
@@ -253,6 +247,6 @@ public class TestFragenService {
     }
 
     public LocalDateTime getErgebnisZeitpunkt(int testId) {
-        return studiTestRepo.findById(testId).getErgebnisZeitpunkt();
+        return studiTestRepository.findById(testId).getErgebnisZeitpunkt();
     }
 }
