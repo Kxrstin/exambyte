@@ -2,7 +2,6 @@ package exambyte.service.organisatoren;
 
 import exambyte.aggregates.organisatoren.TestFormular;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -11,13 +10,11 @@ import java.util.*;
 @Service
 public class TestFormService {
     private TestFormRepo repository;
-    private JdbcTemplate jdbc;
     private Map<Integer, TestFormular> zwischenspeicher = new HashMap<>();
 
     @Autowired
-    public TestFormService(TestFormRepo repository, JdbcTemplate jdbc) {
+    public TestFormService(TestFormRepo repository) {
         this.repository = repository;
-        this.jdbc = jdbc;
     }
 
     public TestFormular getTestFormById(Integer id) {
