@@ -1,6 +1,7 @@
 package exambyte.service.korrektoren;
 
 import exambyte.aggregates.korrektoren.Abgabe;
+import exambyte.service.korrektoren.repository.AbgabenRepo;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -74,5 +75,8 @@ public class AbgabenService {
 
     public Abgabe getAbgabe(int id) {
         return abgabenRepo.findById(id);
+    }
+    public void save(Abgabe abgabe) {
+        abgabenRepo.save(abgabe);
     }
 }

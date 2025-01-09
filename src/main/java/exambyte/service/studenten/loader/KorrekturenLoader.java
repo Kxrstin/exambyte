@@ -1,7 +1,7 @@
 package exambyte.service.studenten.loader;
 
 import exambyte.aggregates.korrektoren.Abgabe;
-import exambyte.service.korrektoren.AbgabenRepo;
+import exambyte.service.korrektoren.repository.AbgabenRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

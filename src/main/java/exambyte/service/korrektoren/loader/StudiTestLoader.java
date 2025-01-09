@@ -1,7 +1,9 @@
-package exambyte.service.korrektoren;
+package exambyte.service.korrektoren.loader;
 
 import exambyte.aggregates.korrektoren.Abgabe;
 import exambyte.aggregates.studenten.StudiTest.StudiTest;
+import exambyte.service.korrektoren.AbgabenService;
+import exambyte.service.korrektoren.repository.AbgabenRepo;
 import exambyte.service.studenten.TestFragenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -14,17 +16,18 @@ import java.util.List;
 public class StudiTestLoader {
     private final TestFragenService studiService;
     private Integer lastSeen = Integer.MIN_VALUE;
-    private final AbgabenRepo abgabenRepo;
+    private final AbgabenService abgabenService;
 
     @Autowired
-    public StudiTestLoader(TestFragenService studiService, AbgabenRepo abgabenRepo) {
+    public StudiTestLoader(TestFragenService studiService, AbgabenService abgabenService) {
         this.studiService = studiService;
-        this.abgabenRepo = abgabenRepo;
+        this.abgabenService = abgabenService;
     }
 
     @Scheduled(fixedDelay = 10000)
     public void loadKorrigierbareStudiTests() {
         try {
+            System.out.println("Suche nach Abgaben");
             List<StudiTest> neueStudiTests = studiService.getAbgelaufeneTests().stream()
                     .filter(test -> test.getId() > lastSeen)
                     .toList();
@@ -36,7 +39,7 @@ public class StudiTestLoader {
                 for (Integer aufgabenId : studiTest.getAufgabenIds().stream().filter(studiTest::isFreitextAufgabe).toList())
                 {
                     for (Integer studiId : studiTest.getStudiIdsVonAntworten(aufgabenId)) {
-                        abgabenRepo.save(new Abgabe(null,
+                        abgabenService.save(new Abgabe(null,
                                 studiTest.getTitel(),
                                 studiTest.getAufgabe(aufgabenId),
                                 studiId,

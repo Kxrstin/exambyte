@@ -1,11 +1,9 @@
 package exambyte.aggregates.korrektoren;
 
 import exambyte.annotations.AggregateRoot;
-import org.springframework.data.annotation.Id;
 
 @AggregateRoot
 public class Abgabe {
-    @Id
     private final Integer id;
     private final String studiantwort;
     private final String aufgabe;
