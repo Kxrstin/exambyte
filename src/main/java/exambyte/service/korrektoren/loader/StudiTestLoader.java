@@ -40,7 +40,7 @@ public class StudiTestLoader {
                     for (Integer studiId : studiTest.getStudiIdsVonAntworten(aufgabenId)) {
                         abgabenService.save(new Abgabe(null,
                                 studiTest.getTitel(),
-                                studiTest.getAufgabe(aufgabenId),
+                                studiTest.getAufgabenstellung(aufgabenId) + "#%#" + studiTest.getTitel(aufgabenId),
                                 studiId,
                                 aufgabenId,
                                 studiTest.getAntwort(aufgabenId, studiId),

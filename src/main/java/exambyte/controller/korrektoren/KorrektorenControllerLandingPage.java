@@ -43,7 +43,7 @@ public class KorrektorenControllerLandingPage {
         if(abgabenService.getTestnamen() == null){
             model.addAttribute("aufgaben", new ArrayList<>());
         } else {
-            model.addAttribute("aufgaben", abgabenService.getAufgabenVonTest(testname.replace('_', ' ')));
+            model.addAttribute("aufgaben", abgabenService.getAufgabenTitelVonTest(testname.replace('_', ' ')));
         }
         return "korrektoren/AufgabenPageKorrektoren";
     }

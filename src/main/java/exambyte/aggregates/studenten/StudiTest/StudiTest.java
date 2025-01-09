@@ -62,12 +62,26 @@ public final class StudiTest {
                 .findFirst()
                 .orElse("");
     }
+    public String getAufgabenstellung(int aufgabenId)    {
+        return testAufgaben.stream()
+                .filter(aufgabe -> aufgabe.getId() == aufgabenId)
+                .map(TestAufgabe::getAufgabenstellung)
+                .findFirst()
+                .orElse("");
+    }
     public int getPunktzahl(int aufgabenId) {
         return testAufgaben.stream()
                 .filter(aufgabe -> aufgabe.getId() == aufgabenId)
                 .map(TestAufgabe::getPunktzahl)
                 .findFirst()
                 .orElse(-1);
+    }
+    public String getTitel(int aufgabenId) {
+        return testAufgaben.stream()
+                .filter(aufgabe -> aufgabe.getId() == aufgabenId)
+                .map(TestAufgabe::getTitel)
+                .findFirst()
+                .orElse("");
     }
     public boolean isFreitextAufgabe(int aufgabenId) {
         return testAufgaben.stream()
@@ -189,7 +203,6 @@ public final class StudiTest {
                 .orElse("");
     }
 
-    // Die braucht die Persistenzschicht
     public void setMcAntworten(List<McAntwort> antworten) {
         this.mcAntworten = antworten;
     }

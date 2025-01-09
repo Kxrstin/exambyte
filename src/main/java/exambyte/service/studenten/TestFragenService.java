@@ -88,7 +88,7 @@ public class TestFragenService {
     }
     public String getAufgabenstellung(int id, int nr) {
         try {
-            return studiTestRepository.findById(id).getAufgabe(nr);
+            return studiTestRepository.findById(id).getAufgabenstellung(nr);
         } catch (Exception e) {
             return "Kein Studi vorhanden";
         }
@@ -254,5 +254,9 @@ public class TestFragenService {
 
     public LocalDateTime getErgebnisZeitpunkt(int testId) {
         return studiTestRepository.findById(testId).getErgebnisZeitpunkt();
+    }
+
+    public String getAufgabenTitel(Integer testId, Integer aufgabenId) {
+        return studiTestRepository.findById(testId).getTitel(aufgabenId);
     }
 }

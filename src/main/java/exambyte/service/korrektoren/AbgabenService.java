@@ -26,15 +26,15 @@ public class AbgabenService {
         }
         return testnamen;
     }
-    public List<String> getAufgabenVonTest(String testname) {
+    public List<String> getAufgabenTitelVonTest(String testname) {
         List<String> aufgaben = new ArrayList<>();
         List<Abgabe> abgaben = abgabenRepo.findAll().stream()
                 .filter(abgabe -> abgabe.getStudiTestTitel().equals(testname))
                 .filter(abgabe -> abgabe.getFeedback() == null && abgabe.getPunktzahl() == null)
                 .toList();
         for(Abgabe abgabe: abgaben) {
-            if(!aufgaben.contains(abgabe.getAufgabe())) {
-                aufgaben.add(abgabe.getAufgabe());
+            if(!aufgaben.contains(abgabe.getAufgabenTitel())) {
+                aufgaben.add(abgabe.getAufgabenTitel());
             }
         }
         return aufgaben;
@@ -56,7 +56,7 @@ public class AbgabenService {
     public List<Integer> getAbgabenIds(String testname, String aufgabe) {
         return abgabenRepo.findAll().stream()
                 .filter(abgabe -> abgabe.getStudiTestTitel().equals(testname))
-                .filter(abgabe -> abgabe.getAufgabe().equals(aufgabe))
+                .filter(abgabe -> abgabe.getAufgabenTitel().equals(aufgabe))
                 .filter(abgabe -> abgabe.getFeedback() == null && abgabe.getPunktzahl() == null)
                 .map(Abgabe::getId)
                 .toList();

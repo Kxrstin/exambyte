@@ -7,14 +7,31 @@ import java.util.List;
 @Wertobjekt
 public class McAufgabe implements TestAufgabe {
     private final Integer id;
-
     private final String aufgabe;
+    private String aufgabenstellung;
+    private final String titel;
     private final List<AntwortMoeglichkeiten> antwortMoeglichkeiten;
     private final int punktzahl;
     private final Integer studiTest;
 
     public McAufgabe(String aufgabe, List<AntwortMoeglichkeiten> antwortMoeglichkeiten, int punktzahl, Integer id) {
         this.aufgabe = aufgabe;
+        String[] aufgabeMitTitel = aufgabe.split("#%#");
+        switch(aufgabeMitTitel.length) {
+            case 1:
+                this.titel = "";
+                this.aufgabenstellung = aufgabeMitTitel[0];
+                break;
+
+            case 2:
+                this.aufgabenstellung = aufgabeMitTitel[0];
+                this.titel = aufgabeMitTitel[1];
+                break;
+
+            default:
+                this.titel = "";
+                this.aufgabenstellung = "";
+        }
         this.antwortMoeglichkeiten = antwortMoeglichkeiten;
         this.punktzahl = punktzahl;
         this.id = id;
@@ -23,6 +40,9 @@ public class McAufgabe implements TestAufgabe {
 
     public McAufgabe(String aufgabe, List<AntwortMoeglichkeiten> antwortMoeglichkeiten, int punktzahl, Integer id, Integer studiTest) {
         this.aufgabe = aufgabe;
+        String[] aufgabeMitTitel = aufgabe.split("#%#");
+        this.aufgabenstellung = aufgabeMitTitel[0];
+        this.titel = aufgabeMitTitel[1];
         this.antwortMoeglichkeiten = antwortMoeglichkeiten;
         this.punktzahl = punktzahl;
         this.id = id;
@@ -61,5 +81,11 @@ public class McAufgabe implements TestAufgabe {
                 punktzahl,
                 id,
                 studiTest);
+    }
+    public String getTitel() {
+        return titel;
+    }
+    public String getAufgabenstellung() {
+        return aufgabenstellung;
     }
 }
