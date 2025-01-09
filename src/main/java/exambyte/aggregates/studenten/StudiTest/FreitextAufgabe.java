@@ -1,18 +1,14 @@
 package exambyte.aggregates.studenten.StudiTest;
 
-import org.springframework.data.annotation.PersistenceCreator;
-import org.springframework.data.annotation.Id;
+import exambyte.annotations.Wertobjekt;
 
+@Wertobjekt
 public class FreitextAufgabe implements TestAufgabe {
-    //@Id
     private final Integer id;
     private final String aufgabe;
     private final int punktzahl;
+    private final Integer studiTest;
 
-    // TODO: Kein Wertobjekt mehr
-    private Integer studiTest;
-
-    //@PersistenceCreator
     public FreitextAufgabe(String aufgabe, int punktzahl, Integer id, Integer studiTest) {
         this.aufgabe = aufgabe;
         this.punktzahl = punktzahl;

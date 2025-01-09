@@ -20,13 +20,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 @ActiveProfiles("test")
 public class StudiTestRepoTest {
     @Autowired
-    StudiTestDataRepository repo;
+    TestFragenService testFragenService;
 
     @Test
     @DisplayName("Die getTest Methode gibt den korrekten Test mit den korrekten Test Daten zurück.")
     @Sql({"clear_data.sql", "add_studi_test_mit_testdaten.sql"})
     void test_findById() {
-        StudiTest testAusDb = repo.findById(0);
+        StudiTest testAusDb = testFragenService.getTest(0);
 
         assertThat(testAusDb.getId()).isEqualTo(0);
         assertThat(testAusDb.getTestDaten().getEndzeitpunkt())
@@ -42,7 +42,7 @@ public class StudiTestRepoTest {
     @DisplayName("Die getTest Methode gibt den korrekten Test mit den korrekten Test Daten zurück.")
     @Sql({"clear_data.sql", "add_studi_test_mit_testdaten.sql", "add_freitext_aufgabe.sql"})
     void test_addAntwortZuFreitextAufgabe() {
-        StudiTest testAusDb = repo.findById(0);
+        StudiTest testAusDb = testFragenService.getTest(0);
         List<Integer> aufgabenIds = testAusDb.getAufgabenIds();
         testAusDb.addAntwort("Dies ist eine Beispielantwort",
                 aufgabenIds.getFirst(), 1234);
@@ -55,7 +55,7 @@ public class StudiTestRepoTest {
     @DisplayName("Die getTest Methode gibt den korrekten Test mit den korrekten Test Daten zurück.")
     @Sql({"clear_data.sql", "add_studi_test_mit_testdaten.sql", "add_mc_aufgabe.sql"})
     void test_addAntwortZuMcAufgabe() {
-        StudiTest testAusDb = repo.findById(0);
+        StudiTest testAusDb = testFragenService.getTest(0);
         List<Integer> aufgabenIds = testAusDb.getAufgabenIds();
         testAusDb.addAntwort("[Dies ist eine Beispielantwort]",
                 aufgabenIds.getFirst(), 1234);

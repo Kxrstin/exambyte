@@ -1,17 +1,17 @@
 package exambyte.aggregates.studenten.StudiTest;
 
+import exambyte.annotations.Wertobjekt;
+
 import java.util.List;
 
+@Wertobjekt
 public class McAufgabe implements TestAufgabe {
-    // TODO Kein Wertobjekt mehr
-    //@Id
-    private Integer id;
+    private final Integer id;
 
     private final String aufgabe;
     private final List<AntwortMoeglichkeiten> antwortMoeglichkeiten;
     private final int punktzahl;
-    // TODO Kein Wertobjekt mehr
-    private Integer studiTest;
+    private final Integer studiTest;
 
     public McAufgabe(String aufgabe, List<AntwortMoeglichkeiten> antwortMoeglichkeiten, int punktzahl, Integer id) {
         this.aufgabe = aufgabe;
@@ -21,8 +21,18 @@ public class McAufgabe implements TestAufgabe {
         this.studiTest = null;
     }
 
-    public void setStudiTest(Integer studiTest) {
-        this.studiTest = studiTest;
+    public McAufgabe(String aufgabe, List<AntwortMoeglichkeiten> antwortMoeglichkeiten, int punktzahl, Integer id, Integer studiTest) {
+        this.aufgabe = aufgabe;
+        this.antwortMoeglichkeiten = antwortMoeglichkeiten;
+        this.punktzahl = punktzahl;
+        this.id = id;
+        this.studiTest = null;
+    }
+
+    public McAufgabe setStudiTest(Integer studiTest) {
+        return new McAufgabe(aufgabe,
+                antwortMoeglichkeiten,
+                punktzahl, id, studiTest);
     }
     public String getAufgabe() {
         return aufgabe;
@@ -45,7 +55,11 @@ public class McAufgabe implements TestAufgabe {
     public boolean isFreitextAufgabe() {
         return false;
     }
-    public void setId(int id) {
-        this.id = id;
+    public McAufgabe setId(int id) {
+        return new McAufgabe(aufgabe,
+                antwortMoeglichkeiten,
+                punktzahl,
+                id,
+                studiTest);
     }
 }

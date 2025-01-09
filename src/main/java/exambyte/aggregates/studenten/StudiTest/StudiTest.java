@@ -9,22 +9,18 @@ import java.util.*;
 
 @AggregateRoot
 public final class StudiTest {
-    //@Id
     private Integer id;
     private final TestDaten testDaten;
     private List<FreitextAufgabe> freitextAufgaben = new ArrayList<>();
     private List<McAufgabe> mcAufgaben = new ArrayList<>();
     private List<McAntwort> mcAntworten = new ArrayList<>();
     private List<FreitextAntwort> freitextAntworten = new ArrayList<>();
-
-    //@Transient
     private final List<TestAufgabe> testAufgaben = new ArrayList<>();
 
     public StudiTest(Integer id, TestDaten testDaten) {
         this(id, testDaten, null, null);
     }
 
-    //@PersistenceCreator
     public StudiTest(Integer id, TestDaten testDaten, List<McAufgabe> mcAufgaben, List<FreitextAufgabe> freitextAufgaben) {
         this.id = id;
         this.testDaten = testDaten;
@@ -95,7 +91,7 @@ public final class StudiTest {
         return List.of();
     }
     public Integer getFirstAufgabe() {
-        return testAufgaben.get(0).getId();
+        return testAufgaben.getFirst().getId();
     }
     public Integer getNextAufgabe(int aufgabeId) {
         if(testAufgaben.size() == 0) {
@@ -150,7 +146,7 @@ public final class StudiTest {
                 .orElse(null);
 
         if(mcAntwort != null) {
-            mcAntwort.addAntwort(antwort);
+           mcAntwort.addAntwort(antwort);
             return;
         }
 
@@ -200,13 +196,6 @@ public final class StudiTest {
     public void setFreitextAntworten(List<FreitextAntwort> antworten) {
         this.freitextAntworten = antworten;
     }
-
-    public void setMcAufgaben(List<McAufgabe> mcAufgaben) {
-        this.mcAufgaben = mcAufgaben;
-    }
-    public void setFreitextAufgaben(List<FreitextAufgabe> freitextAufgaben) {
-        this.freitextAufgaben = freitextAufgaben;
-    }
     public List<Integer> getStudiIdsVonAntworten(Integer aufgabenId) {
         List<Integer> studiIdFallsFreitextAufgabe = freitextAntworten.stream()
                 .filter(antwort -> antwort.getAufgabeId().equals(aufgabenId))
@@ -249,11 +238,6 @@ public final class StudiTest {
                 .map(McAntwort::getId)
                 .findFirst()
                 .orElse(null);
-    }
-
-    // TODO: Das gehört in einen anderen Service aber nicht hier hin
-    public boolean testBestanden() {
-        return true;
     }
 
     public TestDaten getTestDaten() {

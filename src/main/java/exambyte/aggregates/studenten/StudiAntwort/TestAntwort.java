@@ -6,5 +6,4 @@ interface TestAntwort {
     Integer getStudiId();
     Integer getAufgabeId();
     String getAntworten();
-    void removeAntwort();
 }

@@ -31,7 +31,7 @@ public class TestServiceBuilder {
     }
 
     public TestServiceBuilder withAufgabe(String aufgabe) {
-        when(testService.getAufgabe(anyInt(), anyInt())).thenReturn(aufgabe);
+        when(testService.getAufgabenstellung(anyInt(), anyInt())).thenReturn(aufgabe);
         return this;
     }
 

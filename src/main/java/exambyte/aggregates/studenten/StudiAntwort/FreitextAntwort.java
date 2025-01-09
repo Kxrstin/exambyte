@@ -1,27 +1,27 @@
 package exambyte.aggregates.studenten.StudiAntwort;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.annotation.PersistenceCreator;
-
 public class FreitextAntwort implements TestAntwort{
-    //@Id
-    private Integer id;
+    private final Integer id;
+    // TODO final
     private String antworten;
-    private Integer studiTest;
-    private Integer aufgabeId;
-    private Integer studiId;
+    private final Integer studiTest;
+    private final Integer aufgabeId;
+    private final Integer studiId;
 
-    //@PersistenceCreator
-    public FreitextAntwort(Integer id) {
-        this.id = id;
-    }
-
-    public FreitextAntwort(Integer id, Integer studiTest, Integer aufgabeId, Integer studiId)
-    {
+    public FreitextAntwort(Integer id, Integer studiTest, Integer aufgabeId, Integer studiId) {
         this.id = id;
         this.studiTest = studiTest;
         this.aufgabeId = aufgabeId;
         this.studiId = studiId;
+        this.antworten = "";
+    }
+
+    public FreitextAntwort(Integer id, Integer studiTest, Integer aufgabeId, Integer studiId, String antworten) {
+        this.id = id;
+        this.studiTest = studiTest;
+        this.aufgabeId = aufgabeId;
+        this.studiId = studiId;
+        this.antworten = antworten;
     }
 
     public void addAntwort(String antwort) {
@@ -30,20 +30,14 @@ public class FreitextAntwort implements TestAntwort{
     public Integer getStudiId() {
         return studiId;
     }
-
     public boolean isFreitextAufgabe() {
         return true;
-    }
-    public void removeAntwort() {
-        this.antworten = "";
     }
     public String getAntworten() {
         return antworten;
     }
     public Integer getAufgabeId() { return aufgabeId; }
     public Integer getId() { return id; }
-    public void setAufgabeId(int aufgabeId) { this.aufgabeId = aufgabeId;}
-
     public Integer getStudiTest() {
         return studiTest;
     }

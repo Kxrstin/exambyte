@@ -1,28 +1,21 @@
 package exambyte.aggregates.studenten.StudiAntwort;
 
-//import org.springframework.data.annotation.Id;
-//import org.springframework.data.annotation.PersistenceCreator;
-//import org.springframework.data.annotation.Transient;
+import exambyte.annotations.Wertobjekt;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class McAntwort implements TestAntwort{
-    //@Id
-    private Integer id;
-    private String antworten ="";
-    private Integer aufgabeId;
-    private Integer studiId;
-    private Integer studiTest;
+    private final Integer id;
 
-    //@Transient
-    private List<String> antwortWahl = new ArrayList<>();
+    // TODO final
+    private String antworten;
+    private final Integer aufgabeId;
+    private final Integer studiId;
+    private final Integer studiTest;
 
-    //@PersistenceCreator
-    public McAntwort(Integer id) {
-        this.id = id;
-    }
+    private final List<String> antwortWahl;
 
     public McAntwort(Integer id, Integer studiTest, Integer aufgabeId, Integer studiId)
     {
@@ -30,6 +23,18 @@ public class McAntwort implements TestAntwort{
         this.studiTest = studiTest;
         this.aufgabeId = aufgabeId;
         this.studiId = studiId;
+        this.antworten = "";
+        this.antwortWahl = new ArrayList<>();
+    }
+
+    public McAntwort(Integer id, Integer studiTest, Integer aufgabeId, Integer studiId, String antworten, List<String> antwortWahl)
+    {
+        this.id = id;
+        this.studiTest = studiTest;
+        this.aufgabeId = aufgabeId;
+        this.studiId = studiId;
+        this.antworten = antworten;
+        this.antwortWahl = antwortWahl;
     }
 
     public void addAntwort(String antwort) {
@@ -41,31 +46,16 @@ public class McAntwort implements TestAntwort{
     public Integer getId(){
         return id;
     }
-
     public boolean isFreitextAufgabe() {
         return false;
     }
-
     public Integer getStudiId() {
         return studiId;
-    }
-
-    public void removeAntwort(String antwort) {
-        antwortWahl.remove(antwort);
-        antworten = antwortWahl.toString();
     }
     public String getAntworten() {
         return antworten;
     }
-
-    @Override
-    public void removeAntwort() {
-
-    }
-
-    public void setAufgabeId(int aufgabeId) { this.aufgabeId = aufgabeId;}
     public Integer getAufgabeId() { return aufgabeId; }
-
     public Integer getStudiTest() {
         return studiTest;
     }
