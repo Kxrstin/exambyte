@@ -35,8 +35,7 @@ public class StudiTestLoader {
             {
                 lastSeen = studiTest.getId();
 
-                for (Integer aufgabenId : studiTest.getAufgabenIds().stream().filter(studiTest::isFreitextAufgabe).toList())
-                {
+                for (Integer aufgabenId : studiTest.getAufgabenIds().stream().filter(studiTest::isFreitextAufgabe).toList()) {
                     for (Integer studiId : studiTest.getStudiIdsVonAntworten(aufgabenId)) {
                         abgabenService.save(new Abgabe(null,
                                 studiTest.getTitel(),

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.classes;
+import static com.tngtech.archunit.library.Architectures.onionArchitecture;
 
 @AnalyzeClasses(packagesOf = ExambyteProjektApplication.class)
 public class ArchRuleTests {
@@ -25,13 +26,13 @@ public class ArchRuleTests {
 
 
     // TODO: Fehler fixen
-//    @ArchTest
-//    private final ArchRule onionArchitecture = onionArchitecture()
-//            .domainModels("..aggregates..")
-//            .applicationServices("..service..")
-//            .domainServices("..domainService..")
-//            .adapter("web", "..controller..")
-//            .adapter("persistence", "..persistence..");
+    @ArchTest
+    private final ArchRule onionArchitecture = onionArchitecture()
+            .domainModels("..aggregates..")
+            .applicationServices("..service..")
+            .domainServices("..domainService..")
+            .adapter("web", "..controller..")
+            .adapter("persistence", "..persistence..");
 
 //    @ArchTest
 //    private final ArchRule jedesAggregatRootIstAnnotiert = classes()

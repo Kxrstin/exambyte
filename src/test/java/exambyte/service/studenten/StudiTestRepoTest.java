@@ -1,7 +1,8 @@
 package exambyte.service.studenten;
 
 import exambyte.aggregates.studenten.StudiTest.StudiTest;
-import exambyte.persistence.studenten.repository.StudiTestDataRepository;
+import exambyte.service.studenten.loader.KorrekturenLoader;
+import exambyte.service.studenten.repository.StudiTestRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,12 +16,16 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 /** **/
 
-@SpringBootTest // Mit DataJdbcTest gab es Probleme mit dem kompilieren
+@SpringBootTest// Mit DataJdbcTest gab es Probleme mit dem kompilieren
                 // der Flyway Versionen, die ich nicht beheben konnte.
 @ActiveProfiles("test")
 public class StudiTestRepoTest {
-    @Autowired
     TestFragenService testFragenService;
+
+    @Autowired
+    public StudiTestRepoTest(StudiTestRepository repo, KorrekturenLoader loader) {
+        this.testFragenService = new TestFragenService(repo, loader);
+    }
 
     @Test
     @DisplayName("Die getTest Methode gibt den korrekten Test mit den korrekten Test Daten zurück.")

@@ -18,7 +18,7 @@ public class TestFragenService {
     private final StudiTestRepository studiTestRepository;
     private final KorrekturenLoader korrekturenLoader;
 
-    public TestFragenService(StudiTestRepository testRepository, JdbcTemplate jdbc, KorrekturenLoader korrekturenLoader) {
+    public TestFragenService(StudiTestRepository testRepository, KorrekturenLoader korrekturenLoader) {
         this.studiTestRepository = testRepository;
         this.korrekturenLoader = korrekturenLoader;
     }
