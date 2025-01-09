@@ -19,7 +19,7 @@
         </h1>
 
         <span th:if="${abgabeVorhanden}">
-            <p> Aufgabe: <span th:text="${abgabe.getAufgabe()}"> Was ist 2 + 2? </span></p>
+            <p> Aufgabe: <span th:text="${abgabe.getAufgabenstellung()}"> Was ist 2 + 2? </span></p>
             <p> Antwort: <span th:text="${abgabe.getStudiantwort()}"> 4 </span></p>
             <p> Maximale Punktzahl: <span th:text="${abgabe.getMaxPunktzahl()}"> 2 </span> Punkte</p>
             <form method="post" th:action="@{/korrektoren/landingPage/zeigeAbgabe/{abgabeId}(abgabeId=${abgabeId})}" class="form-check">

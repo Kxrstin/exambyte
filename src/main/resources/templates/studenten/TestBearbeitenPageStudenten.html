@@ -23,6 +23,8 @@
         ExamByte - Testbearbeitung
     </h1>
 
+    <p class="aufgabenstellung" th:text="${aufgabenTitel}"> Titel der Aufgabe</p>
+
     <span th:if="${freitextFrage}">
             <form class="form-check" method="post" th:action="@{/studenten/testBearbeitung/{id}/{aufgabe}(id=${id}, aufgabe=${aufgabe})}">
                 <label class="aufgabenstellung" for="idfreitextfrage" th:text="${aufgabenstellung}"> Fragestellung: </label> <br>

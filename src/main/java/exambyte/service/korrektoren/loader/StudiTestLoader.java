@@ -27,7 +27,6 @@ public class StudiTestLoader {
     @Scheduled(fixedDelay = 10000)
     public void loadKorrigierbareStudiTests() {
         try {
-            System.out.println("Suche nach Abgaben");
             List<StudiTest> neueStudiTests = studiService.getAbgelaufeneTests().stream()
                     .filter(test -> test.getId() > lastSeen)
                     .toList();
@@ -36,12 +35,11 @@ public class StudiTestLoader {
             {
                 lastSeen = studiTest.getId();
 
-                for (Integer aufgabenId : studiTest.getAufgabenIds().stream().filter(studiTest::isFreitextAufgabe).toList())
-                {
+                for (Integer aufgabenId : studiTest.getAufgabenIds().stream().filter(studiTest::isFreitextAufgabe).toList()) {
                     for (Integer studiId : studiTest.getStudiIdsVonAntworten(aufgabenId)) {
                         abgabenService.save(new Abgabe(null,
                                 studiTest.getTitel(),
-                                studiTest.getAufgabe(aufgabenId),
+                                studiTest.getAufgabenstellung(aufgabenId) + "#%#" + studiTest.getTitel(aufgabenId),
                                 studiId,
                                 aufgabenId,
                                 studiTest.getAntwort(aufgabenId, studiId),
@@ -52,6 +50,7 @@ public class StudiTestLoader {
                 }
             }
         } catch(Exception e) {
+            System.out.println(e.getMessage());
         }
     }
 }

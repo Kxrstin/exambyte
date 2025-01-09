@@ -6,4 +6,6 @@ interface TestAufgabe {
     Integer getId();
     boolean isFreitextAufgabe();
     Integer getStudiTest();
+    String getTitel();
+    String getAufgabenstellung();
 }

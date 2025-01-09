@@ -39,6 +39,7 @@ public class StudentenControllerTestBearbeitenPage {
         model.addAttribute("isAbgelaufen", testService.isAbgelaufen(testId));
         model.addAttribute("aufgabe", aufgabenId);
         model.addAttribute("id", testId);
+        model.addAttribute("aufgabenTitel", "Aufgabentitel: " +  testService.getAufgabenTitel(testId, aufgabenId));
         model.addAttribute("aufgabenstellung", "Aufgabe: " + testService.getAufgabenstellung(testId, aufgabenId));
         model.addAttribute("punktzahl", "Maximale Punktzahl: " + testService.getPunktzahl(testId, aufgabenId));
 

@@ -15,23 +15,23 @@ public class ExambyteProjektApplication {
         SpringApplication.run(ExambyteProjektApplication.class, args);
     }
 
-    @Profile("!test") // Soll nicht bei Tests geladen werden
-    @Bean
-    public CommandLineRunner deleteData(JdbcTemplate jdbc) {
-        return args -> {
-            jdbc.update("BEGIN; DELETE FROM test_daten; " +
-                    "DELETE FROM antwort_moeglichkeiten; " +
-                    "DELETE FROM mc_aufgabe; " +
-                    "DELETE FROM freitext_aufgabe; " +
-                    "DELETE FROM freitext_antwort CASCADE; " +
-                    "DELETE FROM mc_antwort CASCADE; " +
-                    "DELETE FROM abgabe;" +
-                    "DELETE FROM mc_antwort_orga;" +
-                    "DELETE FROM mc_frage;" +
-                    "DELETE FROM freitext_frage;" +
-                    "DELETE FROM test_formular;" +
-                    "COMMIT;");
-            jdbc.update("DELETE FROM studi_test");
-       };
-   }
+//    @Profile("!test") // Soll nicht bei Tests geladen werden
+//    @Bean
+//    public CommandLineRunner deleteData(JdbcTemplate jdbc) {
+//        return args -> {
+//            jdbc.update("BEGIN; DELETE FROM test_daten; " +
+//                    "DELETE FROM antwort_moeglichkeiten; " +
+//                    "DELETE FROM mc_aufgabe; " +
+//                    "DELETE FROM freitext_aufgabe; " +
+//                    "DELETE FROM freitext_antwort CASCADE; " +
+//                    "DELETE FROM mc_antwort CASCADE; " +
+//                    "DELETE FROM abgabe;" +
+//                    "DELETE FROM mc_antwort_orga;" +
+//                    "DELETE FROM mc_frage;" +
+//                    "DELETE FROM freitext_frage;" +
+//                    "DELETE FROM test_formular;" +
+//                    "COMMIT;");
+//            jdbc.update("DELETE FROM studi_test");
+//       };
+//   }
 }

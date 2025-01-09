@@ -82,7 +82,7 @@ public class KorrektorenControllerLandingPageTest {
             "zeigt die richtigen Aufgaben an.")
     void test_04() throws Exception {
         when(abgabenService.getTestnamen()).thenReturn(testnamen);
-        when(abgabenService.getAufgabenVonTest(any())).thenReturn(aufgaben);
+        when(abgabenService.getAufgabenTitelVonTest(any())).thenReturn(aufgaben);
         MvcResult result = mvc.perform(
                 get("/korrektoren/landingPage/zeigeAufgaben/BeispielTestName"))
                 .andExpect(status().isOk())

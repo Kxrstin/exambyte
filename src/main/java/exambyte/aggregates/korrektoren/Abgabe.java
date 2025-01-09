@@ -7,6 +7,8 @@ public class Abgabe {
     private final Integer id;
     private final String studiantwort;
     private final String aufgabe;
+    private final String aufgabenstellung;
+    private final String aufgabenTitel;
     private final Integer aufgabenId;
     private final Integer studiId;
     private final String studiTestTitel;
@@ -19,6 +21,22 @@ public class Abgabe {
     public Abgabe(Integer id, String studiTestTitel, String aufgabe, Integer studiId, Integer aufgabenId, String studiantwort, Integer antwort, int maxPunktzahl, Integer studiTest) {
         this.id = id;
         this.aufgabe = aufgabe;
+        String[] aufgabeMitTitel = aufgabe.split("#%#");
+        switch(aufgabeMitTitel.length) {
+            case 1:
+                this.aufgabenTitel = "";
+                this.aufgabenstellung = aufgabeMitTitel[0];
+                break;
+
+            case 2:
+                this.aufgabenstellung = aufgabeMitTitel[0];
+                this.aufgabenTitel = aufgabeMitTitel[1];
+                break;
+
+            default:
+                this.aufgabenTitel = "";
+                this.aufgabenstellung = "";
+        }
         this.studiId = studiId;
         this.studiantwort = studiantwort;
         this.studiTestTitel = studiTestTitel;
@@ -32,6 +50,10 @@ public class Abgabe {
         return studiTest;
     }
 
+    public String getAufgabenTitel() {
+        return aufgabenTitel;
+    }
+
     public Integer getAufgabenId() {
         return aufgabenId;
     }
@@ -40,11 +62,15 @@ public class Abgabe {
         return antwort;
     }
 
+    public String getAufgabenstellung() {
+        return aufgabenstellung;
+    }
+
     public Integer getStudiId() {
         return studiId;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
