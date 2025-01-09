@@ -37,15 +37,22 @@ public class ErstellteTestsLoader {
                         for (String moeglichkeit : testForm.getAntwortMoeglickeiten(mcFrage)) {
                             antwortMoeglichkeiten.add(new AntwortMoeglichkeiten(moeglichkeit, mcFrage.getId()));
                         }
-                        mcAufgaben.add(new McAufgabe(mcFrage.getTitel(), antwortMoeglichkeiten, mcFrage.getPunkte(), mcFrage.getId()));
+                        mcAufgaben.add(new McAufgabe(mcFrage.getFragestellung(), antwortMoeglichkeiten, mcFrage.getPunkte(), mcFrage.getId()));
                     }
 
                     for (TestFrage freitextFrage : testForm.getFreitextFragen()) {
-                        freitextAufgaben.add(new FreitextAufgabe(freitextFrage.getTitel(), freitextFrage.getPunkte(), freitextFrage.getId(), testForm.getId()));
+                        freitextAufgaben.add(new FreitextAufgabe(freitextFrage.getFragestellung(),
+                                freitextFrage.getPunkte(),
+                                freitextFrage.getId(),
+                                testForm.getId()));
                     }
 
                     StudiTest neuerStudiTest = new StudiTest(testForm.getId(),
-                            new TestDaten(testForm.getTestTitel(), testForm.getStartzeitpunkt(), testForm.getEndzeitpunkt(), testForm.getErgebniszeitpunkt(), testForm.getId()),
+                            new TestDaten(testForm.getTestTitel(),
+                                    testForm.getStartzeitpunkt(),
+                                    testForm.getEndzeitpunkt(),
+                                    testForm.getErgebniszeitpunkt(),
+                                    testForm.getId()),
                             mcAufgaben,
                             freitextAufgaben);
 

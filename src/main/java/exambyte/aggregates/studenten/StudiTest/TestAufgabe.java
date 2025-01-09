@@ -8,4 +8,5 @@ public interface TestAufgabe {
     int getPunktzahl();
     Integer getId();
     boolean isFreitextAufgabe();
+    Integer getStudiTest();
 }

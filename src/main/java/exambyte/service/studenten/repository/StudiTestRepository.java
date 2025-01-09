@@ -9,5 +9,4 @@ public interface StudiTestRepository {
     boolean existsById(int id);
     List<StudiTest> findAll();
     StudiTest save(StudiTest test);
-    StudiTest saveNewTest(StudiTest test);
 }

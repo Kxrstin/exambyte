@@ -1,7 +1,7 @@
 package exambyte.service.studenten;
 
 import exambyte.aggregates.studenten.StudiTest.StudiTest;
-import exambyte.persistence.studenten.StudiTestRepo;
+import exambyte.persistence.studenten.repository.StudiTestDataRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +20,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @ActiveProfiles("test")
 public class StudiTestRepoTest {
     @Autowired
-    StudiTestRepo repo;
+    StudiTestDataRepository repo;
 
     @Test
     @DisplayName("Die getTest Methode gibt den korrekten Test mit den korrekten Test Daten zurück.")

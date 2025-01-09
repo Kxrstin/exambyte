@@ -18,14 +18,13 @@ public class TestFragenService {
     private final StudiTestRepository studiTestRepository;
     private final KorrekturenLoader korrekturenLoader;
 
-    @Autowired
     public TestFragenService(StudiTestRepository testRepository, JdbcTemplate jdbc, KorrekturenLoader korrekturenLoader) {
         this.studiTestRepository = testRepository;
         this.korrekturenLoader = korrekturenLoader;
     }
 
     public StudiTest save(StudiTest studiTest) {
-        return studiTestRepository.saveNewTest(studiTest);
+        return studiTestRepository.save(studiTest);
     }
 
     public StudiTest getTest(int testId) {
@@ -81,6 +80,13 @@ public class TestFragenService {
 
     // Test Infos
     public String getAufgabe(int id, int nr) {
+        try {
+            return studiTestRepository.findById(id).getAufgabe(nr);
+        } catch (Exception e) {
+            return "Kein Studi vorhanden";
+        }
+    }
+    public String getAufgabenstellung(int id, int nr) {
         try {
             return studiTestRepository.findById(id).getAufgabe(nr);
         } catch (Exception e) {

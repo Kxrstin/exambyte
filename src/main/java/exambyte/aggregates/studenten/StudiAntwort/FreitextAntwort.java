@@ -4,14 +4,14 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.PersistenceCreator;
 
 public class FreitextAntwort implements TestAntwort{
-    @Id
+    //@Id
     private Integer id;
     private String antworten;
     private Integer studiTest;
     private Integer aufgabeId;
     private Integer studiId;
 
-    @PersistenceCreator
+    //@PersistenceCreator
     public FreitextAntwort(Integer id) {
         this.id = id;
     }
@@ -41,6 +41,10 @@ public class FreitextAntwort implements TestAntwort{
         return antworten;
     }
     public Integer getAufgabeId() { return aufgabeId; }
-    public int getId() { return id; }
+    public Integer getId() { return id; }
     public void setAufgabeId(int aufgabeId) { this.aufgabeId = aufgabeId;}
+
+    public Integer getStudiTest() {
+        return studiTest;
+    }
 }

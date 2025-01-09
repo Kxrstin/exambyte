@@ -1,25 +1,25 @@
 package exambyte.aggregates.studenten.StudiAntwort;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.annotation.PersistenceCreator;
-import org.springframework.data.annotation.Transient;
+//import org.springframework.data.annotation.Id;
+//import org.springframework.data.annotation.PersistenceCreator;
+//import org.springframework.data.annotation.Transient;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class McAntwort implements TestAntwort{
-    @Id
+    //@Id
     private Integer id;
     private String antworten ="";
     private Integer aufgabeId;
     private Integer studiId;
     private Integer studiTest;
 
-    @Transient
+    //@Transient
     private List<String> antwortWahl = new ArrayList<>();
 
-    @PersistenceCreator
+    //@PersistenceCreator
     public McAntwort(Integer id) {
         this.id = id;
     }
@@ -65,4 +65,8 @@ public class McAntwort implements TestAntwort{
 
     public void setAufgabeId(int aufgabeId) { this.aufgabeId = aufgabeId;}
     public Integer getAufgabeId() { return aufgabeId; }
+
+    public Integer getStudiTest() {
+        return studiTest;
+    }
 }

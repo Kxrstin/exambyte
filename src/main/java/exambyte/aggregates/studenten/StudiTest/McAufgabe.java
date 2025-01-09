@@ -1,11 +1,10 @@
 package exambyte.aggregates.studenten.StudiTest;
 
-import org.springframework.data.annotation.Id;
 import java.util.List;
 
 public class McAufgabe implements TestAufgabe {
     // TODO Kein Wertobjekt mehr
-    @Id
+    //@Id
     private Integer id;
 
     private final String aufgabe;
@@ -28,8 +27,11 @@ public class McAufgabe implements TestAufgabe {
     public String getAufgabe() {
         return aufgabe;
     }
-    public List<String> getAntwortMoeglichkeiten() {
-        return antwortMoeglichkeiten.stream().map(a -> a.getAntwortmoeglichkeit()).toList();
+    public List<String> getAntwortMoeglichkeitenAlsString() {
+        return antwortMoeglichkeiten.stream().map(a -> a.getAntwort()).toList();
+    }
+    public List<AntwortMoeglichkeiten> getAntwortMoeglichkeiten() {
+        return antwortMoeglichkeiten;
     }
     public int getPunktzahl() {
         return punktzahl;

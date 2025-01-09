@@ -18,7 +18,7 @@ public class AntwortMoeglichkeiten {
         this.mcAufgabe = mcAufgabe;
     }
 
-    public String getAntwortmoeglichkeit() {
+    public String getAntwort() {
         return antwort;
     }
     public void setAntwort(String antwort) {

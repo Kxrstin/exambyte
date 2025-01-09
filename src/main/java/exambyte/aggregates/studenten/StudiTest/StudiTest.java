@@ -3,18 +3,13 @@ package exambyte.aggregates.studenten.StudiTest;
 import exambyte.aggregates.studenten.StudiAntwort.FreitextAntwort;
 import exambyte.aggregates.studenten.StudiAntwort.McAntwort;
 import exambyte.annotations.AggregateRoot;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.annotation.PersistenceCreator;
-import org.springframework.data.annotation.Transient;
 
-import javax.persistence.CascadeType;
-import javax.persistence.OneToMany;
 import java.time.LocalDateTime;
 import java.util.*;
 
 @AggregateRoot
 public final class StudiTest {
-    @Id
+    //@Id
     private Integer id;
     private final TestDaten testDaten;
     private List<FreitextAufgabe> freitextAufgaben = new ArrayList<>();
@@ -22,14 +17,14 @@ public final class StudiTest {
     private List<McAntwort> mcAntworten = new ArrayList<>();
     private List<FreitextAntwort> freitextAntworten = new ArrayList<>();
 
-    @Transient
+    //@Transient
     private final List<TestAufgabe> testAufgaben = new ArrayList<>();
 
     public StudiTest(Integer id, TestDaten testDaten) {
         this(id, testDaten, null, null);
     }
 
-    @PersistenceCreator
+    //@PersistenceCreator
     public StudiTest(Integer id, TestDaten testDaten, List<McAufgabe> mcAufgaben, List<FreitextAufgabe> freitextAufgaben) {
         this.id = id;
         this.testDaten = testDaten;
@@ -93,7 +88,7 @@ public final class StudiTest {
             return testAufgaben.stream()
                     .filter(aufgabe -> aufgabe.getId() == aufgabenId)
                     .filter(aufgabe -> !aufgabe.isFreitextAufgabe())
-                    .map(aufgabe -> ((McAufgabe) aufgabe).getAntwortMoeglichkeiten())
+                    .map(aufgabe -> ((McAufgabe) aufgabe).getAntwortMoeglichkeitenAlsString())
                     .findFirst()
                     .orElse(List.of());
         }
@@ -185,7 +180,7 @@ public final class StudiTest {
     public String getAntwort(int aufgabeId, int studiId) {
         if(testAufgaben.get(getIndexOf(aufgabeId)).isFreitextAufgabe()) {
             return freitextAntworten.stream()
-                    .filter(antwort -> ((FreitextAntwort)antwort).getStudiId() == studiId && antwort.getAufgabeId() == aufgabeId)
+                    .filter(antwort -> (antwort).getStudiId() == studiId && antwort.getAufgabeId() == aufgabeId)
                     .map(FreitextAntwort::getAntworten)
                     .findFirst()
                     .orElse("");
@@ -263,5 +258,21 @@ public final class StudiTest {
 
     public TestDaten getTestDaten() {
         return testDaten;
+    }
+
+    public List<FreitextAufgabe> getFreitextAufgaben() {
+        return freitextAufgaben;
+    }
+
+    public List<McAufgabe> getMcAufgaben() {
+        return mcAufgaben;
+    }
+
+    public List<FreitextAntwort> getFreitextAntworten() {
+        return freitextAntworten;
+    }
+
+    public List<McAntwort> getMcAntworten() {
+        return mcAntworten;
     }
 }

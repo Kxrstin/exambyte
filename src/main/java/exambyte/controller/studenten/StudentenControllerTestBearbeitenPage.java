@@ -1,5 +1,6 @@
 package exambyte.controller.studenten;
 
+import exambyte.aggregates.studenten.StudiTest.StudiTest;
 import exambyte.service.studenten.TestFragenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
@@ -38,7 +39,7 @@ public class StudentenControllerTestBearbeitenPage {
         model.addAttribute("isAbgelaufen", testService.isAbgelaufen(testId));
         model.addAttribute("aufgabe", aufgabenId);
         model.addAttribute("id", testId);
-        model.addAttribute("aufgabenstellung", "Aufgabe: " + testService.getAufgabe(testId, aufgabenId));
+        model.addAttribute("aufgabenstellung", "Aufgabe: " + testService.getAufgabenstellung(testId, aufgabenId));
         model.addAttribute("punktzahl", "Maximale Punktzahl: " + testService.getPunktzahl(testId, aufgabenId));
 
         if (testService.isFreitextAufgabe(testId, aufgabenId)) {

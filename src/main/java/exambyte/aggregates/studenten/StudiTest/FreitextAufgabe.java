@@ -4,7 +4,7 @@ import org.springframework.data.annotation.PersistenceCreator;
 import org.springframework.data.annotation.Id;
 
 public class FreitextAufgabe implements TestAufgabe {
-    @Id
+    //@Id
     private final Integer id;
     private final String aufgabe;
     private final int punktzahl;
@@ -12,7 +12,7 @@ public class FreitextAufgabe implements TestAufgabe {
     // TODO: Kein Wertobjekt mehr
     private Integer studiTest;
 
-    @PersistenceCreator
+    //@PersistenceCreator
     public FreitextAufgabe(String aufgabe, int punktzahl, Integer id, Integer studiTest) {
         this.aufgabe = aufgabe;
         this.punktzahl = punktzahl;
@@ -35,5 +35,8 @@ public class FreitextAufgabe implements TestAufgabe {
     }
     public boolean isFreitextAufgabe() {
         return true;
+    }
+    public Integer getStudiTest() {
+        return studiTest;
     }
 }
