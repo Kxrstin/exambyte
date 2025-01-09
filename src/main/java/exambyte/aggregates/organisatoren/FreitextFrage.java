@@ -8,11 +8,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 @Wertobjekt
-class FreitextFrage implements TestFrage {
+public class FreitextFrage implements TestFrage {
     private final Integer punkte;
     private final String titel;
     private final String fragestellung;
-
     @Id
     private Integer id;
     private final String erklaerung;
@@ -34,6 +33,21 @@ class FreitextFrage implements TestFrage {
         this.id = id;
     }
 
+    public FreitextFrage(Integer punkte,
+                         String titel,
+                         String fragestellung,
+                         Integer id,
+                         String erklaerung,
+                         Integer testFormular) {
+        this.punkte = punkte;
+        this.titel = titel;
+        this.fragestellung = fragestellung;
+        this.id = id;
+        this.erklaerung = erklaerung;
+        this.testFormular = testFormular;
+    }
+
+    //Wird nie verwendet
     public List<McAntwortOrga> getMcAntwortOrga() {
         return new ArrayList<>();
     }

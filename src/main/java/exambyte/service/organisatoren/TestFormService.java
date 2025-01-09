@@ -1,6 +1,7 @@
 package exambyte.service.organisatoren;
 
 import exambyte.aggregates.organisatoren.TestFormular;
+import exambyte.persistence.organisatoren.repository.TestFormDataRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,11 +10,11 @@ import java.util.*;
 
 @Service
 public class TestFormService {
-    private TestFormRepo repository;
+    private TestFormRepository repository;
     private Map<Integer, TestFormular> zwischenspeicher = new HashMap<>();
 
     @Autowired
-    public TestFormService(TestFormRepo repository) {
+    public TestFormService(TestFormRepository repository) {
         this.repository = repository;
     }
 
@@ -28,9 +29,9 @@ public class TestFormService {
         return testForm.getId();
     }
 
-    public void deleteTestDB(Integer id) {
-        repository.deleteById(id);
-    }
+//    public void deleteTestDB(Integer id) {
+//        repository.deleteById(id);
+//    }
 
     public int save(TestFormular testForm) {
         int id = testForm.getId();

@@ -1,6 +1,7 @@
 package exambyte.aggregates.organisatoren;
 
 import exambyte.annotations.Wertobjekt;
+import exambyte.persistence.studenten.data.McAntwortDto;
 import org.springframework.data.annotation.PersistenceCreator;
 
 import javax.persistence.Id;
@@ -8,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Wertobjekt
-class McFrage implements TestFrage {
+public class McFrage implements TestFrage {
     private final Integer punkte;
     private final String titel;
     private final String fragestellung;
@@ -33,6 +34,22 @@ class McFrage implements TestFrage {
         this.fragestellung = fragestellung;
         this.erklaerung = erklaerung;
         this.mcAntwortOrga = mcAntwortOrga;
+    }
+
+    public McFrage(Integer punkte,
+                   String titel,
+                   String fragestellung,
+                   String erklaerung,
+                   Integer id,
+                   List<McAntwortOrga> mcAntwortOrga,
+                   Integer testFormular){
+        this.punkte = punkte;
+        this.titel = titel;
+        this.fragestellung = fragestellung;
+        this.erklaerung = erklaerung;
+        this.id = id;
+        this.mcAntwortOrga = mcAntwortOrga;
+        this.testFormular = testFormular;
     }
 
     public Integer getTestFormular() {

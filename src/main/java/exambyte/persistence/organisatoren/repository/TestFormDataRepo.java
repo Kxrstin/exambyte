@@ -1,6 +1,7 @@
-package exambyte.service.organisatoren;
+package exambyte.persistence.organisatoren.repository;
 
 import exambyte.aggregates.organisatoren.TestFormular;
+import exambyte.persistence.organisatoren.data.TestFormularDto;
 import org.springframework.data.jdbc.repository.query.Modifying;
 import org.springframework.data.jdbc.repository.query.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -9,10 +10,10 @@ import org.springframework.data.repository.query.Param;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public interface TestFormRepo extends CrudRepository<TestFormular, Integer> {
-    TestFormular save(TestFormular testForm);
-    TestFormular findById(int id);
-    List<TestFormular> findAll();
+public interface TestFormDataRepo extends CrudRepository<TestFormularDto, Integer> {
+    TestFormularDto save(TestFormularDto testForm);
+    TestFormularDto findById(int id);
+    List<TestFormularDto> findAll();
 
     @Modifying
     @Query("UPDATE test_formular SET startzeitpunkt = :start, endzeitpunkt = :ende, ergebniszeitpunkt = :ergebnis WHERE test_formular.id = :id")

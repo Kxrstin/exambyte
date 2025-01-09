@@ -38,6 +38,26 @@ public class TestFormular {
         this(null, titel, mcFragen, freitextFragen);
     }
 
+    public TestFormular(Integer id,
+                        String testTitel,
+                        LocalDateTime startzeitpunkt,
+                        LocalDateTime endzeitpunkt,
+                        LocalDateTime ergebniszeitpunkt,
+                        List<McFrage> mcFragen,
+                        List<FreitextFrage> freitextFragen,
+                        List<McAntwortOrga> mcAntwortOrga) {
+        this.id = id;
+        this.testTitel = testTitel;
+        this.startzeitpunkt = startzeitpunkt;
+        this.endzeitpunkt = endzeitpunkt;
+        this.ergebniszeitpunkt = ergebniszeitpunkt;
+        this.mcFragen = mcFragen;
+        this.freitextFragen = freitextFragen;
+        this.mcAntwortOrga = mcAntwortOrga;
+        this.testFragen = getTestFragenFromMcFragenFreitextFragen();
+        this.testFragenMap = getTestFragenAsMap();
+    }
+
     private List<TestFrage> getTestFragenFromMcFragenFreitextFragen() {
         List<TestFrage> testFragen = new ArrayList<>();
         for(McFrage mcFrage : mcFragen) {
@@ -233,6 +253,13 @@ public class TestFormular {
 
     public List<FreitextFrage> getFreitextFragen() {
         return freitextFragen;
+    }
+
+    public List<McAntwortOrga> getMcAntworten() {
+        if(mcAntwortOrga == null) {
+            return new ArrayList<>();
+        }
+        return mcAntwortOrga;
     }
 
     public List<String> getAntwortMoeglickeiten(TestFrage mcFrage) {
