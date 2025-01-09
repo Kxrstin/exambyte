@@ -44,7 +44,7 @@ public class Abgabe {
         return studiId;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 

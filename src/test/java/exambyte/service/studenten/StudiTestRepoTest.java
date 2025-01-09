@@ -39,7 +39,7 @@ public class StudiTestRepoTest {
     }
 
     @Test
-    @DisplayName("Die getTest Methode gibt den korrekten Test mit den korrekten Test Daten zurück.")
+    @DisplayName("Die Freitext Antworten werden korrekt hinzugefügt und angezeigt.")
     @Sql({"clear_data.sql", "add_studi_test_mit_testdaten.sql", "add_freitext_aufgabe.sql"})
     void test_addAntwortZuFreitextAufgabe() {
         StudiTest testAusDb = testFragenService.getTest(0);
@@ -52,7 +52,7 @@ public class StudiTestRepoTest {
     }
 
     @Test
-    @DisplayName("Die getTest Methode gibt den korrekten Test mit den korrekten Test Daten zurück.")
+    @DisplayName("Die Mc Antworten werden korrekt hinzugefügt und angezeigt.")
     @Sql({"clear_data.sql", "add_studi_test_mit_testdaten.sql", "add_mc_aufgabe.sql"})
     void test_addAntwortZuMcAufgabe() {
         StudiTest testAusDb = testFragenService.getTest(0);

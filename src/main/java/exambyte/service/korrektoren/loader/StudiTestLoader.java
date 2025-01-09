@@ -27,7 +27,6 @@ public class StudiTestLoader {
     @Scheduled(fixedDelay = 10000)
     public void loadKorrigierbareStudiTests() {
         try {
-            System.out.println("Suche nach Abgaben");
             List<StudiTest> neueStudiTests = studiService.getAbgelaufeneTests().stream()
                     .filter(test -> test.getId() > lastSeen)
                     .toList();
@@ -52,6 +51,7 @@ public class StudiTestLoader {
                 }
             }
         } catch(Exception e) {
+            System.out.println(e.getMessage());
         }
     }
 }
