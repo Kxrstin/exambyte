@@ -116,8 +116,6 @@ public class TestFormService {
                 countKorrekteAntworten++;
                 if (gewaehlteAntworten.contains(antwortOrga.getName())) {
                     countKorrektBeantwortet++;
-                } else {
-                    countFalschBeantwortet++;
                 }
             } else if(gewaehlteAntworten.contains(antwortOrga.getName())) {
                 countFalschBeantwortet++;
@@ -132,7 +130,6 @@ public class TestFormService {
         }
         return 0.0;
     }
-
     private McFrage getMcFrageWithAufgabenId(Integer aufgabeId) {
         TestFormular form = getTestFormWithMcId(aufgabeId);
         if(form == null) { return null; }
@@ -141,13 +138,28 @@ public class TestFormService {
                 .findFirst()
                 .orElse(null);
     }
-
-    public boolean isFalschGewaehlteMcAntwort(Integer aufgabeId, String antwort) {
+    public String getKorrekturMcAufgabe(Integer aufgabeId, List<String> gewaehlteAntworten) {
         McFrage mcFrage = getMcFrageWithAufgabenId(aufgabeId);
         if(mcFrage == null) {
-            return false;
+            return "";
         }
-        return mcFrage.getMcAntwortOrga().stream()
-                .noneMatch(antwortOrga -> antwortOrga.getName().equals(antwort) && antwortOrga.getAntwort());
+        String korrektur = "";
+        for(McAntwortOrga antwortOrga: mcFrage.getMcAntwortOrga()) {
+            if(antwortOrga.getAntwort()) {
+                if(gewaehlteAntworten.contains(antwortOrga.getName())) {
+                    korrektur += antwortOrga.getName() + " ist korrekt und wurde ausgewählt, ";
+                } else {
+                    korrektur += antwortOrga.getName() + " ist korrekt, aber wurde nicht ausgewählt, ";
+                }
+            } else {
+                if(gewaehlteAntworten.contains(antwortOrga.getName())) {
+                    korrektur += antwortOrga.getName() + " ist falsch, wurde jedoch ausgewählt, ";
+                } else {
+                    korrektur += antwortOrga.getName() + " ist falsch und wurde nicht ausgewählt, ";
+                }
+            }
+        }
+        return korrektur.substring(0, korrektur.length()-2) + ".";
+
     }
 }

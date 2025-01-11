@@ -137,22 +137,20 @@ public class StudiTestRepositoryImpl implements StudiTestRepository {
     }
 
     private McAntwort toMcAntwort(McAntwortDto mcAntwortDto) {
-        McAntwort antwort = new McAntwort(mcAntwortDto.id(),
+        return new McAntwort(mcAntwortDto.id(),
                 mcAntwortDto.studiTest(),
                 mcAntwortDto.aufgabeId(),
-                mcAntwortDto.studiId());
-        antwort.addAntwort(mcAntwortDto.antworten());
-        return antwort;
+                mcAntwortDto.studiId(),
+                mcAntwortDto.antworten());
     }
 
     private FreitextAntwort toFreitextAntwort(FreitextAntwortDto freitextAntwortDto) {
-        FreitextAntwort antwort = new FreitextAntwort(freitextAntwortDto.id(),
+        return new FreitextAntwort(freitextAntwortDto.id(),
                 freitextAntwortDto.studiTest(),
                 freitextAntwortDto.aufgabeId(),
                 freitextAntwortDto.studiId(),
                 freitextAntwortDto.antworten()
         );
-        return antwort;
     }
 
     private McAufgabe toMcAufgabe(McAufgabeDto mcAufgabe) {

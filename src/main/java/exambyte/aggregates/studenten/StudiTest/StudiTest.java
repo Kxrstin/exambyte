@@ -153,7 +153,8 @@ public final class StudiTest {
                 .orElse(null);
 
         if(mcAntwort != null) {
-           mcAntwort.addAntwort(antwort);
+            mcAntworten.remove(mcAntwort);
+            mcAntworten.add(mcAntwort.addAntwort(antwort));
             return;
         }
 
@@ -174,8 +175,7 @@ public final class StudiTest {
             FreitextAntwort neueFreitextAntwort = new FreitextAntwort(null, id, aufgabenId, studiId, antwort);
             freitextAntworten.add(neueFreitextAntwort);
         } else {
-            McAntwort neueMcAntwort = new McAntwort(null, id, aufgabenId, studiId);
-            neueMcAntwort.addAntwort(antwort);
+            McAntwort neueMcAntwort = new McAntwort(null, id, aufgabenId, studiId, antwort);
             mcAntworten.add(neueMcAntwort);
         }
     }

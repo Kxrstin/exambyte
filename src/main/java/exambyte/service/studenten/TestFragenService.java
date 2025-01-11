@@ -41,9 +41,8 @@ public class TestFragenService {
                     .toList();
     }
     public List<StudiTest> getAbgelaufeneTests() {
-        LocalDateTime now = LocalDateTime.now();
         return studiTestRepository.findAll().stream()
-                .filter(test -> test.isAbgelaufen(now))
+                .filter(test -> test.isAbgelaufen(LocalDateTime.now()))
                 .toList();
     }
 
@@ -151,7 +150,7 @@ public class TestFragenService {
                     idsAllerTests.add(studiTest.getId());
                 }
                 double erreichtePunktzahl = getErreichtePunkte(studiId, studiTest.getId());
-                double maxPunktzahl = getMaxErreichbarePunkte(studiId, studiTest.getId());
+                double maxPunktzahl = getMaxErreichbarePunkte(studiTest.getId());
 
                 if (erreichtePunktzahl >= maxPunktzahl / 2) {
                     countBestanden++;
@@ -180,15 +179,15 @@ public class TestFragenService {
 
     public double getErgebnisInProzent(Integer studiId, Integer studiTest) {
         double sumErreichtePunkte = getErreichtePunkte(studiId, studiTest);
-        double sumMaxPunkte = getMaxErreichbarePunkte(studiId, studiTest);
+        double sumMaxPunkte = getMaxErreichbarePunkte(studiTest);
         if(sumMaxPunkte > 0) {
             return Math.round((sumErreichtePunkte / sumMaxPunkte) * 10000.0) / 100.0;
         }
         return 0.0;
     }
     public String parsePunktzahlFuerErgebnis(Integer studiId, Integer studiTest) {
-        int sumErreichtePunkte = (int) getErreichtePunkte(studiId, studiTest);
-        int sumMaxPunkte = (int) getMaxErreichbarePunkte(studiId, studiTest);
+        double sumErreichtePunkte =  getErreichtePunkte(studiId, studiTest);
+        double sumMaxPunkte = getMaxErreichbarePunkte(studiTest);
         return sumErreichtePunkte + " / " + sumMaxPunkte + " Punkte";
     }
     public String testBestanden(Integer studiId, Integer studiTest) {
@@ -199,7 +198,7 @@ public class TestFragenService {
         }
         return "Sie haben den Test leider nicht bestanden.";
     }
-    private double getMaxErreichbarePunkte(Integer studiId, Integer studiTest) {
+    private double getMaxErreichbarePunkte(Integer studiTest) {
         double sumMaxPunkte = 0;
         for(McAufgabe aufgabe: studiTestRepository.findById(studiTest).getMcAufgaben()) {
             sumMaxPunkte += aufgabe.getPunktzahl();
@@ -222,7 +221,6 @@ public class TestFragenService {
             if(gespeicherteAntwort.length() >= 2) {
                 List<String> gewaehlteAntworten = Arrays.asList(gespeicherteAntwort
                         .substring(1, gespeicherteAntwort.length() - 1).split(", "));
-
                 sumErreichtePunkte += getErreichtePunktzahlMcAufgabe(aufgabe.getId(), gewaehlteAntworten);
             }
         }

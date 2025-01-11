@@ -14,7 +14,6 @@ import java.util.List;
 @Component
 public class StudiTestLoader {
     private final TestFragenService studiService;
-    private Integer lastSeen = Integer.MIN_VALUE;
     private final AbgabenService abgabenService;
 
     @Autowired
@@ -26,20 +25,14 @@ public class StudiTestLoader {
     @Scheduled(fixedDelay = 10000)
     public void loadKorrigierbareStudiTests() {
         try {
-            List<StudiTest> neueStudiTests = studiService.getAbgelaufeneTests().stream()
-                    .filter(test -> test.getId() > lastSeen)
-                    .toList();
-
-            for (StudiTest studiTest : neueStudiTests)
-            {
-                lastSeen = studiTest.getId();
-
+            List<StudiTest> neueStudiTests = studiService.getAbgelaufeneTests();
+            for (StudiTest studiTest : neueStudiTests) {
                 for (Integer aufgabenId : studiTest.getAufgabenIds()) {
                     for (Integer studiId : studiTest.getStudiIdsVonAntworten(aufgabenId)) {
                         if(abgabenService.getAbgaben().stream()
                                 .filter(abgabe -> abgabe.getStudiTest().equals(studiTest.getId()))
                                 .filter(abgabe -> abgabe.getAufgabenId().equals(aufgabenId))
-                                .anyMatch(abgabe -> abgabe.getStudiId().equals(studiId))) {
+                                .noneMatch(abgabe -> abgabe.getStudiId().equals(studiId))) {
 
                             if (studiTest.isFreitextAufgabe(aufgabenId)) {
                                 abgabenService.save(new Abgabe(null,

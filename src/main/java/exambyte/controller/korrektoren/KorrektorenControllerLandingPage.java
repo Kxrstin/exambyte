@@ -80,7 +80,7 @@ public class KorrektorenControllerLandingPage {
         String fehler = "";
         int maxPunkte =abgabenService.getAbgabe(abgabeId).getMaxPunktzahl();
 
-        if(feedback.equals("") && !abgabenService.getAbgabe(abgabeId).getStudiantwort().equals("")){
+        if(feedback.isEmpty() && !abgabenService.getAbgabe(abgabeId).getStudiantwort().isEmpty()){
             if(punkteVergabe != maxPunkte) {
                 fehler += "Das Feedback darf nicht leer sein! ";
             }
@@ -89,7 +89,7 @@ public class KorrektorenControllerLandingPage {
         if(punkteVergabe < 0 || punkteVergabe > maxPunkte) {
             fehler += "Die Punktevergabe muss zwischen 0 und " + maxPunkte + " liegen. ";
         }
-        if(fehler.equals("")) {
+        if(fehler.isEmpty()) {
             abgabenService.addKorrektur(punkteVergabe, feedback, abgabeId);
             return "redirect:/korrektoren/landingPage/zeigeAufgaben/" + abgabenService.getTestname(abgabeId).replace(" ", "_");
         }

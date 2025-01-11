@@ -34,19 +34,7 @@ public class KorrekturenLoader {
     }
 
     public String getKorrekturMcAufgabe(Integer aufgabeId, List<String> gewaehlteAntworten) {
-        String korrektur = "";
-        if(gewaehlteAntworten.isEmpty()) {
-            return "Es wurde nichts ausgewählt.";
-        }
-        for(String antwort: gewaehlteAntworten) {
-            boolean isFalschGewaehlt = testFormService.isFalschGewaehlteMcAntwort(aufgabeId, antwort);
-            if(isFalschGewaehlt) {
-                korrektur += antwort + " ist nicht korrekt, ";
-            } else {
-                korrektur += antwort + " ist korrekt gewählt, ";
-            }
-        }
-        return korrektur.substring(0, korrektur.length()-2);
+        return testFormService.getKorrekturMcAufgabe(aufgabeId, gewaehlteAntworten);
     }
 
     public double berechneErreichtePunktzahlMcAntwort(Integer aufgabenId, List<String> gewaehlteAntworten) {
