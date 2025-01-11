@@ -40,6 +40,7 @@
                 <div class="studiAntwortUndFeedback">
                     <p class="feedback" th:text="${feedback}"> Das Feedback vom Korrektor</p>
                     <p class="feedback" th:text="${erreichtePunkte}"> Die erreichten Punkte</p>
+                    <p class="feedback" th:text="${erklaerung}"> Die Erklärung vom Organisator</p>
                 </div>
             </span>
 
@@ -61,6 +62,11 @@
             <input class="btnInput" type="checkbox" th:name="checkboxWahlen" th:value="${antwortwahl}" id="checkboxId2"
                    th:checked="${gewaehlteAntworten.contains(antwortwahl)}" disabled>
             <label class="btnLabel" for="checkboxId2" th:text="${antwortwahl}">Option 1 </label> <br>
+        </span>
+        <span th:if="${isAbgelaufen}">
+             <p class="feedback" th:text="${erklaerung}"> Die Erklärung vom Organisator</p>
+           <p class="feedback" th:text="${korrektur}"> Antwort A, korrekt, Antwort B falsch</p>
+           <p class="feedback" th:text="${erreichtePunktzahl}"> 3 / 4 Punkte </p>
         </span>
     </span>
     <br>

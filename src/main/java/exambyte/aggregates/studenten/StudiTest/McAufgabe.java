@@ -8,7 +8,7 @@ import java.util.List;
 public class McAufgabe implements TestAufgabe {
     private final Integer id;
     private final String aufgabe;
-    private String aufgabenstellung;
+    private final String aufgabenstellung;
     private final String titel;
     private final List<AntwortMoeglichkeiten> antwortMoeglichkeiten;
     private final int punktzahl;
@@ -46,7 +46,7 @@ public class McAufgabe implements TestAufgabe {
         this.antwortMoeglichkeiten = antwortMoeglichkeiten;
         this.punktzahl = punktzahl;
         this.id = id;
-        this.studiTest = null;
+        this.studiTest = studiTest;
     }
 
     public McAufgabe setStudiTest(Integer studiTest) {
@@ -58,7 +58,7 @@ public class McAufgabe implements TestAufgabe {
         return aufgabe;
     }
     public List<String> getAntwortMoeglichkeitenAlsString() {
-        return antwortMoeglichkeiten.stream().map(a -> a.getAntwort()).toList();
+        return antwortMoeglichkeiten.stream().map(AntwortMoeglichkeiten::getAntwort).toList();
     }
     public List<AntwortMoeglichkeiten> getAntwortMoeglichkeiten() {
         return antwortMoeglichkeiten;

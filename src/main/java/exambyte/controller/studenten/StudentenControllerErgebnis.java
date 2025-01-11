@@ -1,5 +1,6 @@
 package exambyte.controller.studenten;
 
+import exambyte.aggregates.studenten.StudiTest.McAufgabe;
 import exambyte.service.studenten.TestFragenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;

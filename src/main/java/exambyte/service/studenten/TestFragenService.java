@@ -1,16 +1,16 @@
 package exambyte.service.studenten;
 
 import exambyte.aggregates.korrektoren.Abgabe;
+import exambyte.aggregates.studenten.StudiTest.McAufgabe;
 import exambyte.aggregates.studenten.StudiTest.StudiTest;
 import exambyte.service.studenten.loader.KorrekturenLoader;
 import exambyte.service.studenten.repository.StudiTestRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -212,14 +212,29 @@ public class TestFragenService {
         for(Abgabe abgabe: alleAbgabenFuerTest) {
             sumMaxPunkte += abgabe.getMaxPunktzahl();
         }
+        for(McAufgabe aufgabe: getTest(studiTest).getMcAufgaben()) {
+            sumMaxPunkte += aufgabe.getPunktzahl();
+        }
         return sumMaxPunkte;
     }
     private double getErreichtePunkte(Integer studiId, Integer studiTest) {
         List<Abgabe> alleAbgabenFuerTest = korrekturenLoader.getKorrekturenFürTestVonStudi(studiId, studiTest);
         double sumErreichtePunkte = 0;
+
         for (Abgabe abgabe : alleAbgabenFuerTest) {
             sumErreichtePunkte += abgabe.getPunktzahl();
         }
+
+        for(McAufgabe aufgabe: getTest(studiTest).getMcAufgaben()) {
+            String gespeicherteAntwort = getAntwort(studiTest, aufgabe.getId(), studiId);
+
+            List<String> gewaehlteAntworten = Arrays.asList(gespeicherteAntwort
+                    .substring(1, gespeicherteAntwort.length()-1).split(", "));
+
+            sumErreichtePunkte += getErreichtePunktzahlMcAufgabe(studiTest, aufgabe.getId(),
+                    gewaehlteAntworten);
+        }
+
         return sumErreichtePunkte;
     }
 
@@ -251,12 +266,29 @@ public class TestFragenService {
         }
         return getAbgabeZuAufgabe(testId, aufgabenId, studiId).getFeedback();
     }
-
     public LocalDateTime getErgebnisZeitpunkt(int testId) {
         return studiTestRepository.findById(testId).getErgebnisZeitpunkt();
     }
-
     public String getAufgabenTitel(Integer testId, Integer aufgabenId) {
         return studiTestRepository.findById(testId).getTitel(aufgabenId);
+    }
+    public String getErklaerungFürMcAufgabe(Integer aufgabeId) {
+        return korrekturenLoader.getErklaerungFürMcAufgabe(aufgabeId);
+    }
+    public String getErklaerungFürFreitextAufgabe(Integer aufgabeId) {
+        return korrekturenLoader.getErklaerungFürFreitextAufgabe(aufgabeId);
+    }
+    public String getKorrekturMcAufgabe(Integer aufgabenId, List<String> gewaehlteAntworten) {
+        return korrekturenLoader.getKorrekturMcAufgabe(aufgabenId, gewaehlteAntworten);
+    }
+    public double getErreichtePunktzahlMcAufgabe(Integer testId, Integer aufgabenId, List<String> gewaehlteAntworten) {
+        int anzahlFalscherAntworten = korrekturenLoader.anzahlFalscheMcAntwortWahlen(aufgabenId, gewaehlteAntworten);
+        int maxPunktzahl = getPunktzahl(testId, aufgabenId);
+
+        return switch (anzahlFalscherAntworten) {
+            case 0 -> maxPunktzahl;
+            case 1 -> (double) maxPunktzahl / 2;
+            default -> 0.0;
+        };
     }
 }

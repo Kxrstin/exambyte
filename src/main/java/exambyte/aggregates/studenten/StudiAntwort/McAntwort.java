@@ -3,7 +3,7 @@ package exambyte.aggregates.studenten.StudiAntwort;
 import exambyte.annotations.Wertobjekt;
 
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Arrays;
 import java.util.List;
 
 public class McAntwort implements TestAntwort{
@@ -15,7 +15,7 @@ public class McAntwort implements TestAntwort{
     private final Integer studiId;
     private final Integer studiTest;
 
-    private final List<String> antwortWahl;
+    private List<String> antwortWahl;
 
     public McAntwort(Integer id, Integer studiTest, Integer aufgabeId, Integer studiId)
     {
@@ -39,7 +39,7 @@ public class McAntwort implements TestAntwort{
 
     public void addAntwort(String antwort) {
         String listeOhneKlammern = antwort.substring(1, antwort.length()-1);
-        Collections.addAll(antwortWahl, listeOhneKlammern.split(", "));
+        antwortWahl = new ArrayList<>(Arrays.stream(listeOhneKlammern.split(", ")).toList());
         this.antworten = antwortWahl.toString();
     }
 
