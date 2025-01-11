@@ -68,7 +68,7 @@ public class TestFormService {
 
     // Code für Korrektur der Studi Abgaben
     public String getErklaerungFürMcAufgabe(Integer aufgabeId) {
-        TestFormular form = getTestFormWithMcId(aufgabeId);
+        TestFormular form = getTestFormWithMcAufgabeId(aufgabeId);
         if(form == null) { return ""; }
         return form.getMcFragen().stream()
                 .filter(frage -> frage.getId().equals(aufgabeId))
@@ -76,7 +76,7 @@ public class TestFormService {
                 .findFirst()
                 .orElse("");
     }
-    private TestFormular getTestFormWithMcId(Integer aufgabeId) {
+    private TestFormular getTestFormWithMcAufgabeId(Integer aufgabeId) {
         return repository.findAll()
                 .stream()
                 .filter(formular -> formular.getMcFragen()
@@ -131,7 +131,7 @@ public class TestFormService {
         return 0.0;
     }
     private McFrage getMcFrageWithAufgabenId(Integer aufgabeId) {
-        TestFormular form = getTestFormWithMcId(aufgabeId);
+        TestFormular form = getTestFormWithMcAufgabeId(aufgabeId);
         if(form == null) { return null; }
         return form.getMcFragen().stream()
                 .filter(frage -> frage.getId().equals(aufgabeId))

@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+@Wertobjekt
 public class McAntwort implements TestAntwort{
     private final Integer id;
     private final String antworten;

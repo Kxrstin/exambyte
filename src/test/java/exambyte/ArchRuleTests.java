@@ -3,6 +3,8 @@ package exambyte;
 import com.tngtech.archunit.junit.AnalyzeClasses;
 import com.tngtech.archunit.junit.ArchTest;
 import com.tngtech.archunit.lang.ArchRule;
+import exambyte.annotations.AggregateRoot;
+import exambyte.annotations.Wertobjekt;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Repository;
@@ -25,7 +27,6 @@ public class ArchRuleTests {
             .beAnnotatedWith(WebMvcTest.class);
 
 
-    // TODO: Fehler fixen
     @ArchTest
     private final ArchRule onionArchitecture = onionArchitecture()
             .domainModels("..aggregates..")
@@ -34,16 +35,16 @@ public class ArchRuleTests {
             .adapter("web", "..controller..")
             .adapter("persistence", "..persistence..");
 
-//    @ArchTest
-//    private final ArchRule jedesAggregatRootIstAnnotiert = classes()
-//            .that()
-//            .resideInAPackage("..aggregates..")
-//            .should()
-//            .beAnnotatedWith(AggregateRoot.class)
-//            .orShould()
-//            .beAnnotatedWith(Wertobjekt.class)
-//            .orShould()
-//            .notBePublic();
+    @ArchTest
+    private final ArchRule jedesAggregatRootIstAnnotiert = classes()
+            .that()
+            .resideInAPackage("..aggregates..")
+            .should()
+            .beAnnotatedWith(AggregateRoot.class)
+            .orShould()
+            .beAnnotatedWith(Wertobjekt.class)
+            .orShould()
+            .notBePublic();
 
     @ArchTest
     private final ArchRule serviceKlassenSindMitServiceAnnotiert = classes()
