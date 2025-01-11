@@ -11,7 +11,7 @@ public class McAntwort implements TestAntwort{
 
     // TODO final
     private String antworten;
-    private final Integer aufgabeId;
+    private final int aufgabeId;
     private final Integer studiId;
     private final Integer studiTest;
 
@@ -55,7 +55,7 @@ public class McAntwort implements TestAntwort{
     public String getAntworten() {
         return antworten;
     }
-    public Integer getAufgabeId() { return aufgabeId; }
+    public int getAufgabeId() { return aufgabeId; }
     public Integer getStudiTest() {
         return studiTest;
     }

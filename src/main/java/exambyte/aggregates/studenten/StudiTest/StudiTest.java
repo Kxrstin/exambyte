@@ -55,13 +55,6 @@ public final class StudiTest {
 
 
     // TestAufgaben
-    public String getAufgabe(int aufgabenId) {
-        return testAufgaben.stream()
-                .filter(aufgabe -> aufgabe.getId() == aufgabenId)
-                .map(TestAufgabe::getAufgabe)
-                .findFirst()
-                .orElse("");
-    }
     public String getAufgabenstellung(int aufgabenId)    {
         return testAufgaben.stream()
                 .filter(aufgabe -> aufgabe.getId() == aufgabenId)
@@ -170,15 +163,15 @@ public final class StudiTest {
             .orElse(null);
 
         if(freitextAntwort != null) {
-            freitextAntwort.addAntwort(antwort);
+            freitextAntworten.remove(freitextAntwort);
+            freitextAntworten.add(freitextAntwort.addAntwort(antwort));
             return;
         }
 
         // Wenn noch keine Antwort existiert wird eine neue erstellt und gespeichert
         if(testAufgaben.get(getIndexOf(aufgabenId)).isFreitextAufgabe())
         {
-            FreitextAntwort neueFreitextAntwort = new FreitextAntwort(null, id, aufgabenId, studiId);
-            neueFreitextAntwort.addAntwort(antwort);
+            FreitextAntwort neueFreitextAntwort = new FreitextAntwort(null, id, aufgabenId, studiId, antwort);
             freitextAntworten.add(neueFreitextAntwort);
         } else {
             McAntwort neueMcAntwort = new McAntwort(null, id, aufgabenId, studiId);
@@ -190,14 +183,14 @@ public final class StudiTest {
     public String getAntwort(int aufgabeId, int studiId) {
         if(testAufgaben.get(getIndexOf(aufgabeId)).isFreitextAufgabe()) {
             return freitextAntworten.stream()
-                    .filter(antwort -> (antwort).getStudiId() == studiId && antwort.getAufgabeId() == aufgabeId)
+                    .filter(antwort -> antwort.getStudiId().equals(studiId) && antwort.getAufgabeId() == (aufgabeId))
                     .map(FreitextAntwort::getAntworten)
                     .findFirst()
                     .orElse("");
         }
 
         return mcAntworten.stream()
-                .filter(antwort -> antwort.getStudiId() == studiId && antwort.getAufgabeId() == aufgabeId)
+                .filter(antwort -> antwort.getStudiId().equals(studiId) && antwort.getAufgabeId() == aufgabeId)
                 .map(McAntwort::getAntworten)
                 .findFirst()
                 .orElse("");
@@ -211,11 +204,11 @@ public final class StudiTest {
     }
     public List<Integer> getStudiIdsVonAntworten(Integer aufgabenId) {
         List<Integer> studiIdFallsFreitextAufgabe = freitextAntworten.stream()
-                .filter(antwort -> antwort.getAufgabeId().equals(aufgabenId))
+                .filter(antwort -> antwort.getAufgabeId() == (aufgabenId))
                 .map(FreitextAntwort::getStudiId)
                 .toList();
         List<Integer> studiIdFallsMcAufgabe = mcAntworten.stream()
-                .filter(antwort -> antwort.getAufgabeId().equals(aufgabenId))
+                .filter(antwort -> antwort.getAufgabeId() == (aufgabenId))
                 .map(McAntwort::getStudiId)
                 .toList();
 
@@ -240,14 +233,14 @@ public final class StudiTest {
     public Integer getAntwortId(Integer studiId, Integer aufgabenId) {
         if(testAufgaben.get(getIndexOf(aufgabenId)).isFreitextAufgabe()) {
             return freitextAntworten.stream()
-                    .filter(antwort -> antwort.getStudiId().equals(studiId) && antwort.getAufgabeId().equals(aufgabenId))
+                    .filter(antwort -> antwort.getStudiId().equals(studiId) && antwort.getAufgabeId() == (aufgabenId))
                     .map(FreitextAntwort::getId)
                     .findFirst()
                     .orElse(null);
         }
 
         return mcAntworten.stream()
-                .filter(antwort -> antwort.getStudiId().equals(studiId) && antwort.getAufgabeId().equals(aufgabenId))
+                .filter(antwort -> antwort.getStudiId().equals(studiId) && antwort.getAufgabeId() ==(aufgabenId))
                 .map(McAntwort::getId)
                 .findFirst()
                 .orElse(null);

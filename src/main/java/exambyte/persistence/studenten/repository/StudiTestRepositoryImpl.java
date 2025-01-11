@@ -149,9 +149,9 @@ public class StudiTestRepositoryImpl implements StudiTestRepository {
         FreitextAntwort antwort = new FreitextAntwort(freitextAntwortDto.id(),
                 freitextAntwortDto.studiTest(),
                 freitextAntwortDto.aufgabeId(),
-                freitextAntwortDto.studiId()
+                freitextAntwortDto.studiId(),
+                freitextAntwortDto.antworten()
         );
-        antwort.addAntwort(freitextAntwortDto.antworten());
         return antwort;
     }
 

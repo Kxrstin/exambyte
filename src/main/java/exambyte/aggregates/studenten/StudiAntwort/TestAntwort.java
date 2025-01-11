@@ -1,9 +1,8 @@
 package exambyte.aggregates.studenten.StudiAntwort;
 
 interface TestAntwort {
-    void addAntwort(String antwort);
     boolean isFreitextAufgabe();
     Integer getStudiId();
-    Integer getAufgabeId();
+    int getAufgabeId();
     String getAntworten();
 }

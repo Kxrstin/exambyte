@@ -1,9 +1,11 @@
 package exambyte.aggregates.studenten.StudiAntwort;
 
+import exambyte.annotations.Wertobjekt;
+
+@Wertobjekt
 public class FreitextAntwort implements TestAntwort{
     private final Integer id;
-    // TODO final
-    private String antworten;
+    private final String antworten;
     private final Integer studiTest;
     private final Integer aufgabeId;
     private final Integer studiId;
@@ -24,8 +26,8 @@ public class FreitextAntwort implements TestAntwort{
         this.antworten = antworten;
     }
 
-    public void addAntwort(String antwort) {
-        this.antworten = antwort;
+    public FreitextAntwort addAntwort(String antwort) {
+        return new FreitextAntwort(id, studiTest, aufgabeId, studiId, antwort);
     }
     public Integer getStudiId() {
         return studiId;
@@ -36,7 +38,7 @@ public class FreitextAntwort implements TestAntwort{
     public String getAntworten() {
         return antworten;
     }
-    public Integer getAufgabeId() { return aufgabeId; }
+    public int getAufgabeId() { return aufgabeId; }
     public Integer getId() { return id; }
     public Integer getStudiTest() {
         return studiTest;
