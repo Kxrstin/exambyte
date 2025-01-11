@@ -71,8 +71,11 @@ public class StudentenControllerTestBearbeitenPage {
             model.addAttribute("antworten", testService.getAntwortMoeglichkeiten(testId, aufgabenId));
             String savedAntwort = testService.getAntwort(testId, aufgabenId, studiId);
 
-            if (savedAntwort != null && !savedAntwort.isEmpty()) {
-                List<String> gewaehlteAntworten = Arrays.asList(savedAntwort.substring(1, savedAntwort.length()-1).split(", "));
+            if (savedAntwort != null) {
+                List<String> gewaehlteAntworten = new ArrayList<>();
+                if(!savedAntwort.isEmpty()) {
+                    gewaehlteAntworten = Arrays.asList(savedAntwort.substring(1, savedAntwort.length() - 1).split(", "));
+                }
                 model.addAttribute("gewaehlteAntworten", gewaehlteAntworten);
 
                 if(testService.getErgebnisZeitpunkt(testId).isBefore(LocalDateTime.now())) {
@@ -80,7 +83,7 @@ public class StudentenControllerTestBearbeitenPage {
                             testService.getErklaerungFürMcAufgabe(aufgabenId));
 
                     model.addAttribute("erreichtePunktzahl", "Erreichte Punktzahl: "
-                            + testService.getErreichtePunktzahlMcAufgabe(testId, aufgabenId, gewaehlteAntworten) + " Punkte");
+                            + testService.getErreichtePunktzahlMcAufgabe(aufgabenId, gewaehlteAntworten) + " Punkte");
 
                     model.addAttribute("korrektur", "Korrektur: "
                             + testService.getKorrekturMcAufgabe(aufgabenId, gewaehlteAntworten));

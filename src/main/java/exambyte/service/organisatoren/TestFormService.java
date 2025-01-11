@@ -104,16 +104,50 @@ public class TestFormService {
                 .findFirst()
                 .orElse("");
     }
-    public boolean studiMcAntwortIsFalsch(Integer aufgabeId, String antwort) {
+    public double berechneErreichtePunktzahlMcAntwort(Integer aufgabeId, List<String> gewaehlteAntworten) {
+        McFrage mcFrage = getMcFrageWithAufgabenId(aufgabeId);
+        if(mcFrage == null) { return 0.0; }
+
+        int countKorrekteAntworten = 0;
+        int countKorrektBeantwortet = 0;
+        int countFalschBeantwortet = 0;
+        for(McAntwortOrga antwortOrga : mcFrage.getMcAntwortOrga()) {
+            if(antwortOrga.getAntwort()) {
+                countKorrekteAntworten++;
+                if (gewaehlteAntworten.contains(antwortOrga.getName())) {
+                    countKorrektBeantwortet++;
+                } else {
+                    countFalschBeantwortet++;
+                }
+            } else if(gewaehlteAntworten.contains(antwortOrga.getName())) {
+                countFalschBeantwortet++;
+            }
+        }
+        if(countKorrektBeantwortet == countKorrekteAntworten && countFalschBeantwortet == 0) {
+            return mcFrage.getPunkte();
+        } else if(countKorrektBeantwortet + 1 == countKorrekteAntworten && countFalschBeantwortet == 0) {
+            return (double) mcFrage.getPunkte() / 2;
+        } else if(countKorrektBeantwortet == countKorrekteAntworten && countFalschBeantwortet == 1) {
+            return (double) mcFrage.getPunkte() / 2;
+        }
+        return 0.0;
+    }
+
+    private McFrage getMcFrageWithAufgabenId(Integer aufgabeId) {
         TestFormular form = getTestFormWithMcId(aufgabeId);
-        if(form == null) { return false; }
-        McFrage mcFrage = form.getMcFragen().stream()
+        if(form == null) { return null; }
+        return form.getMcFragen().stream()
                 .filter(frage -> frage.getId().equals(aufgabeId))
                 .findFirst()
                 .orElse(null);
-        if(mcFrage == null) { return false; }
+    }
+
+    public boolean isFalschGewaehlteMcAntwort(Integer aufgabeId, String antwort) {
+        McFrage mcFrage = getMcFrageWithAufgabenId(aufgabeId);
+        if(mcFrage == null) {
+            return false;
+        }
         return mcFrage.getMcAntwortOrga().stream()
-                .filter(antwortOrga -> antwortOrga.getName().equals(antwort))
-                .anyMatch(antwortOrga -> !antwortOrga.getAntwort());
+                .noneMatch(antwortOrga -> antwortOrga.getName().equals(antwort) && antwortOrga.getAntwort());
     }
 }

@@ -26,13 +26,6 @@ public class KorrekturenLoader {
                 .toList();
     }
 
-    public List<Abgabe> getAllKorrekturenFürStudi(Integer studiId) {
-        return abgabenRepo.findAll().stream()
-                .filter(abgabe -> abgabe.getPunktzahl() != null)
-                .filter(abgabe -> abgabe.getStudiId().equals(studiId))
-                .toList();
-    }
-
     public String getErklaerungFürMcAufgabe(Integer aufgabeId) {
         return testFormService.getErklaerungFürMcAufgabe(aufgabeId);
     }
@@ -42,8 +35,11 @@ public class KorrekturenLoader {
 
     public String getKorrekturMcAufgabe(Integer aufgabeId, List<String> gewaehlteAntworten) {
         String korrektur = "";
+        if(gewaehlteAntworten.isEmpty()) {
+            return "Es wurde nichts ausgewählt.";
+        }
         for(String antwort: gewaehlteAntworten) {
-            boolean isFalschGewaehlt = testFormService.studiMcAntwortIsFalsch(aufgabeId, antwort);
+            boolean isFalschGewaehlt = testFormService.isFalschGewaehlteMcAntwort(aufgabeId, antwort);
             if(isFalschGewaehlt) {
                 korrektur += antwort + " ist nicht korrekt, ";
             } else {
@@ -53,13 +49,7 @@ public class KorrekturenLoader {
         return korrektur.substring(0, korrektur.length()-2);
     }
 
-    public int anzahlFalscheMcAntwortWahlen(Integer aufgabenId, List<String> gewaehlteAntworten) {
-        int countFalscheAntwort = 0;
-        for(String antwort: gewaehlteAntworten) {
-            if(testFormService.studiMcAntwortIsFalsch(aufgabenId, antwort)) {
-                countFalscheAntwort++;
-            }
-        }
-        return countFalscheAntwort;
+    public double berechneErreichtePunktzahlMcAntwort(Integer aufgabenId, List<String> gewaehlteAntworten) {
+        return testFormService.berechneErreichtePunktzahlMcAntwort(aufgabenId, gewaehlteAntworten);
     }
 }

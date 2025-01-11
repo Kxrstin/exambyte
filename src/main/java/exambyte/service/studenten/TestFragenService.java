@@ -1,6 +1,7 @@
 package exambyte.service.studenten;
 
 import exambyte.aggregates.korrektoren.Abgabe;
+import exambyte.aggregates.studenten.StudiTest.FreitextAufgabe;
 import exambyte.aggregates.studenten.StudiTest.McAufgabe;
 import exambyte.aggregates.studenten.StudiTest.StudiTest;
 import exambyte.service.studenten.loader.KorrekturenLoader;
@@ -79,13 +80,6 @@ public class TestFragenService {
 
 
     // Test Infos
-    public String getAufgabe(int id, int nr) {
-        try {
-            return studiTestRepository.findById(id).getAufgabe(nr);
-        } catch (Exception e) {
-            return "Kein Studi vorhanden";
-        }
-    }
     public String getAufgabenstellung(int id, int nr) {
         try {
             return studiTestRepository.findById(id).getAufgabenstellung(nr);
@@ -150,41 +144,40 @@ public class TestFragenService {
     // Zulassungsstatus und Ergebnis
     public String zulassungsStatus(Integer studiId) {
         int countBestanden = 0;
-        List<Abgabe> alleAbgabenVonStudi = korrekturenLoader.getAllKorrekturenFürStudi(studiId);
         List<Integer> idsAllerTests = new ArrayList<>();
+        for(StudiTest studiTest: studiTestRepository.findAll()) {
+            if(studiTest.getErgebnisZeitpunkt().isBefore(LocalDateTime.now())) {
+                if (!idsAllerTests.contains(studiTest.getId())) {
+                    idsAllerTests.add(studiTest.getId());
+                }
+                double erreichtePunktzahl = getErreichtePunkte(studiId, studiTest.getId());
+                double maxPunktzahl = getMaxErreichbarePunkte(studiId, studiTest.getId());
 
-        for(Abgabe abgabe: alleAbgabenVonStudi) {
-            if(!idsAllerTests.contains(abgabe.getStudiTest())) {
-                idsAllerTests.add(abgabe.getStudiTest());
-            }
-        }
-        for (Integer studiTest : idsAllerTests) {
-            int sumBewerteteAufgaben = 0;
-            int sumMaxPunktzahl = 0;
-            for(Abgabe abgabe: alleAbgabenVonStudi) {
-                if (abgabe.getStudiTest().equals(studiTest)) {
-                    sumBewerteteAufgaben += abgabe.getPunktzahl();
-                    sumMaxPunktzahl += abgabe.getMaxPunktzahl();
+                if (erreichtePunktzahl >= maxPunktzahl / 2) {
+                    countBestanden++;
                 }
             }
-            if(sumBewerteteAufgaben >= sumMaxPunktzahl / 2) {
-                countBestanden++;
-            }
         }
-        if(idsAllerTests.size() == 14 && countBestanden < 14) {
-            return "zulassungNichtErreicht";
-        } else if(idsAllerTests.size() == 14 && countBestanden == 14){
-            return "zulassungErreicht";
-        }
-        if (countBestanden == idsAllerTests.size()) {
+        return zulassungsStatus(idsAllerTests.size(), countBestanden);
+
+    }
+
+    private String zulassungsStatus(int anzahlTestsGesamt, int countBestanden) {
+        if(anzahlTestsGesamt == 14 && countBestanden < 14) {
+        return "zulassungNichtErreicht";
+    } else if(anzahlTestsGesamt == 14 && countBestanden == 14){
+        return "zulassungErreicht";
+    }
+        if (countBestanden == anzahlTestsGesamt) {
             return "guterKurs";
-        } else if (countBestanden == idsAllerTests.size() - 1) {
+        } else if (countBestanden == anzahlTestsGesamt - 1) {
             return "vorsicht";
-        } else if (countBestanden == idsAllerTests.size() - 2) {
+        } else if (countBestanden == anzahlTestsGesamt - 2) {
             return "vorsichtiger";
         }
         return "fail";
     }
+
     public double getErgebnisInProzent(Integer studiId, Integer studiTest) {
         double sumErreichtePunkte = getErreichtePunkte(studiId, studiTest);
         double sumMaxPunkte = getMaxErreichbarePunkte(studiId, studiTest);
@@ -207,12 +200,11 @@ public class TestFragenService {
         return "Sie haben den Test leider nicht bestanden.";
     }
     private double getMaxErreichbarePunkte(Integer studiId, Integer studiTest) {
-        List<Abgabe> alleAbgabenFuerTest = korrekturenLoader.getKorrekturenFürTestVonStudi(studiId, studiTest);
         double sumMaxPunkte = 0;
-        for(Abgabe abgabe: alleAbgabenFuerTest) {
-            sumMaxPunkte += abgabe.getMaxPunktzahl();
+        for(McAufgabe aufgabe: studiTestRepository.findById(studiTest).getMcAufgaben()) {
+            sumMaxPunkte += aufgabe.getPunktzahl();
         }
-        for(McAufgabe aufgabe: getTest(studiTest).getMcAufgaben()) {
+        for(FreitextAufgabe aufgabe: studiTestRepository.findById(studiTest).getFreitextAufgaben()) {
             sumMaxPunkte += aufgabe.getPunktzahl();
         }
         return sumMaxPunkte;
@@ -227,12 +219,12 @@ public class TestFragenService {
 
         for(McAufgabe aufgabe: getTest(studiTest).getMcAufgaben()) {
             String gespeicherteAntwort = getAntwort(studiTest, aufgabe.getId(), studiId);
+            if(gespeicherteAntwort.length() >= 2) {
+                List<String> gewaehlteAntworten = Arrays.asList(gespeicherteAntwort
+                        .substring(1, gespeicherteAntwort.length() - 1).split(", "));
 
-            List<String> gewaehlteAntworten = Arrays.asList(gespeicherteAntwort
-                    .substring(1, gespeicherteAntwort.length()-1).split(", "));
-
-            sumErreichtePunkte += getErreichtePunktzahlMcAufgabe(studiTest, aufgabe.getId(),
-                    gewaehlteAntworten);
+                sumErreichtePunkte += getErreichtePunktzahlMcAufgabe(aufgabe.getId(), gewaehlteAntworten);
+            }
         }
 
         return sumErreichtePunkte;
@@ -281,14 +273,7 @@ public class TestFragenService {
     public String getKorrekturMcAufgabe(Integer aufgabenId, List<String> gewaehlteAntworten) {
         return korrekturenLoader.getKorrekturMcAufgabe(aufgabenId, gewaehlteAntworten);
     }
-    public double getErreichtePunktzahlMcAufgabe(Integer testId, Integer aufgabenId, List<String> gewaehlteAntworten) {
-        int anzahlFalscherAntworten = korrekturenLoader.anzahlFalscheMcAntwortWahlen(aufgabenId, gewaehlteAntworten);
-        int maxPunktzahl = getPunktzahl(testId, aufgabenId);
-
-        return switch (anzahlFalscherAntworten) {
-            case 0 -> maxPunktzahl;
-            case 1 -> (double) maxPunktzahl / 2;
-            default -> 0.0;
-        };
+    public double getErreichtePunktzahlMcAufgabe(Integer aufgabenId, List<String> gewaehlteAntworten) {
+        return korrekturenLoader.berechneErreichtePunktzahlMcAntwort(aufgabenId, gewaehlteAntworten);
     }
 }

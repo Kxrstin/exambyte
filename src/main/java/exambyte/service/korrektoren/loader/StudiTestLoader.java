@@ -3,7 +3,6 @@ package exambyte.service.korrektoren.loader;
 import exambyte.aggregates.korrektoren.Abgabe;
 import exambyte.aggregates.studenten.StudiTest.StudiTest;
 import exambyte.service.korrektoren.AbgabenService;
-import exambyte.service.organisatoren.TestFormService;
 import exambyte.service.studenten.TestFragenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -37,16 +36,22 @@ public class StudiTestLoader {
 
                 for (Integer aufgabenId : studiTest.getAufgabenIds()) {
                     for (Integer studiId : studiTest.getStudiIdsVonAntworten(aufgabenId)) {
-                        if(studiTest.isFreitextAufgabe(aufgabenId)) {
-                            abgabenService.save(new Abgabe(null,
-                                    studiTest.getTitel(),
-                                    studiTest.getAufgabenstellung(aufgabenId) + "#%#" + studiTest.getTitel(aufgabenId),
-                                    studiId,
-                                    aufgabenId,
-                                    studiTest.getAntwort(aufgabenId, studiId),
-                                    studiTest.getAntwortId(studiId, aufgabenId),
-                                    studiTest.getPunktzahl(aufgabenId),
-                                    studiTest.getId()));
+                        if(abgabenService.getAbgaben().stream()
+                                .filter(abgabe -> abgabe.getStudiTest().equals(studiTest.getId()))
+                                .filter(abgabe -> abgabe.getAufgabenId().equals(aufgabenId))
+                                .anyMatch(abgabe -> abgabe.getStudiId().equals(studiId))) {
+
+                            if (studiTest.isFreitextAufgabe(aufgabenId)) {
+                                abgabenService.save(new Abgabe(null,
+                                        studiTest.getTitel(),
+                                        studiTest.getAufgabenstellung(aufgabenId) + "#%#" + studiTest.getTitel(aufgabenId),
+                                        studiId,
+                                        aufgabenId,
+                                        studiTest.getAntwort(aufgabenId, studiId),
+                                        studiTest.getAntwortId(studiId, aufgabenId),
+                                        studiTest.getPunktzahl(aufgabenId),
+                                        studiTest.getId()));
+                            }
                         }
                     }
                 }

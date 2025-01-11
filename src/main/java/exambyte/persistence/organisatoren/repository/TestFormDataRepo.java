@@ -1,15 +1,16 @@
 package exambyte.persistence.organisatoren.repository;
 
-import exambyte.aggregates.organisatoren.TestFormular;
 import exambyte.persistence.organisatoren.data.TestFormularDto;
 import org.springframework.data.jdbc.repository.query.Modifying;
 import org.springframework.data.jdbc.repository.query.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
+@Repository
 public interface TestFormDataRepo extends CrudRepository<TestFormularDto, Integer> {
     TestFormularDto save(TestFormularDto testForm);
     TestFormularDto findById(int id);
