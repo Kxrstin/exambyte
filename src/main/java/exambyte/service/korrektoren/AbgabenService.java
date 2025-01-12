@@ -41,7 +41,10 @@ public class AbgabenService {
     }
 
     public String getTestname(int id){
-        return abgabenRepo.findById(id).getStudiTestTitel();
+        if(abgabenRepo.findById(id) != null) {
+            return abgabenRepo.findById(id).getStudiTestTitel();
+        }
+        return "";
     }
 
     public String getAufgabe(int id){

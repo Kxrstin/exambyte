@@ -198,7 +198,7 @@ public class TestFragenService {
         }
         return "Sie haben den Test leider nicht bestanden.";
     }
-    private double getMaxErreichbarePunkte(Integer studiTest) {
+    public double getMaxErreichbarePunkte(Integer studiTest) {
         double sumMaxPunkte = 0;
         for(McAufgabe aufgabe: studiTestRepository.findById(studiTest).getMcAufgaben()) {
             sumMaxPunkte += aufgabe.getPunktzahl();
@@ -208,7 +208,7 @@ public class TestFragenService {
         }
         return sumMaxPunkte;
     }
-    private double getErreichtePunkte(Integer studiId, Integer studiTest) {
+    public double getErreichtePunkte(Integer studiId, Integer studiTest) {
         List<Abgabe> alleAbgabenFuerTest = korrekturenLoader.getKorrekturenFürTestVonStudi(studiId, studiTest);
         double sumErreichtePunkte = 0;
 

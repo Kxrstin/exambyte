@@ -21,28 +21,13 @@
              alt="">
         ExamByte - Korrekturstand
     </h1>
+    <h2> Noch nicht korrigierte Tests: </h2>
+    
+    <div class="divAnmeldung">
+        <ul th:each="aufgabe: ${zuKorrigierendeAufgaben}">
+            <li th:text="${aufgabe}"> Was ist Onion Architektur</li>
+        </ul>
+    </div>
 
-        <h2>Korrekturstand</h2>
-
-        <h3>Test 1</h3>
-
-            <p>
-                Noch nicht korrigiert:
-            </p>
-
-        <!--TODO: Studis speichern und auflisten mithilfe von th:each-->
-            <ul>
-                <li>Rudolf</li>
-                <li>Mickey Mouse</li>
-                <li>Donald Duck</li>
-            </ul>
-
-            <p>
-                Korrigiert:
-            </p>
-
-            <ul>
-                <li>Kerstin Neu</li>
-            </ul>
     </body>
 </html>

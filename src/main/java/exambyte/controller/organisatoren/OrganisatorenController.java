@@ -2,6 +2,7 @@ package exambyte.controller.organisatoren;
 
 import exambyte.aggregates.organisatoren.TestFormular;
 import exambyte.service.organisatoren.TestFormService;
+import exambyte.service.organisatoren.loader.KorrekturenStandLoader;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,10 +15,12 @@ import java.util.List;
 
 @Controller
 public class OrganisatorenController {
-    private TestFormService service;
+    private final TestFormService service;
+    private final KorrekturenStandLoader korrekturenLoader;
 
-    public OrganisatorenController(TestFormService service) {
+    public OrganisatorenController(TestFormService service, KorrekturenStandLoader korrekturenStandLoader) {
         this.service = service;
+        this.korrekturenLoader = korrekturenStandLoader;
     }
 
     @GetMapping("/organisatoren/landingPage")
@@ -240,13 +243,6 @@ public class OrganisatorenController {
         return "redirect:/organisatoren/testErstellen";
     }
 
-    @GetMapping("/organisatoren/korrekturstand")
-    @Secured("ROLE_ORGANISATOR")
-    public String korrekturStand() {
-        return "/organisatoren/KorrekturstandOrganisatoren";
-    }
-
-
     @PostMapping("/organisatoren/testErstellen/testFertigstellen/{id}")
     @Secured("ROLE_ORGANISATOR")
     public String testFertigStellen(@PathVariable int id) {
@@ -285,5 +281,29 @@ public class OrganisatorenController {
         redirectAttributes.addFlashAttribute("id",id);
         redirectAttributes.addFlashAttribute("redirect", true);
         return "redirect:/organisatoren/testVorschau/" + id;
+    }
+
+    @GetMapping("/organisatoren/korrekturstand")
+    @Secured("ROLE_ORGANISATOR")
+    public String korrekturStand(Model model) {
+        List<String> testMitAufgaben = new ArrayList<>();
+        for(Integer testId: korrekturenLoader.loadTestIdsNichtKorrigiert()) {
+            for(String aufgabe: korrekturenLoader.loadTestAufgaben(korrekturenLoader.loadTestName(testId))) {
+                testMitAufgaben.add(korrekturenLoader.loadTestName(testId) + ": " + aufgabe);
+            }
+        }
+        model.addAttribute("zuKorrigierendeAufgaben", testMitAufgaben);
+        return "/organisatoren/KorrekturstandOrganisatoren";
+    }
+
+    @GetMapping("/organisatoren/ergebnisse")
+    @Secured("ROLE_ORGANISATOR")
+    public String ergebnisUebersicht(Model model) {
+        List<String> testErgebnisse = new ArrayList<>();
+        for(Integer testId: korrekturenLoader.loadTestIdsKorrigiert()) {
+            testErgebnisse.add(korrekturenLoader.loadTestName(testId) + ": " + korrekturenLoader.loadTestErgebnisse(testId) + "% korrekt");
+        }
+        model.addAttribute("korrigierteTests", testErgebnisse);
+        return "/organisatoren/ErgebnisUebersichtOrganisatoren";
     }
 }

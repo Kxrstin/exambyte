@@ -76,7 +76,7 @@ public class KorrektorenControllerLandingPage {
 
     @PostMapping("/korrektoren/landingPage/zeigeAbgabe/{abgabeId}")
     @Secured("ROLE_KORREKTOR")
-    public String korrekturAbschicken(RedirectAttributes redirectAttributes, @PathVariable("abgabeId") int abgabeId, @RequestParam(name="feedbackText", defaultValue="") String feedback, @RequestParam(name="punkteVergabe", defaultValue="-1") Integer punkteVergabe) {
+    public String korrekturAbschicken(@PathVariable("abgabeId") int abgabeId, @RequestParam(name="feedbackText", defaultValue="") String feedback, @RequestParam(name="punkteVergabe", defaultValue="-1") Integer punkteVergabe) {
         String fehler = "";
         int maxPunkte =abgabenService.getAbgabe(abgabeId).getMaxPunktzahl();
 
@@ -93,7 +93,6 @@ public class KorrektorenControllerLandingPage {
             abgabenService.addKorrektur(punkteVergabe, feedback, abgabeId);
             return "redirect:/korrektoren/landingPage/zeigeAufgaben/" + abgabenService.getTestname(abgabeId).replace(" ", "_");
         }
-        redirectAttributes.addFlashAttribute("falscheEingabe", fehler);
         return "redirect:/korrektoren/landingPage/zeigeAbgabe/{abgabeId}";
     }
 }
