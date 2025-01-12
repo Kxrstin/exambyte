@@ -88,4 +88,16 @@ public class KorrekturenStandLoader {
     private List<FreitextAntwort> getAbgelaufeneFreitextAntworten(Integer testId) {
         return testService.getTest(testId).getFreitextAntworten();
     }
+
+    public List<Integer> loadTestAufgabenIds(Integer testId) {
+     List<Integer> aufgabenIds = new ArrayList<>(testService.getTest(testId).getMcAufgaben().stream()
+             .map(McAufgabe::getId).toList());
+     aufgabenIds.addAll(testService.getTest(testId).getFreitextAufgaben().stream()
+             .map(FreitextAufgabe::getId).toList());
+     return aufgabenIds;
+    }
+
+    public String loadAufgabenName(Integer testId, Integer aufgabeId) {
+        return testService.getAufgabenTitel(testId, aufgabeId);
+    }
 }

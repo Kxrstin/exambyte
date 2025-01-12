@@ -11,7 +11,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class OrganisatorenController {
@@ -299,11 +301,22 @@ public class OrganisatorenController {
     @GetMapping("/organisatoren/ergebnisse")
     @Secured("ROLE_ORGANISATOR")
     public String ergebnisUebersicht(Model model) {
-        List<String> testErgebnisse = new ArrayList<>();
+        Map<Integer, String> testErgebnisse = new HashMap<>();
         for(Integer testId: korrekturenLoader.loadTestIdsKorrigiert()) {
-            testErgebnisse.add(korrekturenLoader.loadTestName(testId) + ": " + korrekturenLoader.loadTestErgebnisse(testId) + "% korrekt");
+            testErgebnisse.put(testId, korrekturenLoader.loadTestName(testId) + ": " + korrekturenLoader.loadTestErgebnisse(testId) + " % korrekt");
         }
         model.addAttribute("korrigierteTests", testErgebnisse);
         return "/organisatoren/ErgebnisUebersichtOrganisatoren";
+    }
+
+    @GetMapping("/organisatoren/zeigeTests/{testId}")
+    @Secured("ROLE_ORGANISATOR")
+    public String zeigeTest(Model model, @PathVariable("testId") Integer testId) {
+        Map<Integer, String> testAufgaben = new HashMap<>();
+        for(Integer aufgabeId: korrekturenLoader.loadTestAufgabenIds(testId)) {
+            testAufgaben.put(aufgabeId, korrekturenLoader.loadAufgabenName(testId, aufgabeId));
+        }
+        model.addAttribute("testAufgaben", testAufgaben);
+        return "/organisatoren/ZeigeTestOrganisatoren";
     }
 }

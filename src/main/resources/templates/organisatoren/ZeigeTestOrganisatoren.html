@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <title>ExamByte | Ergebnisübersicht</title>
+    <title>ExamByte | Korrekturstand</title>
     <link rel = "stylesheet" th:href="@{/css/bootstrap.min.css}"
           href="../../static/css/bootstrap.min.css">
     <link rel="icon" type="image/png"
@@ -22,11 +22,11 @@
     ExamByte - Ergebnisübersicht
 </h1>
 <div class="divAnmeldung">
-    <ul th:each="testErgebnis: ${korrigierteTests}">
-        <li class="list-group-item"> <span th:text="${testErgebnis.getValue()}">Programmierpraktikum 2: 80,56% korrekt</span>
-        <form th:action="@{/organisatoren/zeigeTests/{testId}(testId =${testErgebnis.getKey()})}">
-            <button class="btnBestaetigen" type="submit"> Zeige Tests</button>
-        </form>
+    <ul th:each="aufgabe: ${testAufgaben}">
+        <li class="list-group-item"> <span th:text="${aufgabe.getValue()}">Programmierpraktikum 2: 80,56% korrekt</span>
+            <form th:action="@{organisatoren/zeigeErgebnisse/{testId}/{aufgabeId}(aufgabeId = ${aufgabe.getKey()}, testId =${aufgabe.getKey()})}">
+                <button class="btnBestaetigen" type="submit"> Zeige Studi-Ergebnisse</button>
+            </form>
         </li>
     </ul>
 </div>
