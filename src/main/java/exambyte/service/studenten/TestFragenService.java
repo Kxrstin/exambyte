@@ -6,7 +6,10 @@ import exambyte.aggregates.studenten.StudiTest.McAufgabe;
 import exambyte.aggregates.studenten.StudiTest.StudiTest;
 import exambyte.service.studenten.loader.KorrekturenLoader;
 import exambyte.service.studenten.repository.StudiTestRepository;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.dao.ConcurrencyFailureException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -18,10 +21,14 @@ import java.util.List;
 public class TestFragenService {
     private final StudiTestRepository studiTestRepository;
     private final KorrekturenLoader korrekturenLoader;
+    private final TestFragenService self;
 
-    public TestFragenService(StudiTestRepository testRepository, KorrekturenLoader korrekturenLoader) {
+    public TestFragenService(StudiTestRepository testRepository,
+                             KorrekturenLoader korrekturenLoader,
+                             @Lazy TestFragenService self) {
         this.studiTestRepository = testRepository;
         this.korrekturenLoader = korrekturenLoader;
+        this.self = self;
     }
 
     public StudiTest save(StudiTest studiTest) {
@@ -128,10 +135,28 @@ public class TestFragenService {
 
     // Antworten speichern
     public void addAntwort(int testId, int aufgabeId, String antwort, int studiId) {
+        boolean successfull = false;
+        int failcount = 0;
+        while(!successfull && failcount < 4) {
+            try {
+                self.addAntwortAbschliessen(testId, aufgabeId, antwort, studiId);
+                successfull = true;
+            } catch(ConcurrencyFailureException ex) {
+                failcount++;
+                System.err.println("ROLLBACK");
+            }
+            if(!successfull) throw new RuntimeException("Antwort hinzufügen fehlgeschlagen!");
+        }
+    }
+
+    @Transactional
+    public synchronized void addAntwortAbschliessen(int testId, int aufgabeId, String antwort, int studiId) {
         StudiTest test = studiTestRepository.findById(testId);
         test.addAntwort(antwort, aufgabeId, studiId);
+
         studiTestRepository.save(test);
     }
+
     public String getAntwort(int testId, int aufgabeId, int studiId) {
         try {
             return studiTestRepository.findById(testId).getAntwort(aufgabeId, studiId);
