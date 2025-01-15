@@ -9,4 +9,6 @@ public interface AbgabenRepo {
     Abgabe findById(int id);
     boolean existsById(int abgabeId);
     Abgabe save(Abgabe abgabe);
+
+    Abgabe findByIdWithLock(int id);
 }

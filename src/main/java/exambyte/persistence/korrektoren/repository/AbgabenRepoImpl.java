@@ -39,6 +39,11 @@ public class AbgabenRepoImpl implements AbgabenRepo {
         return toAbgabe(saved);
     }
 
+    @Override
+    public Abgabe findByIdWithLock(int id) {
+        return toAbgabe(repo.findByIdWithLock(id));
+    }
+
     private AbgabeDto toAbgabeDto(Abgabe abgabe) {
         return new AbgabeDto(abgabe.getId(),
                 abgabe.getStudiantwort(),

@@ -3,6 +3,7 @@ package exambyte.service.korrektoren;
 import exambyte.aggregates.korrektoren.Abgabe;
 import exambyte.service.korrektoren.repository.AbgabenRepo;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -69,8 +70,9 @@ public class AbgabenService {
         return abgabenRepo.existsById(abgabeId);
     }
 
+    @Transactional
     public void addKorrektur(int punktzahl, String feedback, int id) {
-        Abgabe abgabe = abgabenRepo.findById(id);
+        Abgabe abgabe = abgabenRepo.findByIdWithLock(id);
         abgabe.setPunktzahl(punktzahl);
         abgabe.setFeedback(feedback);
         abgabenRepo.save(abgabe);
