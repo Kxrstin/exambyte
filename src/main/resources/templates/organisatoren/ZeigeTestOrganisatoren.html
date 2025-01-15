@@ -24,7 +24,7 @@
 <div class="divAnmeldung">
     <ul th:each="aufgabe: ${testAufgaben}">
         <li class="list-group-item"> <span th:text="${aufgabe.getValue()}">Programmierpraktikum 2: 80,56% korrekt</span>
-            <form th:action="@{organisatoren/zeigeErgebnisse/{testId}/{aufgabeId}(aufgabeId = ${aufgabe.getKey()}, testId =${aufgabe.getKey()})}">
+            <form>">
                 <button class="btnBestaetigen" type="submit"> Zeige Studi-Ergebnisse</button>
             </form>
         </li>
