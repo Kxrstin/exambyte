@@ -50,9 +50,19 @@ public class ErstellteTestsLoader {
                                 freitextFrage.getId(),
                                 testForm.getId()));
                     }
+                    String titel = testForm.getTestTitel();
+                    if(titel.contains("ä")) {
+                        titel = titel.replace("ä", "ae");
+                    }
+                    if(titel.contains("ö")) {
+                        titel = titel.replace("ö", "oe");
+                    }
+                    if(titel.contains("ü")) {
+                        titel = titel.replace("ü", "ue");
+                    }
 
                     StudiTest neuerStudiTest = new StudiTest(testForm.getId(),
-                            new TestDaten(testForm.getTestTitel(),
+                            new TestDaten(titel,
                                     testForm.getStartzeitpunkt(),
                                     testForm.getEndzeitpunkt(),
                                     testForm.getErgebniszeitpunkt(),
