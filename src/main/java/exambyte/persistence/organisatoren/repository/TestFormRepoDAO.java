@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
-public interface TestFormDataRepo extends CrudRepository<TestFormularDto, Integer> {
+public interface TestFormRepoDAO extends CrudRepository<TestFormularDto, Integer> {
     TestFormularDto save(TestFormularDto testForm);
     TestFormularDto findById(int id);
     List<TestFormularDto> findAll();

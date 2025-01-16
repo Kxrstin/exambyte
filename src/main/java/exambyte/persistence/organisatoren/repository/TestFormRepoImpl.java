@@ -4,12 +4,10 @@ import exambyte.aggregates.organisatoren.FreitextFrage;
 import exambyte.aggregates.organisatoren.McAntwortOrga;
 import exambyte.aggregates.organisatoren.McFrage;
 import exambyte.aggregates.organisatoren.TestFormular;
-import exambyte.aggregates.studenten.StudiAntwort.McAntwort;
 import exambyte.persistence.organisatoren.data.FreitextFrageDto;
 import exambyte.persistence.organisatoren.data.McAntwortOrgaDto;
 import exambyte.persistence.organisatoren.data.McFrageDto;
 import exambyte.persistence.organisatoren.data.TestFormularDto;
-import exambyte.persistence.organisatoren.repository.TestFormDataRepo;
 import exambyte.service.organisatoren.TestFormRepository;
 import org.springframework.stereotype.Repository;
 
@@ -19,24 +17,24 @@ import java.util.*;
 @Repository
 public class TestFormRepoImpl implements TestFormRepository {
     private Map<Integer, TestFormular> testForms = new HashMap<>();
-    private TestFormDataRepo testFormDataRepo;
+    private TestFormRepoDAO testFormRepoDAO;
 
-    public TestFormRepoImpl(TestFormDataRepo testFormDataRepo) {
-        this.testFormDataRepo = testFormDataRepo;
+    public TestFormRepoImpl(TestFormRepoDAO testFormRepoDAO) {
+        this.testFormRepoDAO = testFormRepoDAO;
     }
 
     public TestFormular save(TestFormular testForm) {
-        testFormDataRepo.save(toTestFormularDto(testForm));
+        testFormRepoDAO.save(toTestFormularDto(testForm));
         return testForm;
     }
 
     public TestFormular findById(int id) {
-        TestFormularDto testFormDto = testFormDataRepo.findById(id);
+        TestFormularDto testFormDto = testFormRepoDAO.findById(id);
         return toTestFormular(testFormDto);
     }
 
     public List<TestFormular> findAll() {
-        return testFormDataRepo.findAll().stream().map(testFormularDto -> toTestFormular(testFormularDto)).toList();
+        return testFormRepoDAO.findAll().stream().map(testFormularDto -> toTestFormular(testFormularDto)).toList();
     }
 
     private TestFormularDto toTestFormularDto(TestFormular testForm) {
@@ -120,6 +118,6 @@ public class TestFormRepoImpl implements TestFormRepository {
                                  LocalDateTime endzeitpunkt,
                                  LocalDateTime ergebniszeitpunkt,
                                  Integer id) {
-        testFormDataRepo.updateZeitpunkte(startzeitpunkt, endzeitpunkt, ergebniszeitpunkt, id);
+        testFormRepoDAO.updateZeitpunkte(startzeitpunkt, endzeitpunkt, ergebniszeitpunkt, id);
     }
 }
