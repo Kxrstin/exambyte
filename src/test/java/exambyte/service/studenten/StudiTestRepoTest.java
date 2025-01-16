@@ -23,8 +23,8 @@ public class StudiTestRepoTest {
     TestFragenService testFragenService;
 
     @Autowired
-    public StudiTestRepoTest(StudiTestRepository repo, KorrekturenLoader loader) {
-        this.testFragenService = new TestFragenService(repo, loader);
+    public StudiTestRepoTest(StudiTestRepository repo, KorrekturenLoader loader, TestFragenService service) {
+        this.testFragenService = new TestFragenService(repo, loader, service);
     }
 
     @Test
