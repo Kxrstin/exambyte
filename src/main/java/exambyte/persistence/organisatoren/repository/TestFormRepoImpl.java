@@ -9,7 +9,10 @@ import exambyte.persistence.organisatoren.data.McAntwortOrgaDto;
 import exambyte.persistence.organisatoren.data.McFrageDto;
 import exambyte.persistence.organisatoren.data.TestFormularDto;
 import exambyte.service.organisatoren.TestFormRepository;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.dao.ConcurrencyFailureException;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.*;
@@ -18,23 +21,11 @@ import java.util.*;
 public class TestFormRepoImpl implements TestFormRepository {
     private Map<Integer, TestFormular> testForms = new HashMap<>();
     private TestFormRepoDAO testFormRepoDAO;
+    private TestFormRepoImpl self;
 
-    public TestFormRepoImpl(TestFormRepoDAO testFormRepoDAO) {
+    public TestFormRepoImpl(TestFormRepoDAO testFormRepoDAO, @Lazy TestFormRepoImpl self) {
         this.testFormRepoDAO = testFormRepoDAO;
-    }
-
-    public TestFormular save(TestFormular testForm) {
-        testFormRepoDAO.save(toTestFormularDto(testForm));
-        return testForm;
-    }
-
-    public TestFormular findById(int id) {
-        TestFormularDto testFormDto = testFormRepoDAO.findById(id);
-        return toTestFormular(testFormDto);
-    }
-
-    public List<TestFormular> findAll() {
-        return testFormRepoDAO.findAll().stream().map(testFormularDto -> toTestFormular(testFormularDto)).toList();
+        this.self = self;
     }
 
     private TestFormularDto toTestFormularDto(TestFormular testForm) {
@@ -44,9 +35,9 @@ public class TestFormRepoImpl implements TestFormRepository {
                 testForm.getStartzeitpunkt(),
                 testForm.getEndzeitpunkt(),
                 testForm.getErgebniszeitpunkt(),
-                testForm.getMcFragen().stream().map(mcFrage -> toMcFrageDto(mcFrage)).toList(),
-                testForm.getFreitextFragen().stream().map(freitextFrage -> toFreitextFrageDto(freitextFrage)).toList(),
-                mcAntworten.stream().map(mcAntwort -> toMcAntwortOrgaDto(mcAntwort)).toList());
+                testForm.getMcFragen().stream().map(this::toMcFrageDto).toList(),
+                testForm.getFreitextFragen().stream().map(this::toFreitextFrageDto).toList(),
+                mcAntworten.stream().map(this::toMcAntwortOrgaDto).toList());
     }
 
     private McAntwortOrgaDto toMcAntwortOrgaDto(McAntwortOrga mcAntwort) {
@@ -63,7 +54,7 @@ public class TestFormRepoImpl implements TestFormRepository {
                 mcFrage.getFragestellung(),
                 mcFrage.getId(),
                 mcFrage.getErklaerung(),
-                mcFrage.getMcAntwortOrga().stream().map(mcAntwort ->  toMcAntwortOrgaDto(mcAntwort)).toList(),
+                mcFrage.getMcAntwortOrga().stream().map(this::toMcAntwortOrgaDto).toList(),
                 mcFrage.getTestFormular());
     }
 
@@ -82,9 +73,9 @@ public class TestFormRepoImpl implements TestFormRepository {
                 testFormularDto.startzeitpunkt(),
                 testFormularDto.endzeitpunkt(),
                 testFormularDto.ergebniszeitpunkt(),
-                testFormularDto.mcFragen().stream().map(mcFrageDto -> toMcFrage(mcFrageDto)).toList(),
-                testFormularDto.freitextFragen().stream().map(freitextFrageDto -> toFreitextFrage(freitextFrageDto)).toList(),
-                testFormularDto.mcAntwortOrga().stream().map(mcAntwortDto -> toMcAntwort(mcAntwortDto)).toList());
+                testFormularDto.mcFragen().stream().map(this::toMcFrage).toList(),
+                testFormularDto.freitextFragen().stream().map(this::toFreitextFrage).toList(),
+                testFormularDto.mcAntwortOrga().stream().map(this::toMcAntwort).toList());
     }
 
     private McFrage toMcFrage(McFrageDto mcFrageDto) {
@@ -93,7 +84,7 @@ public class TestFormRepoImpl implements TestFormRepository {
                 mcFrageDto.fragestellung(),
                 mcFrageDto.erklaerung(),
                 mcFrageDto.id(),
-                mcFrageDto.mcAntwortOrga().stream().map(antwortDto -> toMcAntwort(antwortDto)).toList(),
+                mcFrageDto.mcAntwortOrga().stream().map(this::toMcAntwort).toList(),
                 mcFrageDto.testFormular());
     }
 
@@ -118,6 +109,43 @@ public class TestFormRepoImpl implements TestFormRepository {
                                  LocalDateTime endzeitpunkt,
                                  LocalDateTime ergebniszeitpunkt,
                                  Integer id) {
+        boolean successful = false;
+        int failcount = 0;
+        while(!successful && failcount < 4) {
+            try {
+                self.zeitpunkteUpdaten(startzeitpunkt, endzeitpunkt, ergebniszeitpunkt, id);
+                successful = true;
+            } catch (ConcurrencyFailureException e) {
+                System.err.println("Rollback");
+                failcount++;
+            }
+
+            if(!successful) {
+                System.err.println("Fehlschlag beim Verändern der Zeitpunkte");
+            }
+        }
+    }
+
+    @Transactional
+    public void zeitpunkteUpdaten(LocalDateTime startzeitpunkt,
+                                  LocalDateTime endzeitpunkt,
+                                  LocalDateTime ergebniszeitpunkt,
+                                  Integer id) {
         testFormRepoDAO.updateZeitpunkte(startzeitpunkt, endzeitpunkt, ergebniszeitpunkt, id);
+    }
+
+    public TestFormular save(TestFormular testForm) {
+        //Die save Methode gibt das Objekt aus der DB zurück mit der richtigen ID
+        TestFormularDto testFormularDto = testFormRepoDAO.save(toTestFormularDto(testForm));
+        return toTestFormular(testFormularDto);
+    }
+
+    public TestFormular findById(int id) {
+        TestFormularDto testFormDto = testFormRepoDAO.findById(id);
+        return toTestFormular(testFormDto);
+    }
+
+    public List<TestFormular> findAll() {
+        return testFormRepoDAO.findAll().stream().map(this::toTestFormular).toList();
     }
 }
