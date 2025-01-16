@@ -5,6 +5,7 @@ import exambyte.helper.WithMockOAuth2User;
 import exambyte.security.MethodSecurityConfig;
 import exambyte.security.SecurityConfig;
 import exambyte.service.organisatoren.TestFormService;
+import exambyte.service.organisatoren.loader.KorrekturenStandLoader;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -39,6 +40,9 @@ public class OrganisatorenControllerTest {
 
     @MockBean
     TestFormService testFormService;
+
+    @MockBean
+    KorrekturenStandLoader loader;
 
     TestFormular mockTestForm = mock(TestFormular.class);
     int testId = 69420;
