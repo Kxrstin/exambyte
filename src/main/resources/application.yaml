@@ -32,13 +32,16 @@ spring:
             client-secret: ${CLIENT_SECRET}
             scope: read:public_repo
 
+#
   datasource:
-    password: iamgroot
-    username: user
+    # Use DB_PASSWORD if available, otherwise ‘iamgroot’ as local fallback
+    password: ${DB_PASSWORD:iamgroot}
+    username: ${DB_USER:user}
     url: jdbc:postgresql://localhost:5435/exambyte
 
 exambyte:
   rollen:
-    studenten: Kxrstin, Narr1M
-    korrektoren: Kxrstin, Narr1M
-    organisatoren: Kxrstin, Narr1M
+    # ----------------- Enter your GitHub name here -----------------
+    studenten: YourGithubName
+    korrektoren: YourGithubName
+    organisatoren: YourGithubName
