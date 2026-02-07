@@ -4,5 +4,6 @@ services:
     ports:
       - "5435:5432"
     environment:
+      - POSTGRES_DB=exambyte
       - "POSTGRES_USER=user"
       - "POSTGRES_PASSWORD=iamgroot"
