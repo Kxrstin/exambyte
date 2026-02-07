@@ -1,6 +1,22 @@
+### Java & Gradle ###
 .gradle/
 build/
+bin/
+*.class
 *.log
 *.tmp
-*.bin
-*.class
+*.bak
+
+### IntelliJ IDEA ###
+.idea/
+*.iws
+*.iml
+*.ipr
+out/
+
+### macOS / Windows ###
+.DS_Store
+Thumbs.db
+
+### Sensitive Data ###
+.env
