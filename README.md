@@ -1,5 +1,5 @@
 # Exambyte 
-## Full-stack web application for managing exams and assessments. ##
+## Full-stack web application for managing exams and assessments. 
 
 This project focuses on clean backend architecture, security, and explicit data persistence. 
 
@@ -9,36 +9,52 @@ Follow these steps to start the project in your local environment (e.g., WSL or 
 
 ### 1. Requirements 
 * **Java 21** (JDK)
-* * **Docker & Docker Desktop**
+* **Docker & Docker Desktop**
 * **GitHub OAuth App**:
 * Create a new OAuth app under [GitHub Developer Settings](https://github.com/settings/developers).
-* **Homepage URL**: http://localhost:8080
-* **Authorization callback URL**: http://localhost:8080
+* **Homepage URL**:
+  ```bash
+  http://localhost:8080
+  ```
+* **Authorization callback URL**:
+  ```bash
+  http://localhost:8080
+  ```
 
 ### 2. Configuration (environment variables) 
 We have integrated OAuth2 so that users can log in securely via GitHub. Since client secrets are sensitive, they are injected via environment variables and are not checked into the repository.
 The application requires access to your GitHub app data. To do this, set the following environment variables in your terminal (or in your IDE): 
-* export CLIENT_ID=Your_GitHub_Client_ID 
-* export CLIENT_SECRET=Your_GitHub_Client_Secret
+```bash
+export CLIENT_ID=Your_GitHub_Client_ID 
+export CLIENT_SECRET=Your_GitHub_Client_Secret
+```
 
 ### 3. Role assignment 
 To access protected areas after logging in, enter your GitHub username in the src/main/resources/application.yml file under the corresponding roles: 
+```bash
 exambyte:
   rollen:
     studenten: YourGithubName
     korrektoren: YourGithubName
-    organisatoren: YourGithubName 
+    organisatoren: YourGithubName
+```
     
 ### 4. Start Docker 
 Start the PostgreSQL database via Docker Compose: 
-* docker compose up -d
+```bash
+docker compose up -d
+```
 
 ### 5. Start application 
 Start the application with the Gradle wrapper: 
-* ./gradlew bootRun
+```bash
+./gradlew bootRun
+```
 
-Once the startup process is complete, you can access the application at: 
-* http://localhost:8080
+Once the startup process is complete, you can access the application at:
+```bash
+http://localhost:8080
+```
 
 --- 
 
