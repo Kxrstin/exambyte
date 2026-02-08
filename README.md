@@ -1,7 +1,7 @@
 # Exambyte 
 ## Full-stack web application for managing exams and assessments. 
 
-This project focuses on clean backend architecture, security, and explicit data persistence. 
+This application models the workflow of academic assessments. Organizers create and oversee tests, monitor results, and keep track of pending corrections. Correctors focus on evaluating assigned tests, while students gain transparency into their test results and performance status, such as whether they are progressing well or struggling.
 
 --- 
 ## Get started
