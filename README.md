@@ -20,6 +20,7 @@ Follow these steps to start the project in your local environment (e.g., WSL or 
   ```bash
   http://localhost:8080
   ```
+Now please generate a new Client secret, you need this and the Client Id for the next step.
 
 ### 2. Configuration (environment variables) 
 We have integrated OAuth2 so that users can log in securely via GitHub. Since client secrets are sensitive, they are injected via environment variables and are not checked into the repository.
