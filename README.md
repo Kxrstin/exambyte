@@ -1,5 +1,100 @@
-Quellenverzeichnis:
-- Quelle des Logos: https://www.design.com/maker/logo/creative-document-file-17357?text=ExamByte&isVariation=True
-- Quelle des grünen Hakens: https://media.istockphoto.com/id/1435212785/de/vektor/h%C3%A4kchensymbol-vektor-design-vorlage-in-wei%C3%9Fem-hintergrund.jpg?s=612x612&w=0&k=20&c=brscOuhUBkRmKJOa4OgxaomCwkwkQbPUZLKSQqjk_jw=
-- Quelle des roten Kreuzes: https://www.google.de/url?sa=i&url=https%3A%2F%2Fwww.vecteezy.com%2Fvector-art%2F28579407-red-cross-wrong-symbol-incorrect-sign-error-in-circle&psig=AOvVaw3Ro9KRujdYvXkyHEgD3Xat&ust=1732453479047000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCJCDqKPC8okDFQAAAAAdAAAAABAE
-- Quelle des Warn-Symbols: https://www.google.de/url?sa=i&url=https%3A%2F%2Fwww.freepik.com%2Fpremium-vector%2Fwarning-sign-with-exclamation-mark-vector-illustration-attention-symbol-information-flat-icon_129857701.htm&psig=AOvVaw0a01_Gcr8e5zTiVaV_5LC8&ust=1732453506334000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCIiWvrHC8okDFQAAAAAdAAAAABAE
+# Exambyte 
+## Full-stack web application for managing exams and assessments. ##
+
+This project focuses on clean backend architecture, security, and explicit data persistence. 
+
+--- 
+## Get started
+Follow these steps to start the project in your local environment (e.g., WSL or Linux). 
+
+### 1. Requirements 
+* **Java 21** (JDK)
+* * **Docker & Docker Desktop**
+* **GitHub OAuth App**:
+* Create a new OAuth app under [GitHub Developer Settings](https://github.com/settings/developers).
+* **Homepage URL**: http://localhost:8080
+* **Authorization callback URL**: http://localhost:8080
+
+### 2. Configuration (environment variables) 
+We have integrated OAuth2 so that users can log in securely via GitHub. Since client secrets are sensitive, they are injected via environment variables and are not checked into the repository.
+The application requires access to your GitHub app data. To do this, set the following environment variables in your terminal (or in your IDE): 
+* export CLIENT_ID=Your_GitHub_Client_ID 
+* export CLIENT_SECRET=Your_GitHub_Client_Secret
+
+### 3. Role assignment 
+To access protected areas after logging in, enter your GitHub username in the src/main/resources/application.yml file under the corresponding roles: 
+exambyte:
+  rollen:
+    studenten: YourGithubName
+    korrektoren: YourGithubName
+    organisatoren: YourGithubName 
+    
+### 4. Start Docker 
+Start the PostgreSQL database via Docker Compose: 
+* docker compose up -d
+
+### 5. Start application 
+Start the application with the Gradle wrapper: 
+* ./gradlew bootRun
+
+Once the startup process is complete, you can access the application at: 
+* http://localhost:8080
+
+--- 
+
+## Features 
+- User authentication and authorization with OAuth2
+- Role-based access control (student/grader/organizer)
+- Server-side rendered frontend with Thymeleaf
+- SQL-based persistence with explicit JDBC access
+- Database versioning and migrations with Flyway
+
+---
+
+## Tech Stack 
+### Backend
+- Java 21
+- Spring Boot
+- Spring Security (OAuth2)
+- JDBC
+- Flyway
+- Gradle
+
+### Frontend 
+- Thymeleaf
+- HTML
+- CSS
+
+### Database 
+- Relational SQL database (PostgreSQL)
+
+--- 
+
+### Background 
+This project is based on a university project, whereby the task was set by the instructor and all implementation was carried out by [Miran](https://github.com/Narr1m) and [Kerstin](https://github.com/Kxrstin). 
+
+--- 
+
+### What we learned 
+Test-driven development and structuring of larger Java applications with clean architecture Implementation of secure authentication and authorization processes Design of web-based services and their integration into server-side user interfaces Management of relational databases and migrations 
+
+---
+
+## Architecture 
+The application follows the **Onion Architecture**: 
+- **Domain layer** Contains the core business logic (Exams, Questions, ...) and domain models.
+- **Application layer** Implements use cases and application-specific logic.
+- **Presentation layer** Spring MVC Controllers and Thymeleaf templates.
+Dependencies refer strictly inward to keep domain logic independent and testable.
+
+
+## Images
+
+This project uses graphics from external providers. The rights belong to the respective authors:
+
+* **Logo (ExamByte)**: Created via [Design.com](https://www.design.com/maker/logo/creative-document-file-17357?text=ExamByte&isVariation=True)
+* **Green check mark**: [iStock / Getty Images](https://www.istockphoto.com/de/vektor/h%C3%A4kchensymbol-vektor-design-vorlage-in-wei%C3%9Fem-hintergrund-gm1435212785-476685817)
+* **Red cross**: [Vecteezy](https://www.vecteezy.com/vector-art/28579407-red-cross-wrong-symbol-incorrect-sign-error-in-circle)
+* **Warning symbol**: [Freepik](https://www.freepik.com/premium-vector/warning-sign-with-exclamation-mark-vector-illustration-attention-symbol-information-flat-icon_129857701.htm)
+
+
