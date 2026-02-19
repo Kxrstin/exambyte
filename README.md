@@ -1,7 +1,7 @@
 # Exambyte 
 ## Full-stack web application for managing exams and assessments. 
 
-This application models the workflow of academic assessments. Organizers create and oversee tests, monitor results, and keep track of pending corrections. Correctors focus on evaluating assigned tests, while students gain transparency into their test results and performance status, such as whether they are progressing well or struggling.
+Exambyte is a web-based testing system that can be used to create, conduct, and correct tests with different question types, such as multiple choice and free text. Correction is partly manual and partly automated, and students are always informed about their current status and admission status. A key feature is role-based authentication via GitHub OAuth with a distinction between the roles of student, organizer, and corrector. This application is an improvement on ILIAS, as students are informed transparently about their admission status, while correctors and organizers are provided with various tools for general exam administration.
 
 --- 
 ## Get started
@@ -35,9 +35,12 @@ To access protected areas after logging in, enter your GitHub username in the sr
 ```bash
 exambyte:
   rollen:
-    studenten: YourGithubName
-    korrektoren: YourGithubName
-    organisatoren: YourGithubName
+    studenten:
+      - YourGithubName
+    korrektoren:
+      - YourGithubName
+    organisatoren:
+      - YourGithubName
 ```
     
 ### 4. Start Docker 
@@ -62,9 +65,12 @@ http://localhost:8080
 ## Features 
 - User authentication and authorization with OAuth2
 - Role-based access control (student/grader/organizer)
-- Server-side rendered frontend with Thymeleaf
-- SQL-based persistence with explicit JDBC access
-- Database versioning and migrations with Flyway
+- Exams with multiple-choice and free-text questions
+- Comprehensive test management: create, conduct, and evaluate exams
+- Automated evaluation of multiple-choice questions
+- Manual evaluation of free-text questions by graders, including feedback option
+- Transparent admission status display for students
+- Detailed overviews for tracking correction status and exam results for organizers
 
 ---
 
@@ -76,6 +82,12 @@ http://localhost:8080
 - JDBC
 - Flyway
 - Gradle
+- Deployed as a Docker container, managed with Docker Compose
+- Validation
+
+### Testing
+- JUnit
+- ArchUnit
 
 ### Frontend 
 - Thymeleaf
@@ -88,12 +100,14 @@ http://localhost:8080
 --- 
 
 ### Background 
-This project is based on a university project, whereby the task was set by the instructor and all implementation was carried out by [Miran](https://github.com/Narr1m) and [Kerstin](https://github.com/Kxrstin). 
+This project is based on a university project, whereby the tasks were set by the instructor and all implementation was carried out by [Miran](https://github.com/Narr1m) and [Kerstin](https://github.com/Kxrstin). 
 
 --- 
 
-### What we learned 
-Test-driven development and structuring of larger Java applications with clean architecture Implementation of secure authentication and authorization processes Design of web-based services and their integration into server-side user interfaces Management of relational databases and migrations 
+### Results and experience
+Exambyte represents an improvement on its predecessor ILIAS, as particular attention has been paid to creating a user-friendly interface and transparent communication of results. In addition, role-based access via OAuth2 ensures simple but secure user management.
+In this project, we learned how to develop and structure a larger Java application in a test-driven manner. We implemented a web-based service with clean architecture and best practices, and learned how to integrate it into server-side user interfaces and relational database management.
+
 
 ---
 
@@ -103,13 +117,14 @@ The application follows the **Onion Architecture**:
 - **Application layer** Implements use cases and application-specific logic.
 - **Presentation layer** Spring MVC Controllers and Thymeleaf templates.
 Dependencies refer strictly inward to keep domain logic independent and testable.
+This architecture was enforced and verified using ArchUnit tests
 
 
 ## Images
 
 This project uses graphics from external providers. The rights belong to the respective authors:
 
-* **Logo (ExamByte)**: Created via [Design.com](https://www.design.com/maker/logo/creative-document-file-17357?text=ExamByte&isVariation=True)
+* **Logo (Exambyte)**: Created via [Design.com](https://www.design.com/maker/logo/creative-document-file-17357?text=ExamByte&isVariation=True)
 * **Green check mark**: [iStock / Getty Images](https://www.istockphoto.com/de/vektor/h%C3%A4kchensymbol-vektor-design-vorlage-in-wei%C3%9Fem-hintergrund-gm1435212785-476685817)
 * **Red cross**: [Vecteezy](https://www.vecteezy.com/vector-art/28579407-red-cross-wrong-symbol-incorrect-sign-error-in-circle)
 * **Warning symbol**: [Freepik](https://www.freepik.com/premium-vector/warning-sign-with-exclamation-mark-vector-illustration-attention-symbol-information-flat-icon_129857701.htm)
