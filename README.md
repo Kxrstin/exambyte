@@ -85,14 +85,6 @@ http://localhost:8080
 - Deployed as a Docker container, managed with Docker Compose
 - Validation
 
-## Testing Strategy
-The application is tested using a comprehensive testing setup:
-
-- **JUnit 5** for unit and integration tests
-- **ArchUnit** to enforce architectural rules (Onion Architecture)
-- **Spring Security Test** for authentication and authorization scenarios
-
-
 ### Frontend 
 - Thymeleaf
 - HTML
@@ -101,17 +93,14 @@ The application is tested using a comprehensive testing setup:
 ### Database 
 - Relational SQL database (PostgreSQL)
 
---- 
+---
 
-### Background 
-This project is based on a university project, whereby the tasks were set by the instructor and all implementation was carried out by [Miran](https://github.com/Narr1m) and [Kerstin](https://github.com/Kxrstin). 
+## Testing Strategy
+The application is tested using a comprehensive testing setup:
 
---- 
-
-### Results and experience
-Exambyte represents an improvement on its predecessor ILIAS, as particular attention has been paid to creating a user-friendly interface and transparent communication of results. In addition, role-based access via OAuth2 ensures simple but secure user management.
-In this project, we learned how to develop and structure a larger Java application in a test-driven manner. We implemented a web-based service with clean architecture and best practices, and learned how to integrate it into server-side user interfaces and relational database management.
-
+- **JUnit 5** for unit and integration tests
+- **ArchUnit** to enforce architectural rules (Onion Architecture)
+- **Spring Security Test** for authentication and authorization scenarios
 
 ---
 
@@ -124,6 +113,18 @@ The application follows the **Onion Architecture**:
 Dependencies refer strictly inward to keep domain logic independent and testable.
 This architecture was enforced and verified using ArchUnit tests
 
+--- 
+
+## Background 
+This project is based on a university project, whereby the tasks were set by the instructor and all implementation was carried out by [Miran](https://github.com/Narr1m) and [Kerstin](https://github.com/Kxrstin). 
+
+--- 
+
+## Results and experience
+Exambyte represents an improvement on its predecessor ILIAS, as particular attention has been paid to creating a user-friendly interface and transparent communication of results. In addition, role-based access via OAuth2 ensures simple but secure user management.
+In this project, we learned how to develop and structure a larger Java application in a test-driven manner. We implemented a web-based service with clean architecture and best practices, and learned how to integrate it into server-side user interfaces and relational database management.
+
+---
 
 ## Images
 
