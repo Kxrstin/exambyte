@@ -85,9 +85,13 @@ http://localhost:8080
 - Deployed as a Docker container, managed with Docker Compose
 - Validation
 
-### Testing
-- JUnit
-- ArchUnit
+## Testing Strategy
+The application is tested using a comprehensive testing setup:
+
+- **JUnit 5** for unit and integration tests
+- **ArchUnit** to enforce architectural rules (Onion Architecture)
+- **Spring Security Test** for authentication and authorization scenarios
+
 
 ### Frontend 
 - Thymeleaf
@@ -115,7 +119,8 @@ In this project, we learned how to develop and structure a larger Java applicati
 The application follows the **Onion Architecture**: 
 - **Domain layer** Contains the core business logic (Exams, Questions, ...) and domain models.
 - **Application layer** Implements use cases and application-specific logic.
-- **Presentation layer** Spring MVC Controllers and Thymeleaf templates.
+- **Presentation layer** Spring MVC Controllers and Thymeleaf templates.  
+  
 Dependencies refer strictly inward to keep domain logic independent and testable.
 This architecture was enforced and verified using ArchUnit tests
 
