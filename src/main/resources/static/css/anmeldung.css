@@ -189,7 +189,7 @@ main > p span {
 }
 
 .buttonAnmeldung-o {
- background: linear-gradient(135deg, #b5f1d1, #85f6ad);
+ background: linear-gradient(135deg, #76bc95, #58d684);
 }
 
 /* Anmelde-Buttons */
@@ -248,7 +248,7 @@ main > p span {
 }
 
 .buttonAnmeldung-s {
-    background: linear-gradient(135deg, #c7a5ef, #c980f4);
+    background: linear-gradient(135deg, #b394d6, #7e41a1);
 }
 
 /* Anmelde-Buttons */
@@ -307,7 +307,7 @@ main > p span {
 }
 
 .buttonAnmeldung-k {
-    background: linear-gradient(135deg, #b6e7fb, #77b4f1);
+    background: linear-gradient(135deg, #92b7c6, #5a8dc3);
 }
 
 /* Info-Box für noRole */

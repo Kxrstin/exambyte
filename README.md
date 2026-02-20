@@ -139,6 +139,11 @@ The application is tested using a comprehensive testing setup:
 - **ArchUnit** to enforce architectural rules (Onion Architecture)
 - **Spring Security Test** for authentication and authorization scenarios
 
+Run tests locally:
+```bash
+./gradlew test
+``` 
+
 ---
 
 ## Architecture 
