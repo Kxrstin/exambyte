@@ -10,7 +10,8 @@ Follow these steps to start the project in your local environment (e.g., WSL or 
 ### 1. Requirements 
 * **Java 21** (JDK)
 * **Docker & Docker Desktop**
-* **GitHub OAuth App**:
+
+**GitHub OAuth App**:
 * Create a new OAuth app under [GitHub Developer Settings](https://github.com/settings/developers).
 * **Homepage URL**:
   ```bash
@@ -61,6 +62,42 @@ http://localhost:8080
 ```
 
 --- 
+## Demo & Screenshots
+
+<table>
+  <tr>
+    <td align="center"><b>Context delimitation</b></td>
+  </tr>
+  <tr>
+    <td><img src="docs/kontextabgrenzung.png" width="800px" alt="Context delimitation"></td>
+
+  </tr>
+  <tr>
+    <td align="center"><b>Organisator-Page</b></td>
+    <td align="center"><b>Update Test</b></td>
+  </tr>
+  <tr>
+    <td><img src="docs/orga_page.png" width="350px" alt="Screenshot of Organisator Main Page"></td>
+    <td><img src="docs/organisator_testvorschau.png" width="350px" alt="Screenshot of updating a test"></td>
+  </tr>
+  <tr>
+    <td align="center"><b>Studi-Page</b></td>
+    <td align="center"><b>Edit test</b></td>
+  </tr>
+  <tr>
+    <td><img src="docs/studi_page.png" width="350px" alt="Screenshot of the student main page with status and tests"></td>
+    <td><img src="docs/student_test.png" width="350px" alt="Screenshot of an editable student test"></td>
+  </tr> 
+ <tr>
+    <td align="center"><b>Korrektor-Page</b></td>
+    <td align="center"><b>Grade test</b></td>
+  </tr>
+  <tr>
+    <td><img src="docs/korrektor_page.png" width="350px" alt="Screenshot of the korrektor main page with not graded tests"></td>
+    <td><img src="docs/korrektor-test.png" width="350px" alt="Screenshot of a test that is being graded"></td>
+  </tr> 
+</table>
+---
 
 ## Features 
 - User authentication and authorization with OAuth2
