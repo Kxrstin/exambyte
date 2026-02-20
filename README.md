@@ -62,7 +62,7 @@ http://localhost:8080
 ```
 
 --- 
-## Demo & Screenshots
+## 📸 A brief look at the application
 
 <table>
   <tr>
