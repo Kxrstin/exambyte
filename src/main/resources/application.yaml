@@ -42,6 +42,9 @@ spring:
 exambyte:
   rollen:
     # ----------------- Enter your GitHub name here -----------------
-    studenten: Kxrstin
-    korrektoren: Kxrstin
-    organisatoren: Kxrstin
+    studenten:
+      - YourGithubName
+    korrektoren:
+      - YourGithubName
+    organisatoren:
+      - YourGithubName

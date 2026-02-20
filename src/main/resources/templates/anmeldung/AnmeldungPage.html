@@ -27,19 +27,19 @@
         <div class="divAnmeldung">
         <span th:if="${isStudent}">
             <form method="get" th:action="@{/studenten/landingPage}">
-                <button class="buttonAnmeldung-s" type="submit">Weiter zu Exambyte für Studenten</button>
+                <button class="buttonAnmeldung-s" type="submit">Weiter zu ExamByte für Studenten</button>
             </form>
         </span>
 
             <span th:if="${isOrganisator}">
             <form method="get" th:action="@{/organisatoren/landingPage}">
-                  <button class="buttonAnmeldung-o" type="submit">Weiter zu Exambyte für Organisatoren</button>
+                  <button class="buttonAnmeldung-o" type="submit">Weiter zu ExamByte für Organisatoren</button>
             </form>
         </span>
 
             <span th:if="${isKorrektor}">
             <form method="get" th:action="@{/korrektoren/landingPage}">
-                <button class="buttonAnmeldung-k" type="submit">Weiter zu Exambyte für Korrektoren</button>
+                <button class="buttonAnmeldung-k" type="submit">Weiter zu ExamByte für Korrektoren</button>
             </form>
         </span>
 
