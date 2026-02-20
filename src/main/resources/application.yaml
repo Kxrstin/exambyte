@@ -1,10 +1,10 @@
 logging:
   level:
-    root: error
-    sql: error
-    org.springframework.web: error
-    org.springframework.jdbc: error
-    org.flywaydb: error
+    root: warn
+    sql: warn
+    org.springframework.web: warn
+    org.springframework.jdbc: warn
+    org.flywaydb: warn
 
 server:
   port: 8080
@@ -42,6 +42,6 @@ spring:
 exambyte:
   rollen:
     # ----------------- Enter your GitHub name here -----------------
-    studenten: YourGithubName
-    korrektoren: YourGithubName
-    organisatoren: YourGithubName
+    studenten: Kxrstin
+    korrektoren: Kxrstin
+    organisatoren: Kxrstin

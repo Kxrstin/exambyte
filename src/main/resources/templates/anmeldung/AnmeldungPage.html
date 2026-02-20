@@ -7,44 +7,46 @@
               th:href="@{/Images/Logo/ExamByteLogoOhneUnterschrift.png}">
         <link rel = "stylesheet" th:href="@{/css/bootstrap.min.css}"
               href="../static/css/bootstrap.min.css">
-        <meta charset="UTF-8">
-        <link rel="stylesheet" href="../../static/css/ExambyteStylesheet.css"
-               th:href="@{/css/ExambyteStylesheet.css}">
+        <meta charset="UTF-16">
+        <link rel="stylesheet" href="../../static/css/anmeldung.css"
+               th:href="@{/css/anmeldung.css}">
     </head>
 
     <body>
-    <h1>
+    <header>
+        <section class="head">
+            <h1>ExamByte - Anmeldung</h1>
+        </section>
         <img class="imgLogo"
              th:src="@{/Images/Logo/ExamByteLogo.png}"
              src="../../static/Images/Logo/ExamByteLogo.png"
              alt="">
-        ExamByte - Anmeldung
-    </h1>
-
-    <p> Willkommen bei Exambyte, <span th:text="${login}">FooLogin</span>!</p>
-
-    <div class="divAnmeldung">
+    </header>
+    <main>
+        <p>Willkommen bei ExamByte, <span th:text="${login}">FooLogin</span>!</p>
+        <div class="divAnmeldung">
         <span th:if="${isStudent}">
             <form method="get" th:action="@{/studenten/landingPage}">
-                <button class="buttonAnmeldung" type="submit">➜  Weiter zu Exambyte für Studenten</button>
+                <button class="buttonAnmeldung-s" type="submit">Weiter zu Exambyte für Studenten</button>
             </form>
         </span>
 
-        <span th:if="${isOrganisator}">
+            <span th:if="${isOrganisator}">
             <form method="get" th:action="@{/organisatoren/landingPage}">
-                  <button class="buttonAnmeldung" type="submit">➜  Weiter zu Exambyte für Organisatoren</button>
+                  <button class="buttonAnmeldung-o" type="submit">Weiter zu Exambyte für Organisatoren</button>
             </form>
         </span>
 
-        <span th:if="${isKorrektor}">
+            <span th:if="${isKorrektor}">
             <form method="get" th:action="@{/korrektoren/landingPage}">
-                <button class="buttonAnmeldung" type="submit">➜  Weiter zu Exambyte für Korrektoren</button>
+                <button class="buttonAnmeldung-k" type="submit">Weiter zu Exambyte für Korrektoren</button>
             </form>
         </span>
 
-        <span th:if="${noRole}">
+            <span th:if="${noRole}">
             <p class="bg-info"> Nur Korrektoren, Studenten und Organisatoren haben Zugriff auf die Website! </p>
         </span>
-    </div>
+        </div>
+    </main>
     </body>
 </html>
