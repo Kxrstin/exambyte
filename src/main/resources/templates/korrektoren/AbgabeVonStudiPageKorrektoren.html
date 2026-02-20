@@ -1,34 +1,43 @@
 <html lang="de">
     <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title> ExamByte | Korrektur </title>
         <link rel="icon" type="image/png"
               href="../../static/Images/Logo/ExamByteLogoOhneUnterschrift.png"
               th:href="@{/Images/Logo/ExamByteLogoOhneUnterschrift.png}">
-        <link rel="stylesheet" href="../../static/css/ExambyteStylesheet.css"
-              th:href="@{/css/ExambyteStylesheet.css}">
-        <link rel = "stylesheet" th:href="@{/css/bootstrap.min.css}"
-              href="../../static/css/bootstrap.min.css">
+        <link rel="stylesheet" href="../../static/css/korrektor_page.css"
+              th:href="@{/css/korrektor_page.css}">
+        <meta charset="UFT-16">
     </head>
     <body>
-        <h1>
-            <img class="imgLogo"
-                 th:src="@{/Images/Logo/ExamByteLogo.png}"
-                 src="../../static/Images/Logo/ExamByteLogo.png"
-                 alt="">
-            ExamByte - Korrektur
-        </h1>
+        <div class="container">
+            <header class="main-header">
+                <div class="header-left">
+                    <h1>ExamByte - Korrektur</h1>
+                </div>
+                <img class="imgLogo"
+                     th:src="@{/Images/Logo/ExamByteLogo.png}"
+                     src="../../static/Images/Logo/ExamByteLogo.png"
+                     alt="">
+            </header>
 
-        <span th:if="${abgabeVorhanden}">
-            <p> Aufgabe: <span th:text="${abgabe.getAufgabenstellung()}"> Was ist 2 + 2? </span></p>
-            <p> Antwort: <span th:text="${abgabe.getStudiantwort()}"> 4 </span></p>
-            <p> Maximale Punktzahl: <span th:text="${abgabe.getMaxPunktzahl()}"> 2 </span> Punkte</p>
-            <form method="post" th:action="@{/korrektoren/landingPage/zeigeAbgabe/{abgabeId}(abgabeId=${abgabeId})}" class="form-check">
-                <label for="feedbackId"> Feedback:</label>
-                <textarea class="form-control" id="feedbackId" name="feedbackText"></textarea> <br>
-                <label for="punkteId"> Punktzahl:</label>
-                <input class="form-control" type="number" id="punkteId" name="punkteVergabe" min="0" th:max="${abgabe.getMaxPunktzahl()}" th:value="${punkteVergabe}">
-                <button class="btnBestaetigen" type="submit"> Abschicken </button>
-            </form>
-        </span>
+            <main>
+               <div th:if="${abgabeVorhanden}">
+                    <p class="aufgabenstellung"><strong>Aufgabe: </strong><span class="aufgabenstellung" th:text="${abgabe.getAufgabenstellung()}"> Was ist 2 + 2? </span></p>
+                    <p class="aufgabenstellung"><strong>Antwort: </strong><span class="aufgabenstellung" th:text="${abgabe.getStudiantwort()}"> 4 </span></p>
+                    <p class="aufgabenstellung"><strong>Maximale Punktzahl: </strong><span class="aufgabenstellung" th:text="${abgabe.getMaxPunktzahl()}"> 2 </span> Punkte</p>
+
+                   <form class="korrekturContainer" method="post" th:action="@{/korrektoren/landingPage/zeigeAbgabe/{abgabeId}(abgabeId=${abgabeId})}">
+                        <label for="feedbackId"> Feedback:</label>
+                        <textarea class="textareaclass" id="feedbackId" name="feedbackText"></textarea> <br>
+                        <label class="form-control" for="punkteId"> Punktzahl:</label>
+                        <input class="input-class" type="number" id="punkteId" name="punkteVergabe" min="0" th:max="${abgabe.getMaxPunktzahl()}" th:value="${punkteVergabe}"><br>
+                       <br>
+                       <button class="btnSpeichern" type="submit"> Abschicken </button>
+                    </form>
+
+                </div>
+            </main>
+        </div>
     </body>
 </html>

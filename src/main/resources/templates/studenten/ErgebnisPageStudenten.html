@@ -1,34 +1,57 @@
 <html lang="de">
     <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title> ExamByte | Ergebnis </title>
-        <link rel="icon" type="image/png" th:href="@{/Images/Logo/ExamByteLogoOhneUnterschrift.png}"
-              href="../../static/Images/Logo/ExamByteLogoOhneUnterschrift.png">
         <link rel="icon" type="image/png"
               href="../../static/Images/Logo/ExamByteLogoOhneUnterschrift.png"
               th:href="@{/Images/Logo/ExamByteLogoOhneUnterschrift.png}">
-        <link rel="stylesheet" href="../../static/css/ExambyteStylesheet.css"
-              th:href="@{/css/ExambyteStylesheet.css}">
-        <link rel = "stylesheet" th:href="@{/css/bootstrap.min.css}"
-              href="../../static/css/bootstrap.min.css">
-        <meta charset="UTF-8">
+        <link rel="stylesheet" href="../../static/css/studenten_page.css"
+              th:href="@{/css/studenten_page.css}">
+        <meta charset="UFT-16">
     </head>
 
     <body>
-    <h1>
-        <a class="navLink" th:href="@{/}">Zur Anmeldung</a>
-        <a class="navLink-2" th:href="@{/studenten/landingPage}">Zur Landing Page</a>
-        <img class="imgLogo"
-             th:src="@{/Images/Logo/ExamByteLogo.png}"
-             src="../../static/Images/Logo/ExamByteLogo.png"
-             alt="">
-        ExamByte - Ergebnis
-    </h1>
-            <ul>
-                <li class="list-group-item" > <span th:text="${ergebnisZeitpunkt}">Ergebnisveröffentlichung: 14.12.2024</span> </li>
-                <li class="list-group-item" > Ergebnis: <span th:text="${ergebnisInProzent}">Ergebnis: 71,23% korrekt</span> <br> </li>
-                <li class="list-group-item" > Punkte: <span th:text="${punktzahl}">Punkte: 5 / 7 </span> </li>
-                <li class="list-group-item" > <span th:text="${testBestanden}">Sie haben den Test bestanden!</span> </li>
-            </ul>
+    <div class="container">
+        <header class="main-header">
+            <div class="header-left">
+                <a class="navLink" th:href="@{/}">Login</a>
+                <a class="navLink" th:href="@{/studenten/landingPage}">Zur Übersicht</a>
+                <h1>ExamByte - Ergebnis</h1>
+            </div>
 
+            <img class="imgLogo"
+                 th:src="@{/Images/Logo/ExamByteLogo.png}"
+                 src="../../static/Images/Logo/ExamByteLogo.png"
+                 alt="ExamByte Logo">
+        </header>
+
+        <main>
+
+            <section class="section-title">
+                <h2>Testangaben</h2>
+                <ul class="test-list">
+                    <li class="test-item">
+                        <span class="item-icon">⏰</span>
+                        <span class="item-label">Ergebniszeitpunkt:</span>
+                        <span class="item-value" th:text="${ergebnisZeitpunkt}">14.11.2024, 12:00 Uhr</span>
+                    </li>
+                    <li class="test-item">
+                        <span class="item-icon">🎯</span>
+                        <span class="item-label">Ergebnis:</span>
+                        <span class="item-value" th:text="${ergebnisInProzent}">70%</span>
+                    </li>
+                    <li class="test-item">
+                        <span class="item-icon">📊</span>
+                        <span class="item-label">Punktzahl: </span>
+                        <span class="item-value" th:text="${punktzahl}"> 5 / 7</span>
+                    </li>
+                    <li class="test-item">
+                        <span class="item-icon">📋</span>
+                        <span class="item-label">Status:</span>
+                        <span class="item-value" th:text="${testBestanden}"> Sie haben den Test bestanden!</span>
+                    </li>
+                </ul>
+        </main>
+    </div>
     </body>
 </html>

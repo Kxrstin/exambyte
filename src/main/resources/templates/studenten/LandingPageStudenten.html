@@ -1,76 +1,96 @@
 <html lang="de">
     <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title> ExamByte | Landing Page </title>
         <link rel="icon" type="image/png"
               href="../../static/Images/Logo/ExamByteLogoOhneUnterschrift.png"
               th:href="@{/Images/Logo/ExamByteLogoOhneUnterschrift.png}">
-        <link rel="stylesheet" href="../../static/css/ExambyteStylesheet.css"
-              th:href="@{/css/ExambyteStylesheet.css}">
-        <link rel = "stylesheet" th:href="@{/css/bootstrap.min.css}"
-              href="../../static/css/bootstrap.min.css">
+        <link rel="stylesheet" href="../../static/css/studenten_page.css"
+              th:href="@{/css/studenten_page.css}">
+        <meta charset="UFT-16">
     </head>
     <body>
-    <h1>
-        <a class="navLink" th:href="@{/}">Zur Anmeldung</a>
-        <img class="imgLogo" th:src="@{/Images/Logo/ExamByteLogo.png}" src="../../static/Images/Logo/ExamByteLogo.png" alt="" />
-        ExamByte
-    </h1>
 
-    <h2> Zulassungsstatus</h2>
+        <div class="container">
+            <header class="main-header">
+                <div class="header-left">
+                    <a class="navLink" th:href="@{/}">Zur Anmeldung</a>
+                    <h1> ExamByte - Übersicht</h1>
+                </div>
+                    <img class="imgLogo" th:src="@{/Images/Logo/ExamByteLogo.png}" src="../../static/Images/Logo/ExamByteLogo.png" alt="" />
+            </header>
+            <main>
+                <section class="section-title">
+                    <h2 class="section-title">Zulassungsstatus</h2>
 
-    <div th:if="${guterKurs}">
-        <img class="imgGuterKurs" th:src="@{/Images/Zulassung/GuterKurs.jpg}" src="../../static/Images/Zulassung/GuterKurs.jpg" alt="Foto von einem grünen Haken." />
-        <span class="zulassungsstatus-guterKurs">Guter Kurs, du hast bislang alle Tests bestanden!</span>
-    </div>
+                    <div class="zulassung"  th:if="${guterKurs}">
+                        <span class="feedback">
+                            <img class="imgStatus" th:src="@{/Images/Zulassung/GuterKurs.jpg}" src="../../static/Images/Zulassung/GuterKurs.jpg" alt="Foto von einem grünen Haken." />
+                            Guter Kurs, du hast bislang alle Tests bestanden!
+                        </span>
+                    </div>
 
-    <div th:if="${vorsicht}">
-        <img class="imgVorsicht" th:src="@{/Images/Zulassung/WarnSymbol.jpg}" src="../../static/Images/Zulassung/WarnSymbol.jpg" alt="Foto eines Warn Symbols mit einem Ausrufezeichen." />
-        <span class="zulassungsstatus-vorsicht"> Vorsicht! Du hast einen Test bislang nicht bestanden!</span>
-    </div>
+                    <div class="zulassung"  th:if="${vorsicht}">
+                        <span class="feedback">
+                            <img class="imgStatus" th:src="@{/Images/Zulassung/WarnSymbol.jpg}" src="../../static/Images/Zulassung/WarnSymbol.jpg" alt="Foto eines Warn Symbols mit einem Ausrufezeichen." />
+                            Vorsicht! Du hast einen Test bislang nicht bestanden!
+                        </span>
+                    </div>
 
-    <div th:if="${vorsichtiger}">
-        <img class="imgVorsicht" th:src="@{/Images/Zulassung/WarnSymbol.jpg}" src="../../static/Images/Zulassung/WarnSymbol.jpg" alt="Foto eines Warn Symbols mit einem Ausrufezeichen." />
-        <span class="zulassungsstatus-vorsichtiger"> Wenn du noch einen weiteren Test nicht bestehst, kannst du die Zulassung nicht mehr erreichen!</span>
-    </div>
 
-    <div th:if="${fail}">
-        <img class="imgFail" th:src="@{/Images/Zulassung/FailSymbol.jpg}" src="../../static/Images/Zulassung/FailSymbol.jpg" alt="Foto eines Fail Symbols mit einer roten Fläche und einem Kreuz drin." />
-        <span class="zulassungsstatus-fail">"Zulassungsstatus nicht erreicht! Du hast mehr als 2 Tests nicht bestanden!" </span>
-    </div>
+                    <div class="zulassung"  th:if="${vorsichtiger}">
+                        <span class="feedback">
+                            <img class="imgStatus" th:src="@{/Images/Zulassung/WarnSymbol.jpg}" src="../../static/Images/Zulassung/WarnSymbol.jpg" alt="Foto eines Warn Symbols mit einem Ausrufezeichen." />
+                            Wenn du noch einen weiteren Test nicht bestehst, kannst du die Zulassung nicht mehr erreichen!
+                        </span>
+                    </div>
 
-    <div th:if="${zulassungErreicht}">
-        <img class="imgGuterKurs" th:src="@{/Images/Zulassung/GuterKurs.jpg}" src="../../static/Images/Zulassung/GuterKurs.jpg" alt="Foto eines Fail Symbols mit einer roten Fläche und einem Kreuz drin." />
-        <span class="zulassungsstatus-guterKurs"> Zulassung erreicht. Herzlichen Glückwunsch!</span>
-    </div>
+                    <div class="zulassung"  th:if="${fail}">
+                        <span class="feedback">
+                            <img class="imgStatus" th:src="@{/Images/Zulassung/FailSymbol.jpg}" src="../../static/Images/Zulassung/FailSymbol.jpg" alt="Foto eines Fail Symbols mit einer roten Fläche und einem Kreuz drin." />
+                            Zulassungsstatus nicht erreicht! Du hast mehr als 2 Tests nicht bestanden!
+                        </span>
+                    </div>
 
-    <div th:if="${zulassungNichtErreicht}">
-        <img class="imgFail" th:src="@{/Images/Zulassung/FailSymbol.jpg}" src="../../static/Images/Zulassung/FailSymbol.jpg" alt="Foto eines Fail Symbols mit einer roten Fläche und einem Kreuz drin." />
-        <span class="zulassungsstatus-fail"> Zulassung nicht erreicht.</span>
-    </div>
+                    <div class="zulassung"  th:if="${fail}">
+                        <span class="feedback">
+                            <img class="imgStatus" th:src="@{/Images/Zulassung/GuterKurs.jpg}" src="../../static/Images/Zulassung/GuterKurs.jpg" alt="Foto eines Fail Symbols mit einer roten Fläche und einem Kreuz drin." />
+                            Zulassung erreicht. Herzlichen Glückwunsch!
+                        </span>
+                    </div>
 
-    <h3> Zu bearbeitende Tests: </h3>
 
-    <ul th:remove="all-but-first">
-        <li class="list-group-item" th:each="test : ${bearbeitbareTests}">
-            <form th:action="@{/studenten/landingPage/zeigeErgebnis/{id}(id=${test.getId()})}" class="form-group">
-                <a class="korrektorenLink" th:href="@{/studenten/landingPage/zeigeTest/{id}(id=${test.getId()})}">
-                    <span th:text="${test.getTitel()}"> Test 1</span></a> <br>
-            </form>
-        </li>
+                    <div class="zulassung" th:if="${zulassungNichtErreicht}">
+                        <span class="feedback">
+                            <img class="imgStatus" th:src="@{/Images/Zulassung/FailSymbol.jpg}" src="../../static/Images/Zulassung/FailSymbol.jpg" alt="Foto eines Fail Symbols mit einer roten Fläche und einem Kreuz drin." />
+                            Zulassung nicht erreicht.
+                        </span>
+                    </div>
 
-        <li class="list-group-item"> <a href="/studenten/landingPage/zeigeTest/2">Test 2</a></li>
-        <li class="list-group-item"> <a href="/studenten/landingPage/zeigeTest/3">Test 3</a></li>
-    </ul>
-    <br>
-    <h3> Abgelaufene Tests: </h3>
-    <ul th:remove="all-but-first">
-        <li class="list-group-item" th:each="test : ${abgelaufeneTests}">
-            <form th:action="@{/studenten/landingPage/zeigeErgebnis/{id}(id=${test.getId()})}" class="form-group">
-                <a class="korrektorenLink" th:href="@{/studenten/landingPage/zeigeTest/{id}(id=${test.getId()})}">
-                    <span th:text="${test.getTitel()}"> Test 1</span></a> <br>
-                <button class="btnStudi" type="submit"> Ergebnis </button>
-            </form>
-        </li>
-    </ul>
+                    <h3 class="section-title"> Aktuelle Tests </h3>
+
+                    <ul class="test-list" th:remove="all-but-first">
+                        <li class="test-item" th:each="test : ${bearbeitbareTests}">
+                            <a class="korrektorenLink" th:href="@{/studenten/landingPage/zeigeTest/{id}(id=${test.getId()})}">
+                                <span class="test-name" th:text="${test.getTitel()}"> Test 1</span></a> <br>
+                        </li>
+
+                        <li class="list-group-item"> <a href="/studenten/landingPage/zeigeTest/2">Test 2</a></li>
+                        <li class="list-group-item"> <a href="/studenten/landingPage/zeigeTest/3">Test 3</a></li>
+                    </ul>
+                    <h3 class="section-title"> Abgelaufene Tests </h3>
+                    <ul class="test-list" th:remove="all-but-first">
+                        <li class="test-item" th:each="test : ${abgelaufeneTests}">
+                            <a class="korrektorenLink" th:href="@{/studenten/landingPage/zeigeTest/{id}(id=${test.getId()})}">
+                                <span class="test-name" th:text="${test.getTitel()}"> Test 1</span></a> <br>
+
+                            <form th:action="@{/studenten/landingPage/zeigeErgebnis/{id}(id=${test.getId()})}" class="form-group">
+                                <button class="btnBestaetigen" type="submit"> Ergebnis </button>
+                            </form>
+                        </li>
+                    </ul>
+                </section>
+            </main>
+        </div>
     </body>
 </html>

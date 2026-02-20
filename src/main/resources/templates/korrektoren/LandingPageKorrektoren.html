@@ -1,34 +1,44 @@
 <html lang="de">
     <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title> ExamByte | Übersicht </title>
         <link rel="icon" type="image/png"
               href="../../static/Images/Logo/ExamByteLogoOhneUnterschrift.png"
               th:href="@{/Images/Logo/ExamByteLogoOhneUnterschrift.png}">
-        <link rel="stylesheet" href="../../static/css/ExambyteStylesheet.css"
-              th:href="@{/css/ExambyteStylesheet.css}">
-        <link rel = "stylesheet" th:href="@{/css/bootstrap.min.css}"
-              href="../../static/css/bootstrap.min.css">
+        <link rel="stylesheet" href="../../static/css/korrektor_page.css"
+              th:href="@{/css/korrektor_page.css}">
+        <meta charset="UFT-16">
     </head>
 <body>
-    <h1>
-        <a class="navLink" th:href="@{/}">Zur Anmeldung</a>
-        <img class="imgLogo"
-             th:src="@{/Images/Logo/ExamByteLogo.png}"
-             src="../../static/Images/Logo/ExamByteLogo.png"
-             alt="">
-        ExamByte - Übersicht
-    </h1>
+    <div class="container">
+        <header class="main-header">
+            <div class="header-left">
+                <a class="navLink" th:href="@{/}">Login</a>
+                <h1>ExamByte - Übersicht</h1>
+            </div>
 
-    <h2> Testtitel der zu korrigierenden Tests: </h2>
-    <ul>
-        <li class="list-group-item" th:each="testname : ${testnamen}">
-            <form class="form-group">
-                <a class="korrektorenLink" th:href="@{/korrektoren/landingPage/zeigeAufgaben/{testname}(testname=${testname.replace(' ', '_')})}">
-                    <span th:text="${testname}"> Test 1</span></a> <br>
-            </form>
-        </li>
-    </ul>
-    <span th:if="${nichtsZuKorrigieren}"><p class="nichtsZuKorrigieren"> Es gibt nichts zu korrigieren.</p></span>
+            <img class="imgLogo"
+                     th:src="@{/Images/Logo/ExamByteLogo.png}"
+                     src="../../static/Images/Logo/ExamByteLogo.png"
+                     alt="ExamByte Logo">
+        </header>
 
+        <main>
+            <section class="section-title">
+                <h2 class="section-title">Anstehende Korrekturen</h2>
+            <ul class="test-list">
+                <li class="test-item" th:each="testname : ${testnamen}">
+                    <a class="korrektorenLink" th:href="@{/korrektoren/landingPage/zeigeAufgaben/{testname}(testname=${testname.replace(' ', '_')})}">
+                        <span class="test-name" th:text="${testname}"> Test 1</span>
+                    </a>
+                </li>
+            </ul>
+
+            <div class="info-box" th:if="${nichtsZuKorrigieren}">
+                <p>Alles erledigt! Es gibt aktuell nichts zu korrigieren.</p>
+            </div>
+            </section>
+        </main>
+    </div>
 </body>
 </html>

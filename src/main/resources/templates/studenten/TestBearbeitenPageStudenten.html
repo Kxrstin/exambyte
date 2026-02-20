@@ -1,88 +1,93 @@
 <html lang="de">
     <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title> ExamByte | Testbearbeitung </title>
-        <link rel = "stylesheet" th:href="@{/css/bootstrap.min.css}"
-              href="../../static/css/bootstrap.min.css">
-        <link rel="stylesheet" href="../../static/css/ExambyteStylesheet.css"
-              th:href="@{/css/ExambyteStylesheet.css}">
         <link rel="icon" type="image/png"
               href="../../static/Images/Logo/ExamByteLogoOhneUnterschrift.png"
               th:href="@{/Images/Logo/ExamByteLogoOhneUnterschrift.png}">
-        <meta charset="UTF-8">
+        <link rel="stylesheet" href="../../static/css/studenten_page.css"
+              th:href="@{/css/studenten_page.css}">
+        <meta charset="UFT-16">
     </head>
 
     <body>
-
-    <h1>
-        <a class="navLink" th:href="@{/}">Zur Anmeldung</a>
-        <a class="navLink-2" th:href="@{/studenten/landingPage}">Zur Landing Page</a>
-        <img class="imgLogo"
-             th:src="@{/Images/Logo/ExamByteLogo.png}"
-             src="../../static/Images/Logo/ExamByteLogo.png"
-             alt="">
-        ExamByte - Testbearbeitung
-    </h1>
-
-    <p class="aufgabenstellung" th:text="${aufgabenTitel}"> Titel der Aufgabe</p>
-
-    <span th:if="${freitextFrage}">
-            <form class="form-check" method="post" th:action="@{/studenten/testBearbeitung/{id}/{aufgabe}(id=${id}, aufgabe=${aufgabe})}">
-                <label class="aufgabenstellung" for="idfreitextfrage" th:text="${aufgabenstellung}"> Fragestellung: </label> <br>
-                <span th:unless="${isAbgelaufen}">
-                    <textarea class="form-control" id="idfreitextfrage" name="studiFAntwort" th:text="${studiFAntwort}"> </textarea>
-                    <button class="btnBestaetigen" type="submit">Bestätigen</button>
-                </span>
-            </form>
-
-
-            <span th:if="${isAbgelaufen}">
-                <p class="antwort" th:text="${studiFAntwort}"> Die Studi Antwort. </p>
-                <div class="studiAntwortUndFeedback">
-                    <p class="feedback" th:text="${feedback}"> Das Feedback vom Korrektor</p>
-                    <p class="feedback" th:text="${erreichtePunkte}"> Die erreichten Punkte</p>
-                    <p class="feedback" th:text="${erklaerung}"> Die Erklärung vom Organisator</p>
+        <div class="container">
+            <header class="main-header">
+                <div class="header-left">
+                    <a class="navLink" th:href="@{/}">Login</a>
+                    <a class="navLink" th:href="@{/studenten/landingPage}">Zur Übersicht</a>
+                    <h1>ExamByte - Testbearbeitung</h1>
                 </div>
-            </span>
 
-    </span>
+                <img class="imgLogo"
+                     th:src="@{/Images/Logo/ExamByteLogo.png}"
+                     src="../../static/Images/Logo/ExamByteLogo.png"
+                     alt="ExamByte Logo">
+            </header>
 
-    <span th:if="${mcfrage}">
-        <form method="post" th:action="@{/studenten/testBearbeitung/{id}/{aufgabe}(id=${id}, aufgabe=${aufgabe})}">
-            <p class="aufgabenstellung" th:text="${aufgabenstellung}"> Fragestellung: </p>
-            <span th:unless="${isAbgelaufen}">
-                <span th:each="antwortwahl: ${antworten}">
-                    <input class="btnInput" type="checkbox" th:name="checkboxWahlen" th:value="${antwortwahl}" id="checkboxId" th:checked="${gewaehlteAntworten.contains(antwortwahl)}">
-                    <label class="btnLabel" for="checkboxId" th:text="${antwortwahl}">Option 1 </label><br>
+            <main>
+                <section class="section-title">
+                    <p class="aufgabenstellung" th:text="${aufgabenTitel}"> Titel der Aufgabe</p>
+
+                    <div th:if="${freitextFrage}">
+                        <form class="form-check" method="post" th:action="@{/studenten/testBearbeitung/{id}/{aufgabe}(id=${id}, aufgabe=${aufgabe})}">
+                            <label class="aufgabenstellung" for="idfreitextfrage" th:text="${aufgabenstellung}"> Fragestellung: </label> <br>
+                            <span th:unless="${isAbgelaufen}">
+                                <textarea class="form-control" id="idfreitextfrage" name="studiFAntwort" th:text="${studiFAntwort}"> </textarea>
+                                <button class="btnBestaetigen" type="submit">Bestätigen</button>
+                            </span>
+                        </form>
+
+                        <div th:if="${isAbgelaufen}">
+                            <p class="antwort" th:text="${studiFAntwort}"> Die Studi Antwort. </p>
+                            <div class="studiAntwortUndFeedback">
+                                <p class="feedback" th:text="${feedback}"> Das Feedback vom Korrektor</p>
+                                <p class="feedback" th:text="${erreichtePunkte}"> Die erreichten Punkte</p>
+                                <p class="feedback" th:text="${erklaerung}"> Die Erklärung vom Organisator</p>
+                            </div>
+                        </div>
+
+                </div>
+
+            <div th:if="${mcfrage}">
+                <form method="post" th:action="@{/studenten/testBearbeitung/{id}/{aufgabe}(id=${id}, aufgabe=${aufgabe})}">
+                    <p class="aufgabenstellung" th:text="${aufgabenstellung}"> Fragestellung: </p>
+                    <span th:unless="${isAbgelaufen}">
+                        <span th:each="antwortwahl: ${antworten}">
+                            <input class="btnInput" type="checkbox" th:name="checkboxWahlen" th:value="${antwortwahl}" id="checkboxId" th:checked="${gewaehlteAntworten.contains(antwortwahl)}">
+                            <label class="btnLabel" for="checkboxId" th:text="${antwortwahl}">Option 1 </label><br>
+                        </span>
+                        <button class="btnFreigeben" type="submit">Bestätigen</button>
+                    </span>
+                </form>
+
+               <div th:if="${isAbgelaufen}" th:each="antwortwahl: ${antworten}">
+                    <input class="btnInput" type="checkbox" th:name="checkboxWahlen" th:value="${antwortwahl}" id="checkboxId2"
+                           th:checked="${gewaehlteAntworten.contains(antwortwahl)}" disabled>
+                    <label class="btnLabel" for="checkboxId2" th:text="${antwortwahl}">Option 1 </label> <br>
+                </div>
+                <span th:if="${isAbgelaufen}">
+                     <p class="feedback" th:text="${erklaerung}"> Die Erklärung vom Organisator</p>
+                   <p class="feedback" th:text="${korrektur}"> Antwort A, korrekt, Antwort B falsch</p>
+                   <p class="feedback" th:text="${erreichtePunktzahl}"> 3 / 4 Punkte </p>
                 </span>
-                <button class="btnBestaetigenMC" type="submit">Bestätigen</button>
-            </span>
-        </form>
+            </div>
+            <span class="punktzahl" th:text="${punktzahl}"> Maximale Punktzahl: 2 Punkte </span>
 
-       <span th:if="${isAbgelaufen}" th:each="antwortwahl: ${antworten}">
-            <input class="btnInput" type="checkbox" th:name="checkboxWahlen" th:value="${antwortwahl}" id="checkboxId2"
-                   th:checked="${gewaehlteAntworten.contains(antwortwahl)}" disabled>
-            <label class="btnLabel" for="checkboxId2" th:text="${antwortwahl}">Option 1 </label> <br>
-        </span>
-        <span th:if="${isAbgelaufen}">
-             <p class="feedback" th:text="${erklaerung}"> Die Erklärung vom Organisator</p>
-           <p class="feedback" th:text="${korrektur}"> Antwort A, korrekt, Antwort B falsch</p>
-           <p class="feedback" th:text="${erreichtePunktzahl}"> 3 / 4 Punkte </p>
-        </span>
-    </span>
-    <br>
-    <span class="punktzahl" th:text="${punktzahl}"> Maximale Punktzahl: 2 Punkte </span>
+            <div class="buttonContainer">
 
-    <div class="buttonContainer">
+                <form th:action="@{/studenten/testBearbeitung/{id}/{aufgabe}(id=${id}, aufgabe=${prevAufgabe})}">
+                    <button class="btnPrüfen" type="submit"> Zurück </button>
+                </form>
 
+                 <form th:action="@{/studenten/testBearbeitung/{id}/{aufgabe}(id=${id}, aufgabe=${nextAufgabe})}">
+                    <button class="btnPrüfen" type="submit"> Weiter </button>
+                </form>
 
-    <form th:action="@{/studenten/testBearbeitung/{id}/{aufgabe}(id=${id}, aufgabe=${prevAufgabe})}">
-        <button class="btnWeiterZurueck" type="submit"> Zurück </button>
-    </form>
+            </div>
 
-     <form th:action="@{/studenten/testBearbeitung/{id}/{aufgabe}(id=${id}, aufgabe=${nextAufgabe})}">
-        <button class="btnWeiterZurueck" type="submit"> Weiter </button>
-    </form>
-
-    </div>
+                </section>
+            </main>
+        </div>
     </body>
 </html>

@@ -1,39 +1,67 @@
 <!DOCTYPE html>
 <html lang="de">
     <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title> ExamByte | Test </title>
         <link rel="icon" type="image/png"
               href="../../static/Images/Logo/ExamByteLogoOhneUnterschrift.png"
               th:href="@{/Images/Logo/ExamByteLogoOhneUnterschrift.png}">
-        <link rel="stylesheet" href="../../static/css/ExambyteStylesheet.css"
-              th:href="@{/css/ExambyteStylesheet.css}">
-        <link rel = "stylesheet" th:href="@{/css/bootstrap.min.css}"
-              href="../../static/css/bootstrap.min.css">
-        <meta charset="UTF-8">
+        <link rel="stylesheet" href="../../static/css/studenten_page.css"
+              th:href="@{/css/studenten_page.css}">
+        <meta charset="UFT-16">
     </head>
+
     <body>
-    <h1>
-        <a class="navLink" th:href="@{/}">Zur Anmeldung</a>
-        <a class="navLink-2" th:href="@{/studenten/landingPage}">Zur Landing Page</a>
-        <img class="imgLogo"
-             th:src="@{/Images/Logo/ExamByteLogo.png}"
-             src="../../static/Images/Logo/ExamByteLogo.png"
-        alt="">
-        ExamByte - Test
-    </h1>
+        <div class="container">
+            <header class="main-header">
+                <div class="header-left">
+                    <a class="navLink" th:href="@{/}">Login</a>
+                    <a class="navLink" th:href="@{/studenten/landingPage}">Zur Übersicht</a>
+                    <h1>ExamByte - Test</h1>
+                </div>
 
-    <li class="list-group-item" th:text="${titel}"> Titel: Beispieltest</li>
-    <li class="list-group-item" th:text="${startzeitpunkt}"> Startzeitpunkt: 14.11.2024, 12:00 Uhr</li>
-    <li class="list-group-item" th:text="${endzeitpunkt}"> Endzeitpunkt: 21.11.2024, 11:59 Uhr</li>
-    <li class="list-group-item" th:text="${ergebniszeitpunkt}"> Ergebniszeitpunkt: 28.11.2024, 12:00 Uhr</li>
+                <img class="imgLogo"
+                     th:src="@{/Images/Logo/ExamByteLogo.png}"
+                     src="../../static/Images/Logo/ExamByteLogo.png"
+                     alt="ExamByte Logo">
+            </header>
 
-    <form th:action="@{/studenten/testBearbeitung/{id}(id=${id})}">
-        <span th:unless="${isAbgelaufen}">
-            <button class="btn btn-dark" type="submit"> Test bearbeiten </button>
-        </span>
-        <span th:if="${isAbgelaufen}">
-            <button class="btn btn-dark" type="submit"> Test anschauen </button>
-        </span>
-    </form>
+            <main>
+                <section class="section-title">
+                    <h2>Testangaben</h2>
+                    <ul class="test-list">
+                        <li class="test-item">
+                            <span class="item-icon">📋</span>
+                            <span class="item-label">Titel</span>
+                            <span class="item-value" th:text="${titel}">Beispieltest</span>
+                        </li>
+                        <li class="test-item">
+                            <span class="item-icon">⏰</span>
+                            <span class="item-label">Startzeitpunkt</span>
+                            <span class="item-value" th:text="${startzeitpunkt}">14.11.2024, 12:00 Uhr</span>
+                        </li>
+                        <li class="test-item">
+                            <span class="item-icon">⌛</span>
+                            <span class="item-label">Endzeitpunkt</span>
+                            <span class="item-value" th:text="${endzeitpunkt}">21.11.2024, 11:59 Uhr</span>
+                        </li>
+                        <li class="test-item">
+                            <span class="item-icon">📊</span>
+                            <span class="item-label">Ergebniszeitpunkt</span>
+                            <span class="item-value" th:text="${ergebniszeitpunkt}">28.11.2024, 12:00 Uhr</span>
+                        </li>
+                    </ul>
+
+                    <form th:action="@{/studenten/testBearbeitung/{id}(id=${id})}">
+                        <span th:unless="${isAbgelaufen}">
+                            <button class="btnFreigeben" type="submit">Test bearbeiten</button>
+                        </span>
+                        <span th:if="${isAbgelaufen}">
+                            <button class="btnFreigeben" type="submit">Test anschauen</button>
+                        </span>
+                    </form>
+                </section>
+            </main>
+        </div>
     </body>
 </html>

@@ -78,7 +78,7 @@ public class TestFragenService {
     }
     public String parseErgebnis(int id) {
         try {
-            return "Ergebniszeitpunkt: " + parseTime(studiTestRepository.findById(id).getErgebnisZeitpunkt());
+            return parseTime(studiTestRepository.findById(id).getErgebnisZeitpunkt());
         } catch (NullPointerException e) {
             return "Kein Studi vorhanden";
         }

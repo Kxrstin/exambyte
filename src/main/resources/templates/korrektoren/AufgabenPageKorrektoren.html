@@ -1,35 +1,41 @@
 <html lang="de">
 <head>
-    <title> ExamByte | Aufgabenstellung </title>
+    <title> ExamByte | Aufgabenstellungen </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png"
           href="../../static/Images/Logo/ExamByteLogoOhneUnterschrift.png"
           th:href="@{/Images/Logo/ExamByteLogoOhneUnterschrift.png}">
-    <link rel="stylesheet" href="../../static/css/ExambyteStylesheet.css"
-          th:href="@{/css/ExambyteStylesheet.css}">
-    <link rel = "stylesheet" th:href="@{/css/bootstrap.min.css}"
-          href="../../static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../static/css/korrektor_page.css"
+          th:href="@{/css/korrektor_page.css}">
+    <meta charset="UFT-16">
 </head>
-<body>
-<h1>
-    <a class="navLink" th:href="@{/}">Zur Anmeldung</a>
-    <a class="navLink-2" th:href="@{/korrektoren/landingPage}">Zur Landing Page</a>
-    <img class="imgLogo"
-         th:src="@{/Images/Logo/ExamByteLogo.png}"
-         src="../../static/Images/Logo/ExamByteLogo.png"
-         alt="">
-    ExamByte - Aufgabenstellung
-</h1>
+    <body>
+    <div class="container">
+    <header class="main-header">
+        <div class="header-left">
+            <a class="navLink" th:href="@{/}">Login</a>
+            <a class="navLink" th:href="@{/korrektoren/landingPage}">Zur Übersicht</a>
+            <h1>ExamByte - Aufgabenstellungen</h1>
+        </div>
 
-<h2> Aufgabenstellungen der zu korrigierenden Aufgaben: </h2>
-<ul>
-    <li class="list-group-item" th:each="aufgabe : ${aufgaben}">
-        <form class="form-group">
-            <a class="korrektorenLink" th:href="@{/korrektoren/landingPage/zeigeAbgaben/{testname}/{aufgabe}(aufgabe=${aufgabe.replace(' ', '_')}, testname=${testname.replace(' ', '_')})}">
-                <span th:text="${aufgabe}"> Test 1</span></a> <br>
-        </form>
-    </li>
-</ul>
-</ul>
+        <img class="imgLogo"
+             th:src="@{/Images/Logo/ExamByteLogo.png}"
+             src="../../static/Images/Logo/ExamByteLogo.png"
+             alt="">
+    </header>
 
-</body>
+    <main>
+        <section class="section-title">
+        <h2 class="section-title"> Anstehende Aufgaben</h2>
+        <ul class="test-list">
+            <li class="test-item" th:each="aufgabe : ${aufgaben}">
+                <a class="korrektorenLink" th:href="@{/korrektoren/landingPage/zeigeAbgaben/{testname}/{aufgabe}(aufgabe=${aufgabe.replace(' ', '_')}, testname=${testname.replace(' ', '_')})}">
+                    <span th:text="${aufgabe}"> Test 1</span>
+                </a>
+            </li>
+        </ul>
+        </section>
+    </main>
+    </div>
+    </body>
 </html>
