@@ -36,12 +36,9 @@ To access protected areas after logging in, enter your GitHub username in the sr
 ```bash
 exambyte:
   rollen:
-    studenten:
-      - YourGithubName
-    korrektoren:
-      - YourGithubName
-    organisatoren:
-      - YourGithubName
+    studenten: YourGithubName
+    korrektoren: YourGithubName
+    organisatoren: YourGithubName
 ```
     
 ### 4. Start Docker 

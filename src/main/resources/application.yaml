@@ -39,12 +39,10 @@ spring:
     username: ${DB_USER:user}
     url: jdbc:postgresql://localhost:5435/exambyte
 
+
+    # ----------------- Enter your GitHub name here -----------------
 exambyte:
   rollen:
-    # ----------------- Enter your GitHub name here -----------------
-    studenten:
-      - YourGithubName
-    korrektoren:
-      - YourGithubName
-    organisatoren:
-      - YourGithubName
+    studenten: YourGithubName
+    korrektoren: YourGithubName
+    organisatoren: YourGithubName

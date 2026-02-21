@@ -1,792 +1,186 @@
-/* Reset & Base Styles */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
+/* 1. Base & Variables */
 :root {
-    /* Korrektor-spezifische Farbpalette - OHNE GELB */
-    --korrektor-primary: #3b82f6;        /* Kräftiges Blau */
-    --korrektor-secondary: #8b5cf6;       /* Violett */
-    --korrektor-accent: #ec4899;          /* Pink */
-    --korrektor-success: #22c55e;         /* Grün */
-    --korrektor-warning: #ef4444;          /* ROT statt Gelb */
-    --korrektor-danger: #b91c1c;           /* Dunkelrot */
-    --korrektor-info: #06b6d4;             /* Türkis */
+    --korrektor-primary: #3b82f6;
+    --korrektor-secondary: #8b5cf6;
+    --korrektor-success: #22c55e;
+    --korrektor-warning: #ef4444;
     --korrektor-background: #f8fafc;
     --korrektor-surface: #ffffff;
     --korrektor-text: #0f172a;
-    --korrektor-text-light: #475569;
-    --korrektor-border: #e2e8f0;
-    --korrektor-card-bg: #f1f5f9;
-
-    /* Buttons - KEIN GELB */
-    --button-primary: #3b82f6;              /* Blau */
-    --button-primary-hover: #2563eb;         /* Dunkleres Blau */
-    --button-secondary: #8b5cf6;             /* Violett */
-    --button-secondary-hover: #7c3aed;       /* Dunkleres Violett */
-    --button-success: #22c55e;               /* Grün */
-    --button-success-hover: #16a34a;          /* Dunkleres Grün */
-    --button-accent: #ec4899;                 /* Pink */
-    --button-accent-hover: #db2777;            /* Dunkleres Pink */
-    --button-info: #06b6d4;                    /* Türkis */
-    --button-info-hover: #0891b2;               /* Dunkleres Türkis */
-
-    /* Gemeinsame Variablen */
-    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --korrektor-border: #6e7698;
+    --radius: 16px;
     --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
     --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
-    --radius: 16px;
 }
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+    font-family: sans-serif;
     background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+    color: var(--korrektor-text);
     min-height: 100vh;
     padding: 2rem 1rem;
-    color: var(--korrektor-text);
-    line-height: 1.6;
 }
 
-.container {
-    max-width: 800px;
-    margin: 0 auto;
-}
+.container { max-width: 800px; margin: 0 auto; }
 
-/* Header Styles */
-.main-header {
+/* 2. Layout Elements */
+.main-header, main, .korrekturContainer {
     background: var(--korrektor-surface);
-    backdrop-filter: blur(10px);
     border-radius: var(--radius);
     padding: 1.5rem 2rem;
     margin-bottom: 2rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
     box-shadow: var(--shadow-lg);
     border: 1px solid rgba(255, 255, 255, 0.1);
-    animation: slideDown 0.5s ease-out;
 }
 
-.header-left {
-    display: flex;
-    align-items: center;
-    gap: 2rem;
-    flex-wrap: wrap;
-}
+.main-header { display: flex; align-items: center; justify-content: space-between; }
 
 .header-left h1 {
     font-size: 1.5rem;
-    font-weight: 600;
-    background: linear-gradient(135deg, var(--korrektor-primary) 0%, var(--korrektor-secondary) 100%);
+    background: linear-gradient(135deg, var(--korrektor-primary), var(--korrektor-secondary));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    background-clip: text;
 }
 
-.navLink {
-    color: var(--korrektor-text-light);
+/* 3. Interactive Elements (Links & Items) */
+.navLink, .arrow {
     text-decoration: none;
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     padding: 0.5rem 1rem;
     border-radius: 30px;
     background: rgba(59, 130, 246, 0.1);
     transition: all 0.3s ease;
+    color: var(--korrektor-primary);
+    margin-bottom: 0.7rem;
     display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    border: 1px solid transparent;
 }
 
-.navLink:hover {
-    background: var(--button-primary);
+.navLink:hover, .test-item:hover .arrow {
+    background: var(--korrektor-primary);
     color: white;
-    transform: translateX(-5px);
-    box-shadow: var(--shadow);
-    border-color: var(--button-primary);
 }
 
-.navLink:first-child::before {
-    content: '←';
-    transition: transform 0.3s ease;
-}
-
-.navLink:first-child:hover::before {
-    transform: translateX(-3px);
-}
-
-.imgLogo {
-    height: 60px;
-    width: auto;
-    transition: transform 0.3s ease;
-    filter: drop-shadow(var(--shadow-sm));
-}
-
-.imgLogo:hover {
-    transform: rotate(5deg) scale(1.05);
-}
-
-/* Main Content */
-main {
-    background: var(--korrektor-surface);
-    backdrop-filter: blur(10px);
-    border-radius: var(--radius);
-    padding: 2rem;
-    box-shadow: var(--shadow-lg);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    animation: fadeIn 0.5s ease-out 0.2s both;
-}
-
-.section-title {
-    margin-bottom: 2rem;
-}
-
-.section-title h2 {
-    font-size: 1.8rem;
-    font-weight: 600;
-    color: var(--korrektor-text);
-    position: relative;
-    padding-bottom: 0.75rem;
-}
-
-.section-title h2::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 60px;
-    height: 4px;
-    background: linear-gradient(90deg, var(--korrektor-primary) 0%, var(--korrektor-secondary) 100%);
-    border-radius: 2px;
-    transition: width 0.3s ease;
-}
-
-.section-title:hover h2::after {
-    width: 100px;
-}
-
-/* Test List - Verbesserte Items */
-.test-list {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
+.test-list { list-style: none; display: flex; flex-direction: column; gap: 1rem; margin: 1rem;  }
 
 .test-item {
     background: var(--korrektor-background);
     border-radius: 12px;
-    overflow: hidden;
-    transition: all 0.3s ease;
     border: 1px solid var(--korrektor-border);
-    animation: slideIn 0.5s ease-out;
-    animation-fill-mode: both;
+    transition: 0.3s;
 }
 
-.test-item:nth-child(1) { animation-delay: 0.1s; }
-.test-item:nth-child(2) { animation-delay: 0.2s; }
-.test-item:nth-child(3) { animation-delay: 0.3s; }
-.test-item:nth-child(4) { animation-delay: 0.4s; }
-.test-item:nth-child(5) { animation-delay: 0.5s; }
+.test-item:hover { transform: translateY(-3px); border-color: var(--korrektor-primary); }
 
-.test-item:hover {
-    transform: translateY(-3px);
-    box-shadow: var(--shadow);
-    border-color: var(--korrektor-primary);
-}
+.korrektorenLink { display: flex; justify-content: space-between; padding: 1.2rem; text-decoration: none; color: inherit; }
 
-.korrektorenLink {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1.2rem 1.5rem;
-    text-decoration: none;
-    color: inherit;
-    transition: all 0.3s ease;
-}
-
-.test-name {
-    font-weight: 500;
-    font-size: 1.1rem;
-    color: var(--korrektor-text);
-    transition: color 0.3s ease;
-}
-
-.test-item:hover .test-name {
-    color: var(--korrektor-primary);
-}
-
-/* Arrow Styling - OHNE GELB */
-.arrow {
-    color: var(--korrektor-text-light);
-    font-size: 0.9rem;
+/* 4. Universal Button Style */
+.btnKorrektur, .btnBewerten, .btnSpeichern, .btnBearbeiten, .btnFreigeben, .btnPrüfen {
+    background: var(--korrektor-primary);
+    color: white !important;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 30px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    transition: all 0.3s ease;
-    background: rgba(59, 130, 246, 0.1);
-    padding: 0.4rem 1rem;
-    border-radius: 30px;
 }
 
-.arrow::after {
-    content: '→';
-    transition: transform 0.3s ease;
+.btnSpeichern, .btnBewerten { background: var(--korrektor-success); }
+.btnFreigeben { background: var(--korrektor-secondary); }
+
+.btnKorrektur:hover, .btnSpeichern:hover, .btnBewerten:hover, .btnBearbeiten:hover, .btnFreigeben:hover, .btnPrüfen:hover { opacity: 0.9; transform: scale(1.02); }
+
+.imgLogo { height: 50px; transition: 0.3s; }
+.imgLogo:hover { transform: rotate(5deg) scale(1.1); }
+
+/* 5. Form Elements */
+.textareaclass, .input-class {
+    width: 100%;
+    padding: 1rem;
+    border: 2px solid var(--korrektor-border);
+    border-radius: 12px;
+    background: #f1f5f9;
+    margin-bottom: 1rem;
 }
 
-.test-item:hover .arrow {
-    background: var(--button-primary);
-    color: white;
+.input-class { width: 120px; }
+
+/* 6. Responsive */
+@media (max-width: 640px) {
+    .main-header { flex-direction: column; gap: 1rem; }
+    .btnKorrektur, .btnSpeichern, .input-class { width: 100%; }
 }
 
-.test-item:hover .arrow::after {
-    transform: translateX(5px);
-}
-
-/* Buttons für Korrektor - ALLE OHNE GELB */
-.btnKorrektur,
-.btnBewerten,
-.btnSpeichern,
-.btnBearbeiten,
-.btnEdit,
-.btnFreigeben,
-.btnPrüfen {
-    background: linear-gradient(135deg, var(--button-primary), var(--button-secondary)) !important;
-    color: white !important;
-    border: none !important;
-    padding: 0.8rem 2rem !important;
-    border-radius: 30px !important;
-    font-weight: 600 !important;
-    font-size: 1rem !important;
-    cursor: pointer !important;
-    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
-    box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3) !important;
-    margin: 0.5rem 0 !important;
-    position: relative !important;
-    overflow: hidden !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    gap: 0.5rem !important;
-    border: 1px solid rgba(255, 255, 255, 0.2) !important;
-}
-
-.btnBewerten {
-    background: linear-gradient(135deg, var(--button-success), var(--button-success-hover)) !important;
-    box-shadow: 0 4px 15px rgba(34, 197, 94, 0.3) !important;
-}
-
-.btnSpeichern {
-    background: linear-gradient(135deg, var(--button-info), var(--button-info-hover)) !important;
-    box-shadow: 0 4px 15px rgba(6, 182, 212, 0.3) !important;
-}
-
-.btnFreigeben {
-    background: linear-gradient(135deg, var(--button-accent), var(--button-accent-hover)) !important;
-    box-shadow: 0 4px 15px rgba(236, 72, 153, 0.3) !important;
-}
-
-.btnKorrektur::before,
-.btnBewerten::before,
-.btnSpeichern::before,
-.btnBearbeiten::before,
-.btnEdit::before,
-.btnFreigeben::before,
-.btnPrüfen::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 0;
-    height: 0;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.3);
-    transform: translate(-50%, -50%);
-    transition: width 0.6s, height 0.6s;
-    z-index: 0;
-}
-
-.btnKorrektur span,
-.btnBewerten span,
-.btnSpeichern span,
-.btnBearbeiten span,
-.btnEdit span,
-.btnFreigeben span,
-.btnPrüfen span {
-    position: relative;
-    z-index: 1;
-}
-
-.btnKorrektur:hover,
-.btnBewerten:hover,
-.btnSpeichern:hover,
-.btnBearbeiten:hover,
-.btnEdit:hover,
-.btnFreigeben:hover,
-.btnPrüfen:hover {
-    transform: scale(1.05) translateY(-2px) !important;
-    box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4) !important;
-}
-
-.btnBewerten:hover {
-    box-shadow: 0 6px 20px rgba(34, 197, 94, 0.4) !important;
-}
-
-.btnSpeichern:hover {
-    box-shadow: 0 6px 20px rgba(6, 182, 212, 0.4) !important;
-}
-
-.btnFreigeben:hover {
-    box-shadow: 0 6px 20px rgba(236, 72, 153, 0.4) !important;
-}
-
-.btnKorrektur:hover::before,
-.btnBewerten:hover::before,
-.btnSpeichern:hover::before,
-.btnBearbeiten:hover::before,
-.btnEdit:hover::before,
-.btnFreigeben:hover::before,
-.btnPrüfen:hover::before {
-    width: 300px;
-    height: 300px;
-}
-
-.btnKorrektur:active,
-.btnBewerten:active,
-.btnSpeichern:active,
-.btnBearbeiten:active,
-.btnEdit:active,
-.btnFreigeben:active,
-.btnPrüfen:active {
-    transform: scale(0.95) !important;
-}
-
-/* Icons für Buttons */
-.btnKorrektur::after {
-    content: '✓';
-    margin-left: 0.5rem;
-    font-size: 1.1rem;
-}
-
-.btnBewerten::after {
-    content: '⭐';
-    margin-left: 0.5rem;
-    font-size: 1.1rem;
-}
-
-.btnSpeichern::after {
-    content: '💾';
-    margin-left: 0.5rem;
-    font-size: 1.1rem;
-}
-
-.btnBearbeiten::before, .btnEdit::before {
-    content: '✎';
-    margin-right: 0.5rem;
-    font-size: 1.1rem;
-}
-
-.btnFreigeben::after {
-    content: '🚀';
-    margin-left: 0.5rem;
-    font-size: 1.1rem;
-}
-
-.btnPrüfen::after {
-    content: '🔍';
-    margin-left: 0.5rem;
-    font-size: 1.1rem;
-}
-
-/* Info Box - OHNE GELB */
 .info-box {
-    background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
-    border-left: 4px solid var(--korrektor-primary);
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(139, 92, 246, 0.05) 100%);
+    border: 1px solid var(--korrektor-border);
+    border-left: 4px solid #7dd39c;
     padding: 1.5rem;
     border-radius: 12px;
+    margin: 2rem 0;
     text-align: center;
-    animation: pulse 2s infinite;
-    margin-top: 2rem;
+    animation: fadeIn 0.5s ease-out;
 }
 
 .info-box p {
-    color: var(--korrektor-primary);
+    color: #2c3034;
     font-size: 1.1rem;
+    font-weight: 500;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 0.75rem;
 }
 
+/* Optionales Icon vor dem Text via CSS */
 .info-box p::before {
     content: '✨';
-    font-size: 1.5rem;
-    animation: sparkle 2s infinite;
-}
-
-/* Korrektur-spezifische Elemente */
-.korrekturContainer {
-    background: white;
-    border-radius: var(--radius);
-    padding: 1.5rem;
-    margin: 1rem 0;
-    box-shadow: var(--shadow);
-    border: 1px solid var(--korrektor-border);
-}
-
-.korrekturHeader {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 2px solid var(--korrektor-border);
-}
-
-.korrekturHeader h3 {
-    color: var(--korrektor-primary);
-    font-weight: 600;
-}
-
-.korrekturStatus {
-    padding: 0.3rem 1rem;
-    border-radius: 30px;
-    font-size: 0.9rem;
-    font-weight: 600;
-    background: rgba(59, 130, 246, 0.1);
-    color: var(--korrektor-primary);
-}
-
-/* Animations */
-@keyframes slideDown {
-    from {
-        opacity: 0;
-        transform: translateY(-30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    font-size: 1.3rem;
 }
 
 @keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: scale(0.95);
-    }
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
-@keyframes slideIn {
-    from {
-        opacity: 0;
-        transform: translateX(-30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-@keyframes pulse {
-    0%, 100% {
-        opacity: 1;
-    }
-    50% {
-        opacity: 0.9;
-        transform: scale(1.02);
-    }
-}
-
-@keyframes sparkle {
-    0%, 100% {
-        opacity: 1;
-        transform: scale(1);
-    }
-    50% {
-        opacity: 0.7;
-        transform: scale(1.2) rotate(10deg);
-    }
-}
-
-/* Responsive Design */
-@media (max-width: 640px) {
-    body {
-        padding: 1rem;
-    }
-
-    .main-header {
-        padding: 1rem;
-        flex-direction: column;
-        gap: 1rem;
-        text-align: center;
-    }
-
-    .header-left {
-        justify-content: center;
-        gap: 1rem;
-    }
-
-    .header-left h1 {
-        font-size: 1.2rem;
-    }
-
-    .navLink {
-        padding: 0.4rem 0.8rem;
-        font-size: 0.85rem;
-    }
-
-    main {
-        padding: 1.5rem;
-    }
-
-    .section-title h2 {
-        font-size: 1.5rem;
-    }
-
-    .test-name {
-        font-size: 1rem;
-    }
-
-    .arrow {
-        padding: 0.3rem 0.8rem;
-        font-size: 0.8rem;
-    }
-
-    .btnKorrektur,
-    .btnBewerten,
-    .btnSpeichern,
-    .btnBearbeiten,
-    .btnEdit,
-    .btnFreigeben,
-    .btnPrüfen {
-        width: 100%;
-        justify-content: center;
-    }
-}
-
-/* Loading State */
-.test-list:empty::before {
-    content: 'Lade verfügbare Korrekturen...';
-    display: block;
-    text-align: center;
-    padding: 3rem;
-    color: var(--korrektor-text-light);
+/* Container für die Aufgaben-Details */
+.aufgabenstellung {
     background: var(--korrektor-background);
     border-radius: 12px;
-    border: 2px dashed var(--korrektor-border);
+    padding: 1rem 1.5rem;
+    margin-bottom: 1rem;
+    border: 1px solid var(--korrektor-border);
+    display: block; /* Falls es auf einem span liegt */
+    line-height: 1.5;
 }
 
-/* Focus Styles */
-.korrektorenLink:focus-visible,
-.btnKorrektur:focus-visible,
-.btnBewerten:focus-visible,
-.btnSpeichern:focus-visible,
-.btnBearbeiten:focus-visible,
-.btnEdit:focus-visible,
-.btnFreigeben:focus-visible,
-.btnPrüfen:focus-visible {
-    outline: 2px solid var(--korrektor-primary);
-    outline-offset: 2px;
+/* Die Labels (Aufgabe, Antwort, Punkte) hervorheben */
+.aufgabenstellung strong {
+    color: var(--korrektor-primary);
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.05rem;
+    display: block; /* Label steht über dem Text */
+    margin-bottom: 0.25rem;
 }
 
-/* Custom Scrollbar - OHNE GELB */
-::-webkit-scrollbar {
-    width: 10px;
+/* Spezielle Formatierung für die Antwort des Studenten */
+p.aufgabenstellung:nth-of-type(2) {
+    background: #ffffff;
+    border-left: 4px solid var(--korrektor-secondary);
+    font-style: italic;
+    box-shadow: var(--shadow-sm);
 }
 
-::-webkit-scrollbar-track {
-    background: var(--korrektor-background);
-}
-
-::-webkit-scrollbar-thumb {
-    background: linear-gradient(135deg, var(--korrektor-primary) 0%, var(--korrektor-secondary) 100%);
-    border-radius: 5px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(135deg, var(--korrektor-secondary) 0%, var(--korrektor-accent) 100%);
-}
-
-/* Druckoptimierung */
-@media print {
-    .btnKorrektur,
-    .btnBewerten,
-    .btnSpeichern,
-    .btnBearbeiten,
-    .btnEdit,
-    .btnFreigeben,
-    .btnPrüfen,
-    .navLink {
-        display: none;
-    }
-
-    body {
-        background: white;
-        padding: 0;
-    }
-
-    .main-header, main {
-        box-shadow: none;
-        border: 1px solid #ddd;
-    }
-}
-
-/* Korrektur Container */
-.korrekturContainer {
-    background: white;
-    border-radius: 24px;
-    padding: 2rem;
-    margin: 2rem 0;
-    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
-    border: 1px solid var(--student-border);
-    animation: fadeInUp 0.5s ease-out;
-    max-width: 600px;
-}
-
-/* Labels */
-.korrekturContainer label {
-    display: block;
-    font-weight: 600;
-    color: var(--student-text);
-    margin-bottom: 0.5rem;
-    font-size: 1rem;
-}
-
-.korrekturContainer label[for="feedbackId"] {
-    color: var(--student-primary);
-    font-size: 1.1rem;
-}
-
-.korrekturContainer label[for="punkteId"] {
-    color: var(--student-success);
-    margin-top: 1rem;
-}
-
-/* Textarea */
-.textareaclass {
-    width: 100%;
-    min-height: 150px;
-    padding: 1rem;
-    border: 2px solid rgba(187, 211, 194, 0.32);
-    border-radius: 16px;
-    font-family: inherit;
-    font-size: 1rem;
-    line-height: 1.6;
-    resize: vertical;
-    transition: all 0.3s ease;
-    background: rgba(212, 239, 217, 0.49);
-    margin-bottom: 1.5rem;
-}
-
-.textareaclass:focus {
-    outline: none;
-    border-color: var(--student-primary);
-    box-shadow: 0 0 0 4px rgba(106, 159, 244, 0.1);
-    transform: translateY(-2px);
-}
-
-/* Input Feld */
-.input-class {
-    width: 120px;
-    padding: 0.8rem 1rem;
-    border: 2px solid rgba(187, 211, 194, 0.32);
-    border-radius: 12px;
-    font-size: 1rem;
-    transition: all 0.3s ease;
-    background: rgba(212, 239, 217, 0.49);
-}
-
-.input-class:focus {
-    outline: none;
-    border-color: var(--student-success);
-    box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.1);
-    transform: translateY(-2px);
-}
-
-.input-class[type="number"] {
-    -moz-appearance: textfield;
-}
-
-.input-class[type="number"]::-webkit-inner-spin-button,
-.input-class[type="number"]::-webkit-outer-spin-button {
-    opacity: 0.5;
-    height: 24px;
-}
-
-/* Button */
-.btnSpeichern {
-    background: linear-gradient(135deg, var(--button-success), var(--button-success-hover)) !important;
-    color: white !important;
-    border: none !important;
-    padding: 1rem 2.5rem !important;
-    border-radius: 30px !important;
-    font-weight: 700 !important;
-    font-size: 1.1rem !important;
-    cursor: pointer !important;
-    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
-    box-shadow: 0 4px 15px rgba(34, 197, 94, 0.3) !important;
-    margin-top: 2rem !important;
-    position: relative !important;
-    overflow: hidden !important;
-    display: inline-block !important;
-    border: 2px solid rgba(255, 255, 255, 0.2) !important;
-}
-
-.btnSpeichern::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 0;
-    height: 0;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.3);
-    transform: translate(-50%, -50%);
-    transition: width 0.6s, height 0.6s;
-    z-index: 0;
-}
-
-.btnSpeichern span {
-    position: relative;
-    z-index: 1;
-}
-
-.btnSpeichern:hover {
-    transform: scale(1.05) translateY(-2px) !important;
-    box-shadow: 0 6px 20px rgba(34, 197, 94, 0.4) !important;
-}
-
-.btnSpeichern:hover::before {
-    width: 300px;
-    height: 300px;
-}
-
-.btnSpeichern:active {
-    transform: scale(0.95) !important;
-}
-
-/* Form-Control Klasse (falls für Labels verwendet) */
-.form-control {
-    display: block;
-    margin-top: 1rem;
-}
-
-/* Responsive */
-@media (max-width: 640px) {
-    .korrekturContainer {
-        padding: 1.5rem;
-    }
-
-    .input-class {
-        width: 100%;
-    }
-
-    .btnSpeichern {
-        width: 100%;
-        text-align: center;
-    }
+/* Maximale Punktzahl etwas dezenter */
+p.aufgabenstellung:nth-of-type(3) {
+    border: none;
+    background: transparent;
+    padding-left: 0;
+    font-size: 0.9rem;
 }

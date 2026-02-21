@@ -1,421 +1,82 @@
-/* anmeldung.css - ExamByte Anmeldeseite im Korrektoren-Stil */
-
-/* Reset & Base Styles */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+/* Reset & Variables */
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
 :root {
-    /* Korrektor-spezifische Farbpalette */
-    --korrektor-primary: #3b82f6;
-    --korrektor-secondary: #8b5cf6;
-    --korrektor-accent: #ec4899;
-    --korrektor-success: #22c55e;
-    --korrektor-warning: #ef4444;
-    --korrektor-info: #06b6d4;
-    --korrektor-background: #f8fafc;
-    --korrektor-surface: #ffffff;
-    --korrektor-text: #0f172a;
-    --korrektor-text-light: #475569;
-    --korrektor-border: #e2e8f0;
-
-    /* Buttons */
-    --button-primary: #3b82f6;
-    --button-primary-hover: #2563eb;
-    --button-secondary: #8b5cf6;
-    --button-secondary-hover: #7c3aed;
-    --button-success: #22c55e;
-    --button-success-hover: #16a34a;
-
-    /* Gemeinsame Variablen */
-    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-    --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+    --primary: #3b82f6; --secondary: #8b5cf6;
+    --surface: #ffffff; --text: #0f172a;
     --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
-    --radius: 16px;
     --radius-lg: 24px;
 }
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
-    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+    font-family: system-ui, sans-serif;
+    background: linear-gradient(135deg, #1e293b, #0f172a);
     min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 2rem 1rem;
-    color: var(--korrektor-text);
-    line-height: 1.6;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    padding: 1rem; color: var(--text); line-height: 1.6;
 }
 
-/* Header */
-header {
-    background: var(--korrektor-surface);
-    backdrop-filter: blur(10px);
+/* Layout Containers */
+header, main {
+    background: var(--surface);
     border-radius: var(--radius-lg);
-    padding: 1.5rem 2.5rem;
-    margin-bottom: 2rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    box-shadow: var(--shadow-lg);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    width: 100%;
-    max-width: 700px;
-    animation: slideDown 0.5s ease-out;
+    padding: 1.5rem 2.5rem; width: 100%; max-width: 700px;
+    box-shadow: var(--shadow-lg); margin-bottom: 2rem;
+    animation: fadeIn 0.5s ease-out both;
 }
+
+header { display: flex; align-items: center; justify-content: space-between; }
 
 .head h1 {
-    font-size: 1.8rem;
-    font-weight: 700;
-    background: linear-gradient(135deg, var(--korrektor-primary) 0%, var(--korrektor-secondary) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    margin: 0;
+    font-size: 1.8rem; font-weight: 700;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
 }
 
-/* Logo */
-.imgLogo {
-    height: 50px;
-    width: auto;
-    transition: transform 0.3s ease;
-    filter: drop-shadow(var(--shadow-sm));
-}
-
-.imgLogo:hover {
-    transform: rotate(5deg) scale(1.05);
-}
+.imgLogo { height: 50px; transition: 0.3s; }
+.imgLogo:hover { transform: rotate(5deg) scale(1.1); }
 
 /* Main Content */
-main {
-    background: var(--korrektor-surface);
-    backdrop-filter: blur(10px);
-    border-radius: var(--radius-lg);
-    padding: 2.5rem;
-    box-shadow: var(--shadow-lg);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    width: 100%;
-    max-width: 700px;
-    animation: fadeIn 0.5s ease-out 0.2s both;
-}
-
-/* Willkommenstext */
 main > p {
-    font-size: 1.3rem;
-    color: var(--korrektor-text);
-    margin-bottom: 2rem;
-    padding-bottom: 1rem;
-    border-bottom: 2px solid var(--korrektor-border);
-    position: relative;
+    font-size: 1.3rem; margin-bottom: 2rem; padding-bottom: 1rem;
+    border-bottom: 2px solid #e2e8f0;
 }
 
-main > p span {
-    font-weight: 700;
-    color: var(--korrektor-primary);
-    background: rgba(59, 130, 246, 0.1);
-    padding: 0.2rem 0.8rem;
-    border-radius: 30px;
-    display: inline-block;
+main span {
+    font-weight: 700; color: var(--primary);
+    background: rgba(59, 130, 246, 0.1); padding: 0.2rem 0.8rem; border-radius: 30px;
 }
 
-/* Container für Buttons */
-.divAnmeldung {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
+/* Buttons Base */
+[class^="buttonAnmeldung-"] {
+    width: 100%; border: none; padding: 1.2rem 2rem; border-radius: 50px;
+    color: white; font-weight: 600; font-size: 1.2rem; cursor: pointer;
+    transition: 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    display: flex; align-items: center; margin-bottom: 1rem;
 }
 
-/* Formulare */
-.divAnmeldung form {
-    width: 100%;
-}
+[class^="buttonAnmeldung-"]:hover { transform: scale(1.02) translateY(-3px); box-shadow: var(--shadow-lg); }
+[class^="buttonAnmeldung-"]::after { content: '→'; margin-left: auto; transition: 0.3s; }
+[class^="buttonAnmeldung-"]:hover::after { transform: translateX(5px); }
 
-/* Anmelde-Buttons */
-.buttonAnmeldung-o {
-    width: 100%;
-    background: linear-gradient(135deg, var(--button-primary), var(--button-secondary));
-    color: white;
-    border: none;
-    padding: 1.2rem 2rem;
-    border-radius: 50px;
-    font-weight: 600;
-    font-size: 1.2rem;
-    cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-    box-shadow: var(--shadow);
-    position: relative;
-    overflow: hidden;
-    text-align: left;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-}
+/* Button Colors */
+.buttonAnmeldung-o { background: linear-gradient(135deg, #76bc95, #58d684); }
+.buttonAnmeldung-s { background: linear-gradient(135deg, #b394d6, #7e41a1); }
+.buttonAnmeldung-k { background: linear-gradient(135deg, #92b7c6, #5a8dc3); }
 
-.buttonAnmeldung-o::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 0;
-    height: 0;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.3);
-    transform: translate(-50%, -50%);
-    transition: width 0.6s, height 0.6s;
-    z-index: 0;
-}
-
-.buttonAnmeldung-o span {
-    position: relative;
-    z-index: 1;
-}
-
-.buttonAnmeldung-o:hover {
-    transform: scale(1.02) translateY(-3px);
-    box-shadow: var(--shadow-lg);
-}
-
-.buttonAnmeldung-o:hover::before {
-    width: 500px;
-    height: 500px;
-}
-
-.buttonAnmeldung-o:active {
-    transform: scale(0.98);
-}
-
-.buttonAnmeldung-o {
- background: linear-gradient(135deg, #76bc95, #58d684);
-}
-
-/* Anmelde-Buttons */
-.buttonAnmeldung-s {
-    width: 100%;
-    background: linear-gradient(135deg, var(--button-primary), var(--button-secondary));
-    color: white;
-    border: none;
-    padding: 1.2rem 2rem;
-    border-radius: 50px;
-    font-weight: 600;
-    font-size: 1.2rem;
-    cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-    box-shadow: var(--shadow);
-    position: relative;
-    overflow: hidden;
-    text-align: left;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.buttonAnmeldung-s::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 0;
-    height: 0;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.3);
-    transform: translate(-50%, -50%);
-    transition: width 0.6s, height 0.6s;
-    z-index: 0;
-}
-
-.buttonAnmeldung-s span {
-    position: relative;
-    z-index: 1;
-}
-
-.buttonAnmeldung-s:hover {
-    transform: scale(1.02) translateY(-3px);
-    box-shadow: var(--shadow-lg);
-}
-
-.buttonAnmeldung-s:hover::before {
-    width: 500px;
-    height: 500px;
-}
-
-.buttonAnmeldung-s:active {
-    transform: scale(0.98);
-}
-
-.buttonAnmeldung-s {
-    background: linear-gradient(135deg, #b394d6, #7e41a1);
-}
-
-/* Anmelde-Buttons */
-.buttonAnmeldung-k {
-    width: 100%;
-    background: linear-gradient(135deg, var(--button-primary), var(--button-secondary));
-    color: white;
-    border: none;
-    padding: 1.2rem 2rem;
-    border-radius: 50px;
-    font-weight: 600;
-    font-size: 1.2rem;
-    cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-    box-shadow: var(--shadow);
-    position: relative;
-    overflow: hidden;
-    text-align: left;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.buttonAnmeldung-k::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 0;
-    height: 0;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.3);
-    transform: translate(-50%, -50%);
-    transition: width 0.6s, height 0.6s;
-    z-index: 0;
-}
-
-.buttonAnmeldung-k span {
-    position: relative;
-    z-index: 1;
-}
-
-.buttonAnmeldung-k:hover {
-    transform: scale(1.02) translateY(-3px);
-    box-shadow: var(--shadow-lg);
-}
-
-.buttonAnmeldung-k:hover::before {
-    width: 500px;
-    height: 500px;
-}
-
-.buttonAnmeldung-k:active {
-    transform: scale(0.98);
-}
-
-.buttonAnmeldung-k {
-    background: linear-gradient(135deg, #92b7c6, #5a8dc3);
-}
-
-/* Info-Box für noRole */
+/* Info Box */
 .bg-info {
-    background: linear-gradient(135deg, rgba(239, 68, 68, 0.1), rgba(185, 28, 28, 0.1));
-    border-left: 4px solid var(--korrektor-warning);
-    padding: 1.5rem;
-    border-radius: var(--radius);
-    color: var(--korrektor-warning);
-    font-weight: 500;
-    text-align: center;
-    animation: pulse 2s infinite;
-    margin-top: 1rem;
+    background: rgba(239, 68, 68, 0.1); border-left: 4px solid #ef4444;
+    padding: 1.5rem; border-radius: 16px; color: #ef4444;
+    text-align: center; animation: pulse 2s infinite;
 }
 
-/* Animationen */
-@keyframes slideDown {
-    from {
-        opacity: 0;
-        transform: translateY(-30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
+/* Animations & Responsive */
+@keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes pulse { 50% { transform: scale(1.02); } }
 
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: scale(0.95);
-    }
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
-
-@keyframes pulse {
-    0%, 100% {
-        opacity: 1;
-    }
-    50% {
-        opacity: 0.9;
-        transform: scale(1.02);
-    }
-}
-
-/* Responsive Design */
 @media (max-width: 640px) {
-    body {
-        padding: 1rem;
-    }
-
-    header {
-        padding: 1rem 1.5rem;
-    }
-
-    .head h1 {
-        font-size: 1.3rem;
-    }
-
-    .imgLogo {
-        height: 40px;
-    }
-
-    main {
-        padding: 1.5rem;
-    }
-
-    main > p {
-        font-size: 1.1rem;
-    }
-
-    .buttonAnmeldung {
-        padding: 1rem 1.5rem;
-        font-size: 1rem;
-    }
-}
-
-@media (max-width: 480px) {
-    header {
-        flex-direction: column;
-        gap: 1rem;
-        text-align: center;
-    }
-
-    .head h1 {
-        font-size: 1.2rem;
-    }
-}
-
-/* Focus Styles */
-.buttonAnmeldung:focus-visible {
-    outline: 2px solid var(--korrektor-primary);
-    outline-offset: 2px;
-}
-
-/* Zusätzliche Hover-Effekte */
-.buttonAnmeldung::after {
-    content: '→';
-    margin-left: auto;
-    font-size: 1.3rem;
-    transition: transform 0.3s ease;
-    position: relative;
-    z-index: 1;
-}
-
-.buttonAnmeldung:hover::after {
-    transform: translateX(5px);
+    header, main { padding: 1.5rem; }
+    header { flex-direction: column; text-align: center; gap: 1rem; }
+    .head h1 { font-size: 1.4rem; }
 }

@@ -67,7 +67,7 @@
                         </span>
                     </div>
 
-                    <h3 class="section-title"> Aktuelle Tests </h3>
+                    <h3 class="tests"> Aktuelle Tests </h3>
 
                     <ul class="test-list" th:remove="all-but-first">
                         <li class="test-item" th:each="test : ${bearbeitbareTests}">
@@ -78,7 +78,7 @@
                         <li class="list-group-item"> <a href="/studenten/landingPage/zeigeTest/2">Test 2</a></li>
                         <li class="list-group-item"> <a href="/studenten/landingPage/zeigeTest/3">Test 3</a></li>
                     </ul>
-                    <h3 class="section-title"> Abgelaufene Tests </h3>
+                    <h3 class="tests"> Abgelaufene Tests </h3>
                     <ul class="test-list" th:remove="all-but-first">
                         <li class="test-item" th:each="test : ${abgelaufeneTests}">
                             <a class="korrektorenLink" th:href="@{/studenten/landingPage/zeigeTest/{id}(id=${test.getId()})}">

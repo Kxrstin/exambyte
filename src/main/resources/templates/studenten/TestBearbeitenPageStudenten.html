@@ -31,9 +31,12 @@
 
                     <div th:if="${freitextFrage}">
                         <form class="form-check" method="post" th:action="@{/studenten/testBearbeitung/{id}/{aufgabe}(id=${id}, aufgabe=${aufgabe})}">
-                            <label class="aufgabenstellung" for="idfreitextfrage" th:text="${aufgabenstellung}"> Fragestellung: </label> <br>
+                            <label class="fragestellung" for="idfreitextfrage" th:text="${aufgabenstellung}"> Fragestellung: </label> <br>
                             <span th:unless="${isAbgelaufen}">
                                 <textarea class="form-control" id="idfreitextfrage" name="studiFAntwort" th:text="${studiFAntwort}"> </textarea>
+                                                        <span class="punktzahl" th:text="${punktzahl}"> Maximale Punktzahl: 2 Punkte </span>
+
+
                                 <button class="btnBestaetigen" type="submit">Bestätigen</button>
                             </span>
                         </form>
@@ -47,16 +50,21 @@
                             </div>
                         </div>
 
-                </div>
+                    </div>
 
             <div th:if="${mcfrage}">
                 <form method="post" th:action="@{/studenten/testBearbeitung/{id}/{aufgabe}(id=${id}, aufgabe=${aufgabe})}">
                     <p class="aufgabenstellung" th:text="${aufgabenstellung}"> Fragestellung: </p>
                     <span th:unless="${isAbgelaufen}">
-                        <span th:each="antwortwahl: ${antworten}">
-                            <input class="btnInput" type="checkbox" th:name="checkboxWahlen" th:value="${antwortwahl}" id="checkboxId" th:checked="${gewaehlteAntworten.contains(antwortwahl)}">
-                            <label class="btnLabel" for="checkboxId" th:text="${antwortwahl}">Option 1 </label><br>
+                        <span th:each="antwortwahl, iterStat : ${antworten}">
+                            <input class="btnInput" type="checkbox" th:name="checkboxWahlen"
+                                   th:value="${antwortwahl}" th:id="${'checkbox' + iterStat.index}"
+                                   th:checked="${gewaehlteAntworten.contains(antwortwahl)}">
+
+                            <label class="btnLabel" th:for="${'checkbox' + iterStat.index}"
+                                   th:text="${antwortwahl}">Option</label><br>
                         </span>
+                        <span class="punktzahl" th:text="${punktzahl}"> Maximale Punktzahl: 2 Punkte </span>
                         <button class="btnFreigeben" type="submit">Bestätigen</button>
                     </span>
                 </form>
@@ -71,21 +79,16 @@
                    <p class="feedback" th:text="${korrektur}"> Antwort A, korrekt, Antwort B falsch</p>
                    <p class="feedback" th:text="${erreichtePunktzahl}"> 3 / 4 Punkte </p>
                 </span>
-            </div>
-            <span class="punktzahl" th:text="${punktzahl}"> Maximale Punktzahl: 2 Punkte </span>
+                 </div>
 
             <div class="buttonContainer">
-
                 <form th:action="@{/studenten/testBearbeitung/{id}/{aufgabe}(id=${id}, aufgabe=${prevAufgabe})}">
                     <button class="btnPrüfen" type="submit"> Zurück </button>
                 </form>
-
                  <form th:action="@{/studenten/testBearbeitung/{id}/{aufgabe}(id=${id}, aufgabe=${nextAufgabe})}">
                     <button class="btnPrüfen" type="submit"> Weiter </button>
                 </form>
-
             </div>
-
                 </section>
             </main>
         </div>

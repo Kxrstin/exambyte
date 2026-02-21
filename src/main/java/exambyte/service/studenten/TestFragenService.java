@@ -57,21 +57,21 @@ public class TestFragenService {
     // Testinformationen parsen
     public String parseTitel(int id) {
         try {
-            return "Titel: " + studiTestRepository.findById(id).getTitel();
+            return studiTestRepository.findById(id).getTitel();
         } catch (NullPointerException e) {
             return "Kein Studi vorhanden";
         }
     }
     public String parseStart(int id) {
         try {
-            return "Startzeitpunkt: " + parseTime(studiTestRepository.findById(id).getStartzeitpunkt());
+            return parseTime(studiTestRepository.findById(id).getStartzeitpunkt());
         } catch (NullPointerException e) {
             return "Kein Studi vorhanden";
         }
     }
     public String parseEnde(int id) {
         try {
-            return "Endzeitpunkt: " + parseTime(studiTestRepository.findById(id).getEndzeitpunkt());
+            return parseTime(studiTestRepository.findById(id).getEndzeitpunkt());
         } catch (NullPointerException e) {
             return "Kein Studi vorhanden";
         }
