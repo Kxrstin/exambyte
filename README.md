@@ -1,9 +1,9 @@
 # Exambyte 
-![Build Status](https://github.com/DEIN_USERNAME/DEIN_REPO/actions/workflows/gradle.yml/badge.svg)
+![Build Status](https://github.com/Kxrstin/exambyte/actions/workflows/gradle.yml/badge.svg)
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 
 <p align="left">
-  <img src="https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white" />
+  <img src="https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white"/>
   <img src="https://img.shields.io/badge/Spring_Boot-6DB33F?style=for-the-badge&logo=spring-boot&logoColor=white" />
   <img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white" />
   <img src="https://img.shields.io/badge/PostgreSQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=white" />
