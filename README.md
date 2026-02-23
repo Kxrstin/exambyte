@@ -1,4 +1,15 @@
 # Exambyte 
+![Build Status](https://github.com/DEIN_USERNAME/DEIN_REPO/actions/workflows/gradle.yml/badge.svg)
+![License](https://img.shields.io/badge/license-MIT-blue.svg)
+
+<p align="left">
+  <img src="https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white" />
+  <img src="https://img.shields.io/badge/Spring_Boot-6DB33F?style=for-the-badge&logo=spring-boot&logoColor=white" />
+  <img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white" />
+  <img src="https://img.shields.io/badge/PostgreSQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=white" />
+  <img src="https://img.shields.io/badge/Gradle-02303A?style=for-the-badge&logo=gradle&logoColor=white" />
+</p>
+
 ## Full-stack web application for managing exams and assessments. 
 
 Exambyte is a web-based testing system that can be used to create, conduct, and correct tests with different question types, such as multiple choice and free text. Correction is partly manual and partly automated, and students are always informed about their current status and admission status. A key feature is role-based authentication via GitHub OAuth with a distinction between the roles of student, organizer, and corrector. This application is an improvement on ILIAS, as students are informed transparently about their admission status, while correctors and organizers are provided with various tools for general exam administration.
@@ -67,8 +78,8 @@ http://localhost:8080
     <td align="center"><b>Update Test</b></td>
   </tr>
   <tr>
-    <td><img src="" width="400px" alt="In progress"></td>
-    <td><img src="" width="400px" alt="In progress"></td>
+    <td>In progress</td>
+    <td>In progress</td>
   </tr>
   <tr>
     <td align="center"><b>Studi-Main-Page</b></td>
@@ -119,27 +130,24 @@ http://localhost:8080
 
 ## Tech Stack 
 ### Backend
-- Java 21
-- Spring Boot
-- Spring Security (OAuth2)
-- JDBC
-- Flyway
-- Gradle
-- Deployed as a Docker container, managed with Docker Compose
-- Validation
+<img src="https://img.shields.io/badge/Java_21-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white" /> <img src="https://img.shields.io/badge/Spring_Boot-6DB33F?style=for-the-badge&logo=spring-boot&logoColor=white" /> <img src="https://img.shields.io/badge/Spring_Security-6DB33F?style=for-the-badge&logo=Spring-Security&logoColor=white" /> <img src="https://img.shields.io/badge/Flyway-CC0202?style=for-the-badge&logo=flyway&logoColor=white" /> <img src="https://img.shields.io/badge/Gradle-02303A?style=for-the-badge&logo=gradle&logoColor=white" /> <img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white" /> <img src="https://img.shields.io/badge/Validation-323330?style=for-the-badge&logo=checkmarx&logoColor=white" /> <img src="https://img.shields.io/badge/JDBC-007396?style=for-the-badge&logo=oracle&logoColor=white" /><img src="https://img.shields.io/badge/JDBC-007396?style=for-the-badge&logo=oracle&logoColor=white" />
 
-### Frontend 
-- Thymeleaf
-- HTML
-- CSS
+### Frontend
+<img src="https://img.shields.io/badge/Thymeleaf-005C0F?style=for-the-badge&logo=Thymeleaf&logoColor=white" /> <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white" /> <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white" />
 
-### Database 
-- Relational SQL database (PostgreSQL)
+### Database
+<img src="https://img.shields.io/badge/PostgreSQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=white" />
 
 ---
 
 ## Testing Strategy
 The application is tested using a comprehensive testing setup:
+
+<p align="left">
+  <img src="https://img.shields.io/badge/JUnit%205-25A162?style=for-the-badge&logo=junit5&logoColor=white" />
+  <img src="https://img.shields.io/badge/ArchUnit-F89820?style=for-the-badge&logo=java&logoColor=white" />
+  <img src="https://img.shields.io/badge/Spring_Security_Test-6DB33F?style=for-the-badge&logo=spring&logoColor=white" />
+</p>
 
 - **JUnit 5** for unit and integration tests
 - **ArchUnit** to enforce architectural rules (Onion Architecture)
