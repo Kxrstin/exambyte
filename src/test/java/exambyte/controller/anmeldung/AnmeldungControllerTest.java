@@ -42,9 +42,9 @@ public class AnmeldungControllerTest {
                 .andReturn();
         String html = mvcResult.getResponse().getContentAsString();
         assertThat(html).contains("Nur Korrektoren, Studenten und Organisatoren haben Zugriff auf die Website!");
-        assertThat(html.contains("Weiter zu Exambyte für Korrektoren")).isFalse();
-        assertThat(html.contains("Weiter zu Exambyte für Studenten")).isFalse();
-        assertThat(html.contains("Weiter zu Exambyte für Organisatoren")).isFalse();
+        assertThat(html.contains("Weiter zu ExamByte für Korrektoren")).isFalse();
+        assertThat(html.contains("Weiter zu ExamByte für Studenten")).isFalse();
+        assertThat(html.contains("Weiter zu ExamByte für Organisatoren")).isFalse();
     }
 
     @Test
@@ -55,9 +55,9 @@ public class AnmeldungControllerTest {
                 .andExpect(status().isOk())
                 .andReturn();
         String html = mvcResult.getResponse().getContentAsString();
-        assertThat(html.contains("Weiter zu Exambyte für Korrektoren")).isTrue();
-        assertThat(html.contains("Weiter zu Exambyte für Studenten")).isFalse();
-        assertThat(html.contains("Weiter zu Exambyte für Organisatoren")).isFalse();
+        assertThat(html.contains("Weiter zu ExamByte für Korrektoren")).isTrue();
+        assertThat(html.contains("Weiter zu ExamByte für Studenten")).isFalse();
+        assertThat(html.contains("Weiter zu ExamByte für Organisatoren")).isFalse();
     }
 
     @Test
@@ -68,9 +68,9 @@ public class AnmeldungControllerTest {
                 .andExpect(status().isOk())
                 .andReturn();
         String html = mvcResult.getResponse().getContentAsString();
-        assertThat(html.contains("Weiter zu Exambyte für Korrektoren")).isFalse();
-        assertThat(html.contains("Weiter zu Exambyte für Studenten")).isTrue();
-        assertThat(html.contains("Weiter zu Exambyte für Organisatoren")).isFalse();
+        assertThat(html.contains("Weiter zu ExamByte für Korrektoren")).isFalse();
+        assertThat(html.contains("Weiter zu ExamByte für Studenten")).isTrue();
+        assertThat(html.contains("Weiter zu ExamByte für Organisatoren")).isFalse();
     }
 
     @Test
@@ -81,9 +81,9 @@ public class AnmeldungControllerTest {
                 .andExpect(status().isOk())
                 .andReturn();
         String html = mvcResult.getResponse().getContentAsString();
-        assertThat(html.contains("Weiter zu Exambyte für Korrektoren")).isFalse();
-        assertThat(html.contains("Weiter zu Exambyte für Studenten")).isFalse();
-        assertThat(html.contains("Weiter zu Exambyte für Organisatoren")).isTrue();
+        assertThat(html.contains("Weiter zu ExamByte für Korrektoren")).isFalse();
+        assertThat(html.contains("Weiter zu ExamByte für Studenten")).isFalse();
+        assertThat(html.contains("Weiter zu ExamByte für Organisatoren")).isTrue();
     }
 
     @Test
@@ -94,9 +94,9 @@ public class AnmeldungControllerTest {
                 .andExpect(status().isOk())
                 .andReturn();
         String html = mvcResult.getResponse().getContentAsString();
-        assertThat(html.contains("Weiter zu Exambyte für Korrektoren")).isTrue();
-        assertThat(html.contains("Weiter zu Exambyte für Studenten")).isTrue();
-        assertThat(html.contains("Weiter zu Exambyte für Organisatoren")).isTrue();
+        assertThat(html.contains("Weiter zu ExamByte für Korrektoren")).isTrue();
+        assertThat(html.contains("Weiter zu ExamByte für Studenten")).isTrue();
+        assertThat(html.contains("Weiter zu ExamByte für Organisatoren")).isTrue();
     }
 
 }

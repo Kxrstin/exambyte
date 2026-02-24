@@ -101,9 +101,13 @@ public class StudentenControllerErgebnisTest {
                 .andExpect(status().isOk())
                 .andReturn();
         assertThat(result.getResponse().getContentAsString())
-                .contains("<span>Ergebniszeitpunkt: Keine Angaben!</span>",
-                        "Ergebnis: <span>Keine Angaben!</span>",
-                        "Punkte: <span>Keine Angaben!</span>",
-                        "<span>Bestanden?: Keine Angaben!</span>");
+                .contains("<span class=\"item-label\">Ergebniszeitpunkt:</span>\n" +
+                                "                        <span class=\"item-value\">Keine Angaben!</span>",
+                        "<span class=\"item-label\">Ergebnis:</span>\n" +
+                                "                        <span class=\"item-value\">Keine Angaben!</span>",
+                        "<span class=\"item-label\">Punktzahl: </span>\n" +
+                                "                        <span class=\"item-value\">Keine Angaben!</span>",
+                        "<span class=\"item-label\">Status:</span>\n" +
+                                "                        <span class=\"item-value\">Bestanden?: Keine Angaben!</span>");
     }
 }

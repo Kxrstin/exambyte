@@ -145,7 +145,7 @@ public class StudentenControllerLandingPageTest {
                 .andExpect(status().isOk())
                 .andReturn();
 
-        assertThat(result.getResponse().getContentAsString()).contains("vorsicht");
+        assertThat(result.getResponse().getContentAsString()).contains("Vorsicht! Du hast einen Test bislang nicht bestanden!");
     }
 
 }

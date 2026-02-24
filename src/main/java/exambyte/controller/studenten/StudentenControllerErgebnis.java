@@ -37,7 +37,7 @@ public class StudentenControllerErgebnis {
                 model.addAttribute("testBestanden", "In Bearbeitung.");
             }
         } else {
-            model.addAttribute("ergebnisZeitpunkt", "Ergebniszeitpunkt: Keine Angaben!");
+            model.addAttribute("ergebnisZeitpunkt", "Keine Angaben!");
             model.addAttribute("ergebnisInProzent", "Keine Angaben!");
             model.addAttribute("punktzahl", "Keine Angaben!");
             model.addAttribute("testBestanden", "Bestanden?: Keine Angaben!");

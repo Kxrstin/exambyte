@@ -3,6 +3,7 @@ package exambyte.controller.studenten;
 import exambyte.aggregates.studenten.StudiTest.StudiTest;
 import exambyte.aggregates.studenten.StudiTest.TestDaten;
 import exambyte.service.studenten.TestFragenService;
+import org.springframework.test.context.ActiveProfiles;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -10,8 +11,7 @@ import static org.mockito.ArgumentMatchers.anyInt;
 
 import static org.mockito.Mockito.when;
 
-/** **/
-
+@ActiveProfiles("test")
 public class TestServiceBuilder {
     private final TestFragenService testService;
 
