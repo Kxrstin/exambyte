@@ -40,10 +40,10 @@
             <br>
             <h2>Erstellte Tests:</h2>
             <ul th:remove="all-but-first" class="test-list">
-                <li th:each="testForm: ${testForms}" class="test-list-item">
+                <li th:each="testForm: ${testForms}" class="test-list-item-yellow">
                     <a th:href="@{/organisatoren/testVorschau/{id}(id = ${testForm.getId()})}"><span th:text="${testForm.getTestTitel()}">Fragen zur Onion Architektur</span></a>
                 </li>
-                <li class="test-list-item">
+                <li class="test-list-item-yellow">
                     <a href="">MaFIn3 Übung für Blatt 09</a>
                 </li>
             </ul>
