@@ -2,46 +2,55 @@
 <html lang="de">
     <head>
         <title>ExamByte | Landing Page</title>
-        <link rel = "stylesheet" th:href="@{/css/bootstrap.min.css}"
-              href="../../static/css/bootstrap.min.css">
+        <link rel = "stylesheet" th:href="@{/css/organisatoren_page.css}"
+              href="../../static/css/organisatoren_page.css">
         <link rel="icon" type="image/png"
               href="../../static/Images/Logo/ExamByteLogoOhneUnterschrift.png"
               th:href="@{/Images/Logo/ExamByteLogoOhneUnterschrift.png}">
+        <!--
         <link rel="stylesheet" href="../../static/css/ExambyteStylesheet.css"
               th:href="@{/css/ExambyteStylesheet.css}">
+        -->
         <meta charset="UTF-8">
 
     </head>
     <body>
-    <h1>
-        <a class="navLink" th:href="@{/}">Zur Anmeldung</a>
-        <img class="imgLogo"
-             th:src="@{/Images/Logo/ExamByteLogo.png}"
-             src="../../static/Images/Logo/ExamByteLogo.png"
-             alt="">
-        ExamByte - Übersicht
-    </h1>
+    <header class="header-section">
+        <div>
+            <a class="navLink" th:href="@{/}">Zur Anmeldung</a>
+            <h1> ExamByte - Übersicht</h1>
+        </div>
+        <img class="imgLogo" th:src="@{/Images/Logo/ExamByteLogo.png}" src="../../static/Images/Logo/ExamByteLogo.png" alt="Exambyte Logo" />
+    </header>
 
-    <form action="/organisatoren/korrekturstand">
-        <button class="btnBestaetigen" type="submit">Korrekturstand</button>
-    </form>
+    <main class="main-section">
+        <section>
+            <div class="orga-buttons">
+                <form action="/organisatoren/korrekturstand">
+                    <button class="orga-button" type="submit">Korrekturstand</button>
+                </form>
+                <form action="/organisatoren/ergebnisse">
+                    <button class="orga-button" type="submit">Ergebnisübersicht</button>
+                </form>
+                <form action="/organisatoren/testErstellen">
+                    <button class="orga-button" type="submit">+ Test erstellen</button>
+                </form>
+            </div>
+
+            <br>
+            <h2>Erstellte Tests:</h2>
+            <ul th:remove="all-but-first" class="test-list">
+                <li th:each="testForm: ${testForms}" class="test-list-item">
+                    <a th:href="@{/organisatoren/testVorschau/{id}(id = ${testForm.getId()})}"><span th:text="${testForm.getTestTitel()}">Fragen zur Onion Architektur</span></a>
+                </li>
+                <li class="test-list-item">
+                    <a href="">MaFIn3 Übung für Blatt 09</a>
+                </li>
+            </ul>
+        </section>
 
 
-    <form action="/organisatoren/ergebnisse">
-        <button class="btnBestaetigen" type="submit">Ergebnisübersicht</button>
-    </form>
-        <form action="/organisatoren/testErstellen">
-            <button class="btnBestaetigen" type="submit">+ Test erstellen</button>
-        </form>
-        <br>
-        <h2>Erstellte Tests:</h2>
-        <ul th:remove="all-but-first" class="list-group list-group-flush">
-            <li th:each="testForm: ${testForms}" class="list-group-item">
-                <a th:href="@{/organisatoren/testVorschau/{id}(id = ${testForm.getId()})}"><span th:text="${testForm.getTestTitel()}">Fragen zur Onion Architektur</span></a>
-            </li>
-            <li class="list-group-item">
-                <a href="">MaFIn3 Übung für Blatt 09</a>
-            </li>
-        </ul>
+
+    </main>
     </body>
 </html>
