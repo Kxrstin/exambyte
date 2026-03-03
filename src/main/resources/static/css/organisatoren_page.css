@@ -149,3 +149,50 @@ body {
     border: 1px solid rgba(6, 80, 0, 0.7);
     margin: 10px auto;
 }
+
+/* Fehlermeldung */
+
+.warning-message {
+    text-decoration: none;
+    font-size: 0.95rem;
+    padding: 0.6rem 1.2rem;
+    border-radius: 10px;
+    background: #ffa1a1;
+    border: 1px solid #3e0000;
+    color: #880000;
+    /* transition: 0.3s; */
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.6rem;
+}
+
+/* Input-Felder */
+
+.input-field {
+    padding: 10px 14px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.input-field:focus {
+    border-color: #4a90e2;
+}
+
+/* Formulare */
+
+.formular {
+    background: rgba(235, 251, 185, 0.9);
+    backdrop-filter: blur(10px);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem 2rem;
+    box-shadow: var(--shadow);
+    border: 1px solid rgba(0, 13, 23, 0.7);
+    max-width: 800px;
+    margin: 10px auto;
+    display: flex;
+    flex-direction: column;
+}
