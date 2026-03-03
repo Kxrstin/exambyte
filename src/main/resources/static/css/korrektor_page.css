@@ -95,7 +95,7 @@ body {
 
 .btnKorrektur:hover, .btnSpeichern:hover, .btnBewerten:hover, .btnBearbeiten:hover, .btnFreigeben:hover, .btnPrüfen:hover { opacity: 0.9; transform: scale(1.02); }
 
-.imgLogo { height: 50px; transition: 0.3s; }
+.imgLogo { height: 90px; transition: 0.3s; }
 .imgLogo:hover { transform: rotate(5deg) scale(1.1); }
 
 /* 5. Form Elements */
