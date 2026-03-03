@@ -26,10 +26,10 @@
     </header>
     <main class="main-section">
         <ul th:each="testErgebnis: ${korrigierteTests}" class="test-list">
-            <li class="test-list-item">
+            <li class="test-list-item-yellow">
                 <span th:text="${testErgebnis.getValue()}">Programmierpraktikum 2: 80,56% korrekt</span>
                 <form th:action="@{/organisatoren/zeigeTests/{testId}(testId =${testErgebnis.getKey()})}">
-                    <button class="btnBestaetigen" type="submit"> Zeige Tests</button>
+                    <button class="orga-button" type="submit"> Zeige Tests</button>
                 </form>
             </li>
         </ul>
