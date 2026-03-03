@@ -2,32 +2,32 @@
 <html lang="de">
     <head>
         <title>ExamByte | Korrekturstand</title>
-        <link rel = "stylesheet" th:href="@{/css/bootstrap.min.css}"
-              href="../../static/css/bootstrap.min.css">
         <link rel="icon" type="image/png"
               href="../../static/Images/Logo/ExamByteLogoOhneUnterschrift.png"
               th:href="@{/Images/Logo/ExamByteLogoOhneUnterschrift.png}">
-        <link rel="stylesheet" href="../../static/css/ExambyteStylesheet.css"
-              th:href="@{/css/ExambyteStylesheet.css}">
+        <link rel="stylesheet" href="../../static/css/organisatoren_page.css"
+              th:href="@{/css/organisatoren_page.css}">
         <meta charset="UTF-8">
     </head>
     <body>
-    <h1>
-        <a class="navLink" th:href="@{/}">Zur Anmeldung</a>
-        <a class="navLink-2" th:href="@{/organisatoren/landingPage}">Zur Landing Page</a>
+    <header class="header-section">
+        <div>
+            <div class="orga-links">
+                <a class="orga-link" th:href="@{/}">Zur Anmeldung</a>
+                <a class="orga-link" th:href="@{/organisatoren/landingPage}">Zur Landing Page</a>
+            </div>
+            <h1> ExamByte - Korrekturstand </h1>
+        </div>
         <img class="imgLogo"
              th:src="@{/Images/Logo/ExamByteLogo.png}"
              src="../../static/Images/Logo/ExamByteLogo.png"
-             alt="">
-        ExamByte - Korrekturstand
-    </h1>
-    <h2> Noch nicht korrigierte Tests: </h2>
-    
-    <div class="divAnmeldung">
-        <ul th:each="aufgabe: ${zuKorrigierendeAufgaben}">
-            <li th:text="${aufgabe}"> Was ist Onion Architektur</li>
+             alt="ExamByte Logo">
+    </header>
+    <main class="main-section">
+        <h2> Noch nicht korrigierte Tests: </h2>
+        <ul th:each="aufgabe: ${zuKorrigierendeAufgaben}" class="test-list">
+            <li th:text="${aufgabe}" class="test-list-item-yellow"> Was ist Onion Architektur </li>
         </ul>
-    </div>
-
+    </main>
     </body>
 </html>
