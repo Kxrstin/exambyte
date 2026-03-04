@@ -110,7 +110,7 @@ body {
 
 .test-list-item-yellow {
     list-style: none;
-    background: rgba(241, 218, 66, 0.2);
+    background: rgba(236, 212, 0, 0.24);
     backdrop-filter: blur(10px);
     border-radius: var(--radius-lg);
     padding: 1rem;
