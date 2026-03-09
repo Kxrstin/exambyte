@@ -1,7 +1,4 @@
 # Exambyte 
-![Build Status](https://github.com/Kxrstin/exambyte/actions/workflows/gradle.yml/badge.svg)
-![License](https://img.shields.io/badge/license-MIT-blue.svg)
-
 <p align="left">
   <img src="https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white"/>
   <img src="https://img.shields.io/badge/Spring_Boot-6DB33F?style=for-the-badge&logo=spring-boot&logoColor=white" />
@@ -20,7 +17,7 @@ Follow these steps to start the project in your local environment (e.g., WSL or 
 
 ### 1. Requirements 
 * **Java 21** (JDK)
-* **Docker & Docker Desktop**
+* **Docker Desktop**
 
 **GitHub OAuth App**:
 * Create a new OAuth app under [GitHub Developer Settings](https://github.com/settings/developers).
@@ -118,7 +115,7 @@ http://localhost:8080
 
 ## Features 
 - User authentication and authorization with OAuth2
-- Role-based access control (student/grader/organizer)
+- Role-based access control (`Student`, `Organisator`, `Korrektor`)
 - Exams with multiple-choice and free-text questions
 - Comprehensive test management: create, conduct, and evaluate exams
 - Automated evaluation of multiple-choice questions
@@ -177,7 +174,7 @@ This project is based on a university project, whereby the tasks were set by the
 --- 
 
 ## Results and experience
-Exambyte represents an improvement on its predecessor ILIAS, as particular attention has been paid to creating a user-friendly interface and transparent communication of results. In addition, role-based access via OAuth2 ensures simple but secure user management.
+ExamByte represents an improvement on its predecessor ILIAS, as particular attention has been paid to creating a user-friendly interface and transparent communication of results. In addition, role-based access via OAuth2 ensures simple but secure user management.
 In this project, we learned how to develop and structure a larger Java application in a test-driven manner. We implemented a web-based service with clean architecture and best practices, and learned how to integrate it into server-side user interfaces and relational database management.
 
 ---
