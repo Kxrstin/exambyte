@@ -1,4 +1,4 @@
-# Exambyte 
+# ExamByte 
 <p align="left">
   <img src="https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white"/>
   <img src="https://img.shields.io/badge/Spring_Boot-6DB33F?style=for-the-badge&logo=spring-boot&logoColor=white" />
@@ -9,7 +9,7 @@
 
 ## Full-stack web application for managing exams and assessments. 
 
-Exambyte is a web-based testing system that can be used to create, conduct, and correct tests with different question types, such as multiple choice and free text. Correction is partly manual and partly automated, and students are always informed about their current status and admission status. A key feature is role-based authentication via GitHub OAuth with a distinction between the roles of student, organizer, and corrector. This application is an improvement on ILIAS, as students are informed transparently about their admission status, while correctors and organizers are provided with various tools for general exam administration.
+ExamByte is a web-based exam system that can be used to create, conduct, and correct exams with different question types, such as multiple choice and free text. Correction is partly manual and partly automated, and students are always informed about their current status and admission status. A key feature is role-based authentication via GitHub OAuth with a distinction between the roles of `Student`, `Organisator` and `Korrektor`. This application is an improvement on ILIAS, as students are informed transparently about their admission status, while correctors and organizers are provided with various tools for general exam administration.
 
 --- 
 ## Get started
@@ -183,7 +183,7 @@ In this project, we learned how to develop and structure a larger Java applicati
 
 This project uses graphics from external providers. The rights belong to the respective authors:
 
-* **Logo (Exambyte)**: Created via [Design.com](https://www.design.com/maker/logo/creative-document-file-17357?text=ExamByte&isVariation=True)
+* **Logo (ExamByte)**: Created via [Design.com](https://www.design.com/maker/logo/creative-document-file-17357?text=ExamByte&isVariation=True)
 * **Green check mark**: [iStock / Getty Images](https://www.istockphoto.com/de/vektor/h%C3%A4kchensymbol-vektor-design-vorlage-in-wei%C3%9Fem-hintergrund-gm1435212785-476685817)
 * **Red cross**: [Vecteezy](https://www.vecteezy.com/vector-art/28579407-red-cross-wrong-symbol-incorrect-sign-error-in-circle)
 * **Warning symbol**: [Freepik](https://www.freepik.com/premium-vector/warning-sign-with-exclamation-mark-vector-illustration-attention-symbol-information-flat-icon_129857701.htm)
