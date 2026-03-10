@@ -101,7 +101,6 @@ http://localhost:8080
     <td><img src="docs/korrektur.gif" width="600px" alt="Gif of the korrektor main page with not graded tests"></td>
   </tr> 
 </table>
----
 
 ## Features 
 - User authentication and authorization with OAuth2
