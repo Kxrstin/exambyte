@@ -77,13 +77,13 @@ http://localhost:8080
     <td><img src="docs/anmeldung_page.png" width="600px" alt="Screenshot of the access page"></td>
   </tr>
   <tr>
-    <td align="center"><b>Studi: Edit exam</b></td>
+    <td align="center"><b>Studi: Editing an exam</b></td>
   </tr>
   <tr>
     <td><img src="docs/test_bearbeiten.gif" width="600px" alt="Gif of the student main page with status and tests, and editing a test"></td>
   </tr> 
  <tr>
-    <td align="center"><b>Studi: View evaluation and correction exam</b></td>
+    <td align="center"><b>Studi: View evaluation and correction of an exam</b></td>
   </tr>
   <tr>
     <td><img src="docs/test-ergebnis.gif" width="600px" alt="Gif of the student page looking at the evaluation and correction"></td>
