@@ -80,7 +80,7 @@ http://localhost:8080
     <td align="center"><b>Studi: Edit exam</b></td>
   </tr>
   <tr>
-    <td><img src="docs/test-bearbeiten.gif" width="600px" alt="Gif of the student main page with status and tests, and editing a test"></td>
+    <td><img src="docs/test_bearbeiten.gif" width="600px" alt="Gif of the student main page with status and tests, and editing a test"></td>
   </tr> 
  <tr>
     <td align="center"><b>Studi: View evaluation and correction exam</b></td>
