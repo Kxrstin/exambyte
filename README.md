@@ -100,6 +100,12 @@ http://localhost:8080
   <tr>
     <td><img src="docs/korrektur.gif" width="600px" alt="Gif of the korrektor main page with not graded tests"></td>
   </tr> 
+  <tr>
+    <td align="center"><b>Organisator: Creating an exam</b></td>
+  </tr>
+  <tr>
+    <td><img src="docs/exambyte_testerstellen_showcase_gif.gif" width="600px" alt="Gif of the organizer creating a test"></td>
+  </tr> 
 </table>
 
 ## Features 
