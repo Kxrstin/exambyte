@@ -77,12 +77,6 @@ http://localhost:8080
     <td><img src="docs/anmeldung_page.png" width="600px" alt="Screenshot of the access page"></td>
   </tr>
   <tr>
-    <td align="center"><b>Organisator-Page</b></td>
-  </tr>
-  <tr>
-    <td>In progress</td>
-  </tr>
-  <tr>
     <td align="center"><b>Studi: Edit exam</b></td>
   </tr>
   <tr>
